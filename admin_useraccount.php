@@ -53,7 +53,7 @@ $result = mysql_query($sql, $conn)
 $user = mysql_fetch_array($result);
 
 $id = $user['employee_id'];
-$pass = md5($user['password']);
+$pass = $user['password'];
 ?>
 <div class="main">
 
@@ -379,76 +379,77 @@ $id = $user['employee_id'];
     <center><h2>View Employee Record</h2></center>
     
     <TABLE class="table_edit" width= "60%">
-      <tr>
-      <td>Employee ID:&nbsp;&nbsp;</td>
-      <td><span class="id"><?php echo htmlspecialchars($id); ?></span></td>
-      <br/>
-      </td>
+      <TR>
+      <TD>
+        Employee ID:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($id); ?></span>
+        <br/>
 
-      Username:&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['username']); ?></span>
-      <br/>
+        Username:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['username']); ?></span>
+        <br/>
 
-      First Name:&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['first_name']); ?></span>
-      <br/>
-      
-      Middle Name:&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['middle_name']); ?></span>
-      <br/>
-      
-      Last Name:&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['last_name']); ?></span>
-      <br/>
-      Gender:&nbsp;&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['gender']); ?></span>      
-      <br/>
-      Unit ID:&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['unit_id']); ?></span>
-      <br/>
-      Designation ID:&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['designation_id']); ?></span>
-      <br/>
+        First Name:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['first_name']); ?></span>
+        <br/>
+        
+        Middle Name:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['middle_name']); ?></span>
+        <br/>
+        
+        Last Name:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['last_name']); ?></span>
+        <br/>
+        Gender:&nbsp;&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['gender']); ?></span>      
+        <br/>
+        Unit ID:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['unit_id']); ?></span>
+        <br/>
+        Designation ID:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['designation_id']); ?></span>
+        <br/>
 
-      E-Mail Address:&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['email_address']); ?></span>
-      <br/>
-      Parent Address:&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['parent_address']); ?></span>
-      <br/>
-      Current Address:&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['present_address']); ?></span>
-      <br/>
-      Civil Status:&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['civil_status']); ?></span>
-      <br/>
-      Birthdate:&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['birthdate']); ?></span>
-      <br/>
-      Contact Number:&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['contact_number']); ?></span>
-      <br/>
-      Spouse's Name:&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['spouse_name']); ?></span>
-      <br/>
-      Spouse's Contact Number:&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['spouse_contact_number']); ?></span>
-      <br/>
-      Father's Name:&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['father_name']); ?></span>
-      <br/>
-      Mother's Name:&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['mother_name']); ?></span>
-      <br/>
+        E-Mail Address:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['email_address']); ?></span>
+        <br/>
+        Parent Address:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['parent_address']); ?></span>
+        <br/>
+        Current Address:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['present_address']); ?></span>
+        <br/>
+        Civil Status:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['civil_status']); ?></span>
+        <br/>
+        Birthdate:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['birthdate']); ?></span>
+        <br/>
+        Contact Number:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['contact_number']); ?></span>
+        <br/>
+        Spouse's Name:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['spouse_name']); ?></span>
+        <br/>
+        Spouse's Contact Number:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['spouse_contact_number']); ?></span>
+        <br/>
+        Father's Name:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['father_name']); ?></span>
+        <br/>
+        Mother's Name:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['mother_name']); ?></span>
+        <br/>
 
-      Housing Type:&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['housing_type']); ?></span>
-      <br/>
-      Citizenship:&nbsp;&nbsp;
-      <span class="id"><?php echo htmlspecialchars($user['citizenship']); ?></span>
-      <br/>
-
-  </TABLE>
+        Housing Type:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['housing_type']); ?></span>
+        <br/>
+        Citizenship:&nbsp;&nbsp;
+        <span class="id"><?php echo htmlspecialchars($user['citizenship']); ?></span>
+        <br/>
+        </TD>
+        </TR>
+    </TABLE>
 
   <br/><center>
   <a href="admin_useraccount.php?userid=<?php echo $user['employee_id']?>">Modify</a>

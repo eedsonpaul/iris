@@ -262,7 +262,7 @@ if (isset($_REQUEST['action'])) {
           or isset($_POST['middle_name'])
           and isset($_POST['last_name'])
           and isset($_POST['username'])
-          and isset($_POST['password'])
+          //and isset($_POST['password'])
           //and isset($_POST['password2'])
           and isset($_POST['gender'])          
           and isset($_POST['unit_id'])
@@ -292,7 +292,6 @@ if (isset($_REQUEST['action'])) {
         $sql = "UPDATE employee " .
                "SET employee_id='" . $_POST['employee_id'] . 
                "', username= '$uName
-               ', password= '$hashedPassword
                ', access_level_id='" . $_POST['access_level'] .               
                "', first_name='" . $_POST['first_name'] .
                "', middle_name='" . $_POST['middle_name'] .

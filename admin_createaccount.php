@@ -60,7 +60,7 @@ if ($_SESSION['access_level_id'] != 3)  {
         <center><h2> Create Staff Account </h2></center>
       </tr>
 
-      <TABLE width="60%" class="table_edit">
+      <TABLE width="60%" class="table_create">
       <tr>
         <td>Employee ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
         <td<input type="text" class="txtinput" name="employee_id" maxlength="100" size=25px></td>
