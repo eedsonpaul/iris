@@ -12,6 +12,7 @@
 require_once 'admin_db_connect.php';
 require_once 'admin_http.php';
 require_once 'admin_header.php';
+require_once 'admin_sql_query.php';
 
 if (isset($_GET['userid'])) {
 $id = '';
@@ -84,9 +85,9 @@ $id = $user['employee_id'];
       <center><h2>Modify Employee Record</h2></center>
     <?php } ?>
     
-    <TABLE class="table_edit" width= "80%">
+    <TABLE class="table_edit" width= "90%">
     <TR>
-      <TD width="45%" align="right">
+      <TD width="50%" align="right">
       <p>
       Employee ID: &nbsp;&nbsp;<span class="id"><?php echo htmlspecialchars($id); ?></span></h2>
       <input type="hidden" class="txtinput" name="employee_id" value="<?php echo htmlspecialchars($id); ?>">
@@ -133,8 +134,7 @@ $id = $user['employee_id'];
       <br/>
       -->
 
-      Unit ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-      
+      Unit ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;      
       <select name="unit_id">
       <option value="NULL" selected>None</option>
       <?php
@@ -164,7 +164,7 @@ $id = $user['employee_id'];
       </select>      
     </TD>
 
-    <TD width="55%" align="right">
+    <TD width="50%" align="right">
       E-Mail Address:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
       <input type="text" id="email_address" name="email_address" maxlength="50" size=25px
       value="<?php echo htmlspecialchars($user['email_address']); ?>">
@@ -267,7 +267,7 @@ $id = $user['employee_id'];
 ?>
 <div class="main">
 
-  <div id="nav" class="left">
+    <div id="nav" class="left">
     <?php if ($user['access_level_id'] == 3) { ?>
       <a href="index.php?action=SysAd"><span class="left">&larr;Back to list</span></a>
     <?php } else if ($user['access_level_id'] == 2) { ?>
@@ -311,133 +311,88 @@ $id = $user['employee_id'];
       echo '</a>';
     }
     ?>
-    </span>
+     </span>
   </div>
-  <br/>
 
   <div id="fill_up">
-    <h2>View Account</h2>
-
-    Employee ID: &nbsp;&nbsp;&nbsp;<input type="text" disabled="true" name="username" maxlength="100" size=25px
-    value="<?php echo htmlspecialchars($id); ?>">
+    <center><h2>View Employee Record</h2></center>
     
-    <br/>
-    Username:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" disabled="true" name="username" maxlength="100" size=25px
-    value="<?php echo htmlspecialchars($user['username']); ?>">
-    <br/>
-    Reset Password:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="password" disabled="true" id="password" name="password" maxlength="50" size=25px>
-    <br/>
+    <TABLE class="table_edit" width= "60%">
+      <tr>
+      <td>Employee ID:&nbsp;&nbsp;</td>
+      <td><span class="id"><?php echo htmlspecialchars($id); ?></span></td>
+      <br/>
+      </td>
 
-    First Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" disabled="true" id="first_name" name="first_name" maxlength="50" size=25px
-    value="<?php echo htmlspecialchars($user['first_name']); ?>">
-    <br/>
-    Middle Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" disabled="true" id="middle_name" name="middle_name" maxlength="50" size=25px
-    value="<?php echo htmlspecialchars($user['middle_name']); ?>">
-    <br/>
-    Last Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" disabled="true" id="last_name" name="last_name" maxlength="50" size=25px
-    value="<?php echo htmlspecialchars($user['last_name']); ?>">
-    <br/>
-    Gender:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <select name="gender" disabled="true">
-      <option value="" selected>Select Gender</option>
-      <option value="" selected><?php echo htmlspecialchars($user['gender']); ?></option>
-      <option value="Male">Male</option>
-      <option value="Female">Female</option>
-    </select>
-    <br/></br>
-    E-Mail Address:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text"  disabled="true" id="email_address" name="email_address" maxlength="50" size=25px
-    value="<?php echo htmlspecialchars($user['email_address']); ?>">
-    <br/>
-    Unit ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text"  disabled="true" id="unit_id" name="unit_id" maxlength="50" size=25px
-    value="<?php echo htmlspecialchars($user['unit_id']); ?>">
-    <br/>
-    Designation ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text"  disabled="true" id="designation_id" name="designation_id" maxlength="50" size=25px
-    value="<?php echo htmlspecialchars($user['designation_id']); ?>">
-    <br/>
-    Parent Address:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text"  disabled="true" id="parent_address" name="parent_address" maxlength="100" size=25px
-    value="<?php echo htmlspecialchars($user['parent_address']); ?>">
-    <br/>
-    Current Address:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text"  disabled="true" id="present_address" name="present_address" maxlength="50" size=25px
-    value="<?php echo htmlspecialchars($user['present_address']); ?>">
-    <br/>
-    Civil Status:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <select name="civil_status"  disabled="true" >
-      <option value="" selected><?php echo htmlspecialchars($user['civil_status']); ?></option>
-      <option value="" selected>Select Status</option>
-      <option value="Single">Single</option>
-      <option value="Married">Married</option>
-      <option value="Widowed">Widowed</option>
-    </select>
-    <br/><br/>
-    Birthdate:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" disabled="true" id="birthdate" name="birthdate" maxlength="50" size=25px
-    value="<?php echo htmlspecialchars($user['birthdate']); ?>">
-    <br/>
-    Contact Number:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" disabled="true" id="contact_number" name="contact_number" maxlength="50" size=25px
-    value="<?php echo htmlspecialchars($user['contact_number']); ?>">
-    <br/>
-    Spouse's Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" disabled="true" id="spouse_name" name="spouse_name" maxlength="50" size=25px
-    value="<?php echo htmlspecialchars($user['spouse_name']); ?>">
-    <br/>
-    Spouse's Contact Number:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" disabled="true" id="spouse_number" name="spouse_number" maxlength="50" size=25px
-    value="<?php echo htmlspecialchars($user['spouse_contact_number']); ?>">
-    <br/>
-    Father's Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" disabled="true" id="father_name" name="father_name" maxlength="50" size=25px
-    value="<?php echo htmlspecialchars($user['father_name']); ?>">
-    <br/>
-    Mother's Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" disabled="true" id="mother_name" name="mother_name" maxlength="50" size=25px
-    value="<?php echo htmlspecialchars($user['mother_name']); ?>">
-    <br/>
-    <?php
-    if (isset($_SESSION['employee_id']))
-    {
-      if ($_SESSION['access_level_id'] > 2) {
-        echo '<input type="hidden" name="last_updated_by" 
-        value ='. $_SESSION['username'];
-        echo '>';
-      }
-    }
-    ?>
-    Housing Type:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <select name="housing_type" disabled="true">
-      <option value="" selected><?php echo htmlspecialchars($user['housing_type']); ?></option>
-      <option value="" selected>Select Housing Type</option>
-      <option value="Apartment">Apartment</option>
-      <option value="Boarding House Off Campus">BHouse Off Campus</option>
-      <option value="Boarding House on Campus">BHouse On Campus</option>
-      <option value="Own House">Own House</option>
-      <option value="Relative\'s House">Relative's House</option>
-      <option value="U.P. Dormitory">U.P. Dormitory</option>
-      <option value="U.P. Staff House">U.P. Staff House</option>
-    </select>
-    <br/><br/>
-    Citizenship:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" disabled="true" id="citizenship" name="citizenship" maxlength="50" size=25px
-    value="<?php echo htmlspecialchars($user['citizenship']); ?>">
-    
-    <br/><br/>
-  </div>
+      Username:&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['username']); ?></span>
+      <br/>
 
-  <center>
-  <a href="admin_useraccount.php?userid=<?php echo $user['employee_id']?>">
-  Modify
-  </a>
+      First Name:&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['first_name']); ?></span>
+      <br/>
+      
+      Middle Name:&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['middle_name']); ?></span>
+      <br/>
+      
+      Last Name:&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['last_name']); ?></span>
+      <br/>
+      Gender:&nbsp;&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['gender']); ?></span>      
+      <br/>
+      Unit ID:&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['unit_id']); ?></span>
+      <br/>
+      Designation ID:&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['designation_id']); ?></span>
+      <br/>
+
+      E-Mail Address:&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['email_address']); ?></span>
+      <br/>
+      Parent Address:&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['parent_address']); ?></span>
+      <br/>
+      Current Address:&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['present_address']); ?></span>
+      <br/>
+      Civil Status:&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['civil_status']); ?></span>
+      <br/>
+      Birthdate:&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['birthdate']); ?></span>
+      <br/>
+      Contact Number:&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['contact_number']); ?></span>
+      <br/>
+      Spouse's Name:&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['spouse_name']); ?></span>
+      <br/>
+      Spouse's Contact Number:&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['spouse_contact_number']); ?></span>
+      <br/>
+      Father's Name:&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['father_name']); ?></span>
+      <br/>
+      Mother's Name:&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['mother_name']); ?></span>
+      <br/>
+
+      Housing Type:&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['housing_type']); ?></span>
+      <br/>
+      Citizenship:&nbsp;&nbsp;
+      <span class="id"><?php echo htmlspecialchars($user['citizenship']); ?></span>
+      <br/>
+
+  </TABLE>
+
+  <br/><center>
+  <a href="admin_useraccount.php?userid=<?php echo $user['employee_id']?>">Modify</a>
   </center>
+ 
 <?php } ?>
   </div>
 </div>

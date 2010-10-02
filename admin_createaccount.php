@@ -9,6 +9,7 @@ require_once 'admin_db_connect.php';
 require_once 'admin_http.php';
 require_once 'admin_sql_query.php';
 require_once 'admin_echolist.php';
+require_once 'admin_header.php';
 
 $id = '';
 $username = '';
@@ -39,8 +40,6 @@ if (isset($_GET['userid'])) {
   $id = $_GET['userid'];
   $username = $row['username'];
 }
-
-require_once 'admin_header.php';
 ?>
 
 <div class="main">
@@ -79,13 +78,20 @@ require_once 'admin_header.php';
     }
     ?>
   </div>
-  <br/>
-  
+
+<div id="fill_up">  
   <form method="post" action= "admin_transact_user.php" name="createform">
-    <table class="table_create">
     <tr align="center">
-      <td><h2> Create Staff Account </h2></td>
+      <center><h2> Create Staff Account </h2></center>
     </tr>
+
+    <TABLE width="60%" class="table_edit">
+
+    <tr>
+      <td>Employee ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+      <td<input type="text" class="txtinput" name="employee_id" maxlength="100" size=25px></td>
+    </tr>
+    <br/>
 
     <tr>
       <td>Grant Access Right:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
@@ -107,12 +113,6 @@ require_once 'admin_header.php';
       </td>
     </tr>
     <br/><br/>
-
-    <tr>
-      <td>Employee ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
-      <td<input type="text" class="txtinput" name="employee_id" maxlength="100" size=25px></td>
-    </tr>
-    <br/>
 
     <tr>
       <td>First Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
@@ -162,7 +162,7 @@ require_once 'admin_header.php';
     <br/></br>
 
     <tr>
-      <td>Unit ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+      <td>Unit:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
       <td>
       <select name="unit_id">
       <option value="NULL" selected>None</option>
@@ -181,7 +181,7 @@ require_once 'admin_header.php';
     <br/><br/>
 
     <tr>
-      <td>Designation ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+      <td>Designation:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
       <td>
       <select name="designation_id">
       <option value="NULL" selected>None</option>
@@ -199,87 +199,6 @@ require_once 'admin_header.php';
     </tr>
     <br/><br/>
 
-    <!--
-    E-Mail Address:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" id="email_address" name="email_address" maxlength="50" size=25px>
-    <br/>  
-    Parent Address:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" id="parent_address" name="parent_address" maxlength="100" size=25px>
-    <br/>
-    Current Address:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" id="present_address" name="present_address" maxlength="50" size=25px>
-    <br/>
-    Civil Status:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <select name="civil_status">
-      <option value="Single">Single</option>
-      <option value="Married">Married</option>
-      <option value="Widowed">Widowed</option>
-    </select>
-    <br/><br/>
-    Birthdate:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" id="birthdate" name="birthdate" maxlength="50" size=25px>
-    <br/>
-    Contact Number:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" id="contact_number" name="contact_number" size=25px>
-    <br/>
-    Spouse's Name:&nbsp;&nbsp;&nbsp;
-    <input type="text" id="spouse_name" name="spouse_name" maxlength="50" size=25px>
-    <br/>
-    Spouse's Contact Number:&nbsp;&nbsp;&nbsp;
-    <input type="text" id="spouse_number" name="spouse_number" maxlength="50" size=25px>
-    <br/>
-    Father's Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" id="father_name" name="father_name" maxlength="50" size=25px>
-    <br/>
-    Mother's Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" id="mother_name" name="mother_name" maxlength="50" size=25px>
-    <br/>
-    <?php
-    //if (isset($_SESSION['employee_id']))
-    //{
-      if ($_SESSION['access_level_id'] == 3) {
-        echo '<input type="hidden" name="last_updated_by" value ='. $_SESSION['username'];
-        echo '>';
-      }
-    //}
-
-    ?>
-    Housing Type:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <select name="housing_type">
-      <option value="Apartment">Apartment</option>
-      <option value="Boarding House Off Campus">BHouse Off Campus</option>
-      <option value="Boarding House on Campus">BHouse On Campus</option>
-      <option value="Own House">Own House</option>
-      <option value="Relative\'s House">Relative's House</option>
-      <option value="U.P. Dormitory">U.P. Dormitory</option>
-      <option value="U.P. Staff House">U.P. Staff House</option>
-    </select>
-    <br/><br/>
-    Citizenship:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" id="citizenship" name="citizenship" maxlength="50" size=25px>
-    <br/><br/>
-
-    <b>If ever password is forgotten...</b><br/><br/>
-    Security Question:&nbsp;&nbsp;&nbsp;
-    <select name="sec_quest">
-      <option value="What is the name of your first school?<" selected>What is the name of your first school?</option>
-      <option value="Where is your hometown?">Where is your hometown?</option>
-      <option value="What is your favorite past-time?">What is your favorite past-time?</option>
-      <option value="Who is your favorite teacher?">Who is your favorite teacher?</option>
-      <option value="What is your father's middle name?">What is your father's middle name?</option>
-      <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
-      <option value="What is your pet's name?">What is your pet's name?</option>
-      <option value="Who was your childhood hero?">Who was your childhood hero?</option>
-      <option value="What is your betfriend's name?">What is your betfriend's name?</option>
-    </select>
-    <br/><br/>
-
-    Answer:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-    <input type="text" id="sec_ans" name="sec_ans" maxlength="50" size=25px>
-    <br/><br/>
-
-    -->
-
     <center>
     <tr class="no_hover">
       <td>
@@ -291,10 +210,10 @@ require_once 'admin_header.php';
       </div>
       </td>
     </tr>
-    </center>
-    
-    </table>
+    </center>    
+    </TABLE>
   </form>
+  </div>
 
   <script language="JavaScript" type="text/javascript">
 
