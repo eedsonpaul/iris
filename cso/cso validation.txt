@@ -1,0 +1,13 @@
+needs validation
+*cso_add_employee.php
+*cso_add_employee_login_info.php
+*cso_add_employee_record.php
+*cso_add_student_personal_data.php
+*cso_add_student_personal_enrollment_data.php
+*cso_add_student_record.php
+*cso_edit_employee_record.php
+*cso_edit_student_personal_enrollment_data.php
+*cso_edit_view_student_course.php
+*cso_general_registration.php
+*cso_generate_password_change_student_login_account.php
+*cso_remove_employee_record.php

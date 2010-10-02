@@ -1,0 +1,43 @@
+INSERT INTO student (student_number, degree_program, year_level, student_status, first_name, last_name, middle_name, stfap_bracket_id, scholarship_id, degree_level, citizenship)
+VALUES ( 200668869, 'BS ComSci', 4, 1, 'Geoffry', 'Heredia', 'Diala', 1, 1, 'Baccalaureate', 'Filipino');
+
+INSERT INTO student (student_number, degree_program, year_level, student_status, first_name, last_name, middle_name, stfap_bracket_id, scholarship_id, degree_level, citizenship)
+VALUES ( 200650020, 'BS Chemical Engineering', 1, 1, 'Marianne Audrey', 'Bio', 'Saavedra', 2, 1, 'Baccalaureate', 'Filipino');
+
+INSERT INTO student (student_number, degree_program, year_level, student_status, first_name, last_name, middle_name, stfap_bracket_id, scholarship_id, degree_level, citizenship)
+VALUES ( 200412345, 'BS Food Technology', 3, 1, 'Monn Adrian', 'Bio', 'Saavedra', 3, 1, 'Baccalaureate', 'Filipino');
+INSERT INTO student (student_number, degree_program, year_level, student_status, first_name, last_name, middle_name, stfap_bracket_id, scholarship_id, degree_level, citizenship)
+VALUES ( 200678912, 'BS Management Engineering', 1, 1, 'Yu', 'Jan Richie', 'Alimagno', 2, 1, 'Baccalaureate', 'Filipino');
+
+
+insert into accountability_type values (1, 'Scholarship');
+insert into accountability_type values (2, 'Book');
+insert into accountability_type values (3, 'Underassessment/ Lab Fees');
+insert into accountability_type values (4, 'SLB');
+insert into accountability_type values (5, 'Enrollment');
+
+insert into student_status (student_number, course_code, section_label, status) values(200668869, 1, 'A', 'confirmed');
+insert into student_status (student_number, course_code, section_label, status) values(200668869, 2, 'A', 'confirmed');
+insert into student_status (student_number, course_code, section_label, status) values(200668869, 3, 'A', 'confirmed');
+
+INSERT INTO subject (course_code, subject_title,lab_fee, units, semester_offered)
+VALUES ( 1, 'CMSC128', 0, 3, 1);
+INSERT INTO subject (course_code, subject_title,lab_fee, units, semester_offered)
+VALUES ( 2, 'CMSC128lab', 300, 0, 1);
+INSERT INTO subject (course_code, subject_title,lab_fee, units, semester_offered)
+VALUES ( 3, 'CMSC141', 0, 3, 1);
+
+INSERT INTO section (course_code, class_type)
+VALUES ( 1, 'lec');
+INSERT INTO section (course_code, class_type)
+VALUES ( 2, 'lab');
+INSERT INTO section (course_code, class_type)
+VALUES ( 3, 'lec');
+
+insert into stfap (stfap_bracket_id, stfap_bracket, amount_per_unit) values (1, 'a', 1000);
+insert into stfap (stfap_bracket_id, stfap_bracket, amount_per_unit) values (2, 'b', 600);
+insert into stfap (stfap_bracket_id, stfap_bracket, amount_per_unit) values (3, 'c', 400);
+
+
+insert into scholarship (scholarship_id,amount_shouldered, scholarship_name) values (1, 3000, 'DOST');
+

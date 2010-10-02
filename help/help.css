@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+body {
+	font-family: Verdana;
+	font-size: 12px;
+}
+#greeting {
+	font-weight: bold;
+	font-size: 20px;
+	margin-bottom: 25px;
+}
+.question {
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+#answer-container {
+	margin-bottom: 40px;
+}
+.answer {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
