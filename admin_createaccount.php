@@ -54,140 +54,141 @@ if ($_SESSION['access_level_id'] != 3)  {
     ?>
   </div>
 
-<div id="fill_up">  
-  <form method="post" action= "admin_transact_user.php" name="createform">
-    <tr align="center">
-      <center><h2> Create Staff Account </h2></center>
-    </tr>
+  <div id="fill_up">  
+    <form method="post" action= "admin_transact_user.php" name="createform">
+      <tr align="center">
+        <center><h2> Create Staff Account </h2></center>
+      </tr>
 
-    <TABLE width="60%" class="table_edit">
+      <TABLE width="60%" class="table_edit">
+      <tr>
+        <td>Employee ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td<input type="text" class="txtinput" name="employee_id" maxlength="100" size=25px></td>
+      </tr>
+      <br/>
 
-    <tr>
-      <td>Employee ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
-      <td<input type="text" class="txtinput" name="employee_id" maxlength="100" size=25px></td>
-    </tr>
-    <br/>
+      <tr>
+        <td>Grant Access Right:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+        <select name="access_level">
+        <!-- <option value="" selected><i>Select</i></option> -->
+        <?php
+        foreach ($accessList as $key => $value) {
+          if($key != '1') {
+            echo "<option value=\"$key\" ";
+            if (isset($access_levels) && array_key_exists($key,$access_levels)) {
+                echo $access_levels[$key];
+            }
+            echo ">$value</option>\n";
+          }
+        }
+        ?>
+        </select>
+        </td>
+      </tr>
+      <br/><br/>
 
-    <tr>
-      <td>Grant Access Right:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
-      <td>
-      <select name="access_level">
-      <!-- <option value="" selected><i>Select</i></option> -->
-      <?php
-      foreach ($accessList as $key => $value) {
-        if($key != '1') {
+      <tr>
+        <td>First Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td><input type="text" id="first_name" name="first_name" maxlength="50" size=25px></td>
+      </tr>
+      <br/>
+
+      <tr>
+        <td>Middle Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td><input type="text" id="middle_name" name="middle_name" maxlength="50" size=25px></td>
+      </tr>
+      <br/>
+
+      <tr>
+        <td>Last Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td><input type="text" id="last_name" name="last_name" maxlength="50" size=25px></td>
+      </tr>
+      <br/>
+
+      <tr>
+        <td><span class="ast">Username will be auto-generated</span></td><br/><br/>
+      </tr><br/>
+
+      <input type="hidden" class="txtinput" name="username" value="<?php echo $uName ?>">
+
+      <tr>
+        <td>Password:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td><input type="password" id="password" name="password" maxlength="50" size=25px></td>
+      </tr>
+      <br/>
+
+      <tr>
+        <td>Confirm Password:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td><input type="password" id="password2" name="password2" maxlength="50" size=25px></td>
+      </tr>
+      <br/>
+
+      <tr>
+        <td>Gender:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+        <select name="gender">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+        </td>
+      </tr>
+      <br/></br>
+
+      <tr>
+        <td>Unit:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+        <select name="unit_id">
+        <option value="NULL" selected>None</option>
+        <?php
+        foreach ($unitList as $key => $value) {
           echo "<option value=\"$key\" ";
-          if (isset($access_levels) && array_key_exists($key,$access_levels)) {
-              echo $access_levels[$key];
+          if (isset($unit) && array_key_exists($key,$unit)) {
+            echo $unit[$key];
           }
           echo ">$value</option>\n";
         }
-      }
-      ?>
-      </select>
-      </td>
-    </tr>
-    <br/><br/>
+        ?>
+        </select>
+        </td>
+      </tr>
+      <br/><br/>
 
-    <tr>
-      <td>First Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
-      <td><input type="text" id="first_name" name="first_name" maxlength="50" size=25px></td>
-    </tr>
-    <br/>
-
-    <tr>
-      <td>Middle Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-      <td><input type="text" id="middle_name" name="middle_name" maxlength="50" size=25px></td>
-    </tr>
-    <br/>
-
-    <tr>
-      <td>Last Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
-      <td><input type="text" id="last_name" name="last_name" maxlength="50" size=25px></td>
-    </tr>
-    <br/>
-
-    <tr>
-      <td><span class="ast">Username will be auto-generated</span></td><br/><br/>
-    </tr><br/>
-
-    <input type="hidden" class="txtinput" name="username" value="<?php echo $uName ?>">
-
-    <tr>
-      <td>Password:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
-      <td><input type="password" id="password" name="password" maxlength="50" size=25px></td>
-    </tr>
-    <br/>
-
-    <tr>
-      <td>Confirm Password:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
-      <td><input type="password" id="password2" name="password2" maxlength="50" size=25px></td>
-    </tr>
-    <br/>
-
-    <tr>
-      <td>Gender:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
-      <td>
-      <select name="gender">
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-      </select>
-      </td>
-    </tr>
-    <br/></br>
-
-    <tr>
-      <td>Unit:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
-      <td>
-      <select name="unit_id">
-      <option value="NULL" selected>None</option>
-      <?php
-      foreach ($unitList as $key => $value) {
-        echo "<option value=\"$key\" ";
-        if (isset($unit) && array_key_exists($key,$unit)) {
-          echo $unit[$key];
+      <tr>
+        <td>Designation:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+        <select name="designation_id">
+        <option value="NULL" selected>None</option>
+        <?php
+        foreach ($designationList as $key => $value) {
+          echo "<option value=\"$key\" ";
+          if (isset($designation) && array_key_exists($key,$designation)) {
+            echo $designation[$key];
+          }
+          echo ">$value</option>\n";
         }
-        echo ">$value</option>\n";
-      }
-      ?>
-      </select>
-      </td>
-    </tr>
-    <br/><br/>
+        ?>
+        </select>
+        </td>
+      </tr>
+      <br/><br/>
+      <input type="hidden" id="last_updated_by" name="last_updated_by"
+        value="<?php  htmlspecialchars($_SESSION['username']) ?>">
 
-    <tr>
-      <td>Designation:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
-      <td>
-      <select name="designation_id">
-      <option value="NULL" selected>None</option>
-      <?php
-      foreach ($designationList as $key => $value) {
-        echo "<option value=\"$key\" ";
-        if (isset($designation) && array_key_exists($key,$designation)) {
-          echo $designation[$key];
-        }
-        echo ">$value</option>\n";
-      }
-      ?>
-      </select>
-      </td>
-    </tr>
-    <br/><br/>
-
-    <center>
-    <tr class="no_hover">
-      <td>
-      <div id="button">
-        <p>
-          <input type="submit" class="submit" name="action" value="Create">
-          <input type="reset" value="Clear">
-        </p>
-      </div>
-      </td>
-    </tr>
-    </center>    
-    </TABLE>
-  </form>
+      <center>
+      <tr>
+        <td>
+        <div id="button">
+          <p>
+            <input type="submit" class="submit" name="action" value="Create">
+            <input type="reset" value="Clear">
+          </p>
+        </div>
+        </td>
+      </tr>
+      </center>    
+      </TABLE>
+    </form>
   </div>
 
   <script language="JavaScript" type="text/javascript">

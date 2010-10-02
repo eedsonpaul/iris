@@ -159,20 +159,20 @@ if (isset($_REQUEST['action'])) {
                 student_number= '" . $_POST['student_number'] . "' AND password='" . md5($_POST['password']) . "' 
                 AND access_level_id=1 ");
 
-        if ($row = mysql_fetch_array($result)) {
-          session_start();
-          $_SESSION['student_number'] = $row['student_number'];
-		      $_SESSION['password'] = $row['password'];
-          $_SESSION['access_level_id'] = $row['access_level_id'];
+      if ($row = mysql_fetch_array($result)) {
+        session_start();
+        $_SESSION['student_number'] = $row['student_number'];
+	      $_SESSION['password'] = $row['password'];
+        $_SESSION['access_level_id'] = $row['access_level_id'];
           
-		  if(isset($_POST['remember'])){
-			setcookie("cookname", $_SESSION['student_number'], time()+60*60*24*100, "/");
-			setcookie("cookpass", $_SESSION['password'], time()+60*60*24*100, "/");
-		 }
+	      if(isset($_POST['remember'])){
+		      setcookie("cookname", $_SESSION['student_number'], time()+60*60*24*100, "/");
+		      setcookie("cookpass", $_SESSION['password'], time()+60*60*24*100, "/");
+	      }
 
-		  redirect('student/student.php?');
+	      redirect('student/student.php?');
 		  
-        } else {
+      } else {
           redirect('login.php?action=StudentError');
         }
       }
@@ -204,7 +204,8 @@ if (isset($_REQUEST['action'])) {
           and isset($_POST['gender'])          
           and isset($_POST['unit_id'])
           and isset($_POST['designation_id'])
-          and $_POST['password'] == $_POST['password2'])
+          and isset($_POST['last_updated_by'])
+          and $_POST['password'] == $_POST['password2'])          
           /*
           and isset($_POST['email_address'])
           and isset($_POST['parent_address'])
@@ -216,7 +217,6 @@ if (isset($_REQUEST['action'])) {
           and isset($_POST['spouse_number'])
           and isset($_POST['father_name'])
           and isset($_POST['mother_name'])
-          and isset($_POST['last_updated_by'])
           and isset($_POST['housing_type'])
           and isset($_POST['citizenship'])
           and isset($_POST['sec_quest'])
@@ -228,13 +228,13 @@ if (isset($_REQUEST['action'])) {
         $hashedPassword = md5($_POST['password']);
 
         $sql = "INSERT INTO employee (employee_id, username, password, access_level_id,
-                first_name, middle_name, last_name, gender, 
+                first_name, middle_name, last_name, gender, last_updated_by,
                 unit_id, designation_id) " .
                "VALUES ('" . $_POST['employee_id'] . "','$uName',
                '$hashedPassword','" . $_POST['access_level'] . "',
                '" . $_POST['first_name'] . "',
                '" . $_POST['middle_name'] . "','" . $_POST['last_name'] . "',
-               '" . $_POST['gender'] . "',
+               '" . $_POST['gender'] . "','" . $_POST['last_updated_by'] . "',
                '" . $_POST['unit_id'] . "','" . $_POST['designation_id'] . "')";
                /*
                '" . $_POST['parent_address'] . "','" . $_POST['present_address'] . "',
@@ -253,6 +253,77 @@ if (isset($_REQUEST['action'])) {
       session_start();
       $_SESSION['flash'] =  'Account succesfully created!';
       redirect('admin_useraccount.php?userid=' . $_POST['employee_id']);
+      break;
+
+    case 'Save':
+      if (isset($_POST['employee_id'])
+          and isset($_POST['access_level'])
+          and isset($_POST['first_name'])
+          or isset($_POST['middle_name'])
+          and isset($_POST['last_name'])
+          and isset($_POST['username'])
+          and isset($_POST['password'])
+          and isset($_POST['password2'])
+          and isset($_POST['gender'])          
+          and isset($_POST['unit_id'])
+          and isset($_POST['designation_id'])
+          and isset($_POST['last_updated_by'])          
+          and isset($_POST['email_address'])
+          and isset($_POST['parent_address'])
+          and isset($_POST['present_address'])
+          and isset($_POST['civil_status'])
+          and isset($_POST['birthdate'])
+          and isset($_POST['contact_number'])
+          and isset($_POST['spouse_name'])
+          and isset($_POST['spouse_number'])
+          and isset($_POST['father_name'])
+          and isset($_POST['mother_name'])
+          and isset($_POST['housing_type'])
+          and isset($_POST['citizenship'])
+          and isset($_POST['sec_quest'])
+          and isset($_POST['sec_ans'])
+          /*and $_POST['password'] == $_POST['password2']*/)
+
+      {
+        $uName = generateUsername($_POST['first_name'], $_POST['last_name']);
+
+        $hashedPassword = md5($_POST['password']);
+
+        $sql = "UPDATE employee " .
+               "SET employee_id='" . $_POST['employee_id'] . 
+               "', username= '$uName
+               ', password= '$hashedPassword
+               ', access_level_id='" . $_POST['access_level'] .               
+               "', first_name='" . $_POST['first_name'] .
+               "', middle_name='" . $_POST['middle_name'] .
+               "', last_name='" . $_POST['last_name'] .
+               "', gender='" . $_POST['gender'] .
+               "', last_updated_by='" . $_POST['last_updated_by'] .
+               "', unit_id='" . $_POST['unit_id'] .
+               "', designation_id='" . $_POST['designation_id'] . 
+               "', parent_address='" . $_POST['parent_address'] .
+               "', present_address='" . $_POST['present_address'] .
+               "', civil_status='" . $_POST['civil_status'] .
+               "', birthdate='" . $_POST['birthdate'] .
+               "', contact_number='" . $_POST['contact_number'] .
+               "', spouse_name='" . $_POST['spouse_name'] .
+               "', spouse_number='" . $_POST['spouse_number'] .
+               "', father_name='" . $_POST['father_name'] .
+               "', mother_name='" . $_POST['mother_name'] .
+               "', housing_type='" . $_POST['housing_type'] .
+               "', citizenship='" . $_POST['citizenship'] .
+               "', sec_quest='" . $_POST['sec_quest'] .
+               "', sec_ans='" . $_POST['sec_ans'] . "' " .
+               "WHERE employee_id=" . $_POST['employee_id'];
+
+        mysql_query($sql, $conn)
+          or die('Could not create user account; ' . mysql_error());
+      }
+
+      session_start();
+      $_SESSION['flash'] =  'Account updated!';
+      redirect('admin_useraccount.php?userid=' . $_POST['employee_id']);
+    
       break;
 
     case 'Create Student':
@@ -379,24 +450,6 @@ if (isset($_REQUEST['action'])) {
           or die('Could not create user account; ' . mysql_error());
       }
       
-      redirect('index.php');
-      break;
-
-    case 'Save':
-      if (isset($_POST['name'])
-          and isset($_POST['email'])
-          and isset($_POST['accesslvl'])
-          and isset($_POST['userid']))
-      {
-        $sql = "UPDATE cms_users " .
-               "SET email='" . $_POST['email'] . 
-               "', name='" . $_POST['name'] . 
-               "', access_lvl=" . $_POST['accesslvl'] . " " .
-               " WHERE user_id=" . $_POST['userid'];
-
-        mysql_query($sql, $conn)
-          or die('Could not update user account; ' . mysql_error());
-      }
       redirect('index.php');
       break;
 

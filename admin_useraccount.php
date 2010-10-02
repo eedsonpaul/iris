@@ -53,6 +53,7 @@ $result = mysql_query($sql, $conn)
 $user = mysql_fetch_array($result);
 
 $id = $user['employee_id'];
+$pass = md5($user['password']);
 ?>
 <div class="main">
 
@@ -104,8 +105,6 @@ $id = $user['employee_id'];
      </span>
   </div>
 
-  
-
   <br/>
   <?php
   if (isset($_SESSION['flash'])) {
@@ -136,9 +135,10 @@ $id = $user['employee_id'];
       <input type="text" class="txtinput" name="username" size=25px
       value="<?php echo htmlspecialchars($user['username']); ?>">
       <br/>
-      
+
       Reset Password:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-      <input type="password" id="password" name="password" maxlength="50" size=25px>
+      <input type="hidden" id="password" name="password"
+      value="<?php echo htmlspecialchars($pass); ?>">
       <br/>
 
       First Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
