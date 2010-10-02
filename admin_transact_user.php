@@ -1,7 +1,7 @@
 <?php
 require_once 'admin_http.php';
 
-redirect('error.php');
+//redirect('error.php');
 
 ?>
 
@@ -263,25 +263,25 @@ if (isset($_REQUEST['action'])) {
           and isset($_POST['last_name'])
           and isset($_POST['username'])
           and isset($_POST['password'])
-          and isset($_POST['password2'])
+          //and isset($_POST['password2'])
           and isset($_POST['gender'])          
           and isset($_POST['unit_id'])
           and isset($_POST['designation_id'])
-          and isset($_POST['last_updated_by'])          
-          and isset($_POST['email_address'])
-          and isset($_POST['parent_address'])
-          and isset($_POST['present_address'])
-          and isset($_POST['civil_status'])
-          and isset($_POST['birthdate'])
-          and isset($_POST['contact_number'])
-          and isset($_POST['spouse_name'])
-          and isset($_POST['spouse_number'])
-          and isset($_POST['father_name'])
-          and isset($_POST['mother_name'])
-          and isset($_POST['housing_type'])
-          and isset($_POST['citizenship'])
-          and isset($_POST['sec_quest'])
-          and isset($_POST['sec_ans'])
+          or isset($_POST['last_updated_by'])          
+          or isset($_POST['email_address'])
+          or isset($_POST['parent_address'])
+          or isset($_POST['present_address'])
+          or isset($_POST['civil_status'])
+          or isset($_POST['birthdate'])
+          or isset($_POST['contact_number'])
+          or isset($_POST['spouse_name'])
+          or isset($_POST['spouse_number'])
+          or isset($_POST['father_name'])
+          or isset($_POST['mother_name'])
+          or isset($_POST['housing_type'])
+          or isset($_POST['citizenship'])
+          or isset($_POST['sec_quest'])
+          or isset($_POST['sec_ans'])
           /*and $_POST['password'] == $_POST['password2']*/)
 
       {
@@ -307,21 +307,24 @@ if (isset($_REQUEST['action'])) {
                "', birthdate='" . $_POST['birthdate'] .
                "', contact_number='" . $_POST['contact_number'] .
                "', spouse_name='" . $_POST['spouse_name'] .
-               "', spouse_number='" . $_POST['spouse_number'] .
+               "', spouse_contact_number='" . $_POST['spouse_number'] .
                "', father_name='" . $_POST['father_name'] .
                "', mother_name='" . $_POST['mother_name'] .
                "', housing_type='" . $_POST['housing_type'] .
                "', citizenship='" . $_POST['citizenship'] .
-               "', sec_quest='" . $_POST['sec_quest'] .
-               "', sec_ans='" . $_POST['sec_ans'] . "' " .
+               "', security_question='" . $_POST['sec_quest'] .
+               "', security_answer='" . $_POST['sec_ans'] . "' " .
                "WHERE employee_id=" . $_POST['employee_id'];
 
         mysql_query($sql, $conn)
           or die('Could not create user account; ' . mysql_error());
+          
+        session_start();
+        $_SESSION['flash'] =  'Account updated!';
+      } else {
+        session_start();
+        $_SESSION['flash'] =  'Update Failed!';
       }
-
-      session_start();
-      $_SESSION['flash'] =  'Account updated!';
       redirect('admin_useraccount.php?userid=' . $_POST['employee_id']);
     
       break;

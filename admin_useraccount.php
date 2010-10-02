@@ -131,6 +131,9 @@ $pass = md5($user['password']);
       <input type="hidden" class="txtinput" name="employee_id" value="<?php echo htmlspecialchars($id); ?>">
       </p>
 
+      <input type="hidden" class="txtinput" name="access_level"
+      value="<?php echo htmlspecialchars($user['access_level_id']); ?>">
+
       Username:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
       <input type="text" class="txtinput" name="username" size=25px
       value="<?php echo htmlspecialchars($user['username']); ?>">
@@ -173,7 +176,7 @@ $pass = md5($user['password']);
       <br/>
       -->
 
-      Unit ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;      
+      Unit:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;      
       <select name="unit_id">
       <option value="NULL" selected>None</option>
       <?php
@@ -185,10 +188,9 @@ $pass = md5($user['password']);
         echo ">$value</option>\n";
       }
       ?>
-      </select>
-      <br/><br/>
+      </select><br/><br/>
 
-      Designation ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
+      Designation:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
       <select name="designation_id">
       <option value="NULL" selected>None</option>
       <?php
@@ -200,10 +202,8 @@ $pass = md5($user['password']);
         echo ">$value</option>\n";
       }
       ?>
-      </select>      
-    </TD>
+      </select><br/><br/>
 
-    <TD width="50%" align="right">
       E-Mail Address:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
       <input type="text" id="email_address" name="email_address" maxlength="50" size=25px
       value="<?php echo htmlspecialchars($user['email_address']); ?>">
@@ -224,6 +224,9 @@ $pass = md5($user['password']);
         <option value="Widowed">Widowed</option>
       </select>
       <br/><br/>
+    </TD>
+
+    <TD width="50%" align="right">
       Birthdate:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
       <input type="text" id="birthdate" name="birthdate" maxlength="50" size=25px
       value="<?php echo htmlspecialchars($user['birthdate']); ?>">
@@ -274,6 +277,25 @@ $pass = md5($user['password']);
       <input type="text" id="citizenship" name="citizenship" maxlength="50" size=25px
       value="<?php echo htmlspecialchars($user['citizenship']); ?>">
       <br/>
+
+      <b>If ever password is forgotten...</b><br/><br/>
+      Security Question:&nbsp;&nbsp;&nbsp;
+      <select name="sec_quest">
+        <option value="What is the name of your first school?<" selected>What is the name of your first school?</option>
+        <option value="Where is your hometown?">Where is your hometown?</option>
+        <option value="What is your favorite past-time?">What is your favorite past-time?</option>
+        <option value="Who is your favorite teacher?">Who is your favorite teacher?</option>
+        <option value="What is your father's middle name?">What is your father's middle name?</option>
+        <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+        <option value="What is your pet's name?">What is your pet's name?</option>
+        <option value="Who was your childhood hero?">Who was your childhood hero?</option>
+        <option value="What is your betfriend's name?">What is your betfriend's name?</option>
+      </select>
+      <br/><br/>
+
+      Answer:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
+      <input type="text" id="sec_ans" name="sec_ans" maxlength="50" size=25px>
+      <br/><br/>
     </TD>
   </TR>
   </TABLE>
