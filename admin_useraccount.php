@@ -75,106 +75,100 @@ $id = $user['employee_id'];
     ?>
      </span>
   </div>
-  <br/>
 
   <div id="fill_up">
   <form method="post" action= "admin_transact_user.php">
-    <TABLE class="table_edit" width= "90%">
-    <tr>
-      <?php if ($_GET['userid'] == $_SESSION['employee_id']) { ?>
-        <th align="right">Edit My</th>
-        <th align="left">Account</th>
-      <?php } else { ?>
-        <th align="right">Modify</th>
-        <th align="left">Account</th>
-      <?php } ?>
-    <tr>
-
+    <?php if ($_GET['userid'] == $_SESSION['employee_id']) { ?>
+      <center><h2>Edit My Account</h2></center>
+    <?php } else { ?>
+      <center><h2>Modify Employee Record</h2></center>
+    <?php } ?>
+    
+    <TABLE class="table_edit" width= "80%">
     <TR>
-      <TD width="50%">
-        <tr>
-          <td>
-          Employee ID: &nbsp;&nbsp;<span class="id"><?php echo htmlspecialchars($id); ?></span></h2>
-          </td>
-          <td>
-          <input type="hidden" class="txtinput" name="employee_id" value="<?php echo htmlspecialchars($id); ?>">
-          </td>
-        </tr>
+      <TD width="45%" align="right">
+      <p>
+      Employee ID: &nbsp;&nbsp;<span class="id"><?php echo htmlspecialchars($id); ?></span></h2>
+      <input type="hidden" class="txtinput" name="employee_id" value="<?php echo htmlspecialchars($id); ?>">
+      </p>
 
-        <tr>
-          <td>
-          Username:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-          </td>
-          <td>
-          <input type="text" class="txtinput" name="username" size=25px
-            value="<?php echo htmlspecialchars($user['username']); ?>">
-          </td>
-        </tr>
-
-      <!--
+      Username:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
+      <input type="text" class="txtinput" name="username" size=25px
+      value="<?php echo htmlspecialchars($user['username']); ?>">
+      <br/>
+      
       Reset Password:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
       <input type="password" id="password" name="password" maxlength="50" size=25px>
       <br/>
+
+      First Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
+      <input type="text" id="first_name" name="first_name" maxlength="50" size=25px
+      value="<?php echo htmlspecialchars($user['first_name']); ?>">
+      <br/>
+      Middle Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
+      <input type="text" id="middle_name" name="middle_name" maxlength="50" size=25px
+      value="<?php echo htmlspecialchars($user['middle_name']); ?>">
+      <br/>
+      Last Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
+      <input type="text" id="last_name" name="last_name" maxlength="50" size=25px
+      value="<?php echo htmlspecialchars($user['last_name']); ?>">
+      <br/>
+      Gender:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
+      <select name="gender">
+        <option value="" selected>Select Gender</option>
+        <!-- <option value="" selected><?php echo htmlspecialchars($user['gender']); ?></option> -->
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+      <br/></br>        
+
+      <!--
+      Unit ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
+      <input type="text" id="unit_id" name="unit_id" maxlength="50" size=25px
+      value="<?php echo htmlspecialchars($user['unit_id']); ?>">
+      <br/>
+      Designation ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
+      <input type="text" id="designation_id" name="designation_id" maxlength="50" size=25px
+      value="<?php echo htmlspecialchars($user['designation_id']); ?>">
+      <br/>
       -->
-        <tr>
-          <td>
-          First Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-          </td>
-          <td>
-          <input type="text" id="first_name" name="first_name" maxlength="50" size=25px
-          value="<?php echo htmlspecialchars($user['first_name']); ?>">
-          </td>
-        </tr>
 
-        <tr>
-          <td>
-          Middle Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-          </td>
-          <td>
-          <input type="text" id="middle_name" name="middle_name" maxlength="50" size=25px
-          value="<?php echo htmlspecialchars($user['middle_name']); ?>">
-          </td>
-        </tr>
-        
-        <tr>
-          <td>        
-          Last Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-          </td>
-          <td>
-          <input type="text" id="last_name" name="last_name" maxlength="50" size=25px
-          value="<?php echo htmlspecialchars($user['last_name']); ?>">
-          </td>
-        </tr>
+      Unit ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
+      
+      <select name="unit_id">
+      <option value="NULL" selected>None</option>
+      <?php
+      foreach ($unitList as $key => $value) {
+        echo "<option value=\"$key\" ";
+        if (isset($unit) && array_key_exists($key,$unit)) {
+          echo $unit[$key];
+        }
+        echo ">$value</option>\n";
+      }
+      ?>
+      </select>
+      <br/><br/>
 
-        <tr>
-          <td>        
-          Gender:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-          </td>
-          <td>
-          <select name="gender">
-            <option value="" selected>Select Gender</option>
-            <!-- <option value="" selected><?php echo htmlspecialchars($user['gender']); ?></option> -->
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
-          </td>
-        </tr>    
-
-        E-Mail Address:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-        <input type="text" id="email_address" name="email_address" maxlength="50" size=25px
-        value="<?php echo htmlspecialchars($user['email_address']); ?>">
-        <br/>
-        Unit ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-        <input type="text" id="unit_id" name="unit_id" maxlength="50" size=25px
-        value="<?php echo htmlspecialchars($user['unit_id']); ?>">
-        <br/>
-        Designation ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-        <input type="text" id="designation_id" name="designation_id" maxlength="50" size=25px
-        value="<?php echo htmlspecialchars($user['designation_id']); ?>">
-        <br/>
+      Designation ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
+      <select name="designation_id">
+      <option value="NULL" selected>None</option>
+      <?php
+      foreach ($designationList as $key => $value) {
+        echo "<option value=\"$key\" ";
+        if (isset($designation) && array_key_exists($key,$designation)) {
+          echo $designation[$key];
+        }
+        echo ">$value</option>\n";
+      }
+      ?>
+      </select>      
     </TD>
 
-    <TD width="50%">
+    <TD width="55%" align="right">
+      E-Mail Address:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
+      <input type="text" id="email_address" name="email_address" maxlength="50" size=25px
+      value="<?php echo htmlspecialchars($user['email_address']); ?>">
+      <br/>
       Parent Address:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
       <input type="text" id="parent_address" name="parent_address" maxlength="100" size=25px
       value="<?php echo htmlspecialchars($user['parent_address']); ?>">
