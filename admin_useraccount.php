@@ -9,10 +9,36 @@
 </html>
 
 <?php
-require_once 'admin_db_connect.php';
 require_once 'admin_http.php';
+require_once 'admin_db_connect.php';
 require_once 'admin_header.php';
 require_once 'admin_sql_query.php';
+
+if ($_SESSION['access_level_id'] != 3)  {
+  redirect('error.php');
+}
+?>
+
+<?php
+$id = '';
+$username = '';
+$access_level = '';
+$first_name = '';
+$middle_name = '';
+$last_name = '';
+//$gender = '';
+$email_address = '';
+$unit_id = '';
+$designation_id = '';
+$parent_address = '';
+$present_address = '';
+$civil_status = '';
+$birthdate = '';
+$contact_number = '';
+$employee_id = '';
+$username = '';
+$password = '';
+$access_lvl = '';
 
 if (isset($_GET['userid'])) {
 $id = '';
@@ -73,16 +99,29 @@ $id = $user['employee_id'];
       }
       echo '</a>';
     }
+
     ?>
      </span>
   </div>
+
+  
+
+  <br/>
+  <?php
+  if (isset($_SESSION['flash'])) {
+  ?>
+  <div id="flash">
+    <center><?php echo $_SESSION['flash']; ?></center>
+    <?php unset($_SESSION['flash']); ?>
+  </div>
+  <?php } ?>
 
   <div id="fill_up">
   <form method="post" action= "admin_transact_user.php">
     <?php if ($_GET['userid'] == $_SESSION['employee_id']) { ?>
       <center><h2>Edit My Account</h2></center>
     <?php } else { ?>
-      <center><h2>Modify Employee Record</h2></center>
+      <center><h3>Modify Employee Record</h3></center>
     <?php } ?>
     
     <TABLE class="table_edit" width= "90%">

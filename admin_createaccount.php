@@ -4,41 +4,16 @@
 </head>
 </html>
 
+
 <?php
-require_once 'admin_db_connect.php';
 require_once 'admin_http.php';
+require_once 'admin_db_connect.php';
 require_once 'admin_sql_query.php';
 require_once 'admin_echolist.php';
 require_once 'admin_header.php';
 
-$id = '';
-$username = '';
-$access_level = '';
-$first_name = '';
-$middle_name = '';
-$last_name = '';
-//$gender = '';
-$email_address = '';
-$unit_id = '';
-$designation_id = '';
-$parent_address = '';
-$present_address = '';
-$civil_status = '';
-$birthdate = '';
-$contact_number = '';
-$employee_id = '';
-$username = '';
-$password = '';
-$access_lvl = '';
-
-if (isset($_GET['userid'])) {
-  $sql = "SELECT * FROM employees WHERE employee_id=" . $_GET['userid'];
-  $result = mysql_query($sql, $conn)
-    or die('Could not look up user data; ' . mysql_error());
-
-  $row = mysql_fetch_array($result);
-  $id = $_GET['userid'];
-  $username = $row['username'];
+if ($_SESSION['access_level_id'] != 3)  {
+  redirect('error.php');
 }
 ?>
 

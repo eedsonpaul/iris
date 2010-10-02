@@ -87,6 +87,14 @@ require_once 'admin_sql_query.php';
             </tr>
           </table><br/>
           <?php
+            if (isset($_SESSION['flash'])) {
+            ?>
+            <div id="flash_delete">
+              <center><?php echo $_SESSION['flash']; ?></center>
+              <?php unset($_SESSION['flash']); ?>
+            </div><br/>
+            <?php }
+
             echoEmployees(3);
           ?>
 
@@ -109,6 +117,14 @@ require_once 'admin_sql_query.php';
             </tr>
           </table><br/>
           <?php
+            if (isset($_SESSION['flash'])) {
+            ?>
+            <div id="flash_delete">
+              <center><?php echo $_SESSION['flash']; ?></center>
+              <?php unset($_SESSION['flash']); ?>
+            </div><br/>
+            <?php }
+                      
             echoEmployees(8);
           ?>
       <?php
@@ -130,6 +146,14 @@ require_once 'admin_sql_query.php';
             </tr>
           </table><br/>
           <?php
+            if (isset($_SESSION['flash'])) {
+            ?>
+            <div id="flash_delete">
+              <center><?php echo $_SESSION['flash']; ?></center>
+              <?php unset($_SESSION['flash']); ?>
+            </div><br/>
+            <?php }
+                      
             echoEmployees(7);
           ?>
       <?php
@@ -151,6 +175,14 @@ require_once 'admin_sql_query.php';
             </tr>
           </table><br/>
           <?php
+            if (isset($_SESSION['flash'])) {
+            ?>
+            <div id="flash_delete">
+              <center><?php echo $_SESSION['flash']; ?></center>
+              <?php unset($_SESSION['flash']); ?>
+            </div><br/>
+            <?php }
+                      
             echoEmployees(4);
           ?>
       <?php
@@ -172,6 +204,14 @@ require_once 'admin_sql_query.php';
             </tr>
            </table><br/>
           <?php
+            if (isset($_SESSION['flash'])) {
+            ?>
+            <div id="flash_delete">
+              <center><?php echo $_SESSION['flash']; ?></center>
+              <?php unset($_SESSION['flash']); ?>
+            </div><br/>
+            <?php }
+                      
             echoEmployees(2);
     
           break;
@@ -192,6 +232,14 @@ require_once 'admin_sql_query.php';
             </tr>
           </table><br/>
           <?php
+            if (isset($_SESSION['flash'])) {
+            ?>
+            <div id="flash_delete">
+              <center><?php echo $_SESSION['flash']; ?></center>
+              <?php unset($_SESSION['flash']); ?>
+            </div><br/>
+            <?php }
+                      
             echoEmployees(5);
     
           break;
@@ -212,6 +260,14 @@ require_once 'admin_sql_query.php';
             </tr>
           </table><br/>
           <?php
+            if (isset($_SESSION['flash'])) {
+            ?>
+            <div id="flash_delete">
+              <center><?php echo $_SESSION['flash']; ?></center>
+              <?php unset($_SESSION['flash']); ?>
+            </div><br/>
+            <?php }
+                      
             echoEmployees(6);
     
           break;
@@ -232,6 +288,14 @@ require_once 'admin_sql_query.php';
             </tr>
           </table><br/>
           <?php
+            if (isset($_SESSION['flash'])) {
+            ?>
+            <div id="flash_delete">
+              <center><?php echo $_SESSION['flash']; ?></center>
+              <?php unset($_SESSION['flash']); ?>
+            </div><br/>
+            <?php }
+                      
             echoEmployees(9);
     
           break;

@@ -1,54 +1,77 @@
 <?php
-require_once 'admin_db_connect.php';
 require_once 'admin_http.php';
+
+redirect('error.php');
+
+?>
+
+<?php
+require_once 'admin_db_connect.php';
+//require_once 'admin_http.php';
 require_once 'admin_echolist.php';
 
 if (isset($_GET['admindelete'])) {
   $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['admindelete'] . "' LIMIT 1";
   $result = mysql_query($sql, $conn)
     or die('Could not look up user data; ' . mysql_error());
+  session_start();
+  $_SESSION['flash'] =  'Account succesfully deleted!';
   redirect('index.php?action=SysAd');
 
 } else if (isset($_GET['divdelete'])) {
   $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['divdelete'] . "' LIMIT 1";
   $result = mysql_query($sql, $conn)
     or die('Could not look up user data; ' . mysql_error());
+  session_start();
+  $_SESSION['flash'] =  'Account succesfully deleted!';    
   redirect('index.php?action=Faculty');
   
 } else if (isset($_GET['acctgdelete'])) {
   $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['acctgdelete'] . "' LIMIT 1";
   $result = mysql_query($sql, $conn)
     or die('Could not look up user data; ' . mysql_error());
+  session_start();
+  $_SESSION['flash'] =  'Account succesfully deleted!';    
   redirect('index.php?action=Acctg');
   
 } else if (isset($_GET['csodelete'])) {
   $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['csodelete'] . "' LIMIT 1";
   $result = mysql_query($sql, $conn)
     or die('Could not look up user data; ' . mysql_error());
+  session_start();
+  $_SESSION['flash'] =  'Account succesfully deleted!';    
   redirect('index.php?action=Cso');
   
 } else if (isset($_GET['osadelete'])) {
   $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['osadelete'] . "' LIMIT 1";
   $result = mysql_query($sql, $conn)
     or die('Could not look up user data; ' . mysql_error());
+  session_start();
+  $_SESSION['flash'] =  'Account succesfully deleted!';    
   redirect('index.php?action=Osa');
   
 } else if (isset($_GET['libdelete'])) {
   $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['libdelete'] . "' LIMIT 1";
   $result = mysql_query($sql, $conn)
     or die('Could not look up user data; ' . mysql_error());
+  session_start();
+  $_SESSION['flash'] =  'Account succesfully deleted!';    
   redirect('index.php?action=Lib');
 
 } else if (isset($_GET['cashierdelete'])) {
   $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['cashierdelete'] . "' LIMIT 1";
   $result = mysql_query($sql, $conn)
     or die('Could not look up user data; ' . mysql_error());
+  session_start();
+  $_SESSION['flash'] =  'Account succesfully deleted!';    
   redirect('index.php?action=Cashier');
   
 } else if (isset($_GET['clerkdelete'])) {
   $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['clerkdelete'] . "' LIMIT 1";
   $result = mysql_query($sql, $conn)
     or die('Could not look up user data; ' . mysql_error());
+  session_start();
+  $_SESSION['flash'] =  'Account succesfully deleted!';    
   redirect('index.php?action=Clerk');
 }
 
@@ -139,7 +162,7 @@ if (isset($_REQUEST['action'])) {
         if ($row = mysql_fetch_array($result)) {
           session_start();
           $_SESSION['student_number'] = $row['student_number'];
-		  $_SESSION['password'] = $row['password'];
+		      $_SESSION['password'] = $row['password'];
           $_SESSION['access_level_id'] = $row['access_level_id'];
           
 		  if(isset($_POST['remember'])){
@@ -227,6 +250,8 @@ if (isset($_REQUEST['action'])) {
           or die('Could not create user account; ' . mysql_error());
       }
 
+      session_start();
+      $_SESSION['flash'] =  'Account succesfully created!';
       redirect('admin_useraccount.php?userid=' . $_POST['employee_id']);
       break;
 

@@ -2,9 +2,6 @@
 require_once 'admin_http.php';
 ?>
 
-<html>
-<head>
-
 <script type="text/javascript">
 function confirmation(id, lvl) {
 	var answer = confirm("Are you sure you want to delete this account?");
