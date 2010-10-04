@@ -117,13 +117,22 @@ $pass = $user['password'];
 
   <div id="fill_up">
   <form method="post" action= "admin_transact_user.php">
-    <?php if ($_GET['userid'] == $_SESSION['employee_id']) { ?>
-      <center><h2>Edit My Account</h2></center>
-    <?php } else { ?>
-      <center><h3>Modify Employee Record</h3></center>
-    <?php } ?>
     
     <TABLE class="table_edit" width= "90%">
+    <TR>
+      <td colspan=2 align="center" style='background: maroon; color: white;'>
+      <?php if ($_GET['userid'] == $_SESSION['employee_id']) { ?>
+        <h4>Edit My Account</h4>
+      <?php } else { ?>
+        <h2>Modify Employee Record</h2>
+      <?php } ?>
+      </td>
+    </TR>
+    <TR>
+      <td colspan=2 align="center" style='background: maroon; color: white;'>
+      </td>
+    </TR>
+    
     <TR>
       <TD width="50%">
       <table algin="left" class="table_edit2">
@@ -177,17 +186,6 @@ $pass = $user['password'];
           </select>
           </td>
         </tr>
-
-        <!--
-        Unit ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-        <input type="text" id="unit_id" name="unit_id" maxlength="50" size=25px
-        value="<?php echo htmlspecialchars($user['unit_id']); ?>">
-        <br/>
-        Designation ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-        <input type="text" id="designation_id" name="designation_id" maxlength="50" size=25px
-        value="<?php echo htmlspecialchars($user['designation_id']); ?>">
-        <br/>
-        -->
 
         <tr>
           <td>Unit:<span class="ast">*</span></td>
@@ -310,7 +308,7 @@ $pass = $user['password'];
         </tr>
 
         <tr>
-          <td>Mother's Name:<span class="ast">*</span>&</td>
+          <td>Mother's Name:<span class="ast">*</span></td>
           <td>
           <input type="text" id="mother_name" name="mother_name" maxlength="50" size=25px
           value="<?php echo htmlspecialchars($user['mother_name']); ?>">
@@ -381,6 +379,12 @@ $pass = $user['password'];
         </tr>
       </table>
     </TD>
+  </TR>
+  
+  <TR>
+    <td colspan=2 align="center" style='background: maroon; color: white;'>
+    <br/>
+    </td>
   </TR>
   </TABLE>
   

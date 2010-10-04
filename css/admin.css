@@ -83,8 +83,7 @@ body{
   border: 3px solid maroon;
   margin-right: auto;
   margin-left: auto;
-  padding: 10px;
-  padding-right: 30px;
+  padding: 0px;
 }
 
 .table_edit2 {
@@ -92,7 +91,7 @@ body{
   font-size: 12px;
   margin-right: auto;
   margin-left: auto;
-  padding: 0px;
+  padding: 5px;
 }
 
 .table_edit th {
