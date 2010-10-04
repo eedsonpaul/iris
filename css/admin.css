@@ -13,7 +13,7 @@ body{
 .main 
 {
   width: 930px;
-  min-height: 300px;
+  min-height: 360px;
   height: auto;
   margin-left: auto;
   margin-right: auto;
@@ -90,6 +90,36 @@ body{
 .table_edit th {
   font-size: 18px;
   font-weight: bold;
+}
+
+.table_reset {
+  font-family: Verdana, sans-serif;
+  background: #d5e0e0;
+  padding: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 360px;
+  border: 2px solid maroon;
+}
+
+.table_login {
+  font-family: Verdana, sans-serif;
+  background: #d5e0e0;
+  padding: 0px;
+}
+
+.login {
+  padding-left: 20px;
+}
+
+.table_login a {
+  font-size: 12px;
+  text-decoration: none;
+  color: black;
+}
+
+.table_login a:hover {
+  text-decoration: underline;
 }
 
 #admin ul {
@@ -238,45 +268,32 @@ body{
 #right_side a:visited {text-decoration:none;}
 #right_side a:hover {text-decoration:none; color: #880606;}
 
-#search {
-  float: right;
-  padding-right: 10px;
-  width: 230px;
-}
-
 #fill_up {
   width: 910px;
   text-align: right;
   margin-right: auto;
   margin-left: auto;
   padding: 10px;
-
 }
 
 #login {
   width: 500px;
-  border: 2px solid #037;
-  padding: 10px 10px 10px 10px;
-  min-height: 150px;
-}
-
-#login_error {
-  border: 1px solid red;
-  height: 22px;
-  width: 480px;
-  padding: 5px 5px 5px 5px;
-  background: pink;
-  text-align: center;
+  padding: 10px;
+  padding-top: 0px;
+  height: 340px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .clear { clear: both;}
 
 #studentlogin_info {
   color: red;
-  width: 635px;
+  width: 520px;
   background: transparent;
-  height: auto;
-  padding: 10px 10px 10px 10px;
+  height: 250px;
+  padding: 10px;
+  border: 2px solid maroon;
 }
 
 input {
@@ -286,7 +303,7 @@ input {
    margin-top: 0;
    margin-bottom: 5px;
    height: 25px;
-   font-size: 12px;
+   font-size: 14px;
 }
 
 #button input {  
@@ -345,18 +362,6 @@ input {
   padding: 10px;
 }
 
-#search input {
-  border: 2px solid #037;
-}
-
-#search button {
-  background: #06a;  
-  color: #fff;
-  border: 2px solid #037;  
-  font-size: 12px;  
-  font-weight: bold;
-  height: 30px;
-}
 span.list_title {
   font-weight: bold;
   font-size: 18px;
@@ -430,4 +435,17 @@ td.left {
   background: pink;
   color: red;
   padding: 3px;
+}
+
+#flash_login {
+  width: 90%;
+  border: 1px solid red;
+  background: pink;
+  color: red;
+  padding: 3px;
+  font-weight: 10px;
+}
+
+#reset_pw {
+  wid
 }

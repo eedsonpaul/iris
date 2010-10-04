@@ -23,54 +23,101 @@ if (isset($_SESSION['employee_id']) or isset($_SESSION['student_number'])) {
 ?>
 
 <div class="main">
-<div id="login">
-  <form method ="post" action="admin_transact_user.php" name="loginform">
 
 <?php
 if (isset($_GET['action'])) {
   switch ($_GET['action']) {
     case 'Admin':
 ?>
-  <h2>Administrative Login</h2>
+  <div id="login">
+    <form method ="post" action="admin_transact_user.php" name="loginform">
+    <center>
+    <table width="80%" class="table_login">  
+    <tr>
+      <td width="100%" colspan=2 valign=top style='background: maroon;'>
+      <center><h4>Administrative Login</h4></center>
+    </tr>
+    <tr>
+      <td width="100%" colspan=2 valign=top>
+      <br/>
+      </td>
+    </tr>
+    <?php
+    if (isset($_SESSION['flash'])) {
+    ?>
+    <tr>
+      <td width="100%" colspan=2>
+      <center>
+      <div id="flash_login">
+        <center><?php echo $_SESSION['flash']; ?></center>
+        <?php unset($_SESSION['flash']); ?>
+      </div>
+      </center>
+      </td>
+    </tr>
+    <?php } else { ?>
+    </tr>
+    <tr>
+      <td width="100%" colspan=2 valign=top style='background: transparent;'>
+      <br/>
+      </td>
+    </tr>
+    <?php } ?>
+    <tr>
+      <td width="100%" colspan=2 valign=top style='background: transparent;'>
+      </td>
+    </tr>
 
-  <p>
-    Username:
-    <input type="text" name="username" maxlength="255" value="">
-  </p>
-  <p>
-    Password:
-    <input type="password" name="password" maxlength="50">
-  </p>
-  
-  <div id="button">
-  <p>
-    <input type="submit" class="submit" name="action" value="Admin Login">
-  </p>
-  </div>
+    <tr>
+      <td width="40%" class="login">
+      Username:
+      </td>
+      <td width="60%">
+      <input type="text" name="username" maxlength="255" value="" size=30>
+      </td>
+    </tr>
 
-<?php
-    break;
+    <tr>
+      <td width="40%" class="login">
+      Password:
+      </td>
+      <td>
+      <input type="password" name="password" maxlength="50" size=30>
+      </td>
+    </tr>
+    <tr>
+      <td width="100%" colspan=2 valign=top style='background: transparent;'>
+      </td>
+    </tr>
 
-    case 'AdminError':
-?>
-  <div id="login_error">
-    <span class="red"><b>Incorrect Username/Password Combination!</b></span>
-  </div>
-  <h2>Administrative Login</h2>
+    <tr>
+      <td width="40%" class="login">
+      <div id="button">
+      <input type="submit" class="submit" name="action" value="Admin Login">
+      </div>
+      </td>
+    </tr>
 
-  <p>
-    Username:
-    <input type="text" name="username" maxlength="255" value="">
-  </p>
-  <p>
-    Password:
-    <input type="password" name="password" maxlength="50">
-  </p>
+    <tr>
+      <td width="100%" colspan=2 valign=top class="login">
+      <a href="admin_forgotpass.php">Forgot your password?</a>
+      </td>
+    </tr>
+    <tr>
+      <td width="100%" colspan=2 valign=top style='background: transparent;'>
+      <br/>
+      </td>
+    </tr>
+    
+    <tr>
+      <td width="100%" colspan=2 valign=top style='background: maroon;'>
+      <br/>
+      </td>
+    </tr>
 
-  <div id="button">
-  <p>
-    <input type="submit" class="submit" name="action" value="Admin Login">
-  </p>
+    </table>
+    </center>
+    </form>
   </div>
 
 <?php
@@ -78,47 +125,95 @@ if (isset($_GET['action'])) {
 
   case 'Employee':
 ?>
-  <h2>Employee Login</h2>
+  <div id="login">
+    <form method ="post" action="admin_transact_user.php" name="loginform">
+    <center>
+    <table width="80%" class="table_login">  
+    <tr>
+      <td width="100%" colspan=2 valign=top style='background: maroon;'>
+      <center><h4>Employee Login</h4></center>
+    </tr>
+    <tr>
+      <td width="100%" colspan=2 valign=top>
+      <br/>
+      </td>
+    </tr>
+    <?php
+    if (isset($_SESSION['flash'])) {
+    ?>
+    <tr>
+      <td width="100%" colspan=2>
+      <center>
+      <div id="flash_login">
+        <center><?php echo $_SESSION['flash']; ?></center>
+        <?php unset($_SESSION['flash']); ?>
+      </div>
+      </center>
+      </td>
+    </tr>
+    <?php } else { ?>
+    </tr>
+    <tr>
+      <td width="100%" colspan=2 valign=top style='background: transparent;'>
+      <br/>
+      </td>
+    </tr>
+    <?php } ?>
+    <tr>
+      <td width="100%" colspan=2 valign=top style='background: transparent;'>
+      </td>
+    </tr>
 
-  <p>
-    Username:
-    <input type="text" name="username" maxlength="255" value="">
-  </p>
-  <p>
-    Password:
-    <input type="password" name="password" maxlength="50">
-  </p>
+    <tr>
+      <td width="40%" class="login">
+      Username:
+      </td>
+      <td width="60%">
+      <input type="text" name="username" maxlength="255" value="" size=30>
+      </td>
+    </tr>
 
-  <div id="button">
-  <p>
-    <input type="submit" class="submit" name="action" value="Employee Login">
-  </p>
-  </div>
+    <tr>
+      <td width="40%" class="login">
+      Password:
+      </td>
+      <td>
+      <input type="password" name="password" maxlength="50" size=30>
+      </td>
+    </tr>
+    <tr>
+      <td width="100%" colspan=2 valign=top style='background: transparent;'>
+      </td>
+    </tr>
 
-<?php
-  break;
+    <tr>
+      <td width="40%" class="login">
+      <div id="button">
+      <input type="submit" class="submit" name="action" value="Employee Login">
+      </div>
+      </td>
+    </tr>
 
-  case 'EmployeeError':
-?>
-  <div id="login_error">
-    <span class="red">Incorrect Username/Password Combination!</span>
-  </div>
-  
-  <h2>Employee Login</h2>
+    <tr>
+      <td width="100%" colspan=2 valign=top class="login">
+      <a href="admin_forgotpass.php">Forgot your password?</a>
+      </td>
+    </tr>
+    <tr>
+      <td width="100%" colspan=2 valign=top style='background: transparent;'>
+      <br/>
+      </td>
+    </tr>
+    
+    <tr>
+      <td width="100%" colspan=2 valign=top style='background: maroon;'>
+      <br/>
+      </td>
+    </tr>
 
-  <p>
-    Username:
-    <input type="text" name="username" maxlength="255" value="">
-  </p>
-  <p>
-    Password:
-    <input type="password" name="password" maxlength="50">
-  </p>
-
-  <div id="button">
-  <p>
-    <input type="submit" class="submit" name="action" value="Employee Login">
-  </p>
+    </table>
+    </center>
+    </form>
   </div>
 
 <?php
@@ -126,7 +221,116 @@ if (isset($_GET['action'])) {
 
   case 'Student':
 ?>
+  <table>
+  <tr>
+    <td width="550">
+    <form method ="post" action="admin_transact_user.php" name="loginform">
+    <table width="100%" class="table_login">  
+    <tr>
+      <td width="100%" colspan=2 valign=top style='background: maroon;'>
+      <center><h4>Student Login</h4></center>
+    </tr>
+    <tr>
+      <td width="100%" colspan=2 valign=top>
+      <br/>
+      </td>
+    </tr>
+    <?php
+    if (isset($_SESSION['flash'])) {
+    ?>
+    <tr>
+      <td width="100%" colspan=2>
+      <center>
+      <div id="flash_login">
+        <center><?php echo $_SESSION['flash']; ?></center>
+        <?php unset($_SESSION['flash']); ?>
+      </div>
+      </center>
+      </td>
+    </tr>
+    <?php } else { ?>
+    </tr>
+    <tr>
+      <td width="100%" colspan=2 valign=top style='background: transparent;'>
+      <br/>
+      </td>
+    </tr>
+    <?php } ?>
+    <tr>
+      <td width="100%" colspan=2 valign=top style='background: transparent;'>
+      </td>
+    </tr>
 
+    <tr>
+      <td width="40%" class="login">
+      Username:
+      </td>
+      <td width="60%">
+      <input type="text" name="student_number" maxlength="255" value="" size=30>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="40%" class="login">
+      Password:
+      </td>
+      <td>
+      <input type="password" name="password" maxlength="50" size=30>
+      </td>
+    </tr>
+    <tr>
+      <td width="100%" colspan=2 valign=top style='background: transparent;'>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="40%" class="login">
+      <div id="button">
+      <input type="submit" class="submit" name="action" value="Student Login">
+      </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="100%" colspan=2 valign=top class="login">
+      <a href="admin_forgotpass.php">Forgot your password?</a>
+      </td>
+    </tr>
+    <tr>
+      <td width="100%" colspan=2 valign=top style='background: transparent;'>
+      <br/>
+      </td>
+    </tr>
+    
+    <tr>
+      <td width="100%" colspan=2 valign=top style='background: maroon;'>
+      <br/>
+      </td>
+    </tr>
+
+    </table>
+    </td>
+
+    <td>
+      <div id="studentlogin_info">
+
+        Please type the Student ID and password given to you in the appropriate 
+        Student Number and Password boxes at the left-side then click on the "login" 
+        button to enter the menu and registration page.<br/>
+
+        <p>
+            <ul>
+            <li>Get your login account from your college.</li>
+            <li>Note the schedule posted on the main page of this site.</li>
+            <li>Important: Always update your personal data.</li>
+            </ul>
+        </p>
+        Problems, Comments, Suggestions? Email us at   edsonpaul7512[at]gmail[dot]com   or call   (033)338-1535 / (033)315-9631 loc 190. 
+        </p>
+      </div>
+    </td>
+  </tr>
+  </table>
 <!--
 
 function checkLogin(){
@@ -154,82 +358,33 @@ if(isset($_COOKIE['cookname']) && isset($_COOKIE['cookpass'])){
       redirect('student/student.php');
    } else {
 -->
-
-  <h2>Student Login</h2>
-
-  <p>
-    Student ID:
-    <input type="text" name="student_number" maxlength="9">
-  </p>
-  <p>
-    Password:
-    <input type="password" name="password" maxlength="50">
-  </p>
-
-  <!-- <input type="checkbox" name="remember"> -->
-  
-  <div id="button">
-  <p>
-    <input type="submit" class="submit" name="action" value="Student Login">
-  </p>
-  </div>
 <!--
 }
 }
 
 $logged_in = checkLogin();
+-->
 
-
-
--->  
 <?php
   break;
 
-  case 'StudentError':
-?>
-  <div id="login_error">
-    <span class="red">Incorrect Student Number/Password Combination!</span>
-  </div>
-  
-  <h2>Student Login</h2>
+  default:
+    redirect('index.php');
 
-  <p>
-    Student ID:
-    <input type="text" name="student_number" maxlength="9">
-  </p>
-  <p>
-    Password:
-    <input type="password" name="password" maxlength="50">
-  </p>
-  
-  <div id="button">
-  <p>
-    <input type="submit" class="submit" name="action" value="Student Login">
-  </p>
-  </div>
-
-<?php
   break;
   }
 }
 ?>
+  <script language="JavaScript" type="text/javascript">
 
-  <p>
-    <a href="admin_forgotpass.php">Forgot your password?</a>
-  </p>
-
-
-  </form>
-<script language="JavaScript" type="text/javascript">
-
-  var frmvalidator  = new Validator("loginform");
+    var frmvalidator  = new Validator("loginform");
+      
+    frmvalidator.EnableMsgsTogether();
     
-  frmvalidator.EnableMsgsTogether();
-  
-   frmvalidator.addValidation("username","req","Please input username.");
-   frmvalidator.addValidation("password","req","Please input password.");
-  
-</script>
+     frmvalidator.addValidation("username","req","Please input username.");
+     frmvalidator.addValidation("password","req","Please input password.");
+    
+  </script>
 </div>
 
 <?php require_once 'admin_footer.php'; ?>

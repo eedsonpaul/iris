@@ -100,7 +100,9 @@ if (isset($_REQUEST['action'])) {
 
           redirect('index.php?action=Logs');
         } else {
-          redirect('login.php?action=AdminError');
+          session_start();
+          $_SESSION['flash'] = 'Invalid Username/Password Combination';
+          redirect('login.php?action=Admin');
         }
       }
       break;
@@ -132,7 +134,9 @@ if (isset($_REQUEST['action'])) {
 		      else if ($row['access_level_id'] == 8) header("Location: divisionosa/osa/osa.php");
 		      else if ($row['access_level_id'] == 9) header("Location: divisionosa/clerk/clerk.php");
         } else {
-          redirect('login.php?action=EmployeeError');
+          session_start();
+          $_SESSION['flash'] = 'Invalid Username/Password Combination';
+          redirect('login.php?action=Employee');
         }
       }
       break;
@@ -171,9 +175,10 @@ if (isset($_REQUEST['action'])) {
 	      }
 
 	      redirect('student/student.php?');
-		  
-      } else {
-          redirect('login.php?action=StudentError');
+        } else {
+          session_start();
+          $_SESSION['flash'] = 'Invalid Student Number/Password Combination';
+          redirect('login.php?action=Student');
         }
       }
       break;
@@ -185,11 +190,17 @@ if (isset($_REQUEST['action'])) {
 	      setcookie("cookname", "", time()-60*60*24*100, "/");
 		    setcookie("cookpass", "", time()-60*60*24*100, "/");
 	    }
+	    $id = $_SESSION['access_level_id'];
+	    if ($id == 3) {
+	      redirect('login.php?action=Admin');
+	    } else if ($id == 1) {
+	      redirect('login.php?action=Student');
+	    } else {
+	      redirect('login.php?action=Employee');
+	    }
 	 
       session_unset();
       session_destroy();
-
-      redirect('index.php');
       break;
 
     case 'Create':
