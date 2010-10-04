@@ -125,29 +125,36 @@ $pass = $user['password'];
     
     <TABLE class="table_edit" width= "90%">
     <TR>
-      <TD width="50%" align="right">
+      <TD width="50%">
+      <table algin="left">
+      <tr>
       <p>
-      Employee ID: &nbsp;&nbsp;<span class="id"><?php echo htmlspecialchars($id); ?></span></h2>
-      <input type="hidden" class="txtinput" name="employee_id" value="<?php echo htmlspecialchars($id); ?>">
+        <td>Employee ID: &nbsp;&nbsp;<span class="id"><?php echo htmlspecialchars($id); ?></span></h2></td>
+        <td<input type="hidden" class="txtinput" name="employee_id" value="<?php echo htmlspecialchars($id); ?>"></td>
       </p>
+      </tr>
 
       <input type="hidden" class="txtinput" name="access_level"
       value="<?php echo htmlspecialchars($user['access_level_id']); ?>">
 
-      Username:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-      <input type="text" class="txtinput" name="username" size=25px
-      value="<?php echo htmlspecialchars($user['username']); ?>">
-      <br/>
+      <tr>
+        <td>Username:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td><input type="text" class="txtinput" name="username" size=25px
+        value="<?php echo htmlspecialchars($user['username']); ?>"></td>
+      </tr>
 
-      Reset Password:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
-      <input type="hidden" id="password" name="password"
-      value="<?php echo htmlspecialchars($pass); ?>">
-      <br/>
+      <tr>
+        <td colspan=2>
+        <a href=""><span class="ast">Reset Password</span></a>
+        </td>
+      </tr>
 
-      First Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
+      <tr>
+      <td>First Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
       <input type="text" id="first_name" name="first_name" maxlength="50" size=25px
       value="<?php echo htmlspecialchars($user['first_name']); ?>">
-      <br/>
+      </tr>
+      
       Middle Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
       <input type="text" id="middle_name" name="middle_name" maxlength="50" size=25px
       value="<?php echo htmlspecialchars($user['middle_name']); ?>">
@@ -224,9 +231,11 @@ $pass = $user['password'];
         <option value="Widowed">Widowed</option>
       </select>
       <br/><br/>
+      </table>
     </TD>
 
     <TD width="50%" align="right">
+      <table>
       Birthdate:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
       <input type="text" id="birthdate" name="birthdate" maxlength="50" size=25px
       value="<?php echo htmlspecialchars($user['birthdate']); ?>">
@@ -296,6 +305,7 @@ $pass = $user['password'];
       Answer:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;
       <input type="text" id="sec_ans" name="sec_ans" maxlength="50" size=25px>
       <br/><br/>
+      </table>
     </TD>
   </TR>
   </TABLE>
