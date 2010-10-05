@@ -103,15 +103,17 @@ require_once 'admin_sql_query.php';
 
           case 'Osa':
       ?>
-          <table>
+          <table width="95%" class="table_echolist ">
             <tr>
               <td>
                 <span class="list_title">Accounts from OSA</span>
               </td>
-              <td>
+              
+              <td align="right">
                 <div id="override">
                 <a href="http://google.com">
-                <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
+                <input type="submit" class="submit" name="action" value="Override&rarr;">
+                </div>
                 </a>
               </td>
             </tr>

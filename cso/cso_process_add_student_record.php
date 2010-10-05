@@ -63,19 +63,20 @@
 			
 			case "ADD PERSONAL INFO":
 				$student_ID = $_GET['id'];
-				$lname = $_POST['last_name'];
-				$fname = $_POST['first_name'];
-				$midname = $_POST['middle_name'];
-				$gen = $_POST['gender'];
-				$bdate = $_POST['birthdate'];
-				$eadd = $_POST['email_address'];
-				$parbrgy = $_POST['parents_brgy'];
-				$parcty = $_POST['parents_city'];
-				$homebrgy = $_POST['home_brgy'];
-				$homecty = $_POST['home_city'];
-				$guard = $_POST['contact_person_name'];
-				$guardbrgy = $_POST['contact_person_brgy'];
-				$guardcity = $_POST['contact_person_city'];
+				$update = $_GET['update'];
+				// $lname = $_POST['last_name'];
+				// $fname = $_POST['first_name'];
+				// $midname = $_POST['middle_name'];
+				// $gen = $_POST['gender'];
+				// $bdate = $_POST['birthdate'];
+				// $eadd = $_POST['email_address'];
+				// $parbrgy = $_POST['parents_brgy'];
+				// $parcty = $_POST['parents_city'];
+				// $homebrgy = $_POST['home_brgy'];
+				// $homecty = $_POST['home_city'];
+				// $guard = $_POST['contact_person_name'];
+				// $guardbrgy = $_POST['contact_person_brgy'];
+				// $guardcity = $_POST['contact_person_city'];
 				$last_update = time();
 				
 				$sql = "UPDATE student SET
@@ -86,9 +87,6 @@
 						contact_number = '".$_POST['phone_no']."', 
 						father_name = '".$_POST['fathers_name']."', 
 						mother_name = '".$_POST['mothers_name']."', 
-						parent_street = '".$_POST['parents_street']."', 
-						parent_barangay = '".$_POST['parents_brgy']."', 
-						parent_city_municipality = '".$_POST['parents_city']."', 
 						present_street = '".$_POST['present_street']."', 
 						present_barangay = '".$_POST['present_brgy']."', 
 						present_city_municipality = '".$_POST['present_city']."', 
@@ -103,9 +101,10 @@
 						guardian_city_municipality = '".$_POST['contact_person_city']."', 
 						guardian_contact_number = '".$_POST['contact_person_phone_no']."',
 						last_updated = '$last_update' WHERE student_number = '$student_ID'";
-																
-					echo "<script> alert('Student personal data successfully updated.'); window.location.href = 'cso_edit_view_student_course.php?c=SAME&id=$student_ID';</script>";
-				
+					
+					if ($update == 1) echo "<script> alert('Student personal data successfully updated.'); window.location.href = 'cso_student_record_management.php';</script>";
+					else echo "<script> alert('Student personal data successfully updated.'); window.location.href = 'cso_edit_view_student_course.php?c=SAME&id=$student_ID';</script>";
+					
 //				} else {
 //					$student_ID = $_GET['id'];
 //					

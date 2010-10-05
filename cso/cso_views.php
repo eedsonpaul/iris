@@ -13,74 +13,74 @@
 			while($row=mysql_fetch_array($res)){
 				$_SESSION['stud_num'] = $row['student_number']; 
 				echo "<tr>";
-        		echo "<td><div align='center'></div></td>";
-        		echo "<td><div align='center'>".$row['student_number']."</div></td>";
-        		echo "<td width='123'>".$row['first_name']." ".$row['last_name']."</td>";
-        		echo "<td><div align='center'>".$row['unit_id']."</div></td>";
-        		echo "<td><div align='center'>UP CEBU</div></td>
-       			<td width='111'><div align='center'>
-          		<table width='101' border='0' align='center' cellpadding='0' cellspacing='0'>
+        		echo "<td><div align='center' class=normaltext></div></td>";
+        		echo "<td><div align='center' class=normaltext>".$row['student_number']."</div></td>";
+        		echo "<td width='123' class=normaltext>".$row['first_name']." ".$row['last_name']."</td>";
+        		echo "<td><div align='center' class=normaltext>".$row['unit_id']."</div></td>";
+        		echo "<td><div align='center' class=normaltext>UP CEBU</div></td>
+       			<td width='111'><div align='center' class=normaltext>
+          		<table width='101' border='0' align='center' cellpadding='0' cellspacing='0' class=normaltext>
             	<tr>
-              	<td width='95'><a href='cso_generate_password_change_student_login_account.php?c=NOT&id=".$row['student_number']."'>Login Account</a></td>
+              	<td width='95' class=normaltext><a href='cso_generate_password_change_student_login_account.php?c=NOT&id=".$row['student_number']."'>Login Account</a></td>
             	</tr>
             	<tr>
-              	<td><a href='cso_add_student_accountability.php?action=ADD&id=".$row['student_number']."'>Accountability</a></td>
+              	<td class=normaltext><a href='cso_add_student_accountability.php?action=ADD&id=".$row['student_number']."'>Accountability</a></td>
             	</tr>
             	<tr>
-              	<td>Enrollment Info</td>
+              	<td class=normaltext>Enrollment Info</td>
             	</tr>
+            	<tr>";
+            	echo "<td class=normaltext><a href='cso_student_personal_data.php?id=".$row['student_number']."'>Personal Data</a></td>";
+          		echo "</tr>
             	<tr>
-              	<td>Personal Data</td>
-            	</tr>
-            	<tr>
-              	<td>Student Directory</td>
+              	<td class=normaltext>Student Directory</td>
             	</tr>
           		</table>
         		</div></td>
         		<td><table width='95' border='0' align='center' cellpadding='0' cellspacing='0'>
           		<tr>
-            	<td width='95'>Grades/Sched</td>
+            	<td width='95' class=normaltext>Grades/Sched</td>
           		</tr>
           		<tr>
-            	<td>Grade Summary</td>
+            	<td class=normaltext>Grade Summary</td>
           		</tr>
           		<tr>
-            	<td>Study Plan</td>
+            	<td class=normaltext>Study Plan</td>
           		</tr>
           		<tr>";
-            	echo "<td><a href='cso_enroll_student.php?id=".$row['student_number']."'>Enroll</a></td>";
+            	echo "<td class=normaltext><a href='cso_enroll_student.php?id=".$row['student_number']."'>Enroll</a></td>";
           		echo "</tr>
           		<tr>";
-            	echo "<td><a href='cso_edit_view_student_course.php?c=NOT&id=".$row['student_number']."'>Course</a></td>";
+            	echo "<td class=normaltext><a href='cso_edit_view_student_course.php?c=NOT&id=".$row['student_number']."'>Course</a></td>";
           		echo "</tr>
         		</table></td>
         		<td width='99'><table width='89' border='0' align='center' cellpadding='0' cellspacing='0'>
           		<tr>";
-            	echo "<td width='89'><a href='cso_add_delete_view_graduation_data.php?id=".$row['student_number']."'>Graduation Data</a></td>";
+            	echo "<td width='89' class=normaltext><a href='cso_add_delete_view_graduation_data.php?id=".$row['student_number']."'>Graduation Data</a></td>";
+          		echo "</tr>
+          		<tr>";
+				echo "<td class=normaltext><a href='cso_view_student_scholarship.php?id=".$row['student_number']."'>Scholarship</a></td>";
+          		echo "</tr>
+				<tr>";
+            	echo "<td class=normaltext><a href='cso_view_student_stfap_bracket.php?id=".$row['student_number']."'>STFAP Bracket</a></td>";
           		echo "</tr>
           		<tr>
-            	<td>Scholarship</td>
-          		</tr>
-          		<tr>
-            	<td>STFAP Bracket</td>
-          		</tr>
-          		<tr>
-            	<td>Adviser</td>
+            	<td class=normaltext>Adviser</td>
           		</tr>";
           
         		echo "</table></td>
 				<td width='99'><table width='89' border='0' align='center' cellpadding='0' cellspacing='0'>
           		<tr>
-            	<td>Edit Academic Standing</td>
+            	<td class=normaltext>Edit Academic Standing</td>
           		</tr>
           		<tr>
-            	<td width='99'><a href='cso_edit_maximum_units.php?id=".$row['student_number']."'>Edit Max. Units</a></td>
+            	<td width='99' class=normaltext><a href='cso_edit_maximum_units.php?id=".$row['student_number']."'>Edit Max. Units</a></td>
           		</tr>
           		<tr>";
-            	echo "<td><a href='cso_edit_student_number.php?id=".$row['student_number']."'>Edit Student #</a></td>";
+            	echo "<td class=normaltext><a href='cso_edit_student_number.php?id=".$row['student_number']."'>Edit Student #</a></td>";
           		echo "</tr>
           			<tr>";
-           	 	echo "<td><a href='cso_process_delete_student_record.php?id=".$row['student_number']."'>Delete Record/Account</a></td>";
+           	 	echo "<td class=normaltext><a href='cso_process_delete_student_record.php?id=".$row['student_number']."'>Delete Record/Account</a></td>";
           		echo "</tr>";
           
         		echo "</table></td>";
@@ -105,6 +105,7 @@
 				$action = "";
 				$sql = "select * from student_status where student_number = '$stud_num'";
 				$res = mysql_query($sql);
+				
 				while($row = mysql_fetch_array($res)){
 					$subj_id = $row['course_code'];
 					$sect_lab = $row['section_label'];
@@ -137,7 +138,7 @@
 						} else if ($stat=="assessed") {
 							$action = "Cancel Assessment";
 							$st = "Assessed";
-						} else if ($stat=="OE") {
+						} else if ($stat=="enrolled") {
 							$action = "Cancel Enrollment";
 							$st = "Officially Enrolled";
 						} else if ($stat=='waitlisted') {
@@ -151,11 +152,11 @@
 						
 					echo "<tr>";
         			echo "<td>&nbsp;</td>";
-        			echo "<td><div align='center'>".$subj_id."</div></td>";
-        			echo "<td width='75'><div align='center'>".$sect_lab."</div></td>";
-        			echo "<td><div align='center'>".$unit."</div></td>";
-        			echo "<td><div align='center'>".$day." ".$start."-".$end."</div></td>";
-        			echo "<td width='127'><div align='center'>".$st."</div></td>";
+        			echo "<td><div align='center' class=normaltext>".$subj_id."</div></td>";
+        			echo "<td width='75'><div align='center' class=normaltext>".$sect_lab."</div></td>";
+        			echo "<td><div align='center' class=normaltext>".$unit."</div></td>";
+        			echo "<td><div align='center' class=normaltext>".$day." ".$start."-".$end."</div></td>";
+        			echo "<td width='127'><div align='center' class=normaltext>".$st."</div></td>";
         			echo "<td><div align='center' class='headfont'><b><a href='cso_confirm_subject.php?id=$subj_id&lab=$sect_lab&act=$action'>".$action."</a> |  <a href='cso_confirm_subject.php?id=$subj_id&lab=$sect_lab&act=Remove' target='_self' onclick='return getconfirm('Are you sure you want to remove this subject?')'; title='Remove'>  Remove </b></div></td>";
       				echo "</tr>";
 					
@@ -164,15 +165,12 @@
 					$unit_confirm = $unit_confirm + $unit;
 					}
 					
-					}
-					
-					
-					
+				}
+						
 					return $unit_confirm;
 				}
 			
 		
 		}
-
 
 ?>

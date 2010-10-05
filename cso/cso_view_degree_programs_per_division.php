@@ -1,8 +1,8 @@
 <?php
-//File: CSO Subject Module
-//Version 2: Revision Date: September 23, 2010
-//Version 1: Date: September 13, 2010
-//By: Mae Ann A. Amarado
+//File: CSO Degree Programs
+//Version 2: Revision Date: October 5, 2010
+//Version 1: Date: September 19, 2010
+//By: Stefany Marie Serino
 //CSO TEAM
 
 	require_once 'cso_header.php';
@@ -56,12 +56,47 @@
 		</li>
 	</ul>
 	</div>
+	<!-- end of navigation div -->
 
-<div id="right_side">
-	<li><a href="cso_subject_management_module.php">Subject Management Module</a></li>
-	<li><a href="cso_view_subjects_per_degree_program.php">View Subjects Per Degree Program</a></li>
-</div>
+	<!-- wala pa ni sa right niya na format -->
+	<div id="right_side">
+		<p><a href='javascript:history.go(-1)'>Back</a></p>
+		<p>&nbsp;</p>
+		<p class="head"><strong>Degree Programs per Division</strong></p>
+		<p>&nbsp;</p>
 
+		<?php
+			$unit_array = mysql_query("SELECT * FROM unit ORDER BY unit_id ASC");
+			echo "<center><table width=710><tr>
+				<th align=center  valign=middle width=230>Division</th>
+				<th align=center  valign=middle width=110>Degree Level</th>
+				<th align=center  valign=middle width=120>Program Code</th>
+				<th align=center  valign=middle width=250>Degree Program</th>
+				</tr>";
+
+			while ($units = mysql_fetch_array($unit_array)) {
+				extract($units);
+				$loop=0;
+
+				$prog_array = mysql_query("SELECT * FROM degree_program WHERE unit_id='$unit_id' ORDER BY degree_level ASC ");
+				while ($prog_ids = mysql_fetch_array($prog_array)) {
+					extract($prog_ids);
+					if ($loop == 0) echo "<tr><td align=center width=230>".$unit_name."</td>";
+					else echo "<tr><td align=center width=230></td>";
+					$loop++;
+
+					echo "<td align=center width=110>".$degree_level."</td>";
+					echo "<td align=center width=130>".$program_code,"</td>";
+					echo "<td align=center width=250>".$degree_name,"</td></tr>";
+				}
+			}
+
+			echo "</table></center>";
+		?>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+	</div>
+	
 <?php
 	require_once 'cso_footer.php';
 ?>

@@ -5,7 +5,7 @@
 		function searchStudentForm() {
 			echo "<table width=494 border=0 align=center>";
       		echo "<tr>";
-        	echo "<td width=181><div align=right><strong>Enter Student Number:</strong></div></td>";
+        	echo "<td width=181><div align=right class=normaltext><strong>Enter Student Number:</strong></div></td>";
         	echo "<td width=12>&nbsp;</td>";
         	echo "<td width=287><input type=text name=student_id id=student_id></td>";
       		echo "</tr>";

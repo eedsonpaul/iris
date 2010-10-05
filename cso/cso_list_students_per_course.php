@@ -1,8 +1,8 @@
 <?php
-//File: CSO Subject Module
-//Version 2: Revision Date: September 23, 2010
-//Version 1: Date: September 13, 2010
-//By: Mae Ann A. Amarado
+//File: CSO Degree Programs
+//Version 2: Revision Date: October 5, 2010
+//Version 1: Date: September 19, 2010
+//By: Stefany Marie Serino
 //CSO TEAM
 
 	require_once 'cso_header.php';
@@ -56,12 +56,49 @@
 		</li>
 	</ul>
 	</div>
+	<!-- end of navigation div -->
 
-<div id="right_side">
-	<li><a href="cso_subject_management_module.php">Subject Management Module</a></li>
-	<li><a href="cso_view_subjects_per_degree_program.php">View Subjects Per Degree Program</a></li>
-</div>
+	<!-- wala pa ni sa right niya na format -->
+	<div id="right_side">
+		<p><a href='javascript:history.go(-1)'>Back</a></p>
+		<p>&nbsp;</p>
+		<p class="head"><strong>LIST OF STUDENTS PER COURSE</strong></p>
+		<p>&nbsp;</p>
 
+		<table width="650" border="0" align="center"><tr>
+			<td height="50"class="tab"><p align="left"><strong><center>
+				ALL | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
+			</center></strong></p></td>
+		</tr></table>
+
+		<?php
+			$program_array = mysql_query("SELECT * FROM degree_program");
+			echo	"<center><table width=500><tr>
+						<th align=center  valign=middle width=150><strong>DEGREE PROGRAM</strong></th>
+						<th align=center  valign=middle width=350><strong>STUDENT'S NAME</strong></th>
+						</tr>";
+
+			while ($programs = mysql_fetch_array($program_array))  {
+				$prog_id = $programs['degree_program_id'];
+
+				$stud_array = mysql_query("SELECT * FROM student WHERE degree_program_id='$prog_id' ORDER BY last_name asc");
+				$loop = 0;
+
+				while ($students= mysql_fetch_array($stud_array)) {
+					extract($students);
+
+					if ($loop == 0) echo "<tr align=left><td><strong>".$programs['degree_title']. "</strong></td>";
+					else echo "<tr><td align=center width=230></td>";
+					$loop++;
+					echo	"<td valign=middle>" .$last_name. ", " .$first_name. " " .$middle_name. "</td></tr>";
+				}			
+			}
+			echo "</table></center>";
+		?>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+	</div>
+	
 <?php
 	require_once 'cso_footer.php';
 ?>
