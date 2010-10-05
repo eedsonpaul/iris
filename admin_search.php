@@ -5,7 +5,7 @@ require_once 'admin_http.php';
 
 $search = NULL;
 if (isset($_POST['keywords'])) {
-  $sql = "SELECT employee_id, first_name, last_name FROM employee " .
+  $sql = "SELECT employee_id, first_name, last_name, username FROM employee " .
          "WHERE MATCH (username, first_name) " .
          "AGAINST ('" . $_POST['keywords'] . "' IN BOOLEAN MODE) " .
          "ORDER BY MATCH (username, first_name) " .
@@ -25,9 +25,7 @@ if ($search and !mysql_num_rows($search)) {
   echo "<p>No user found that match the search terms.</p>\n";
 } else {
   while ($row = mysql_fetch_array($search)) {
-    echo $row['first_name'];
-    echo '&nbsp;';
-    echo $row['last_name'];
+    echo $row['username'];
   }
 }
 echo '</div>';

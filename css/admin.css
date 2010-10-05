@@ -225,7 +225,7 @@ body{
 	border-left-color: #FFFFFF;
   /*border-bottom: solid 1px white;*/
   height: 30px;
-  padding-left: 10px;
+  padding-left: 20px;
   padding-top: 7px;
   width: 240px;
 }
@@ -258,7 +258,7 @@ body{
   height: 32px;
   padding-left: 10px;
   padding-top: 8px;
-  width: 600px;
+  width: 606px;
   background: transparent;
 }
 

@@ -37,7 +37,7 @@ function confirmation(id, lvl) {
 </head>
 </html>
 
-<?php
+  <?php
   function generateUsername($first, $last) {
     $username = str_replace(" ", '', strtolower($first[0].$last));
     return $username;
@@ -65,7 +65,8 @@ function confirmation(id, lvl) {
           echo '<a href="admin_useraccount.php?userid=' . $row[$id] .
                '" title="' . htmlspecialchars($row[$name]) . '">' .
                htmlspecialchars($row[$id]) . "</a>";
-?>            <a href="admin_transact_user.php?action=Delete>">
+               ?>
+              <a href="admin_transact_user.php?action=Delete>">
               <input type="submit" class="submit" name="action" value="Delete">
               </a>
               <a href="admin_useraccount.php?userid=<?php echo $row[$id] ?>">
@@ -77,10 +78,10 @@ function confirmation(id, lvl) {
       }
     }
   }
+  
 
   $a_employees = array(1 => "Student","Employee","System Administrator","Accounting","Library",
                       "Cashier", "CSO", "OSA", "Clerk");
-  
   function echoEmployees($lvl) {
     global $a_employees;
     

@@ -10,14 +10,14 @@ require_once 'admin_sql_query.php';
   if (isset($_SESSION['employee_id']) or isset($_SESSION['student_number'])
                and $_SESSION['access_level_id'])
   {
-	  if ($_SESSION['access_level_id'] == 1) header("Location: student/student.php");
-    else if ($_SESSION['access_level_id'] == 2) header("Location: divisionosa/faculty/faculty.php");
-    else if ($_SESSION['access_level_id'] == 4) header("Location: accounting/accounting.php");
-    else if ($_SESSION['access_level_id'] == 5) header("Location: accounting/library.php");
-    else if ($_SESSION['access_level_id'] == 6) header("Location: accounting/cashier.php");
-    else if ($_SESSION['access_level_id'] == 7) header("Location: cso/cso.php");
-	  else if ($_SESSION['access_level_id'] == 9) header("Location: divisionosa/osa/osa.php");
-	  else if ($_SESSION['access_level_id'] == 8) header("Location: divisionosa/clerk/clerk.php");
+	  if ($_SESSION['access_level_id'] == 1) redirect('student/student.php');
+    else if ($_SESSION['access_level_id'] == 2) redirect('divisionosa/faculty/faculty.php');
+    else if ($_SESSION['access_level_id'] == 4) redirect('accounting/accounting.php');
+    else if ($_SESSION['access_level_id'] == 5) redirect('accounting/library.php');
+    else if ($_SESSION['access_level_id'] == 6) redirect('accounting/cashier.php');
+    else if ($_SESSION['access_level_id'] == 7) redirect('cso/cso.php');
+	  else if ($_SESSION['access_level_id'] == 9) redirect('divisionosa/osa/osa.php');
+	  else if ($_SESSION['access_level_id'] == 8) redirect('divisionosa/clerk/clerk.php');
   ?>
   <div class="main">
     <div id="nav">
@@ -113,7 +113,7 @@ require_once 'admin_sql_query.php';
               
               <td align="right">
                 <div id="override">
-                <a href="http://google.com">
+                <a href="divisionosa/osa/osa.php">
                 <input type="submit" class="submit" name="action" value="Override&rarr;">
                 </div>
                 </a>
@@ -172,7 +172,7 @@ require_once 'admin_sql_query.php';
               </td>
               <td>
                 <div id="override">
-                <a href="http://google.com">
+                <a href="accounting/accounting.php">
                 <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
                 </a>
               </td>
@@ -197,11 +197,11 @@ require_once 'admin_sql_query.php';
           <table width="95%" class="table_echolist ">
             <tr>
               <td>
-                <span class="list_title">Accounts from Division</span>
+                <span class="list_title">Faculty Accounts</span>
               </td>
               <td>
                 <div id="override">
-                <a href="http://google.com">
+                <a href="divisionosa/faculty/faculty.php">
                 <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
                 </a>
               </td>
@@ -229,7 +229,7 @@ require_once 'admin_sql_query.php';
               </td>
               <td>
                 <div id="override">
-                <a href="http://google.com">
+                <a href="accounting/library.php">
                 <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
                 </a>
               </td>
@@ -257,7 +257,7 @@ require_once 'admin_sql_query.php';
               </td>
               <td>
                 <div id="override">
-                <a href="http://google.com">
+                <a href="accounting/cashier.php">
                 <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
                 </a>
               </td>
@@ -285,7 +285,7 @@ require_once 'admin_sql_query.php';
               </td>
               <td>
                 <div id="override">
-                <a href="http://google.com">
+                <a href="divisionosa/clerk/clerk.php">
                 <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
                 </a>
               </td>
@@ -311,12 +311,14 @@ require_once 'admin_sql_query.php';
               <td>
                 <span class="list_title">Student Accounts</span>
               </td>
+              <!--
               <td>
                 <div id="override">
                 <a href="http://google.com">
                 <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
                 </a>
               </td>
+              -->
             </tr>
           </table><br/>
           <?php
@@ -348,9 +350,8 @@ require_once 'admin_sql_query.php';
             </center>
           <?php } ?>
           
-          <form method="get" action="admin_search.php">
-          <table width="50%" align="left" style="font-size: 12px;">
-            
+          <form method="post" action="admin_search.php">
+          <table width="50%" align="left" style="font-size: 12px;">          
             <tr>
               <td>Keyword</td>
               <td>Filter</td>
@@ -358,7 +359,13 @@ require_once 'admin_sql_query.php';
             
             <tr>
               <td>
-              <input id="searchkeywords" type="text" name="keywords">
+              <input id="searchkeywords" type="text" name="keywords"
+              <?php
+              if (isset($_POST['keywords'])) {
+                echo ' value="' . htmlspecialchars($_POST['keywords']) . '" ';
+              }
+              ?>
+              >
               </td>
 
               <td valign=top>
