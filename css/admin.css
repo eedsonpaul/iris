@@ -133,8 +133,9 @@ body{
 }
 
 .table_echolist {
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid #037;
 }
+
 
 #admin ul {
 	margin: 0px;
@@ -375,7 +376,11 @@ input {
   border: 2px solid gray;
   float: left;
   padding: 10px;
+  background: #e0e0e0;
 }
+
+#search option { height: 21px; }
+#search input:hover { background: white; }
 
 span.list_title {
   font-weight: bold;
@@ -461,6 +466,22 @@ td.left {
   font-weight: 10px;
 }
 
+#flash_search {
+  width: 580px;
+  border: 1px solid red;
+  background: pink;
+  color: red;
+  padding: 3px;
+}
+
 #reset_pw {
   wid
+}
+
+.left_list {
+  margin-top: 0px;
+  margin-left: 0px;
+  padding-left: 0px;
+  margin-bottom: 0px;
+
 }

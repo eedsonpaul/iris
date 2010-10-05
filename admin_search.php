@@ -1,17 +1,21 @@
 <?php
 require_once 'admin_db_connect.php';
 require_once 'admin_header.php';
+require_once 'admin_http.php';
 
 $search = NULL;
-if (isset($_GET['keywords'])) {
-  $sql = "SELECT employee_id FROM employee " .
+if (isset($_POST['keywords'])) {
+  $sql = "SELECT employee_id, first_name, last_name FROM employee " .
          "WHERE MATCH (username, first_name) " .
-         "AGAINST ('" . $_GET['keywords'] . "' IN BOOLEAN MODE) " .
+         "AGAINST ('" . $_POST['keywords'] . "' IN BOOLEAN MODE) " .
          "ORDER BY MATCH (username, first_name) " .
-         "AGAINST ('" . $_GET['keywords'] . "' IN BOOLEAN MODE) DESC";
+         "AGAINST ('" . $_POST['keywords'] . "' IN BOOLEAN MODE) DESC";
 
   $search = mysql_query($sql, $conn)
     or die('Could not perform search; ' . mysql_error());
+} else {
+  $_SESSION['flash'] = 'Please Enter a Keyword';
+  redirect('index.php?action=SearchAcct');  
 }
 
 echo '<div class="main">';
@@ -21,7 +25,9 @@ if ($search and !mysql_num_rows($search)) {
   echo "<p>No user found that match the search terms.</p>\n";
 } else {
   while ($row = mysql_fetch_array($search)) {
-    echo $row['employee_id'];
+    echo $row['first_name'];
+    echo '&nbsp;';
+    echo $row['last_name'];
   }
 }
 echo '</div>';
