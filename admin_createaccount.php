@@ -4,13 +4,11 @@
 </head>
 </html>
 
-
 <?php
 require_once 'admin_http.php';
 require_once 'admin_db_connect.php';
-require_once 'admin_sql_query.php';
-require_once 'admin_echolist.php';
 require_once 'admin_header.php';
+require_once 'admin_sql_query.php';
 
 if ($_SESSION['access_level_id'] != 3)  {
   redirect('error.php');
@@ -18,18 +16,16 @@ if ($_SESSION['access_level_id'] != 3)  {
 ?>
 
 <div class="main">
+
   <div id="nav" class="left">
-    <?php
-    if (isset($_SESSION['employee_id']) or isset($_SESSION['student_number']))
-    {
-      echo '<a href="index.php?action=Logs"><span class="left">&larr;Back';
-      echo '</span></a>';
-    ?>
+      <a href="index.php?action=Logs"><span class="left">&larr;Back</span></a>
   </div>
-    
+
   <div id="nav">
     <span class="right">
     <?php
+    if (isset($_SESSION['employee_id']) or isset($_SESSION['student_number']))
+    {
       echo '<a href="index.php?action=SearchAcct">Search Account &raquo;';
       echo '</a>';
       echo ' | <a href="index.php?action=SearchAcct">Reset';
@@ -47,28 +43,36 @@ if ($_SESSION['access_level_id'] != 3)  {
         echo ' | <a href="admin_accountpanel.php">' . $_SESSION['student_number'];
       }
       echo '</a>';
-    ?>
-    </span>
-    <?php
     }
+
     ?>
+     </span>
   </div>
 
   <div id="fill_up">  
     <form method="post" action= "admin_transact_user.php" name="createform">
-      <tr align="center">
-        <center><h2> Create Staff Account </h2></center>
-      </tr>
 
-      <TABLE width="60%" class="table_create">
+      <TABLE width="60%" class="table_create" style='background: pink;'>
+      <TR>
+        <td colspan=2 align="center" style='background: maroon; color: white;'>
+          <h2>Add Employee Record</h2>
+        </td>
+      </TR>
+
       <tr>
-        <td>Employee ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          <br/>
+        </td>
+      </tr>
+      
+      <tr>
+        <td class="login">Employee ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
         <td<input type="text" class="txtinput" name="employee_id" maxlength="100" size=25px></td>
       </tr>
       <br/>
 
       <tr>
-        <td>Grant Access Right:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td class="login">Grant Access Right:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
         <td>
         <select name="access_level">
         <!-- <option value="" selected><i>Select</i></option> -->
@@ -89,43 +93,43 @@ if ($_SESSION['access_level_id'] != 3)  {
       <br/><br/>
 
       <tr>
-        <td>First Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td class="login">First Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
         <td><input type="text" id="first_name" name="first_name" maxlength="50" size=25px></td>
       </tr>
       <br/>
 
       <tr>
-        <td>Middle Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td class="login">Middle Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
         <td><input type="text" id="middle_name" name="middle_name" maxlength="50" size=25px></td>
       </tr>
       <br/>
 
       <tr>
-        <td>Last Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td class="login">Last Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
         <td><input type="text" id="last_name" name="last_name" maxlength="50" size=25px></td>
       </tr>
       <br/>
 
       <tr>
-        <td><span class="ast">Username will be auto-generated</span></td><br/><br/>
+        <td class="login"><span class="ast">Username will be auto-generated</span></td><br/><br/>
       </tr><br/>
 
       <input type="hidden" class="txtinput" name="username" value="<?php echo $uName ?>">
 
       <tr>
-        <td>Password:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td class="login">Password:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
         <td><input type="password" id="password" name="password" maxlength="50" size=25px></td>
       </tr>
       <br/>
 
       <tr>
-        <td>Confirm Password:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td class="login">Confirm Password:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
         <td><input type="password" id="password2" name="password2" maxlength="50" size=25px></td>
       </tr>
       <br/>
 
       <tr>
-        <td>Gender:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td class="login">Gender:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
         <td>
         <select name="gender">
           <option value="Male">Male</option>
@@ -133,10 +137,9 @@ if ($_SESSION['access_level_id'] != 3)  {
         </select>
         </td>
       </tr>
-      <br/></br>
 
       <tr>
-        <td>Unit:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td class="login">Unit:<span class="ast">*</span></td>
         <td>
         <select name="unit_id">
         <option value="NULL" selected>None</option>
@@ -146,16 +149,21 @@ if ($_SESSION['access_level_id'] != 3)  {
           if (isset($unit) && array_key_exists($key,$unit)) {
             echo $unit[$key];
           }
-          echo ">$value</option>\n";
+          if ($value == 'Natural Sciences and Mathematics Division') {
+            echo ">NSMD</option>\n";
+          } else if ($value == 'Department of Computer Science') {
+            echo ">Dept. of Computer Science</option>\n"; 
+          } else {
+            echo ">$value</option>\n";
+          }
         }
         ?>
         </select>
         </td>
       </tr>
-      <br/><br/>
 
       <tr>
-        <td>Designation:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
+        <td class="login">Designation:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
         <td>
         <select name="designation_id">
         <option value="NULL" selected>None</option>
@@ -171,7 +179,7 @@ if ($_SESSION['access_level_id'] != 3)  {
         </select>
         </td>
       </tr>
-      <br/><br/>
+
       <input type="hidden" id="last_updated_by" name="last_updated_by"
         value="<?php  htmlspecialchars($_SESSION['username']) ?>">
 

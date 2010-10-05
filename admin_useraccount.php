@@ -42,7 +42,7 @@ $access_lvl = '';
 
 if (isset($_GET['userid'])) {
 $id = '';
-$sql = "SELECT employee_id, username, password, employee_type, first_name, middle_name, last_name, gender,
+$sql = "SELECT employee_id, username, employee_type, first_name, middle_name, last_name, gender,
         email_address, unit_id, designation_id, parent_address, present_address, civil_status, birthdate,
         contact_number, spouse_name, spouse_contact_number, father_name, mother_name, citizenship, access_level_id " .
        "FROM employee " .
@@ -53,7 +53,6 @@ $result = mysql_query($sql, $conn)
 $user = mysql_fetch_array($result);
 
 $id = $user['employee_id'];
-$pass = $user['password'];
 ?>
 <div class="main">
 
@@ -104,33 +103,40 @@ $pass = $user['password'];
     ?>
      </span>
   </div>
-
   <br/>
-  <?php
-  if (isset($_SESSION['flash'])) {
-  ?>
-  <div id="flash">
-    <center><?php echo $_SESSION['flash']; ?></center>
-    <?php unset($_SESSION['flash']); ?>
-  </div>
-  <?php } ?>
+
 
   <div id="fill_up">
   <form method="post" action= "admin_transact_user.php">
     
-    <TABLE class="table_edit" width= "90%">
+    <TABLE class="table_edit" style='background: #e0e0e0;'>
     <TR>
       <td colspan=2 align="center" style='background: maroon; color: white;'>
       <?php if ($_GET['userid'] == $_SESSION['employee_id']) { ?>
-        <h4>Edit My Account</h4>
+        <h3>Edit My Account</h3>
       <?php } else { ?>
-        <h2>Modify Employee Record</h2>
+        <h3>Modify Employee Record</h3>
       <?php } ?>
       </td>
     </TR>
+
     <TR>
-      <td colspan=2 align="center" style='background: maroon; color: white;'>
+      <?php
+      if (isset($_SESSION['flash'])) {
+      ?>
+      <td colspan=2 align="center">
+        <center>
+        <div id="flash">
+          <center><?php echo $_SESSION['flash']; ?></center>
+          <?php unset($_SESSION['flash']); ?>
+        </div>
+        </center>
       </td>
+      <?php } else { ?>
+        <td>
+          <br/>
+        </td>
+      <?php } ?>
     </TR>
     
     <TR>
@@ -138,7 +144,7 @@ $pass = $user['password'];
       <table algin="left" class="table_edit2">
         <tr>
           <td colspan=2>
-          <a href=""><span class="ast">Reset Password</span></a>
+          <a href="admin_useraccount.php?reset=<?php echo $id ?>"><span class="ast">Reset Password</span></a>
           </td>
         </tr>
         
@@ -380,12 +386,6 @@ $pass = $user['password'];
       </table>
     </TD>
   </TR>
-  
-  <TR>
-    <td colspan=2 align="center" style='background: maroon; color: white;'>
-    <br/>
-    </td>
-  </TR>
   </TABLE>
   
     <center>
@@ -397,8 +397,93 @@ $pass = $user['password'];
     </center>
   
   </form>
+<?php
+} else if (isset($_GET['reset'])) {
+?>
+<div class="main">
+  <div id="nav" class="left">
+      <a href="javascript:history.back(-1);"><span class="left">&larr;Back</span></a>
+  </div>
 
-<!------------This part for viewing user account information ---------->     
+  <div id="nav">
+    <span class="right">
+    <?php
+    if (isset($_SESSION['employee_id']) or isset($_SESSION['student_number']))
+    {
+      echo '<a href="index.php?action=SearchAcct">Search Account &raquo;';
+      echo '</a>';
+      echo ' | <a href="index.php?action=SearchAcct">Reset';
+      echo '</a>';
+      echo ' | <a href="index.php?action=SearchAcct">Backup';
+      echo '</a>';
+      if ($_SESSION['access_level_id'] == 3) {
+        echo ' | <a href="index.php?action=Logs">Logs</a> | ';
+      }
+      if ($_SESSION['access_level_id'] >1) {
+        echo ' <a href="admin_useraccount.php?userid=' . $_SESSION['employee_id'] .
+             '" title="' . htmlspecialchars($_SESSION['username']) . '">' . $_SESSION['username'];
+
+      } else if ($_SESSION['access_level_id'] == 1) {
+        echo ' | <a href="admin_accountpanel.php">' . $_SESSION['student_number'];
+      }
+      echo '</a>';
+    }
+
+    ?>
+     </span>
+  </div>
+  <br/>
+  
+  <div id="fill_up">
+  <form method="post" action= "admin_transact_user.php">
+    
+    <TABLE class="table_edit" style='background: #e0e0e0;'>
+    <TR>
+      <TD colspan=2 align=center>
+        <table class="table_edit2">
+          <TR>
+            <?php
+            if (isset($_SESSION['flash'])) {
+            ?>
+            <td colspan=2 align="center">
+              <center>
+              <div id="flash">
+                <center><?php echo $_SESSION['flash']; ?></center>
+                <?php unset($_SESSION['flash']); ?>
+              </div>
+              </center>
+            </td>
+            <?php } else { ?>
+              <td>
+                <br/>
+              </td>
+            <?php } ?>
+          </TR>
+          
+          <tr>
+            <td>
+            sdas
+            </td>
+            
+            <td>
+            sdas
+            </td>
+          </tr>
+        </table>
+      </TD>
+    </TR>
+    </TABLE>
+  
+    <center>
+    <div id="button">
+      <p>
+        <input type="submit" class="submit" name="action" value="Reset">
+      </p>
+    </div>
+    </center>
+  
+  </form>
+<!------------This part for viewing user account information ----------> 
 <?php
 } else if (isset($_GET['viewuser'])) {
 $id = '';
