@@ -34,7 +34,7 @@ if (isset($_GET['action'])) {
     <center>
     <table width="80%" class="table_login">  
     <tr>
-      <td width="100%" colspan=2 valign=top style='background: maroon;'>
+      <td width="100%" colspan=2 valign=top style='background: maroon; color: white;'>
       <center><h4>Administrative Login</h4></center>
     </tr>
     <tr>
@@ -110,7 +110,7 @@ if (isset($_GET['action'])) {
     </tr>
     
     <tr>
-      <td width="100%" colspan=2 valign=top style='background: maroon;'>
+      <td width="100%" colspan=2 valign=top style='background: maroon; color: white;'>
       <br/>
       </td>
     </tr>
@@ -130,7 +130,7 @@ if (isset($_GET['action'])) {
     <center>
     <table width="80%" class="table_login">  
     <tr>
-      <td width="100%" colspan=2 valign=top style='background: maroon;'>
+      <td width="100%" colspan=2 valign=top style='background: maroon; color: white;'>
       <center><h4>Employee Login</h4></center>
     </tr>
     <tr>
@@ -206,7 +206,7 @@ if (isset($_GET['action'])) {
     </tr>
     
     <tr>
-      <td width="100%" colspan=2 valign=top style='background: maroon;'>
+      <td width="100%" colspan=2 valign=top style='background: maroon; color: white;'>
       <br/>
       </td>
     </tr>
@@ -227,7 +227,7 @@ if (isset($_GET['action'])) {
     <form method ="post" action="admin_transact_user.php" name="loginform">
     <table width="100%" class="table_login">  
     <tr>
-      <td width="100%" colspan=2 valign=top style='background: maroon;'>
+      <td width="100%" colspan=2 valign=top style='background: maroon; color: white;'>
       <center><h4>Student Login</h4></center>
     </tr>
     <tr>
@@ -303,7 +303,7 @@ if (isset($_GET['action'])) {
     </tr>
     
     <tr>
-      <td width="100%" colspan=2 valign=top style='background: maroon;'>
+      <td width="100%" colspan=2 valign=top style='background: maroon; color: white;'>
       <br/>
       </td>
     </tr>

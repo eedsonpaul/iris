@@ -1,15 +1,41 @@
-
 <?php
-	require_once 'student_sub_header.php';
 
+	require 'dbconnect.php';
+	session_start();
     $student_number = $_SESSION['student_number'];	 
-	echo "REMOVE SUBJECT HERE";
+
 ?>
 
+
+<html>
+<head>
+<title>Current Schedule</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+@import url("default.css");
+
+   body {
+	width:102%;
+	background-color: #FFF4F4;
+	margin-left: 5px;
+	margin-top: 5px;
+   }
+#Layer1 {
+	position:absolute;
+	width:200px;
+	height:auto;
+	z-index:1;
+	left: 10px;
+	top: 250px;
+}
+.style4 {color: #FF0000}
+</style>
+</head>
+<body>
 <div id="container">
 <?php
 
-echo "<table width='57%' align='center border='1'>";
+echo "<table width='5%' align='center border='1'>";
 print "<tr>	
 		<th width='38'><font size='1'>SUBJECT </font></th>
 		<th width='38'><font size='1'>TYPE</th>
@@ -22,7 +48,6 @@ print "<tr>
 		</tr>";
 
 	print "</table>"; 
-
 
 
  $result=mysql_query("SELECT course_code,section_label,status,waitlist_counter from student_status where student_number='$student_number'");	 
@@ -107,3 +132,5 @@ function checkSubjectName($course_code){
 }	
 ?>   
 </div>
+</body>
+</html>

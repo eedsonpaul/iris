@@ -10,6 +10,7 @@
 <form action="process.php" method="post" name="osaform">
 <input type="hidden" name="sub" value="<?php echo $sub ?>">
 <h4 align="center">You are currently Editing for Course Code <strong><?php print($values[0]) ?></strong></h4>
+<input type="hidden" name="course_code" value="<?php print($values[0]) ?>">
 	<tr>
 		<td>Course Title</td>
 		<td><input type="text" name="subject_title" value="<?php echo $values[1] ?>"></td>
@@ -18,7 +19,7 @@
 <td>-->
 <input type="hidden" name="action_taken" value="updated">
 	<tr>
-		<td>Date Processed	</td>
+		<td>Date Proposed	</td>
 		<td><input name="pdate" type="text" value="<?php echo date('Y-m-d',$values[3]) ?>"></td>
 <!--<td><input name="pmonth" type="text" value="mm" maxlength="2" width="40">
  <input name="pday" type="text" value="dd" maxlength="2" width="40">
@@ -33,7 +34,7 @@
 <input name="abdate" type="hidden" value="<?php echo date('Y-m-d',$values[7]) ?>">
 	<tr>
 		<td>Academic Year</td>
-		<td><select name="year" value="<?php $values[9] ?>">
+		<td><select name="year" value="<?php echo $values[9] ?>">
 			<option value="<?php print($d+1) ?>"><?php print($d .'-'. ($d+1)) ?></option>
 			<option value="<?php print($d+2) ?>"><?php print(($d+1) .'-'. ($d+2)) ?></option>
 		</select></td>
@@ -48,7 +49,7 @@
 	</tr>
 	<tr>
 		<td>Degree Level</td>
-		<td><select name="deg" value="<?php echo $values[11] ?>">
+		<td><select name="deg"  value="<?php echo $values[11] ?>">
 			<option value="undergraduate">Undergraduate</option>
 			<option value="graduate">Graduate</option>
 		</select></td>

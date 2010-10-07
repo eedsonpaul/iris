@@ -46,14 +46,39 @@
 					$result_stfap = mysql_query($query_stfap);
 					$amount_per_unit = mysql_result($result_stfap, 0, "amount_per_unit");
 					
+					$query_assessment = "SELECT * FROM assessment_table;";
+					$result_assessment = mysql_query($query_assessment);
+					
+					//student fund start
+					$community_chest = mysql_result($result_assessment,0,"community_chest");
+					$publication = mysql_result($result_assessment,0,"publication");
+					$student_council = mysql_result($result_assessment,0,"student_council");
+					
+					$community_chest_less_stfap = 0;
+					$publication_less_stfap= 0;
+					$student_council_less_stfap = 0;
+					
+					$community_chest_amount_shouldered = 0;
+					$publication_amount_shouldered = 0;
+					$student_council_amount_shouldered = 0;
+					
+					$community_chest_total_less = $community_chest_less_stfap + $community_chest_amount_shouldered;
+					$publication_total_less= $publication_less_stfap + $publication_amount_shouldered;
+					$student_council_total_less = $student_council_less_stfap + $student_council_amount_shouldered;	
+					
+					$community_chest_to_pay = $community_chest - $community_chest_total_less;
+					$publication_to_pay = $publication - $publication_total_less;
+					$student_council_to_pay = $student_council - $student_council_total_less;
+					//student fund end
+					
 					//miscellaneous start
-					$athletics = 55;
-					$cultural = 50;
-					$energy = 250;
-					$internet = 260;
-					$library = 700;
-					$medical = 50;
-					$registration = 40;
+					$athletics = mysql_result($result_assessment,0,"athletics");
+					$cultural = mysql_result($result_assessment,0,"cultural");
+					$energy = mysql_result($result_assessment,0,"energy");
+					$internet = mysql_result($result_assessment,0,"internet");
+					$library = mysql_result($result_assessment,0,"library");
+					$medical = mysql_result($result_assessment,0,"medical");
+					$registration = mysql_result($result_assessment,0,"registration");
 					
 					$athletics_less_stfap = 0;
 					$cultural_less_stfap = 0;
@@ -98,13 +123,13 @@
 					$library_to_pay= $library - $library_total_less;
 					$medical_to_pay = $medical - $medical_total_less;
 					$registration_to_pay = $registration - $registration_total_less;
-					
-					$miscellaneous_1_total = $athletics_to_pay + $cultural_to_pay + $energy_to_pay + $internet_to_pay + $library_to_pay + $medical_to_pay + $registration_to_pay;
-					$miscellaneous_1_less_stfap = $athletics_less_stfap + $cultural_less_stfap + $energy_less_stfap + $internet_less_stfap	+ $library_less_stfap + $medical_less_stfap + $registration_less_stfap;
-					$miscellaneous_1_amount_shouldered = $athletics_amount_shouldered + $cultural_amount_shouldered + $energy_amount_shouldered + $internet_amount_shouldered + $library_amount_shouldered + $medical_amount_shouldered + $registration_amount_shouldered;
-					$miscellaneous_1_total_less = $miscellaneous_1_less_stfap + $miscellaneous_1_amount_shouldered;
-					$miscellaneous_1_total_to_pay = $miscellaneous_1_total - $miscellaneous_1_total_less;
 					//miscellaneous end
+					
+					$miscellaneous_1 = $athletics + $cultural + $energy + $internet + $library + $medical + $registration;
+					$miscellaneous_1_less_stfap = $athletics_less_stfap + $cultural_less_stfap + $energy_less_stfap + $internet_less_stfap + $library_less_stfap + $medical_less_stfap + $registration_less_stfap;
+					$miscellaneous_1_amount_shouldered = $athletics_amount_shouldered + $cultural_amount_shouldered + $energy_amount_shouldered + $internet_amount_shouldered + $library_amount_shouldered + $medical_amount_shouldered + $registration_amount_shouldered;
+					$miscellaneous_1_total_less = $athletics_less_stfap + $cultural_less_stfap + $energy_less_stfap + $internet_less_stfap + $library_less_stfap + $medical_less_stfap + $registration_less_stfap + $athletics_amount_shouldered + $cultural_amount_shouldered + $energy_amount_shouldered + $internet_amount_shouldered + $library_amount_shouldered + $medical_amount_shouldered + $registration_amount_shouldered;
+					$miscellaneous_1_to_pay = $miscellaneous_1 - $miscellaneous_1_total_less;
 					
 					echo "<h3>Breakdown of Miscellaneous Payment</h3>";
 					echo "<table border=1>";

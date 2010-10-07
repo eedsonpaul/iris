@@ -1,14 +1,16 @@
-<?php
-	session_start();
+<?php 
+  require_once 'accounting_header.php';
+  include('connect.php');
 ?>
-<center>
 
+<!--
+<center>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<title>Welcome to UP Cebu IRIS!</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <script language="JavaScript" src="gen_validatorv31.js" type="text/javascript"></script>
 <style type="text/css">
 @import url("default.css");
@@ -32,9 +34,22 @@
 
 <body>
 <div id="container">
-p><img src="banner.jpg" width="950" height="163">
+<p><img src="banner.jpg" width="950" height="163">
 <img src="mb1.1.jpg" width="140" height="30"><a href="/iris/admin_transact_user.php?action=Logout"><img src="mblogout.gif" width="120" height="30" border="0"></a><img src="mb1.2.jpg" width="33" height="30"><img src="mb1.3.jpg" width="657" height="30"><img src="mb1.4.gif" width="950" height="33"></p>
-</div>
+-->
+
+<div class="main">
+	<div id="navigation">
+		
+	  <ul>
+			<li><a href="accounting.php">Return</a></li>
+		</ul>
+
+	<br>
+	</div>
+
+	<div id="right_side">
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <body>
 <br>
 <br>
@@ -53,16 +68,19 @@ p><img src="banner.jpg" width="950" height="163">
 	<p>&nbsp;</p>
 	<table width="288">
 	  <tr>
-	    <td width="54">&nbsp;</td>
-	    <td width="104"><input type="submit" value="Submit" /></td>
-	    <td width="55"><a href="accounting.php"><input type=button value="Back"></a></td>
-	    <td width="55">&nbsp;</td>
+	    <td width="106">&nbsp;</td>
+	    <p = align="Center"><td width="73"><input type="submit" value="Submit" /></td>
+	    <td width="93">&nbsp;</td>
       </tr>
   </table>
 	<p>&nbsp;</p>
 </form>
 </body>
 </html>
-
+</div>
 </body>
 </html>
+
+<?php 
+  require_once 'cashier_footer.php';
+?>

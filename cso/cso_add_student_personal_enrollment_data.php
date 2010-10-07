@@ -29,12 +29,6 @@
 ?>
 <div class="main">
 	<div id="navigation">
-	<p>
-    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
-      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
-      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
-        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
- 	</p>
     <ul>
 	  	<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
         <li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
@@ -59,6 +53,12 @@
 
     
 <div id="right_side">
+	<p>
+    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
+      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
+      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
+        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
+ 	</p>
     <p class="headfont"><strong>CHANGE PERSONAL DATA</strong></p>
   <p class="head"><strong>PERSONAL INFORMATION</strong></p>
     <table width="250" border="1" align="center">
@@ -145,36 +145,6 @@
         <td><div align="right">Mother's Name:</div></td>
         <td>&nbsp;</td>
         <td colspan="2"><input type="text" name="last_name11" id="last_name11"></td>
-      </tr>
-      <tr>
-        <td><div align="right"></div></td>
-        <td>&nbsp;</td>
-        <td colspan="2"><div align="left"><strong>PARENT'S ADDRESS</strong></div></td>
-      </tr>
-      <tr>
-        <td><div align="right">House/Bldg #:</div></td>
-        <td>&nbsp;</td>
-        <td colspan="2"><input type="text" name="parents_house_no" id="parents_house_no"></td>
-      </tr>
-      <tr>
-        <td><div align="right">Street:</div></td>
-        <td>&nbsp;</td>
-        <td colspan="2"><input type="text" name="parents_street" id="parents_street"></td>
-      </tr>
-      <tr>
-        <td><div align="right">Barangay/District:</div></td>
-        <td>*</td>
-        <td colspan="2"><input type="text" name="parents_brgy" id="parents_brgy"></td>
-      </tr>
-      <tr>
-        <td><div align="right">City/Municipality:</div></td>
-        <td>*</td>
-        <td colspan="2"><input type="text" name="paretns_city" id="paretns_city"></td>
-      </tr>
-      <tr>
-        <td><div align="right">Landline/Mobile Phone #:</div></td>
-        <td>&nbsp;</td>
-        <td colspan="2"><input type="text" name="parents_phone_no" id="parents_phone_no"></td>
       </tr>
       <tr>
         <td><div align="right"></div></td>

@@ -1,0 +1,102 @@
+/** BASIC */
+
+body {
+	align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 0.8em;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	overflow: scroll;
+	width: 90%;
+}
+
+ul {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	line-height: 1.5em;
+	text-transform: uppercase;
+	text-weight: bold;
+}
+
+li {
+	font-size: 11px;
+	font-family: Arial, Helvetica, sans-serif;
+	line-height: 1.5em;
+	list-style-type: none;
+}
+
+.headdata {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.headfont {
+	font-size: 11px;
+	font-weight: bold;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.headfont th {	
+	border-collapse: collapse;
+	border-spacing: 0px;
+	font-size: 11px;
+	margin: 0px;
+	text-transform: uppercase;
+	font-weight: bold;
+	padding: 5px;
+}
+
+.superheadfont {
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	text-transform: uppercase;
+}
+.normaltext {
+	font-size: 11px;
+}
+
+.normaltext td {
+	border-collapse: collapse;
+	border-spacing: 0px;
+	font-size: 11px;
+	margin: 0px;
+}
+
+.notice {
+	text-align: center;
+	font-size: 10px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.noborder  tr td{
+	border: 0px;
+}
+
+table {
+	font-size: 11px;
+	border-collapse: collapse;
+	border: 1px;
+	border-style: solid;
+}
+
+table th {
+	text-transform: uppercase;
+	text-align: center;
+	text-weight: bold;
+	font-size: 11px;
+	padding: 1px;
+}
+
+table tr {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+table td {
+	padding: 5px;
+}

@@ -27,14 +27,9 @@
 	$data1 = mysql_fetch_array($res1);
 	$unit = $data1['unit_name'];
 ?>
+
 <div class="main">
 	<div id="navigation">
-	<p>
-    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
-      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
-      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
-        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
- 	</p>
     <ul>
 	  	<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
         <li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
@@ -59,10 +54,16 @@
 <?php
 	$act = $_GET['action'];?>
 <div id="right_side">
+	<p>
+    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
+      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
+      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
+        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
+ 	</p>
 	  <p class="head"><strong>Remove INC/4.0</strong></p>
       <p class="headfont"><strong>Search</strong></p>
       <p>&nbsp;</p>
-  <form action="cso_remove_inc_4_results.php?action=<?php echo $act;?>" method="post">
+  <form action="cso_remove_inc_4_results.php?action=<?php echo $act;?>" method="post" name = "csoform">
     <table width="494" border="0" align="center">
       <tr>
         <td width="181"><div align="right" class="normaltext"><strong>Enter Student Number:</strong></div></td>

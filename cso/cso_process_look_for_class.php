@@ -29,13 +29,6 @@
 
 <div class="main">
 	<div id="navigation">
-		<p>
-			<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
-			<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
-			<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
-			<b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
-		</p>
-		
 		<ul>
 			<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
 			<li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
@@ -59,9 +52,13 @@
 	<!-- end of div navigation -->
 	
 	<div id="right_side">
-
 		<p><a href="cso_classes_menu.php">Back to Menu</a></p>
-
+		<p>
+			<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
+			<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
+			<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
+			<b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
+		</p>
 		<p class="head"><strong>Classes Management Module</strong></p>
 		<!-- <p class="headfont"><strong>Add Class</strong></p> --> 
 		<p>&nbsp;</p>
@@ -89,7 +86,7 @@
 			$class_array = mysql_query ("SELECT * FROM subject WHERE course_code LIKE '%$class_name%' ");
 			$count = 1;
 			
-			echo	"<table width= 710><tr>
+			echo	"<table width= 710 class=tab><tr>
 			<th align=center  valign=middle width=20><strong>#</strong></th>
 			<th align=center  valign=middle width=80><strong>COURSE CODE</strong></th>
 			<th align=center  valign=middle width=140><strong>SUBJECT</strong></th>
@@ -117,6 +114,7 @@
 					$enrolled = $section_list['enrolled_count'];
 					$waitlisted = $section_list['waitlist_count'];
 					$type = $section_list['class_type'];
+					$dissolved = $section_list['dissolved'];
 
 					echo "<tr><td align=center wdith=20>". $count. "</td>";
 					$count++;
@@ -156,8 +154,8 @@
 										.$bldg. " " .$room_id. "<br>"
 										.$faculty_first_name. " ";
 										
-										if ($section_list['dissolved'] == 1) echo $faculty_last_name. "</td><td align=center width=120><b>Dissolved</b></td></tr>";
-										else if ($section_list['dissolved'] == 0) echo $faculty_last_name. "</td><td align=center width=120>LIST | DISSOLVE | EDIT</td></tr>";						
+										if ($dissolved == 1) echo $faculty_last_name. "</td><td align=center width=120><b>Dissolved</b></td></tr>";
+										else if ($dissolved == 0) echo $faculty_last_name. "</td><td align=center width=120>LIST | <a href='cso_process_dissolve_class.php?id=$course_code&sec=$section'>DISSOLVE</a> | <a href='cso_edit_class.php?id=$course_code&sec=$section'>EDIT</a></td></tr>";						
 				}
 				$c++;
 			}
@@ -170,7 +168,7 @@
 		<p>
 			<strong>LEGEND:</strong><br>
 			&nbsp; <strong>A</strong> = Available Slots<br>
-			&nbsp; <strong>S</strong> = Total Slots<br>
+			&nbsp; <strong>T</strong> = Total Slots<br>
 			&nbsp; <strong>C</strong> = Confirmed<br>
 			&nbsp; <strong>E</strong> = Enrolled<br>
 			&nbsp; <strong>W</strong> = Waitlisted<br>

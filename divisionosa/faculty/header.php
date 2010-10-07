@@ -2,6 +2,11 @@
 	session_start();
 	///iris/admin_transact_user.php?action=Logout
 ?>
+<?php
+	require_once '../cssandstuff/http.php';
+	if($_SESSION['access_level_id']!=2) redirect('../../error.php');
+	$emp_id = $_SESSION['employee_id'];
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>

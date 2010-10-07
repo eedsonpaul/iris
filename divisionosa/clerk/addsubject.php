@@ -156,7 +156,7 @@
 		<td><input type="text" name="units"></td>
 	</tr>
 	<tr>
-		<td>lab Fee</td>
+		<td>Lab Fee</td>
 		<td><input type="text" name="lab_fee"></td>
 	</tr>
 	<tr>
@@ -175,7 +175,7 @@
 	</tr>
 	<tr>
 		<td></td>
-		<td><input type="submit" name = "c" value="Add Subject" onCLick=""></td>
+		<td><input type="submit" name = "c" value="Add Course" onCLick=""></td>
 	</tr>
 </form>
 <!--

@@ -1,10 +1,37 @@
 <?php
-	require_once 'student_sub_header.php';
 
+	require 'dbconnect.php';
+	session_start();
     $student_number = $_SESSION['student_number'];	 
-	echo "VIEW SUBJECT HERE";
+
 ?>
 
+
+<html>
+<head>
+<title>Current Schedule</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+@import url("default.css");
+
+   body {
+	width:102%;
+	background-color: #FFF4F4;
+	margin-left: 5px;
+	margin-top: 5px;
+   }
+#Layer1 {
+	position:absolute;
+	width:200px;
+	height:auto;
+	z-index:1;
+	left: 10px;
+	top: 250px;
+}
+.style4 {color: #FF0000}
+</style>
+</head>
+<body>
 <div id="container">
 <?php
 

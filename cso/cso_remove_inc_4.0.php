@@ -29,12 +29,6 @@
 ?>
 <div class="main">
 	<div id="navigation">
-	<p>
-    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
-      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
-      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
-        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
- 	</p>
     <ul>
 	  	<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
         <li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
@@ -60,6 +54,12 @@
 	$act = $_GET['action'];
 ?>
 <div id="right_side">
+	<p>
+    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
+      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
+      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
+        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
+ 	</p>
 	  <p class="head"><strong>Remove INC/4.0</strong></p>
       <p class="headfont"><strong>Edit grade</strong></p>
       <p>&nbsp;</p>

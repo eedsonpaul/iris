@@ -9,6 +9,8 @@
 		
 		//Function to view accountability
 		function viewAccountability() {
+			$accountability = "";
+			$sem = "";
 			$query = "SELECT * from accountability WHERE accountability_status = 'pending'";
 			$resu = mysql_query($query);
 			$count = 0;
@@ -98,16 +100,15 @@
 			session_start();
 			$accountability = $_POST['accountability'];
 			$details = $_POST['accountability_details'];
-			$due = $_POST['amount_due'];
 			$ay_incurred = $_POST['academic_year_incurred'];
 			$sem = $_POST['semester_incurred'];
 			$exact_date = $_POST['exact_date_incurred'];
 
 			$sql = "INSERT INTO accountability
-				(student_number, accountability_type_id, details, amount_due, year_incurred, semester_incurred, date_added, accountability_status, 
+				(student_number, accountability_type_id, details, year_incurred, semester_incurred, date_added, accountability_status, 
 					employee_id)
 				
-				VALUES('$stnum', '$accountability', '$details', '$due', '$ay_incurred', '$sem', '$exact_date', 'pending', '".$_SESSION['employee_id'].
+				VALUES('$stnum', '$accountability', '$details', '$ay_incurred', '$sem', '$exact_date', 'pending', '".$_SESSION['employee_id'].
 					"')";
 
 			//mysql_query($sql);
@@ -121,8 +122,12 @@
 		}
 
 		//Function to search students with accountability
-		function searchStudentAccountability() {
-			$search = $_POST['search_subject'];
+		function searchStudentAccountability($action) {
+			if($action=='GET'){
+				$search = $_GET['id'];
+			} else {
+				$search = $_POST['search_subject'];
+			}
 			
 			if(is_numeric($search)) {
 				$stud_num = $search;
@@ -157,7 +162,7 @@
 					$accountability = $row['accountability_type'];
 				}
 
-				$result2 = "SELECT semester_type FROM semester_mapping WHERE semester_id ='$semester'";
+				$result2 = "SELECT semester_type FROM semester WHERE semester_id ='$semester'";
 				$datu = mysql_query($result2);
 				while($row = mysql_fetch_array($datu)) {
 					$sem = $row['semester_type'];

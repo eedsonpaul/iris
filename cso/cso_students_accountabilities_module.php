@@ -27,14 +27,20 @@
 	$data1 = mysql_fetch_array($res1);
 	$unit = $data1['unit_name'];
 ?>
+
+<script language="JavaScript">
+
+	function init(){
+		document.csoform.reset();
+		
+		oStringMask = new Mask("#########");
+		oStringMask.attach(document.csoform.search_subject);
+		
+	}
+</script>
+
 <div class="main">
 	<div id="navigation">
-	<p>
-    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
-      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
-      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
-        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
- 	</p>
     <ul>
 	  	<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
         <li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
@@ -58,17 +64,23 @@
 	</div>
 
 <div id="right_side">
+	<p>
+    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
+      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
+      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
+        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
+ 	</p>
     <p class="headfont">&nbsp;</p>
   <p class="head"><strong>Student's Accountabilities</strong></p>
-  <p class="head"><strong>Semester goes here, A.Y. Goes Here</strong></p>
+  <p class="headfont"><strong>Semester goes here, A.Y. Goes Here</strong></p>
   <p>
     <center>
     </center>
   </p>
   <table width="750" border="0" align="center">
     <tr>
-      <form action="cso_students_accountabilities_module.php?action=SEARCH" method="post">
-        <td width="750"><div align="center"><strong>Search by Student Number:
+      <form action="cso_students_accountabilities_module.php?action=SEARCH" method="post" name="csoform">
+        <td width="750"><div align="center" class="normaltext"><strong>Search by Student Number:
         </strong>
           <input name="search_subject" type="text" id="search_subject" size="50">
                   <input type="submit" name="search_subject_button" id="search_subject_button" value="Search">
@@ -90,15 +102,15 @@
   </center>
   </p>
   <form action="" method="post">
-    <table width="780" border="1" align="center" cellpadding="0" cellspacing="0" class="tab">
+    <table width="690" border="1" align="center" cellpadding="0" cellspacing="0" class="tab">
       <tr>
         <th width="100" height="36"><div align="center" class="style1">Student Number</div></td>
         <th width="128"><div align="center" class="style1">Student Name</div></td>
-        <th width="130"><div align="center" class="style1">Accountability</div></td>
-        <th width="120"><div align="center"><strong>Details</strong></div></td>
-        <th width="81"><div align="center"><strong>Amount Due</strong></div></td>
+        <th width="100"><div align="center" class="style1">Accountability</div></td>
+        <th width="115"><div align="center"><strong>Details</strong></div></td>
+        <th width="75"><div align="center"><strong>Amount Due</strong></div></td>
         <th width="119"><div align="center"><strong>Date / A.Y. / Semester Incurred</strong></div></td>
-	<th width="80">Action</th>
+		<th width="80">Action</th>
       </tr>
       	<?php
 		include("cso_accountability.php");
@@ -109,7 +121,10 @@
 			$account->viewAccountability();
 		} else if($action=="SEARCH") {
 			$account = new Accountability();
-			$account->searchStudentAccountability();
+			$account->searchStudentAccountability($action);
+		} else if($action=="GET") {
+			$account = new Accountability();
+			$account->searchStudentAccountability($action);
 		}
 	?>
     </table>

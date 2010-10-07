@@ -80,9 +80,10 @@ class Accountability{
 				echo "<td>".$amount_due."</td>";
 				echo "<td><a href=\"libraryEditAccountability.php?id=".$accountability_id."\">Edit</a></td>";
 				echo "<td><a href=\"libraryClearAccountability.php?id=".$accountability_id."\">Clear</a></td>";
-				echo "</tr>";							
+				echo "</tr>";				
 				$i++;
 			}
+				echo "</table>";
 			}
 		}
 		
@@ -238,9 +239,9 @@ class Accountability{
 							echo "<td>".$last_name.", ".$first_name." ".$middle_name."</td>";
 							echo "<td>".$degree_program." ".$year_level."</td>";
 							echo "<td><a href=\"libraryAddAccountability.php?student_number=$student_number\"><input type=\"submit\" value=\"Add\" /></a></td></tr>";
-							echo "</table>";
 							$i++;
 						}
+						echo "</table>";
 					}
 				}
 			}

@@ -127,10 +127,97 @@
 	
 	function options_course()
 	{
-		$q = mysql_query("select course_code from subject");
+		$q = mysql_query("select course_code from subject WHERE abolished =0");
 		if(!$q) die("unable to retrieve code".mysql_error());
 		display_options(cols($q,"course_code"));
 		//print_arr2(cols_2($q1,"course_code"));
+	}
+	
+	function search_class_offering($course_code)//search_course
+	{
+		$q = mysql_query("SELECT DISTINCT a.course_code, a.section_label, a.room_id, d.last_name, d.first_name, a.total_slots, a.class_type, b.start_time, b.end_time, b.day_of_the_week
+			FROM section a, section_schedules b, employee d
+			WHERE a.course_code = b.course_code
+			AND a.section_label = b.section_label
+			AND d.employee_id = a.employee_id
+			and a.course_code like '%$course_code%'");
+		if(!$q) die('Cannot search section'.mysql_error());
+		return $q;
+	}
+	
+	function print_table_class_offering($a)
+	{
+		$i=0;
+		while($row = mysql_fetch_array($a))
+		{
+			echo '<form action=process.php method=post><tr>';
+			while($i<10)
+			{
+				echo '<td>';
+				if($i==3)
+				{
+					echo $row[$i].', '.$row[$i+1];
+					$i++;
+				}
+				else if($i==7)
+				{
+					echo $row[$i].' - '.$row[$i+1];
+					$i++;
+				}
+				else echo $row[$i];
+				$i++;
+				echo '</td>';
+			}
+			echo '<input type=hidden name=course_code value='.$row[0].'>';
+			echo '<input type=hidden name=section value='.$row[1].'>';
+			echo "<td><input type=submit name=c value='Edit Section'></td>";
+			$i=0;
+			echo "</tr></form>";
+		}
+	}
+	
+	function print_table_remove_offering($a)
+	{
+		$i=0;
+		while($row = mysql_fetch_array($a))
+		{
+			echo '<form action=process.php method=post><tr>';
+			while($i<10)
+			{
+				echo '<td>';
+				if($i==3)
+				{
+					echo $row[$i].', '.$row[$i+1];
+					$i++;
+				}
+				else if($i==7)
+				{
+					echo $row[$i].' - '.$row[$i+1];
+					$i++;
+				}
+				else echo $row[$i];
+				$i++;
+				echo '</td>';
+			}
+			echo '<input type=hidden name=course_code value='.$row[0].'>';
+			echo '<input type=hidden name=section value='.$row[1].'>';
+			echo "<td><input type=submit name=c value='Delete'></td>";
+			$i=0;
+			echo "</tr></form>";
+		}
+	}
+	
+	function retrieve_class_offering($course_code,$section)
+	{
+		$q = mysql_query("SELECT DISTINCT a.course_code, a.section_label, a.room_id, d.last_name, d.first_name, a.total_slots, a.class_type, b.start_time, b.end_time, b.day_of_the_week
+			FROM section a, section_schedules b, employee d
+			WHERE a.course_code = b.course_code
+			AND a.section_label = b.section_label
+			AND d.employee_id = a.employee_id
+			AND a.course_code = '$course_code'
+			AND a.section_label = '$section'");
+		if(!$q) die('Cannot retrieve section'.mysql_error());
+		return $q;
 	}
 	//options_cc();
 	//options_faculty();

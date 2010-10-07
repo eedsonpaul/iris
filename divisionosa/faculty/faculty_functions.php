@@ -71,7 +71,7 @@
 		$z[1] = 0;
 		while($row=mysql_fetch_array($q))
 		{
-			if($row['class_type']=="lab") $z[1]++;
+			if($row['class_type']=="lab" or strcasecmp($row['course_code'],"PE")==0 or strcasecmp($row[0],"cwts")==0 or strcasecmp($row['course_code'],"NSTP")==0) $z[1]++;
 			else $z[0]=$z[0]+$row['units'];
 		}
 		return $z;
@@ -122,6 +122,7 @@
 					echo $row[$i]."-".$row[$i+1];
 					$i++;
 				}
+				else if($i==2 and (strcasecmp($row[0],"NSTP")==0 or strcasecmp($row[0],"cwts")==0 or strcasecmp($row[0],"PE")==0)) echo '('.$row[$i].')';
 				else echo $row[$i]." ";
 				$i++;
 				echo '</td>';
@@ -131,9 +132,10 @@
 		}
 	}
 	
-	function print_bracket_degree($arr)	//returns an array containing stfap bracket and degree program from an input mysql array	
+	function print_bracket_degree($arr)	//returns an array containing stafp bracket and degree program from an input mysql array	
 	{
 		$i=0;
+		$c=array('','');
 		while($row = mysql_fetch_array($arr))
 		{
 			while($i<2)
@@ -160,6 +162,17 @@
 			$j++;
 		}
 		return $c;
+	}
+	
+	function oned_array($arr)
+	{
+		$i=0;
+		while($row = mysql_fetch_array($arr))
+		{
+			$a[$i] = $row;
+			$i++;
+		}
+		return $a;
 	}
 	
 	function print_array($a)	//prints a multidimensional array from an input array
@@ -264,22 +277,363 @@
 		}
 	}
 	
-	function retrieve_student_name($name)
+	function miscell_fees()
 	{
-		$q = mysql_query("select last_name,first_name
-			from student
-			where student_number='$name'");
-		if(!$q) die('Cannot retrieve last name and first name'.mysql_error());
+		$q = mysql_query("select athletics,cultural,energy,internet,library,medical,registration
+			from assessment_table
+			where look_up=1");
+		if(!$q) die('Cannot retrieve miscellaneous'.mysql_error());
 		return $q;
 	}
 	
-	function retrieve_amount_shouldered($student_number)
+	//$a = mysql_fetch_array(miscell_fees());
+
+	function student_fund()
 	{
-		$q = mysql_query("select a.amount_shouldered,a.scholarship_name
-		from scholarship a,student b
-		where a.scholarship_id=b.scholarship_id
-		and b.student_number='$student_number'");
-		if(!$q) die('Cannot retrieve amount shouldered'.mysql_error());
+		$q = mysql_query("SELECT community_chest,publication,student_council 
+			FROM `assessment_table` 
+			WHERE look_up=1");
+		if(!$q) die('Cannot retrieve student fund'.mysql_error());
 		return $q;
 	}
+	
+	//$a = mysql_fetch_array(student_fund());
+	//print($a[0]);
+	//print($a[1]);
+	
+	function other_fees()
+	{
+		$q = mysql_query("SELECT non_citizen_fee,entrance,deposit,id_fee,in_residence
+			FROM `assessment_table` 
+			WHERE look_up=1");
+		if(!$q) die('Cannot retrieve other fees'.mysql_error());
+		return $q;
+	}
+	
+	//$a = mysql_fetch_array(other_fees());
+	//print($a[0]);
+	//print($a[1]);
+	
+	function laboratory_nstp()
+	{
+		$q = mysql_query("SELECT laboratory_fee,nstp_cwts 
+			FROM `assessment_table` 
+			WHERE look_up=1");
+		if(!$q) die('Cannot retrieve laboratory fees and nstp'.mysql_error());
+		return $q;
+	}
+	//$a = mysql_fetch_array(laboratory_nstp());
+	//print($a[0]);
+	//print($a[1]);
+	function insert_assess_info($a,$b,$c,$d,$e,$f,$g,$h,$i)
+	{
+		$q = mysql_query("INSERT INTO assessment (
+			student_number,
+			unit_count,
+			lab_count,
+			non_citizen_fee,
+			entrance,
+			deposit,
+			id_fee,
+			in_residence,
+			nstp,
+			assessment_status
+			)
+			VALUES (
+			'$a', '$b', '$c', '$d', '$e', '$f', '$g', '$h', '$i','')");
+		if(!$q) die('Cannot retrieve laboratory fees and nstp'.mysql_error());	
+	}
+	
+	function retrieve_assess_info($student_number)
+	{
+		$q = mysql_query("SELECT unit_count,lab_count,non_citizen_fee,entrance,deposit,id_fee,in_residence,nstp 
+			FROM `assessment` 
+			WHERE student_number='$student_number'");
+		if(!$q) die('Cannot retrieve assessment info'.mysql_error());
+		return $q;
+	}
+	//$a = mysql_fetch_array(retrieve_assess_info('201000001'));
+	//print($a[0]);
+	//print($a[1]);
+	
+	function view_student_scholarship($student_number)
+	{
+		$q = mysql_query("SELECT a.scholarship_name,a.amount_shouldered 
+			FROM scholarship a,student b 
+			WHERE a.scholarship_id=b.scholarship_id
+			and b.student_number='$student_number'");
+		if(!$q) die('Cannot retrieve scholarship and amount'.mysql_query());
+		return $q;
+	}
+	
+	function retrieve_student_name($student_number)
+	{
+		$q = mysql_query("SELECT last_name,first_name 
+			FROM student 
+			WHERE student_number='$student_number'");
+		if(!$q) die('Cannot retrieve scholarship and amount'.mysql_query());
+		return $q;
+	}
+	
+	function view_accountability($student_number)
+	{
+		$q = mysql_query("SELECT * 
+			FROM accountability 
+			WHERE accountability_status='pending' 
+			and student_number='$student_number'");
+		if(!$q) die('Cannot view accountability'.mysql_query());
+		return $q;
+	}
+	
+	function set_assessed($student_number)
+	{
+		$q = mysql_query("update`assessment`
+			set assessment_status='assessed' 
+			WHERE student_number='$student_number'");
+		if(!$q) die('Cannot set Assessed'.mysql_query());
+		else $r = 'Student Assessed';
+		return $r;
+	}
+	
+	function total_miscell($arr)
+	{
+		$i=0;
+		$total=0;
+		while($i<7)
+		{
+			$total=$total+$arr[$i++];
+		}
+		return $total;
+	}
+	
+	function total_student_fund($arr)
+	{
+		$i=0;
+		$total=0;
+		while($i<3)
+		{
+			$total=$total+$arr[$i++];
+		}
+		return $total;
+	}
+	//echo total_miscell();
+	//echo total_student_fund();
+	function check_nstp($student_number)
+	{
+		$q = mysql_query("SELECT *
+			FROM `student_status` 
+			WHERE course_code='nstp'
+			and student_number='$student_number'");
+		if(!$q) die('Cannot check Nstp'.mysql_query());
+		return $q;
+	}
+	
+	function is_assessed($student_number)
+	{
+		$q = mysql_query("SELECT *
+			FROM `assessment` 
+			WHERE assessment_status='assessed'
+			and student_number='$student_number'");
+		if(!$q) die('Cannot check Nstp'.mysql_query());
+		return $q;
+	}
+	
+	function is_DOST($student_number)
+	{
+		$q = mysql_query("SELECT * FROM 
+			student a,scholarship b 
+			WHERE a.scholarship_id=b.scholarship_id
+			and b.scholarship_name='DOST'
+			and a.student_number='$student_number'");
+		if(!$q) die('Cannot check Nstp'.mysql_query());
+		return $q;
+	}
+	
+	function search_name($employee_id)
+	{
+		$q = mysql_query("select last_name,first_name
+			from employee
+			where employee_id='$employee_id'");
+		if(!$q) die('Cannot search Name'.mysql_query());
+		return $q;
+	}
+	
+	function search_unit($employee_id)
+	{
+		$q = mysql_query("SELECT b.unit_name 
+			FROM employee a,unit b 
+			WHERE a.unit_id=b.unit_id
+			and a.employee_id='$employee_id'");
+		if(!$q) die('Cannot retrieve unit of employee'.mysql_query());
+		return $q;
+	}
+	
+	function students_enrolled($course_code,$section_label)
+	{
+		/* mysql_query("SELECT b.student_number
+			FROM student_status b
+			WHERE b.status =  'enrolled'
+			AND b.course_code =  '$course_code'
+			AND b.section_label =  '$section_label'");*/
+		$q =mysql_query("SELECT DISTINCT a.student_number
+			FROM student_status a
+			LEFT JOIN grade b
+			USING ( student_number ) 
+			WHERE b.student_number IS NULL 
+			AND a.status =  'enrolled'
+			AND a.course_code =  'cmsc21'
+			AND a.section_label =  's'");
+		if(!$q) die('Cannot retrieve students'.mysql_query());
+		return $q;
+	}
+	
+	function print_table_students_enrolled($a,$course_code,$section_label,$semester,$academic_year)//,$b
+	{
+		$i=0;
+		while($row = mysql_fetch_array($a))
+		{
+			echo '<form action=process_faculty.php method=post><tr>';
+			/*while($i<8)
+			{
+				echo '<td>';
+				if($i==4)
+				{
+					echo $row[$i].' - '.$row[$i+1];
+					$i++;
+				}
+				else echo $row[$i];
+				$i++;
+				echo '</td>';
+			}*/
+			echo '<td>'.$row[$i].'</td>';
+			echo '<td><select name=initial_grade>';
+			grade_option();
+			echo '</select></td>';
+			echo '<td><input type=text name=remarks></td>';
+			echo '<input type=hidden name=student_number value='.$row[0].'>';
+			echo '<input type=hidden name=course_code value='.$course_code.'>';
+			echo '<input type=hidden name=section_label value='.$section_label.'>';
+			echo '<input type=hidden name=semester value='.$semester.'>';
+			echo '<input type=hidden name=academic_year value='.$academic_year.'>';
+			echo "<td><input type=submit name=action value='Submit Grade'></td>";
+			$i=0;
+			echo "</tr></form>";
+		}
+	}
+	
+	function student_assess($student_number,$amount)
+	{
+		$r='error';
+		$q = mysql_query("insert into student_assessment
+			(to_pay_amount,assessment_status,student_number)
+			values
+			('$amount','unpaid','$student_number')");
+		if(!$q) die('Cannot set student unpaid'.mysql_query());
+		else $r = 'Student Assessed';
+		return $r;
+	}
+	
+	function confirm_to_assess($student_number)
+	{
+		$r='confirm';
+		$q = mysql_query("update student_status
+			set status='assessed'
+			where status='confirmed'
+			and student_number='$student_number'");
+		if(!$q) die('Cannot set assess from confirm'.mysql_query());
+		else $r = 'Confirm to Assess Complete';
+		return $r;
+	}
+	
+	function grade_status($grade)
+	{
+		$status=0;
+		switch($grade)//strcasecmp(
+		{
+			case 'INC':
+				$status='INC';//removal
+			break;
+			case '4.0':
+				$status='removal';
+			break;
+			case '5.0':
+				$status='failed';
+			break;
+			default:
+				$status='passed';
+		}
+		return $status;
+	}
+	
+	function init_final($grade)
+	{
+		$final=0;
+		switch($grade)
+		{
+			case 'INC':
+				$final='';
+			break;
+			case '4.0':
+				$final='';
+			break;
+			case '5.0':
+				$final='5.0';
+			break;
+			default:
+				$final=$grade;
+		}
+		
+		return $final;
+	}
+	
+	function grade_option()
+	{
+		$i=0;
+		$g = array(1.0,1.25,1.5,1.75,2.0,2.25,2.5,2.75,3.0,4.0,'INC',5.0);
+		//echo '<select name=initial_grade>';
+		while($i < sizeof($g))
+		{
+			echo '<option value='.$g[$i].'>'.$g[$i].'</option>';
+			$i++;
+		}
+		//echo '</select>';
+	}
+	
+	function insert_grade($course_code,$section_label,$student_number,$remarks,$date,$initial_grade,$completion_grade,$grade_status,$semester,$academic_year)
+	{
+		$r='Student Number '.$student_number.' grade have been submitted.';
+		$q = mysql_query("INSERT INTO `grade` (
+			`course_code` ,
+			`section_label` ,
+			`student_number` ,
+			`remarks` ,
+			`date_incurred` ,
+			`initial_grade` ,
+			`completion_grade` ,
+			`grade_status` ,
+			`semester` ,
+			`academic_year`)
+			values
+			('$course_code',
+			'$section_label',
+			'$student_number',
+			'$remarks',
+			'$date',
+			'$initial_grade',
+			'$completion_grade',
+			'$grade_status',
+			'$semester',
+			'$academic_year'
+			)");
+		if(!$q) 
+		{
+			die('Cannot add grade'.mysql_error());
+			$r = 'Cannot Submit Grade to student number '.$student_number;
+		}
+		return $r;
+	}
+	//print(mysql_numrows(is_assessed(201000000)));
+	//$check_nstp = mysql_numrows(check_nstp('201012345'));
+	//print(mysql_fetch_array(retrieve_assess_info(201000000)));
+
 ?>

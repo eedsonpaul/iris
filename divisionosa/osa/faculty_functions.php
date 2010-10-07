@@ -29,7 +29,7 @@
 	function retrieve_account($student_number)
 	{
 		$q	=	mysql_query("SELECT d.student_number, d.last_name, d.first_name, a.accountability_type, b.details, b.amount_due, b.year_incurred, c.semester_type
-				FROM student d, semester_mapping c, accountability b, accountability_type a
+				FROM student d, semester c, accountability b, accountability_type a
 				WHERE b.accountability_type_id = a.accountability_type_id
 				AND b.accountability_status = 'pending'
 				AND c.semester_id = b.semester_incurred

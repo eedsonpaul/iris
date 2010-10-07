@@ -29,17 +29,10 @@
 ?>
 <div class="main">
 	<div id="navigation">
-	<p>
-    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
-      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
-      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
-        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
- 	</p>
     <ul>
 	  	<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
         <li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
 	</ul>
-
 	<ul>
 		<li><a href="cso_students_concerns.php">STUDENT'S CONCERNS</a></li>
 		<li><a href="cso_subject_module.php">SUBJECT</a></li>
@@ -82,28 +75,39 @@
   ?>
   
 <div id="right_side">
+	<p>
+    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
+      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
+      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
+        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
+ 	</p>
     <p class="head"><strong>Student Record</strong></p>
-  <p class="headfont"><strong>CHANGE STUDENT LOGIN ACCOUNT</strong></p>
-  <table width="250" border="1" align="center">
-    <tr>
-      <td><div align="center"><strong>NOTICE</strong></div></td>
-    </tr>
-    <tr>
-      <td class="notice"><ul>
-          <li>fields with * should be filled up</li>
-        <li>do not use apostrophe (')</li>
-      </ul></td>
-    </tr>
-  </table>
-  <p>&nbsp;</p>
-  <form action="cso_process_add_student_record.php?action=ADD LOGIN ACCOUNT&id=<?php echo $student_ID;?>" method="post">
-    <table width="494" border="0" align="center" class="tab">
-      <tr>
-        <td width="181"><div align="right">Student ID:</div></td>
-        <td width="12">&nbsp;</td>
-        <td width="287"><strong><input type="text" name="last_name" id="last_name" value="<?php echo $student_ID;?>"></strong></td>
-      </tr>
-      <?php
+	<p class="headfont"><strong>CHANGE STUDENT LOGIN ACCOUNT</strong></p>
+	
+	<table width="250" border="1" align="center">
+		<tr>
+			<td><div align="center"><strong>NOTICE</strong></div></td>
+		</tr>
+		<tr>
+			<td class="notice">
+				<ul>
+					<li>fields with * should be filled up</li>
+					<li>do not use apostrophe (')</li>
+				</ul>
+			</td>
+		</tr>
+	</table>
+	<p>&nbsp;</p>
+	
+	<form action="cso_process_add_student_record.php?action=ADD LOGIN ACCOUNT&id=<?php echo $student_ID;?>" method="post">
+		<table width="494" border="0" align="center" class="tab">
+			<tr>
+				<td width="181"><div align="right">Student ID:</div></td>
+				<td width="12">&nbsp;</td>
+				<td width="287"><strong><input type="text" name="last_name" id="last_name" value="<?php echo $student_ID;?>" readonly></strong></td>
+			</tr>
+		
+		<?php
 	  		$lname = "";
 			$fname = "";
 			$mname = "";
@@ -125,78 +129,82 @@
 				$entrysem = $row['entry_semester'];
 				$pass = $row['password'];
 			}
-	  ?>
-      <tr>
-        <td><div align="right">Last Name:</div></td>
-        <td>*</td>
-        <td><input type="text" name="last_name" id="last_name" value="<?php echo $lname;?>" readonly></td>
-      </tr>
-      <tr>
-        <td><div align="right">First Name:</div></td>
-        <td>*</td>
-        <td><input type="text" name="first_name" id="first_name" value="<?php echo $fname;?>" readonly></td>
-      </tr>
-      <tr>
-        <td><div align="right">Middle Name:</div></td>
-        <td>*</td>
-        <td><input type="text" name="middle_name" id="middle_name" value="<?php echo $mname;?>" readonly></td>
-      </tr>
-      <tr>
-        <td><div align="right">Gender:</div></td>
-        <td>*</td>
-        <td><select name="gender" id="gender">
-        	<?php if($gender=="Female") {
-			?>
-          	<option value="Female" selected>Female</option>
-          	<option value="Male">Male</option>
-            <?php 
-			} else if($gender=="Male") {
-			?>
-            <option value="Female">Female</option>
-          	<option value="Male" selected>Male</option>
-            <?php } else {?>
-            <option value="Female">Female</option>
-          	<option value="Male">Male</option>
-            <?php } ?>
-        </select>        </td>
-      </tr>
-      <tr>
-        <td><div align="right">Login Expiration:</div></td>
-        <td>*</td>
-        <td><input type="text" name="login_expiration" id="login_expiration" value="<?php echo $log;?>" readonly>
-        (yyyymmdd)</td>
-      </tr>
-      <tr>
-        <td><div align="right">Entry A.Y.:</div></td>
-        <td>*</td>
-        <td><input type="text" name="entry_academic_year" id="entry_academic_year" value="<?php echo $entryay;?>" readonly>(end year:yyyy)</td>
-      </tr>
-      <tr>
-        <td><div align="right">Entry Semester:</div></td>
-        <td>*</td>
-        <td><input type="text" name="entry_semester" id="entry_semester" value="<?php echo $entrysem;?>"></td>
-      </tr>
-      <tr>
-        <td><div align="right">Password:</div></td>
-        <td>&nbsp;</td>
-        <td><input type="text" name="password" id="password" value="<?php echo $pass;?>"></td>
-      </tr>
-      <tr>
-        <td><div align="right"></div></td>
-        <td colspan="2"><a href="cso_process_generate_new_password.php?action=STUDENT&id=<?php echo $student_ID;?>"><strong>Click Here to Generate New Password</strong></a></td>
-      </tr>
-      <tr>
-        <td><div align="right"></div></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr>
-    </table>
+		?>
+			<tr>
+				<td><div align="right">Last Name:</div></td>
+				<td>*</td>
+				<td><input type="text" name="last_name" id="last_name" value="<?php echo $lname;?>" readonly></td>
+			</tr>
+			<tr>
+				<td><div align="right">First Name:</div></td>
+				<td>*</td>
+				<td><input type="text" name="first_name" id="first_name" value="<?php echo $fname;?>" readonly></td>
+			</tr>
+			<tr>
+				<td><div align="right">Middle Name:</div></td>
+				<td>*</td>
+				<td><input type="text" name="middle_name" id="middle_name" value="<?php echo $mname;?>" readonly></td>
+			</tr>
+			<tr>
+				<td><div align="right">Gender:</div></td>
+				<td>*</td>
+				<td><select name="gender" id="gender" disabled>
+					<?php if($gender=="Female") {?>
+						<option value="Female" selected>Female</option>
+						<option value="Male">Male</option>
+					<?php 
+						} else if($gender=="Male") {
+					?>
+						<option value="Female">Female</option>
+						<option value="Male" selected>Male</option>
+					<?php } else {?>
+						<option value="Female">Female</option>
+						<option value="Male">Male</option>
+					<?php } ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td><div align="right">Login Expiration:</div></td>
+				<td>*</td>
+				<td><input type="text" name="login_expiration" id="login_expiration" value="<?php echo $log;?>" readonly>
+					(yyyymmdd)</td>
+			</tr>
+			<tr>
+				<td><div align="right">Entry A.Y.:</div></td>
+				<td>*</td>
+				<td><input type="text" name="entry_academic_year" id="entry_academic_year" value="<?php echo $entryay;?>" readonly>(end year:yyyy)</td>
+			</tr>
+			<tr>
+				<td><div align="right">Entry Semester:</div></td>
+				<td>*</td>
+				<td><input type="text" name="entry_semester" id="entry_semester" value="<?php echo $entrysem;?>" readonly></td>
+			</tr>
+			<tr>
+				<td><div align="right">Password:</div></td>
+				<td>*</td>
+				<td><input type="password" name="password" id="password" value="<?php echo $pass;?>"></td>
+			</tr>
+			<tr>
+				<td><div align="right">Retyped Password:</div></td>
+				<td>*</td>
+				<td><input type="password" name="repassword" id="repassword" value="<?php echo $pass;?>"></td>
+			</tr>
+			<tr>
+				<td><div align="right"></div></td>
+				<td colspan="2"><a href="cso_process_generate_new_password.php?action=STUDENT&id=<?php echo $student_ID;?>"><strong>Click Here to Generate New Password</strong></a></td>
+			</tr>
+			<tr>
+				<td><div align="right"></div></td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
     <p>
-      <center><input type="submit" name="update_student_login" id="update_student_login" value="UPDATE">
-      </center>
+      <center><input type="submit" name="update_student_login" id="update_student_login" value="UPDATE"></center>
     </p>
-  </form>
-  <p>&nbsp;</p>
+	</form>
+	<p>&nbsp;</p>
 </div>
 
 <?php }

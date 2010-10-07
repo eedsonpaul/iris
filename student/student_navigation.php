@@ -5,20 +5,20 @@
 
 		<ul>
 			<ul>
-			  <li><a href="student.php">student profile </a><a href="student_edit_login_account.php">Edit login account</a></li>
+			  <li><a href="student.php">student profile </a><a href="student_edit_login_account.php">Edit Login account</a></li>
 			</ul>
-			<li><a href="student_add_editpersonal_data.php">add/edit personal data</a></li>
+			<li><a href="student_edit_data.php">Edit Personal Data</a></li>
 		  </ul>
 		</li>
 		
-		<li> <a href="#">registration</a>
+		<li> <a href="#">Registration</a>
 
 		  <ul>
-			<li> <a href="student_View accountabilities.php">View accountabilities </a></li>
-			<li><a href="student_view study plan.php">view study plan </a>
+			<li> <a href="student_view_accountabilities.php">View Accountabilities </a></li>
+			<li><a href="student_view study plan.php">View Study Plan</a>
 			  <ul>
 				<ul>
-				  <li><a href="student_view Grades per semester.php">view grades</a></li>
+				  <li><a href="student_view_grades.php">View Grades per Semester</a></li>
 				</ul>
 			  </ul>
 			</li>
@@ -27,7 +27,7 @@
 		
 		<li>
 		  <ul>
-			<li><a href="student_confirm subject here.php">edit subject here </a></li>
+			<li><a href="student_register_subject.php">Register Subject</a></li>
 		  </ul>
 		</li>
 	  </ul>

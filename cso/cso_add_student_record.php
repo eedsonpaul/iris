@@ -1,9 +1,11 @@
 <?php
 //File: CSO Student Record
+//Version 3: October 5, 2010. Added validations.
 //Version 2: Revision Date: September 23, 2010
 //Version 1: Date: September 13, 2010
 //By: Mae Ann A. Amarado
 //CSO TEAM
+
 
 	require_once 'cso_header.php';
 	$employee_id = "";
@@ -28,12 +30,6 @@
 ?>
 <div class="main">
 	<div id="navigation">
-	<p>
-    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
-      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
-      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
-        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
- 	</p>
     <ul>
 	  	<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
         <li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
@@ -56,10 +52,16 @@
 	</ul>
 	</div>
 <div id="right_side">
+	<p>
+    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
+      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
+      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
+        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
+ 	</p>
 	  <p class="head"><strong>Student Record</strong></p>
     <p class="headfont"><strong>Add Student Record</strong></p>
     <p>&nbsp;</p>
-  <form action="cso_check_student_number.php" method="post">
+  <form action="cso_check_student_number.php" method="post" name="csoform">
     <table width="494" border="0" align="center">
       <tr>
         <td width="181"><div align="right" class="normaltext"><strong>Enter Student Number:</strong></div></td>
@@ -71,6 +73,8 @@
       <center><input type="submit" name="add_student_record" id="add_student_record" value="ADD"></center>
     </p>
   </form>
+  
+    
   <p>&nbsp;</p>
 </div>
 

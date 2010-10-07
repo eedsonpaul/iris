@@ -1,42 +1,22 @@
-<?php
-	session_start();
+<?php 
+  require_once 'accounting_header.php';
 ?>
-<center>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>Welcome to UP Cebu IRIS!</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<script language="JavaScript" src="gen_validatorv31.js" type="text/javascript"></script>
-<style type="text/css">
-@import url("default.css");
 
-   body {
-	width:102%;
-	background-color: #FFF4F4;
-	margin-left: 0px;
-	margin-top: 0px;
-   }
-#Layer1 {
-	position:absolute;
-	width:200px;
-	height:auto;
-	z-index:1;
-	left: 10px;
-	top: 250px;
-}
-</style>
-</head>
+<div class="main">
+	<div id="navigation">
+		
+	  <ul>
+			<li><a href="accountingAddAccountabilitySearch.php?search_option=&search_query=">Add Accountability</a></li>
+			<li><a href="viewClearedAccounts.php">View Already Cleared</a></li>
+            <li><a href="generateSLB.php">Generate Student Accountabilities</a></li>
+			<li><a href="accounting.php">Return</a></li>
+		</ul>
 
-<body>
-<div id="container">
-<p><img src="banner.jpg" width="950" height="163">
-<img src="mb1.1.jpg" width="140" height="30"><a href="/iris/admin_transact_user.php?action=Logout"><img src="mblogout.gif" width="120" height="30" border="0"></a><img src="mb1.2.jpg" width="33" height="30"><img src="mb1.3.jpg" width="657" height="30"><img src="mb1.4.gif" width="950" height="33"></p>
-</div>
-<body>
+<br>
+	</div>
 
-<center>
+	<div id="right_side">
+    <br><br><br><br><br><br><br><br><br><br><br>
 <?php
 	include('connect.php');
 	$student_number = $_GET['student_number'];
@@ -53,6 +33,8 @@
 	echo "<tr><td>Name: </td><td>".$last_name.", ".$first_name." ".$middle_name."</td></tr>";
 	echo "<tr><td>Degree Program: </td><td>".$degree_program."</td></tr>";
 ?>
+
+
 <form action="addAccountability.php?student_number=<?php echo $student_number; ?>" method="post">
 	<td>Accountability:</td>
 		<td>
@@ -74,8 +56,8 @@
 		<td>Academic Year Incurred:</td>
 		<td>
 		<select name="year_incurred">
-		<option value="2010">2009-2010</option>
-		<option value="2011">2010-2011</option>
+		<option value="2009">2009-2010</option>
+		<option value="2010">2010-2011</option>
 		</select>
 		</td>
 	</tr>
@@ -98,7 +80,10 @@
 	</tr>
 	</table>
 </form>
+</div>
 </body>
 </html>
 
-
+<?php 
+  require_once 'cashier_footer.php';
+?>

@@ -466,3 +466,8 @@ html>body #menu {
 	color: #FFFFFF;
 }
 */
+
+#subjectaction {
+    text-decoration: underline;
+    cursor:pointer;
+}

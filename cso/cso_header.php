@@ -20,16 +20,22 @@
   @import url("default.css");
   </style>
   
-  <script language="JavaScript" src="masks.js" type="text/JavaScript"></script>
+<script language="JavaScript" src="masks.js" type="text/JavaScript"></script>
 
 <script language="JavaScript">
 
 	function init(){
-		document.loginform.reset();
+		document.csoform.reset();
 		
 		oStringMask = new Mask("#########");
-		oStringMask.attach(document.loginform.student_number);
+		oStringMask.attach(document.csoform.student_id);
 		
+		oStringMask = new Mask("####");
+		oStringMask.attach(document.csoform.start_ay);
+		
+		oStringMask = new Mask("#########");
+		oStringMask.attach(document.csoform.search_subject);
+	
 	}
 </script>
 
@@ -42,6 +48,7 @@
     <?php } else { ?>
       <a href="index.php?action=Logs"><img src="../img/banner.jpg" width="950" height="163" border="0"></a>
     <?php } ?>
+  </div>
   </div>
 
   <div id="stud_menu">

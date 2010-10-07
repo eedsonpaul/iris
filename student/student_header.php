@@ -5,6 +5,9 @@
 
 <html>
 <head>
+
+
+
   <?php if (isset($_SESSION['employee_id']))
         /*and  isset($_SESSION['access_level_id']) == 3)*/ { ?>
     <title><?php echo $_SESSION['access_level_id']; ?> | UP Cebu IRIS</title>
@@ -20,8 +23,8 @@
   @import url("student.css");
   </style>
   
-  <script language="JavaScript" src="masks.js" type="text/JavaScript"></script>
-
+<script language="JavaScript" src="masks.js" type="text/JavaScript"></script>
+<script language="JavaScript" src="jquery-1.4.2.min.js" type="text/JavaScript"></script>
 <script language="JavaScript">
 
 	function init(){

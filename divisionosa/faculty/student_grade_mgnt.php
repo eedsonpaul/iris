@@ -3,8 +3,8 @@
   <ul>
   	<li><a href=#"">Student Grade management module</a></li>
     <ul>
-    	<li><a href=#"">View Grade per Class</a>
-        <li><a href=#"">Submit Grade per Class</a>
+    	<li><a href="">View Grade per Class</a>
+        <li><a href="select_section.php">Submit Grade per Class</a>
     </ul>
   </ul>
 <?php require_once 'footer.php' ?>

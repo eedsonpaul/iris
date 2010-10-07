@@ -77,9 +77,15 @@
 		return $q;	
 	}
 	
-	printarray(retrieve_bracket_degree('201000000'));
-	print_r(accept_multiarray(retrieve_bracket_degree('201000000')));
-	print_r(print_bracket_degree(retrieve_bracket_degree('201000000')));
+	//printarray(retrieve_bracket_degree('201000000'));
+	//print_r(accept_multiarray(retrieve_bracket_degree('201000000')));
+	//print_r(print_bracket_degree(retrieve_bracket_degree('201000000')));
+	$c = 34;
+	$d = "34";
+	$e = "edge"; 
+	print(ctype_digit($c));
+	print(ctype_digit($d));
+	print(ctype_alpha($e));
 	
 	function printarray($arr)	//prints a multidimensional array from an input mysql row
 	{
@@ -110,6 +116,14 @@
 		return $c;
 	}
 	
+	function search_course($a1)
+	{
+		$q = mysql_query("SELECT course_code,subject_title FROM subject
+				WHERE course_code like '%".$a1."%'");
+		if(!$q) die('Search for approved scholarship failed'.mysql_error());
+		return $q;
+	}
+	
 	function accept_multiarray($arr)	//returns an array from an input mysql array	
 	{
 		$i=0;
@@ -126,6 +140,41 @@
 		}
 		return $c;
 	}
+	
+	function retrieve_scholarship_information($a1)
+	{
+		$q = mysql_query("select * from scholarship 
+						where scholarship_name='$a1'");
+		if(!$q) die('Cannot retrieve scholarship info'.mysql_error());
+		return $q;
+	}
+	print_r(accept_multiarray(retrieve_scholarship_information('scholar')));
+	
+	function print_table_search($a)
+	{
+		$i=0;
+		while($row = mysql_fetch_array($a))
+		{
+			echo '<tr>';
+			echo '<td><input type=radio name=course value='.$row[0].'></td>';
+			while($i<2)
+			{
+				echo '<td>';
+				echo $row[$i];
+				echo '</td>';
+				$i++;
+			}
+			$i=0;
+			echo "</tr>";
+		}
+		echo '<tr><td><input type=submit name=osa value=edit></td></tr>';
+	}
+	
+	echo "</br>";
+	echo "<form><table>";
+	print_table_search(search_course('cmsc'));
+	echo "</table></form>";
+	print_array(accept_multiarray(search_course('cmsc')));
 	
 	function print_array($a)	//prints a multidimensional array from an input array
 	{

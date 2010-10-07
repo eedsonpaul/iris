@@ -1,6 +1,11 @@
-<?php
-	session_start();
+<?php 
+  require_once 'accounting_header.php';
 ?>
+<?php
+	//session_start();
+?>
+
+<!--
 <center>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -31,9 +36,12 @@
 
 <body>
 <div id="container">
-p><img src="banner.jpg" width="950" height="163">
+<p><img src="banner.jpg" width="950" height="163">
 <img src="mb1.1.jpg" width="140" height="30"><a href="/iris/admin_transact_user.php?action=Logout"><img src="mblogout.gif" width="120" height="30" border="0"></a><img src="mb1.2.jpg" width="33" height="30"><img src="mb1.3.jpg" width="657" height="30"><img src="mb1.4.gif" width="950" height="33"></p>
-</div>
+-->
+
+<div class="main">
+	<div id="navigation">
 		
 	  <ul>
 			<li><a href="accountingAddAccountabilitySearch.php?search_option=&search_query=">Add Accountability</a></li>
@@ -43,23 +51,31 @@ p><img src="banner.jpg" width="950" height="163">
 		</ul>
 
 <br>
+	</div>
 
-<center>
-<br>
+	<div id="right_side">
 
-<form action="searchAccountability.php" method="post">
-Enter Last name:<input type="text" name="last_name" />
-<input type="submit" value="Search" /> &nbsp;
-</form>
-<br><br><br>
-<?php
-	include('connect.php');
-	include('accountabilityClass.php');
-	$accountability = new Accountability();
-	$accountability->acctg_displayAccountabilities(0,0);
-?>
+		<br><br><br><br><br><br><br><br><br><br><br><br>
+		<h4><form action="searchAccountability.php" method="post">
+		Enter Last name:<input type="text" name="last_name" />
+		<input type="submit" value="Search" /> &nbsp;
+		</form>
+		<br><br><br>
+	<?php
+		include('connect.php');
+		include('accountabilityClass.php');
+		$accountability = new Accountability();
+		$accountability->acctg_displayAccountabilities(0,0);
+	?>
+    </div>
 
 <br>
 <br>
 </body>
 </html>
+
+
+
+<?php 
+  require_once 'cashier_footer.php';
+?>

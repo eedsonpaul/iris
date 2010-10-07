@@ -28,17 +28,9 @@ if ($_SESSION['access_level_id'] != 3)  {
     {
       echo '<a href="index.php?action=SearchAcct">Search Account &raquo;';
       echo '</a>';
-      echo ' | <a href="index.php?action=SearchAcct">Reset';
-      echo '</a>';
-      echo ' | <a href="index.php?action=SearchAcct">Backup';
-      echo '</a>';
       if ($_SESSION['access_level_id'] == 3) {
         echo ' | <a href="index.php?action=Logs">Logs</a> | ';
-      }
-      if ($_SESSION['access_level_id'] >1) {
-        echo ' <a href="admin_useraccount.php?userid=' . $_SESSION['employee_id'] .
-             '" title="' . htmlspecialchars($_SESSION['username']) . '">' . $_SESSION['username'];
-
+        echo ' <a href="admin_panel.php">' . $_SESSION['username'];
       } else if ($_SESSION['access_level_id'] == 1) {
         echo ' | <a href="admin_accountpanel.php">' . $_SESSION['student_number'];
       }

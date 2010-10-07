@@ -30,19 +30,21 @@
 			echo "<br>Degree Program:".$row['degree_program'];
 			echo "<br><br>";		
 		 }
+	?>
 		 
-	 echo "<table width='100%' align='center border='1'>";
-	print "<tr>
+	
+		
+	<p>
+	<table width="660" class="tablestyle">
+	<tr>
 			<th width=150>SUBJECT</th>
 			<th width=150>UNITS</th>
 			<th width=150>INITIAL GRADE</th>
 			<th width=150>FINAL GRADE</th>
 			<th width=150>REMARKS</th>
-			</tr>";
+  </tr>
 
-		print "</table>"; 
-
-
+	<?php
 	 $result=mysql_query("SELECT course_code,initial_grade,completion_grade,grade_status from grade where student_number='$student_number' and academic_year=$academic_year and semester=$semester");	 
 	 $sub= mysql_num_rows($result);
 	 
@@ -60,7 +62,6 @@
 				$index++;
 			}
 		$totalunits = 0;
-		echo "<table>";
 			for($i = 0;$i < $index; $i++){
 				echo "<tr>";
 				echo "<td width='150'>" .$course_code[$i]. "</td>";

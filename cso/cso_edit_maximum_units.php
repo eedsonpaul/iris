@@ -1,5 +1,5 @@
 <?php
-//File: CSO Edit Maximu Units
+//File: CSO Edit Maximum Units
 //Version 2: Revision Date: September 23, 2010
 //Version 1: Date: September 13, 2010
 //By: Mae Ann A. Amarado
@@ -27,14 +27,19 @@
 	$data1 = mysql_fetch_array($res1);
 	$unit = $data1['unit_name'];
 ?>
+
+<script language="JavaScript">
+
+	function init(){
+		document.csoform.reset();
+		
+		oStringMask = new Mask("##");
+		oStringMask.attach(document.csoform.new_max_units);
+		
+	}
+</script>
 <div class="main">
 	<div id="navigation">
-	<p>
-    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
-      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
-      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
-        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
- 	</p>
     <ul>
 	  	<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
         <li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
@@ -75,8 +80,14 @@
 	} else {
   ?>
 <div id="right_side">
+	<p>
+    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
+      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
+      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
+        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
+ 	</p>
     <p class="head"><strong></strong></p>
-  <p class="headfont"><strong>Edit Student Number</strong></p>
+  <p class="headfont"><strong>Edit Maximum Units</strong></p>
   <p>&nbsp;</p>
   <?php
 	
@@ -87,7 +98,7 @@
 			$pass = $password;
 	}
   ?>
-  <form action="cso_process_edit_maximum_units.php?id=<?php echo $student_ID;?>" method="post">
+  <form action="cso_process_edit_maximum_units.php?id=<?php echo $student_ID;?>" method="post" name = "csoform">
     <table width="494" border="0" align="center" class="tab">
       <tr>
         <td width="181"><div align="right">Student ID:</div></td>

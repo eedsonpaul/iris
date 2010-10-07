@@ -27,56 +27,49 @@
 	$data1 = mysql_fetch_array($res1);
 	$unit = $data1['unit_name'];
 ?>
-<div id="navigation">
-<p>
+<script language="JavaScript">
+
+	function init(){
+		document.csoform.reset();
+		
+		oStringMask = new Mask("####-##-##");
+		oStringMask.attach(document.csoform.exact_date_incurred);
+		
+		oStringMask = new Mask("####");
+		oStringMask.attach(document.csoform.academic_year_incurred);
+		
+	}
+</script>
+<div class="main">
+	<div id="navigation">
+    <ul>
+	  	<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
+        <li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
+	</ul>
+
+	<ul>
+		<li><a href="cso_students_concerns.php">STUDENT'S CONCERNS</a></li>
+		<li><a href="cso_subject_module.php">SUBJECT</a></li>
+    	<li><a href="cso_degree_programs.php">DEGREE PROGRAMS</a></li>
+		<li> <a href="cso_grades_menu.php">GRADES</a></li>
+		<li> <a href="cso_classes_menu.php">CLASSES</a></li>
+	</ul>
+	<ul>
+		<li> <a href="#">REGISTRATION</a>
+			<ul> <a href="cso_reports_utilities.php">&nbsp;&nbsp;&nbsp;REPORTS/UTILITIES</a></ul>
+			<ul> <a href="cso_preenlistment_module.php">&nbsp;&nbsp;&nbsp;Pre-enlistment Module</a></ul>
+			<ul> <a href="cso_confirmation_module.php">&nbsp;&nbsp;&nbsp;Confirmation Module</a></ul>
+            <ul><a href="cso_general_registration.php">&nbsp;&nbsp;&nbsp;General Registration Module</a></ul>
+		</li>
+	</ul>
+	</div>
+<div id="right_side">
+	<p>
     	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
       	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
       	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
         <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
  	</p>
-  <ul>
-	  <li>
-          <a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
-    <?php 
-	$emp_id = "101135299";
-	?>
-        <li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a>
-         </ul>
-
-	<ul>
-	<li><a href="cso_students_concerns.php">STUDENT'S CONCERNS</a>
-	</li>
-		<li><a href="cso_subject_module.php">SUBJECT</a>
-	</li>
-    
-	<li><a href="cso_degree_programs.php">DEGREE PROGRAMS</a>
-	</li>
-	<li> <a href="cso_grades_menu.php">GRADES</a>
-	</li>
-	<li> <a href="cso_classes_menu.php">CLASSES</a>
-		</li>
-    </li>
-	</ul>
-	<ul>
-	</ul>
-	<ul>
-	<li> <a href="#">REGISTRATION</a>
-			<ul> <a href="cso_reports_utilities.php">&nbsp;&nbsp;&nbsp;REPORTS/UTILITIES</a>
-			</ul>
-
-			<ul> <a href="cso_preenlistment_module.php">&nbsp;&nbsp;&nbsp;Pre-enlistment Module</a>
-			</ul>
-
-			<ul> <a href="cso_confirmation_module.php">&nbsp;&nbsp;&nbsp;Confirmation Module</a>
-			</ul>
-            
-            <ul>
-            	<a href="cso_general_registration.php">&nbsp;&nbsp;&nbsp;General Registration Module</a>
-            </ul>
-	</li>
-	</ul>
-</div>
-<div id="contentcolumn1">
     <p class="headfont">&nbsp;</p>
     <?php 
 		$student_id = $_GET['id'];
@@ -103,7 +96,7 @@
 		}
 	?>
   <p class="head"><strong>Student Accountabilities</strong></p>
-    <form action="<?php echo $path;?>" method="post">
+    <form action="<?php echo $path;?>" method="post" name ="csoform">
     <table width="494" border="0" align="center" class="tab">
       
 	  <?php 
@@ -161,14 +154,10 @@
         <td><input type="text" name="accountability_details" id="accountability_details" value="<?php echo $acct_details;?>"></td>
       </tr>
       <tr>
-        <td><div align="right">Amount Due:</div></td>
+        <td><div align="right">Academic Year Incurred: *</div></td>
         <td>&nbsp;</td>
-        <td><input type="text" name="amount_due" id="amount_due" value="<?php echo $amt_due;?>"></></td>
-      </tr>
-      <tr>
-        <td><div align="right">Academic Year Incurred::</div></td>
-        <td>&nbsp;</td>
-        <td><input type="text" name="academic_year_incurred" id="academic_year_incurred" value="<?php echo $ay_incurred;?>"></></td>
+        <td><input type="text" name="academic_year_incurred" id="academic_year_incurred" value="<?php echo $ay_incurred;?>"></>
+		(yyyy)</td>
       </tr>
       <tr>
         <td><div align="right">Semester Incurred:</div></td>
@@ -189,10 +178,10 @@
           </label></td>
       </tr>
       <tr>
-        <td><div align="right">Exact Date Incurred:</div></td>
+        <td><div align="right">Exact Date Incurred: *</div></td>
         <td>&nbsp;</td>
         <td><input type="text" name="exact_date_incurred" id="exact_date_incurred" value="<?php echo $date;?>"></>
-        (yyyymmdd)</td>
+        (yyyy-mm-dd)</td>
       </tr>
     </table>
     <p>
@@ -200,6 +189,18 @@
       </center>
     </p>
   </form>
+  
+  <script language="JavaScript" type="text/javascript">
+
+    var frmvalidator  = new Validator("csoform");
+    
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("exact_date_incurred","req","Exact Date Incurred field requires an input.");
+    frmvalidator.addValidation("academic_year_incurred","req","Academic Year required.");
+ 
+  </script>
+  
   <p>&nbsp;</p>
 </div>
 

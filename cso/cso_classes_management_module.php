@@ -28,14 +28,7 @@
 ?>
 
 <div class="main">
-	<div id="navigation">
-		<p>
-			<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
-			<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
-			<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
-			<b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
-		</p>
-		
+	<div id="navigation">		
 		<ul>
 			<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
 			<li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
@@ -59,7 +52,12 @@
 	<!-- end of div navigation -->
 
 	<div id="right_side">
-		
+		<p>
+			<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
+			<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
+			<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
+			<b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
+		</p>
 		<p class="head"><strong>Classes Management Module</strong></p>
 		<!-- <p class="headfont"><strong>Add Class</strong></p> --> 
 		<p>&nbsp;</p>
@@ -73,13 +71,6 @@
 			</table>
 		</form>
 
-		<table width="650" border="0" align="center">
-			<tr>
-				<td height="50"class="tab"><p align="left"><strong><center>
-					ALL | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
-				</center></strong></p></td>
-			</tr>
-		</table>
 	</div>
 
 <?php

@@ -47,11 +47,12 @@
 <body>
 <table width="1056" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td width="886"><span class="style5">UPC IRIS Form 5</span></td>
-    <td width="170" class="style5"><div align="right"></div></td>
+    <td colspan="2"><span class="style5">UPC IRIS Form 5</span></td>
+    <td width="117" class="style5"><div align="right"></div></td>
   </tr>
   <tr>
-    <td height="27"><span class="style7"><img src="logo.jpg" width="30" height="25" />UP FORM 5. UNIVERSITY OF THE PHILIPPINES VISAYAS CERTIFICATE OF REGISTRATION (REV. 05-2010)</span></td>
+    <td width="32" height="27"><span class="style7"><img src="logo.jpg" width="30" height="25" /></span></td>
+    <td width="907"><span class="style7"> UP FORM 5. UNIVERSITY OF THE PHILIPPINES VISAYAS CERTIFICATE OF REGISTRATION (REV. 05-2010)</span></td>
     <td class="style7">Semester, AY</td>
   </tr>
 </table>
@@ -491,5 +492,7 @@
     <td height="14" colspan="3" class="style9">TEL. NO.</td>
   </tr>
 </table>
+
+<p>_________________________________________________________________________________________________________________________________________</p>
 </body>
 </html>

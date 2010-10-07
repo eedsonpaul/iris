@@ -7,6 +7,15 @@
 			$stud_num = $_SESSION['stud_num'];
 			$action = $_GET['act'];
 			
+			$sql1 = "SELECT * FROM section WHERE section_label = '$sec_id' && course_code = '$sub_id'";
+			$section = mysql_query($sql1);
+			while($row = mysql_fetch_array($section)) {
+				$confirmed = $row['confirmed_count'];
+				$waitlisted = $row['waitlist_count'];
+				$total_slots = $row['total_slots'];
+				$available= $row['available_slots'];
+				$enrolled_count = $row['enrolled_count'];
+			}
 			if ($action=="Confirm") {
 				$sql="select * from prerequisite where course_code = '$sub_id'";
 				$count = 0;
@@ -30,10 +39,16 @@
 					$wait_count++;
 				}
 
-				if ($count==0 && $wait_count==0) {
+				if ($count==0 && $available!=0) {
 					$sql = "UPDATE student_status SET
 					status = 'confirmed' WHERE student_number = '$stud_num' && section_label = '$sec_id' && course_code = '$sub_id'";
 					mysql_query($sql);
+					
+					$sql2 = "UPDATE section SET
+						confirmed_count = confirmed_count+1
+						WHERE section_label = '$sec_id' && course_code = '$sub_id'";
+					mysql_query($sql2);
+					
 					echo "<script> alert('Subject successfully confirmed.'); window.location.href = 'cso_enroll_student.php?id=$stud_num';</script>";
 				} else {
 					echo "<script> alert('Cannot confirm subject.'); window.location.href = 'cso_enroll_student.php?id=$stud_num';</script>";
@@ -42,7 +57,13 @@
 				$sql = "UPDATE student_status SET
 				status = 'unconfirmed' WHERE student_number = '$stud_num' && section_label = '$sec_id' && course_code = '$sub_id'";
 				mysql_query($sql);
+				
+				$sql2 = "UPDATE section SET
+						confirmed_count = confirmed_count-1
+						WHERE section_label = '$sec_id' && course_code = '$sub_id'";
+				mysql_query($sql2);		
 				echo "<script> alert('Subject successfully unconfirmed.'); window.location.href = 'cso_enroll_student.php?id=$stud_num';</script>";
+				
 			} else if ($action=="Cancel Payment") {
 				$sql = "UPDATE student_status SET
 				status = 'assessed' WHERE student_number = '$stud_num' && section_label = '$sec_id' && course_code = '$sub_id'";
@@ -57,10 +78,20 @@
 				$sql = "UPDATE student_status SET
 				status = 'paid' WHERE student_number = '$stud_num' && section_label = '$sec_id' && course_code = '$sub_id'";
 				mysql_query($sql);
+				
+				$sql2 = "UPDATE section SET
+						enrolled_count = enrolled_count-1
+						WHERE section_label = '$sec_id' && course_code = '$sub_id'";
+				mysql_query($sql2);
+						
 				echo "<script> alert('Enrollment successfully cancelled.'); window.location.href = 'cso_enroll_student.php?id=$stud_num';</script>";
 			} else if ($action=="Remove") {
 				$sql = "DELETE FROM student_status WHERE student_number = '$stud_num' && section_label = '$sec_id' && course_code = '$sub_id'";
 				mysql_query($sql);
+				$sql2 = "UPDATE section SET
+						available_slots = available_slots+1
+						WHERE section_label = '$sec_id' && course_code = '$sub_id'";
+				mysql_query($sql2);
 				header ("Location: cso_enroll_student.php?id=$stud_num");
 				//echo "<script> alert('Subject successfully removed.'); window.location.href = 'cso_enroll_student.php?id=$stud_num';</script>";
                 

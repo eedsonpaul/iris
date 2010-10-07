@@ -36,7 +36,7 @@
 			$sql = "UPDATE student SET
 				password = '$new_password' WHERE student_number = '$id'";
 					
-			header("Location:cso_generate_password_change_student_login_account.php?id=$id");
+			header("Location:cso_generate_password_change_student_login_account.php?c=NOT&id=$id");
 			break;
 			
 		case "EMPLOYEE":

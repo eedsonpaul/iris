@@ -3,8 +3,8 @@
 	
 
 		$id = $_GET['id'];				
-		$sql = "DELETE FROM student WHERE student_id = '$id'";
-		$sqll = "DELETE FROM students_degree WHERE student_id = '$id'";
+		$sql = "DELETE FROM student WHERE student_number = '$id'";
+		$sqll = "DELETE FROM students_degree WHERE student_number = '$id'";
 		mysql_query($sqll);
 	
 		echo "<script> alert('Student successfully removed.'); window.location.href = 'cso.php';</script>";

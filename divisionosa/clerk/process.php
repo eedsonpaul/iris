@@ -8,7 +8,7 @@ if(isset($_REQUEST['c']))
 {
 	switch($_REQUEST['c'])
 	{
-		case 'Add Subject':
+		case 'Add Course':
 			if(isset($_POST['course_code'])
 				and isset($_POST['subject_title'])
 				and isset($_POST['action_taken'])
@@ -31,12 +31,10 @@ if(isset($_REQUEST['c']))
 					time(),
 					strtotime($_POST['rdate']),
 					strtotime($_POST['abdate']),
-					"",
 					$_POST['year'],
 					$_POST['units'],
 					$_POST['deg'],
 					$_POST['sem'],
-					"0",
 					$_POST['lab_fee']);
 				echo "Course Added.";
 			} else{
@@ -81,6 +79,20 @@ if(isset($_REQUEST['c']))
 				echo "Some inputs missing...";
 			}
 			break;
+		
+		case 'Search Course':
+			if(isset($_POST['sub']))
+			{
+				require_once 'edit_course_list.php';
+			}
+		break;
+		
+		case 'Search Section':
+			if(isset($_POST['sub']))
+			{
+				require_once 'edit_co_list.php';
+			}
+		break;
 			
 		case 'Edit Course':
 			if(isset($_POST['sub']))
@@ -159,24 +171,60 @@ if(isset($_REQUEST['c']))
 					$_POST['sem'],
 					$_POST['lab_fee'],
 					$_POST['sub']);
-				echo "Course Updated.";
-			} else echo "Some inputs missing...";
+				echo "Subject Updated.";
+			}
 			break;
-			
 		case 'Remove Course':
 			if(isset($_POST['sub']))
 			{
-				remove_subject($_POST['sub'],time());
+				require_once 'remove_course_list.php';
+			}
+			break;	
+		
+		case 'Remove':
+			if(isset($_POST['sub']))
+			{
+				require_once 'remove_course_info.php';
+			}
+		break;
+		
+		case 'Yes':
+			if(isset($_POST['course_code']))
+			{
+				remove_subject($_POST['course_code'],time());
 				print("course is removed");
 			}
-			break;
+		break;
+		
+		case 'No':
+			redirect('clerk.php');
+		break;
 			
 		case 'Remove Section':
+			if(isset($_POST['course_code']))
+				{
+					require_once 'remove_co_list.php';
+				}
+				break;
+				
+		case 'Delete':
+			if(isset($_POST['course_code'])
+				and isset($_POST['section']))
+				{
+					require_once 'remove_co_info.php';
+				}
+				break;
+		case 'Proceed':
 			if(isset($_POST['course_code'])
 				and isset($_POST['section']))
 				{
 					remove_offering($_POST['course_code'],$_POST['section']);
 					echo 'Class Offering Removed';
+				}
+				break;
+		case 'Not':
+				{
+					redirect('clerk.php');
 				}
 				break;
 		case 'Dissolve Section':

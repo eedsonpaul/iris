@@ -22,6 +22,7 @@
 		<th width='50'><font size="1">END</th>
 		<th width='50'><font size="1">ROOM</th>
 		<th width='50'><font size="1">SLOTS/AVAILABLE/CONFIRMED/WAITLISTED</th>
+		<th width='50'><font size="1"></th>
 		</tr>
 		</table></font>
 </div>

@@ -13,21 +13,23 @@
 	define('COMMUNITY_CHEST','0.50');
 	define('PUBLICATION','40.00');
 	define('STUDENT_COUNCIL','6.00');
+	//Define Schorlarship
+	define('SCHOLARSHIP',2000);
 	//Define Laboratory
 	define('LABORATORY',300);
 	//Define units confirmed
-	///define('NO_OF_UNITS',$unit);
+	define('NO_OF_UNITS',20);
 	//define no. of laboratories confirmed
-	///define('LAB',$lab);
+	define('LAB',2);
 	//Determine STFAP Bracket
-	///define('STFAP',$stfap[0]);
+	define('STFAP','B');
 	//Define amount shouldered on scholarships
-	///define('SCHOLARSHIP',$scholarship[0]);
+	define('SCHOLARSHIP',3000);
 	//$u=600;
 	//$u*=(5/3);
 	//print($u);
 	//PRINT(TUITION);
-	$lm=less_miscellaneous($stfap[0]);
+	$lm=less_miscellaneous();
 	print_r($lm);
 	//Initialize Tuition Row
 	$a[0]=tuition();

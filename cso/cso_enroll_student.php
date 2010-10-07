@@ -29,12 +29,6 @@
 ?>
 <div class="main">
 	<div id="navigation">
-	<p>
-    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
-      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
-      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
-        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
- 	</p>
     <ul>
 	  	<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
         <li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
@@ -57,6 +51,12 @@
 	</ul>
 	</div>
 <div id="right_side">
+	<p>
+    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
+      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
+      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
+        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
+ 	</p>
     <p class="headfont">&nbsp;</p>
   <p class="head"><strong>General Registration</strong></p>
   <p class="head"><strong>Semester goes here</strong></p>
@@ -67,7 +67,17 @@
 	include("cso_views.php");
 	
 	$stud_num = $_GET['id'];
+	$count = 0;
+	$query = "SELECT * from student WHERE student_number = '$stud_num'";
+	$result = mysql_query($query);
+	while ($row = mysql_fetch_array($result)) {
+		$count++;
+	}
 	
+	if($count==0){
+		echo "<script> alert('Student number does not exist. Please input another student number.'); window.location.href = 
+		    'cso_general_registration.php';</script>";
+	} else {
 	$query = new SqlQueries();
 	$result = $query->querysql("SELECT * from student WHERE student_number = '$stud_num'");
 	while ($row = mysql_fetch_array($result)) {
@@ -143,7 +153,7 @@
     </table>
     <p>
       <center>
-        <table width="703" border="0" cellpadding="0" cellspacing="0" class="tab2">
+        <table width="703" border="0" cellpadding="0" cellspacing="0" class="tab2" align="center">
           <tr>
             <td width="202" class="tab2">Total Units Earned:</td>
             <td width="178" class="tab2">Total Units Confirmed: <?php echo $units;?></td>
@@ -159,16 +169,13 @@
           </tr>
           <tr>
             <td><div align="center">
-              <input type="submit" name="add_student_subject" id="add_student_subject" value="ADD SUBJECT" onclick="addSubject();">
+              <a href=""><input type="submit" name="add_student_subject" id="add_student_subject" value="ADD SUBJECT" onclick="addSubject();"></a>
             </div></td>
             <td><div align="center">
-              <input type="submit" name="check_conflict" id="check_conflict" value="CHECK CONFLICT">
+              <a href="cso_students_accountabilities_module.php?id=<?php echo $stud_num;?>&action=GET"><input type="submit" name="check_accountability" id="check_accountability" value="CHECK ACCOUNTABILITY"></a>
             </div></td>
             <td><div align="center">
-              <input type="submit" name="check_accountability" id="check_accountability" value="CHECK ACCOUNTABILITY">
-            </div></td>
-            <td><div align="center">
-              <input type="submit" name="edit_enrollment_data" id="edit_enrollment_data" value="EDIT ENROLLMENT DATA">
+              <a href=""><input type="submit" name="edit_enrollment_data" id="edit_enrollment_data" value="EDIT ENROLLMENT DATA"></a>
             </div></td>
           </tr>
         </table>
@@ -183,7 +190,7 @@
 	}
 		
 </script>
-<?php
+<?php }
 	require_once 'cso_footer.php';
 ?>
 

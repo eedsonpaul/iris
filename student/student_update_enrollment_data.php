@@ -50,7 +50,7 @@
 	  
 	  $employer_address=$_POST['employer-address'];
 	  $employer_zipcode=$_POST['employer-zipcode'];
-	  $employer_phonenum=$_POST['employer-phonenum'];
+	  $employer_number=$_POST['employer-phonenum'];
 		
 	if($sameaddress==false){
        mysql_query("UPDATE student SET student_type = '".$student_type."' , graduating = '".$graduating."' ,

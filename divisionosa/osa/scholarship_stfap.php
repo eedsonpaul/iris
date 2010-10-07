@@ -188,6 +188,25 @@
 						where student_number='$a1'");
 		if(!$q) die('Cannot Remove student Scholarship'.mysql_error());
 	}
+	
+	function search_name($employee_id)
+	{
+		$q = mysql_query("select last_name,first_name
+			from employee
+			where employee_id='$employee_id'");
+		if(!$q) die('Cannot search Name'.mysql_query());
+		return $q;
+	}
+	
+	function search_unit($employee_id)
+	{
+		$q = mysql_query("SELECT b.unit_name 
+			FROM employee a,unit b 
+			WHERE a.unit_id=b.unit_id
+			and a.employee_id='$employee_id'");
+		if(!$q) die('Cannot retrieve unit of employee'.mysql_query());
+		return $q;
+	}
 	/*
 	function add_stfap_bracket($a1)
 	{

@@ -3,27 +3,55 @@
     $student_number = $_SESSION['student_number'];
 ?>
 <div class="main">
-<?php
-	require_once 'student_navigation.php';
-?>
+	<div id="navigation">
+	<ul>
+	  <li> <a href="#"> PERSONAL DATA </a>
 
-<div id="right_side">
-	<p>
-	<table width="660" class="tablestyle">
-	<tr>
-	<th width=150>#</th>
-	<th width=150>ACADEMIC YEAR</th>
-	<th width=150>SEMESTER</th>
-	<th width=150>PREVIOUS SEMESTER CLASS STANDING</th>
-	<th width=150>CURRENT SEMESTER CLASS STANDING</th>
-	<th width=150>GWA</th>
-	<th width=150>ACTION</th>
-	</tr>
-	 
+		<ul>
+			<ul><li><a href="student.php">student profile </a><a href="student_edit_login_account.php">Edit login account</a></li>
+			</ul>
+			<li><a href="student_add_editpersonal_data.php">add/edit personal data</a></li>
+		  </ul>
+		</li>
+		
+		<li> <a href="#">registration</a>
+
+		  <ul>
+			<li> <a href="student_View accountabilities.php">View accountabilities </a></li>
+			<li><a href="student_view study plan.php">view study plan </a>
+			  <ul>
+				<ul>
+				  <li><a href="student_view Grades per semester.php">view Grades per semester </a></li>
+				</ul>
+			  </ul>
+			</li>
+		  </ul>
+		</li>
+		
+		<li>
+		  <ul>
+			<li><a href="student_confirm subject here.php">edit subject here </a></li>
+		  </ul>
+		</li>
+	  </ul>
+
+	</div>
+	<div id="right_side">
 	 
 	 <?php
 	 
+	 echo "<table width='100%' align='center border='1'>";
+	print "<tr>
+			<th width=150>#</th>
+			<th width=150>ACADEMIC YEAR</th>
+			<th width=150>SEMESTER</th>
+			<th width=150>PREVIOUS SEMESTER CLASS STANDING</th>
+			<th width=150>CURRENT SEMESTER CLASS STANDING</th>
+			<th width=150>GWA</th>
+			<th width=150>ACTION</th>
+			</tr>";
 
+		print "</table>"; 
 		
 
 		
@@ -36,7 +64,8 @@
 				$i++;
 			}
 	  $y=0;
-
+	  
+	  echo "<table>";
 	  $counter=1;
 		for($x = 0;$x < $i; $x++){
 		 $sem =mysql_query("SELECT DISTINCT semester from grade where student_number='$student_number' and academic_year='$academic[$x]'");
@@ -47,9 +76,6 @@
 				echo "<td> " . $counter . "</td> ";
 				echo "<td>" .checkAcademicYear($academic[$x]). "</td>";
 				echo "<td>" .checkSemester($semester[$x][$y]).   "</td>";
-				echo "<td> </td>";
-				echo "<td> </td>";
-				echo "<td> </td>";
 				$a = $semester[$x][$y];
 				echo "<td><a href=\"student_display_grade.php?academic_year=$academic[$x]&semester=$a\">VIEW</a></td>";
 				echo "</tr>";
@@ -59,6 +85,9 @@
 				}
 		  }
 
+		echo "</table>";
+		
+		
 		
 	function checkSemester($sem){
 
@@ -92,7 +121,6 @@
 	}
 	 
 	 ?>
-	 </table>
 	</div>
 </div>
 

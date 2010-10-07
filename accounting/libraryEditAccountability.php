@@ -70,9 +70,7 @@
 	<tr>
 		<td>Accountability:</td>
 		<td>
-		<select name="accountability_type">
-		<option onfocus="this.blur()" readonly value="2"> Book</option>
-		</select>
+		<input type="hidden" name="accountability_type" onfocus="this.blur()" readonly value="2">Book</option>
 		</td>
 	</tr>
 	<tr>
@@ -84,62 +82,57 @@
 		<td><input type="text" name="amount_due" value="<?php echo $amount_due; ?>" ></td>
 	</tr>
 	<tr>
-		<?php
-			if($year_incurred == 2010){ $year = '2010-2011';}
-			if($year_incurred == 2011){ $year = '2011-2012';}
-		?>
 		<td>Academic Year Incurred:</td>
 		<td>
-		<select name="year_incurred" value="<?php echo $year_incurred; ?>">
-		<option value="<?php $year_incurred; ?>" select><?php echo $year; ?></option>
+		<select name="year_incurred">
 		<?php
-		if($year_incurred==2010){
-			echo "<option value=\"2011\">2011-2012</option>";
-		}
-		else{
+		if($year_incurred==2009){
+			echo "<option value=\"2009\">2009-2010</option>";
 			echo "<option value=\"2010\">2010-2011</option>";
+		}
+		else if($year_incurred == 2010){
+			echo "<option value=\"2010\">2010-2011</option>";
+			echo "<option value=\"2009\">2009-2010</option>";
 		}
 		?>
 		</select>
 		</td>
 	</tr>
 	<tr>
-		<?php 
-			if($semester_incurred == 1){ $semester = 'first semester';}
-			if($semester_incurred == 2){ $semester = 'second semester';}
-			if($semester_incurred == 3){ $semester = 'first trimester';}
-			if($semester_incurred == 4){ $semester = 'second trimester';}
-			if($semester_incurred == 5){ $semester = 'third trimester';}
-		?>	
 		<td>Semester Incurred:</td>
-		<td><select name="semester_incurred" value="<?php echo $semester_incurred; ?>">
-		<option id="<?php $semester_incurred; ?>" select><?php echo $semester; ?></option>
+		<td>
+		<select name="semester_incurred">
 		<?php
 		if($semester_incurred == 1){
+			echo	"<option value=\"1\">first semester</option>";
 			echo	"<option value=\"2\">second semester</option>";
 			echo "<option value=\"3\">first trimester</option>";
 			echo "<option value=\"4\">second trimester</option>";
 			echo "<option value=\"5\">third trimester</option>";
 		}
 		if($semester_incurred == 2){
+			echo	"<option value=\"2\">second semester</option>";
 			echo	"<option value=\"1\">first semester</option>";
 			echo "<option value=\"3\">first trimester</option>";
 			echo "<option value=\"4\">second trimester</option>";
 			echo "<option value=\"5\">third trimester</option>";
 		}
 		if($semester_incurred == 3){
+			echo "<option value=\"3\">first trimester</option>";
 			echo	"<option value=\"1\">first semester</option>";
 			echo "<option value=\"2\">second semester</option>";
 			echo "<option value=\"4\">second trimester</option>";
 			echo "<option value=\"5\">third trimester</option>";
 		}
 		if($semester_incurred == 4){
+			echo "<option value=\"4\">second trimester</option>";
 			echo	"<option value=\"1\">first semester</option>";
 			echo "<option value=\"2\">second semester</option>";
 			echo "<option value=\"3\">first trimester</option>";
 			echo "<option value=\"5\">third trimester</option>";
 		}
 		if($semester_incurred == 5){
+			echo "<option value=\"5\">third trimester</option>";
 			echo	"<option value=\"1\">first semester</option>";
 			echo "<option value=\"2\">second semester</option>";
 			echo "<option value=\"3\">first trimester</option>";

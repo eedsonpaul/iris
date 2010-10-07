@@ -47,10 +47,13 @@
 					$result_stfap = mysql_query($query_stfap);
 					$amount_per_unit = mysql_result($result_stfap, 0, "amount_per_unit");
 					
-					//student fund start
-					$community_chest = 0.50;
-					$publication = 40;
-					$student_council = 6;
+					$query_assessment = "SELECT * FROM assessment_table;";
+					$result_assessment = mysql_query($query_assessment);
+					
+						//student fund start
+					$community_chest = mysql_result($result_assessment,0,"community_chest");
+					$publication = mysql_result($result_assessment,0,"publication");
+					$student_council = mysql_result($result_assessment,0,"student_council");
 					
 					$community_chest_less_stfap = 0;
 					$publication_less_stfap= 0;
@@ -67,13 +70,13 @@
 					$community_chest_to_pay = $community_chest - $community_chest_total_less;
 					$publication_to_pay = $publication - $publication_total_less;
 					$student_council_to_pay = $student_council - $student_council_total_less;
+					//student fund end
 					
-					$miscellaneous_2_total = $community_chest + $publication + $student_council;
+					$miscellaneous_2 = $community_chest + $publication + $student_council;
 					$miscellaneous_2_less_stfap = $community_chest_less_stfap + $publication_less_stfap + $student_council_less_stfap;
 					$miscellaneous_2_amount_shouldered = $community_chest_amount_shouldered + $publication_amount_shouldered + $student_council_amount_shouldered;
-					$miscellaneous_2_total_less = $miscellaneous_2_less_stfap + $miscellaneous_2_amount_shouldered;
-					$miscellaneous_2_total_to_pay = $miscellaneous_2_total - $miscellaneous_2_total_less;
-					//student fund end
+					$miscellaneous_2_total_less = $community_chest_less_stfap + $publication_less_stfap + $student_council_less_stfap + $community_chest_amount_shouldered + $publication_amount_shouldered + $student_council_amount_shouldered;
+					$miscellaneous_2_to_pay = $miscellaneous_2 - $miscellaneous_2_total_less;
 					
 					echo "<h3>Breakdown of Student Fund Payment</h3>";
 					echo "<table border=1>";

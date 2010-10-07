@@ -2,18 +2,35 @@
 
 //connect to db
 
-function admin_tracker($employee_id, $action_flag, $target_flag) {
+function admin_tracker($employee_id, $action_flag, $target_type, $id, $section_label) {
   $date = date("Y-n-d H:i:s", time()); //time of update, modification, addition, deletion of records
   $tracker = 'tracker.txt'; //file name of the log file
   $username = mysql_result(mysql_query("SELECT username FROM {employee} WHERE employee_id='$employee_id'"));
-  if ($action_flag /*condition_here*/) {
-    $action = /*insert value here*/;
+  if ($action_flag == 1) {
+    $action = 'creates user ';
+  } else if ($action_flag == 2) {
+  	$action = 'edits user ';
+  } else if ($action_flag == 3) {
+  	$action = 'removes/blocks user ';
+  } else if ($action_flag == 4) {
+  	$action = 'adds accountability ';
+  } else if ($action_flag == 5) {
+  	$action = 'edits accountability ';
+  } else if ($action_flag == 6) {
+  	$action = 'removes accountability ';
+  } else if ($action_flag == 7) {
+  	$action = 'extends slots ';
+  } else if ($action_flag == 8) {
+  	$action = 'extends slots ';
   }
-  if ($target_flag /*condition_here*/) {
-    $target = /*insert value here*/;
+  if ($target_type == 1) { //student type
+  	$target = $id;
+  } else if ($target_type == 2) { //subject type
+  	$target = $id . '-' . $section_label;
   }
   $handle = fopen($tracker, 'a') or die('Cannot open file:  '.$my_file); //append series of activities by the employee
-  $log = $date . ' ' . $username . ' ' . $action . ' ' . $target . '\n'; //info to store
+  $log = $date . ' ' . $username . ' ' . $action . ' ' . $target . "\n"; //info to store
+  echo $log; //show in page
   fwrite($handle, $log);
   fclose($handle);
 }

@@ -1,7 +1,7 @@
 <?php
 	require_once 'header.php';
 	require_once 'faculty_functions.php';
-	$employee_id = '2342343';
+	$employee_id = '2342343';//$employee_id=$_SESSION['employee_id'];
 ?>
 	<h1 align='center'>Select Section To Submit Grade</h1>
 	<table align='center' class='tablestyle'>

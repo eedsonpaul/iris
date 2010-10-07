@@ -1,16 +1,8 @@
 <?php
 	require_once 'student_header.php';
-?>
-<!--
-<?php 
-	/*
-	 require 'dbconnect.php';
-	 session_start();
-	*/
 	$student_number = $_SESSION['student_number'];	 
 ?>
 
--->
 <div class="main">
 
 <?php
@@ -18,8 +10,7 @@
 ?>
 	
 	<div id="right_side">															   
-	<form name="form1" method="post" action="student_edit enrollment data here.php">
-
+	<form name="form1" method="post" action="student_edit_enrolldata1.php">
 
 
 	  <p>Enrollment Information&hellip;.<br><br>

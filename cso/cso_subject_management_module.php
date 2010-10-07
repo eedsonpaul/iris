@@ -30,12 +30,6 @@
 
 <div class="main">
 	<div id="navigation">
-	<p>
-    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
-      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
-      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
-        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
- 	</p>
     <ul>
 	  	<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
         <li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
@@ -58,7 +52,12 @@
 	</ul>
 	</div>
 <div id="right_side">
-  
+	<p>
+    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
+      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
+      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
+        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
+ 	</p> 
 
   <table width="650" border="0" align="center">
     <tr><form action="" method="post">
@@ -77,15 +76,15 @@
   </table>
   <p>&nbsp;</p>
   <form action="" method="post">
-    <table width="797" border="0" align="center" class="tab">
+    <table width="680" border="0" align="center" class="tab">
       <tr>
         <th width="75" height="36"><div align="center"><strong>Subject Rcode</strong></div></td>
-        <th width="271"><div align="center"><strong>Subject Name / Title</strong></div></td>
+        <th width="200"><div align="center"><strong>Subject Name / Title</strong></div></td>
         <th width="46"><div align="center"><strong>Units</strong></div></td>
         <th width="86"><div align="center"><strong>Minimum Year Level</strong></div></td>
         <th width="81"><div align="center"><strong>Degree Level</strong></div></td>
         <th width="87"><div align="center"><strong>Pre-requisites</strong></div></td>
-      	<th width="121"><div align="center"><strong>Action</strong></div></td>      </tr>
+      	<th width="90"><div align="center"><strong>Action</strong></div></td>      </tr>
       
         <?php
 			include("connect_to_database.php");
@@ -97,25 +96,25 @@
       <tr>
         <td><div align="right"><strong><?php echo $course_code;?></strong></div></td>
         <td><strong><?php echo $subject_title;?></strong><br>
-        <strong>Full Name:</strong> <?php echo $subject_title;?><br>
-        <strong>Title:</strong> <?php echo $subject_title;?><br>
+        <strong>Full Name:</strong> <?php extract($row); echo $subject_title;?><br>
+        <strong>Title:</strong> <?php extract($row); echo $subject_title;?><br>
         <strong>Credited?:</strong> true<br>
         <strong>Numeric Grades?:</strong> true<br>
-        <strong>Repeatable To:</strong> <?php echo $repeatable_to;?><br>
-        <strong>Date Proposed:</strong> <?php echo $date_proposed;?><br>
-        <strong>Date Approved:</strong> <?php echo $date_approved;?><br>
-        <strong>Date First Implemented:</strong> <?php echo $date_first_implemented;?><br>
-        <strong>Date Revision Implemented:</strong> <?php echo $date_revision_implemented;?><br>
+        <strong>Repeatable To:</strong> <?php extract($row); //echo $repeatable_to;?><br>
+        <strong>Date Proposed:</strong> <?php extract($row); echo $date_proposed;?><br>
+        <strong>Date Approved:</strong> <?php extract($row); echo $date_approved;?><br>
+        <strong>Date First Implemented:</strong> <?php extract($row); echo $date_first_implemented;?><br>
+        <strong>Date Revision Implemented:</strong> <?php extract($row); echo $date_revision_implemented;?><br>
         <strong>Date Abolished in Offerings:</strong> <br>
-        <strong>Unit In-charged:</strong> <?php echo $unit_in_charge;?><br>
-        <strong>Laboratory Fee:</strong> <?php echo $laboratory_fee;?><br>
+        <strong>Unit In-charged:</strong> <?php extract($row); //echo //$unit_in_charge;?><br>
+        <strong>Laboratory Fee:</strong> <?php extract($row); //echo //$laboratory_fee;?><br>
         <strong>RGEP/NSTP/P.E. Name:</strong> <br>
         <strong>Description:</strong> </td>
-        <td><div align="center"><?php echo $units;?></div></td>
-        <td><div align="center"><?php echo $minimum_year_level;?></div></td>
-        <td><div align="center"><?php echo $degree_level;?></div></td>
-        <td><div align="center"><?php echo $pre_requisites;?></div></td>
-        <td><strong>Edit Remove</strong></td>
+        <td><div align="center"><?php extract($row); echo $units;?></div></td>
+        <td><div align="center"><?php extract($row); //echo //$minimum_year_level;?></div></td>
+        <td><div align="center"><?php extract($row); echo $degree_level;?></div></td>
+        <td><div align="center"><?php extract($row); //echo //$pre_requisites;?></div></td>
+        <td><strong><center>Edit | Remove</center></strong></td>
       </tr>
       <?php } ?>
     </table>

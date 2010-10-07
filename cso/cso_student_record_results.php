@@ -29,12 +29,6 @@
 ?>
 <div class="main">
 	<div id="navigation">
-	<p>
-    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
-      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
-      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
-        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
- 	</p>
     <ul>
 	  	<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
         <li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
@@ -58,6 +52,12 @@
 	</div>
     
 <div id="right_side">
+	<p>
+    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
+      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
+      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
+        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
+ 	</p>
     <p class="headfont">&nbsp;</p>
   <p class="head"><strong>Student Record Management</strong></p>
   <p class="head">&nbsp;</p>
@@ -83,23 +83,10 @@
 	}
 	?>
         <tr><form action="cso_student_record_results.php" method="post">
-      <td width="624"><div align="center" class="normaltext">Search by ID / Lastname / Firstname : 
+      <td width="624"><div align="center" class="normaltext">Search by ID / Lastname: 
         <input name="search_name" type="text" id="search_name" size="50">
         <input type="submit" name="search" id="search" value="GO">
       </div></td></form>
-    </tr>
-  </table>
-    <?php
-			if($count==1) {
-	?>
-  <table width="650" border="0" align="center">
-    <tr>
-      <td height="50"class="tab"><p align="left"><strong><center>
-        ALL | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
-      </center></strong></p>      </td>
-       <?php 
-		}
-	?>
     </tr>
   </table>
   <p><center>
@@ -108,95 +95,14 @@
   </p>
   <br>
   <form action="" method="post">
-    <table width="796" border="0" align="center" cellpadding="0" cellspacing="0" class="tab">
+    <table width="650" border="0" align="center" cellpadding="0" cellspacing="0" class="tab">
       <tr>
-        <td width="32">&nbsp;</td>
+        <td width="10">&nbsp;</td>
         <th width="60" height="36"><div align="center" class="normaltext"><strong>ID</strong></div></th>
-        <th width="123"><div align="center" class="normaltext"><strong>Name</strong></div></th>
-        <th width="86"><div align="center" class="normaltext"><strong>Course</strong></div></th>
+        <th width="100"><div align="center" class="normaltext"><strong>Name</strong></div></th>
+        <th width="120"><div align="center" class="normaltext"><strong>Course</strong></div></th>
         <th width="81"><div align="center" class="normaltext"><strong>Campus</strong></div></th>
-        <td width="111">&nbsp;</th>
-        <td width="105">&nbsp;</th>
-        <td width="99">&nbsp;</th>
-      <td width="99">&nbsp;</th>      </tr>
-      <?php
-	  	$count = 0;
-		if ($count==1) { 
-	  ?>
-      <tr>
-        <td><div align="center"></div></td>
-        <td><div align="center"></div></td>
-        <td width="123">&nbsp;</td>
-        <td><div align="center"></div></td>
-        <td><div align="center"></div></td>
-        <td width="111"><div align="center">
-          <table width="101" border="0" align="center" cellpadding="0" cellspacing="0">
-            <tr>
-              <td width="95">Login Account</td>
-            </tr>
-            <tr>
-              <td>Accountability</td>
-            </tr>
-            <tr>
-              <td>Enrollment Info</td>
-            </tr>
-            <tr>
-              <td>Personal Data</td>
-            </tr>
-            <tr>
-              <td>Student Directory</td>
-            </tr>
-          </table>
-        </div></td>
-        <td><table width="95" border="0" align="center" cellpadding="0" cellspacing="0">
-          <tr>
-            <td width="95">Grades/Sched</td>
-          </tr>
-          <tr>
-            <td><a href="cso_vi">Grade Summary</a></td>
-          </tr>
-          <tr>
-            <td>Study Plan</td>
-          </tr>
-          <tr>
-            <td><a href="cso_enroll_student.php">Enroll</a></td>
-          </tr>
-          <tr>
-            <td><a href="cso_edit_view_student_course.php">Course</a></td>
-          </tr>
-        </table></td>
-        <td width="99"><table width="89" border="0" align="center" cellpadding="0" cellspacing="0">
-          <tr>
-            <td width="89"><a href="cso_add_delete_view_graduation_data.php">Graduation Data</a></td>
-          </tr>
-          <tr>
-            <td>Scholarship</td>
-          </tr>
-          <tr>
-            <td>STFAP Bracket</td>
-          </tr>
-          <tr>
-            <td>Adviser</td>
-          </tr>
-          
-        </table></td>
-        <td width="99"><table width="89" border="0" align="center" cellpadding="0" cellspacing="0">
-          <tr>
-            <td>Edit Academic Standing</td>
-          </tr>
-          <tr>
-            <td width="99">Edit Yr. Level &amp; Max. Units</td>
-          </tr>
-          <tr>
-            <td>Edit Student #</td>
-          </tr>
-          <tr>
-            <td>Delete Record/Account</td>
-          </tr>
-          
-        </table></td>
-      </tr>
-      <?php }?>
+		</tr>
       <?php
 	  	$query = new Query();
 		$query->viewSearchResults();

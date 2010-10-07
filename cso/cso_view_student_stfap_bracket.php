@@ -28,14 +28,7 @@
 ?>
 
 <div class="main">
-	<div id="navigation">
-		<p>
-			<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
-			<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
-			<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
-			<b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
-		</p>
-		
+	<div id="navigation">		
 		<ul>
 			<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
 			<li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
@@ -60,9 +53,15 @@
 	
 	<div id="right_side">
 		<p><a href="cso_student_record_management.php">Back to Menu</a></p>
+		<p>
+			<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
+			<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
+			<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
+			<b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
+		</p>
 		<p class="headfont">&nbsp;</p>
 		<p class="head"><strong>Student Scholarship</strong></p>
-		<table width="494" border="0" align="center" class="tab">
+		<table width="494" border="0" align="center" class="normaltext">
 			<?php
 				$student_id = $_GET['id'];
 				include("connect_to_database.php");
@@ -74,17 +73,17 @@
 					$mid_name = $middle_name;
 			?> 
 		<tr>
-			<td width="181"><div align="right">Student Number:</div></td>
+			<td width="181"><div align="right"><b>Student Number:</b></div></td>
 			<td width="12">&nbsp;</td>
 			<td width="287"><?php echo $student_id;?></td>
 		</tr>
 		<tr>
-			<td width="181"><div align="right">Student Name:</div></td>
+			<td width="181"><div align="right"><b>Student Name:</b></div></td>
 			<td width="12">&nbsp;</td>
 			<td width="287"><?php echo $first_name.' '.$mid_name[0].'. '.$last_name;?></td>
 		</tr>
 		<tr>
-			<td width="181"><div align="right">STFAP Bracket:</div></td>
+			<td width="181"><div align="right"><b>STFAP Bracket:</b></div></td>
 			<td width="12">&nbsp;</td>
 			<td width="287">
 				<?php

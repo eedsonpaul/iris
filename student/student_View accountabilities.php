@@ -1,15 +1,28 @@
 <?php
 	require_once 'student_header.php';
+?>
+
+<?php
+
+	/*
+	require 'dbconnect.php';
+	session_start();
+	*/
     $student_number = $_SESSION['student_number'];
 ?>
+
+
+
 <div class="main">
+<div id="navigation">
 <?php
 	require_once 'student_navigation.php';
 ?>
 
+</div>
 <div id="right_side">
   <p>
-	<table width="660" class="tablestyle">
+  <table width="500" class="tablestyle">
   <tr>
     <th width="125">Accountability</th>
     <th width="125">Details</th>
@@ -28,6 +41,8 @@
 			$accountability_type_id[$index] = $row['accountability_type_id'];	
 			$index++;
 		}
+	
+		echo "<table>";
 		for($i = 0;$i < $index; $i++){
 				echo "<tr>";
 				echo "<td width='125'>" . checkAccountability($accountability_type_id[$i]) . "</td>";
@@ -36,6 +51,8 @@
 				echo "<td width='125'>" . $year_incurred[$i] . "/" . $semester_incurred[$i] . "</td>";
 				echo "</tr>";
 		}
+		echo "</table>";
+
 
 function checkAccountability($accountability_type_id){
 	$query = mysql_query("SELECT accountability_type from accountability_type where accountability_type_id='$accountability_type_id'");
@@ -44,10 +61,29 @@ function checkAccountability($accountability_type_id){
 		}
 		return $accountability_type_id;
 }
+
 ?>
+	
+   <tr>
+    <td></td>
+	<td></td>
+	
+ 
 </table>
+
+  
+  
+  </p>
+  <p>&nbsp;
+  </p>
 </div>
 </div>
+</div>
+
+<!--
+</body>
+</html>
+-->
 
 <?php
 	require_once 'student_footer.php';

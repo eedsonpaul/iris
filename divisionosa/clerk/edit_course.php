@@ -7,7 +7,7 @@
 		<td><input type="text" name="sub"/></td>
 	</tr>
 	<tr>
-		<td><input type="submit" name = "c" value="Edit Course"/></td>
+		<td><input type="submit" name = "c" value="Search Course"/></td>
 	</tr>
 </form>
 </table>

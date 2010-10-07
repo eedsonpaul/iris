@@ -40,7 +40,6 @@
 <?php
 	include('connect.php');
 	include('accountabilityClass.php');
-	$id = $_GET['accountability_id'];
 	$accountability = new Accountability();
 	$accountability->acctg_editAccountability();
 ?>

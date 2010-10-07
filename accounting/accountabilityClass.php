@@ -52,34 +52,35 @@ class Accountability{
 				echo "<td>Accountability Details</td>";
 				echo "<td>Amount Due</td>";
 			
-			while ($i < $num) {
-				$student_number = mysql_result($result2,$i,"student_number");
-				$last_name = mysql_result($result2,$i,"last_name");
-				$first_name = mysql_result($result2,$i,"first_name");
-				$middle_name = mysql_result($result2,$i,"middle_name");
-				$degree_program = mysql_result($result2,$i,"degree_program");
-				$year_incurred = mysql_result($result2,$i,"year_incurred");
-				$semester_incurred = mysql_result($result2,$i,"semester_incurred");
-				$date_added = mysql_result($result2,$i,"date_added");
-				$accountability_type = mysql_result($result2,$i,"accountability_type");
-				$details = mysql_result($result2,$i,"details");
-				$amount_due = mysql_result($result2,$i,"amount_due");
-				$accountability_id = mysql_result($result2,$i,"accountability_id"); 
-			
-				echo "<tr>";
-				echo "<td height = \"20\">".$student_number."</td>";
-				echo "<td>".$last_name.", ".$first_name." ".$middle_name."<br>".$degree_program."</td>";
-				echo "<td>".$year_incurred."</td>";
-				echo "<td>".$semester_incurred."</td>";
-				echo "<td>".$date_added."</td>";
-				echo "<td>".$accountability_type."</td>";
-				echo "<td>".$details."</td>";
-				echo "<td>".$amount_due."</td>";
-				echo "<td><a href=\"accountingEditAccountability.php?id=".$accountability_id."\">Edit</a></td>";
-				echo "<td><a href=\"accountingClearAccountability.php?id=".$accountability_id."\">Clear</a></td>";
-				echo "</tr>";							
-				$i++;
-			}
+				while ($i < $num) {
+					$student_number = mysql_result($result2,$i,"student_number");
+					$last_name = mysql_result($result2,$i,"last_name");
+					$first_name = mysql_result($result2,$i,"first_name");
+					$middle_name = mysql_result($result2,$i,"middle_name");
+					$degree_program = mysql_result($result2,$i,"degree_program");
+					$year_incurred = mysql_result($result2,$i,"year_incurred");
+					$semester_incurred = mysql_result($result2,$i,"semester_incurred");
+					$date_added = mysql_result($result2,$i,"date_added");
+					$accountability_type = mysql_result($result2,$i,"accountability_type");
+					$details = mysql_result($result2,$i,"details");
+					$amount_due = mysql_result($result2,$i,"amount_due");
+					$accountability_id = mysql_result($result2,$i,"accountability_id"); 
+				
+					echo "<tr>";
+					echo "<td height = \"20\">".$student_number."</td>";
+					echo "<td>".$last_name.", ".$first_name." ".$middle_name."<br>".$degree_program."</td>";
+					echo "<td>".$year_incurred."</td>";
+					echo "<td>".$semester_incurred."</td>";
+					echo "<td>".$date_added."</td>";
+					echo "<td>".$accountability_type."</td>";
+					echo "<td>".$details."</td>";
+					echo "<td>".$amount_due."</td>";
+					echo "<td><a href=\"accountingEditAccountability.php?id=".$accountability_id."\">Edit</a></td>";
+					echo "<td><a href=\"accountingClearAccountability.php?id=".$accountability_id."\">Clear</a></td>";
+					echo "</tr>";							
+					$i++;
+				}
+				echo "</table>";
 			}
 		}
 		
@@ -92,7 +93,7 @@ class Accountability{
 			$semester_incurred = $_POST['semester_incurred'];
 			$student_number = $_POST['student_number'];
 			$id = $_GET['id'];
- 
+
 			//store in database
 			$add = "UPDATE accountability SET accountability_type_id=$accountability_type, details ='$details', amount_due=$amount_due, year_incurred=$year_incurred, semester_incurred=$semester_incurred, student_number=$student_number, accountability_status='pending' WHERE accountability_id=$id;";
 			$addAccountability= mysql_query($add);
@@ -108,12 +109,16 @@ class Accountability{
 			$id = $_POST['id'];
 			$date_paid = date('Ymd');
 			$date_cleared = date('Ymd');
+			$employee_id = 0; //to be sessioned
+			
 			//store in database
 			$query_amount_due = "SELECT * FROM accountability WHERE accountability_id = $id;";
 			$result_amount_due = mysql_query($query_amount_due);
 			$amount_due = mysql_result($result_amount_due, 0, amount_due);
+			$year_incurred = mysql_result($result_amount_due,0,year_incurred);
+			$semester_incurred = mysql_result($result_amount_due,0,semester_incurred);
 			if(($official_receipt_number==NULL)&&($amount_paid==NULL)){
-				$update = "UPDATE accountability SET accountability_status='cleared', date_cleared = $date_cleared WHERE accountability_id=$id;";
+				$update = "UPDATE accountability SET accountability_status='cleared', date_cleared = $date_cleared, year_incurred=$year_incurred, semester_incurred=$semester_incurred WHERE accountability_id=$id;";
 				$update_call = mysql_query($update);
 				header("Location:accountingSAM.php");
 			}
@@ -122,7 +127,7 @@ class Accountability{
 				header("Location: accountingClearAccountability.php?id=$id");
 				}
 				else{
-					$add = "INSERT INTO payment VALUES ('$official_receipt_number','$amount_paid', '$date_paid', 0, '$student_number');";
+					$add = "INSERT INTO payment VALUES ('$official_receipt_number', $employee_id, $amount_paid, $date_paid, $id, $semester_incurred, $year_incurred);";
 					$addOR= mysql_query($add);
 					$update = "UPDATE accountability SET accountability_status='cleared', date_cleared = $date_cleared Where accountability_id=$id;";
 					mysql_query($update);
@@ -133,9 +138,11 @@ class Accountability{
 	
 		function acctg_viewClearedAccounts(){
 			include('connect.php');
+			$query = "SELECT * FROM payment";
+			$result = mysql_query($query);
 			$query2 = "SELECT * FROM accountability, student WHERE accountability.student_number = student.student_number AND accountability.accountability_status='cleared' AND (accountability.accountability_type_id=1 OR accountability.accountability_type_id=3 OR accountability.accountability_type_id=4);";
 			$result2 = mysql_query($query2);
-			$num = mysql_numrows($result2);
+			$num = mysql_numrows($result);
 			
 			if($num == 0){
 				echo "<div align=\"center\"><font color = \"gray\"><b><i>No students have been cleared.</font></i></b></div>";
@@ -156,24 +163,29 @@ class Accountability{
 				echo "</tr>";
 			
 				while ($i < $num) {
-					$student_number = mysql_result($result2,$i,"student_number");
-					$last_name = mysql_result($result2,$i,"last_name");
-					$first_name = mysql_result($result2,$i,"first_name");
-					$middle_name = mysql_result($result2,$i,"middle_name");
-					$year_incurred = mysql_result($result2,$i,"year_incurred");
-					$semester_incurred = mysql_result($result2,$i,"semester_incurred");
-					$date_added = mysql_result($result2,$i,"date_added");
-					$amount_due = mysql_result($result2,$i,"amount_due");
-					$date_cleared = mysql_result($result2,$i,"date_cleared");
-					$accountability_id = mysql_result($result2,$i,"accountability_id");
-					$query_payment = "SELECT official_receipt_number, date_paid FROM payment WHERE accountability_id=$accountability_id";
-					$payment = mysql_query($query_payment);
-					$official_receipt_number = mysql_result($payment, 0,"official_receipt_number");
-					$date_paid = mysql_result($payment,0,"date_paid");
+					
+					$accountability_id = mysql_result($result,$i,"accountability_id");
+					$query_accountability = "SELECT * FROM accountability WHERE accountability_id = $accountability_id;";
+					$result_accountability = mysql_query($query_accountability);
+					$student_number = mysql_result($result_accountability, 0, "student_number");
+					$query_details = "SELECT * FROM student WHERE student_number=$student_number;";
+					$result_details = mysql_query($query_details);
+					
+					$last_name = mysql_result($result_details,0,"last_name");
+					$first_name = mysql_result($result_details,0,"first_name");
+					$middle_name = mysql_result($result_details,0,"middle_name");
+					$degree_program = mysql_result($result_details,0,"degree_program");
+					$year_incurred = mysql_result($result_accountability,0,"year_incurred");
+					$semester_incurred = mysql_result($result_accountability,0,"semester_incurred");
+					$date_added = mysql_result($result_accountability,0,"date_added");
+					$amount_due = mysql_result($result_accountability,0,"amount_due");
+					$date_cleared = mysql_result($result_accountability,0,"date_cleared");
+					$official_receipt_number = mysql_result($result, $i,"official_receipt_number");
+					$date_paid = mysql_result($result,$i,"date_paid");
 	
 					echo "<tr>";
 					echo "<td height = \"20\">".$student_number."</td>";
-					echo "<td>".$last_name.", ".$first_name." ".$middle_name."</td>";
+					echo "<td>".$last_name.", ".$first_name." ".$middle_name."<br>".$degree_program."</td>";
 					echo "<td>".$year_incurred."</td>";
 					echo "<td>".$semester_incurred."</td>";
 					echo "<td>".$date_added."</td>";
@@ -186,7 +198,6 @@ class Accountability{
 			}
 			}
 			echo "<center><table>";
-			echo "<input type=\"button\" value=\"Back\" onClick=\"history.go(-1)\">";
 			echo "</table>";
 		}
 		
@@ -616,7 +627,6 @@ class Accountability{
 					$isSLB = mysql_query($query_isSLB);
 					$isPaid = mysql_query($query_isPaid);
 					$lol = mysql_numrows($isPaid);
-					echo $lol;
 					if(mysql_numrows($isPaid) == 0){
 						if(mysql_numrows($isSLB)== 1){
 							$loaned_amount = mysql_result($isSLB,0,"loaned_amount");
@@ -640,6 +650,7 @@ class Accountability{
 							echo "<td><input type=\"submit\" value=\"Edit\" />&nbsp;";
 							echo "<a href=\"accountingEM.php\"><input type=\"submit\" value=\"Back\" /></a></td>";
 							echo "</tr>";
+							echo "</table>";
 						}
 						else{
 							if(mysql_numrows($isSLB)==0){
@@ -651,10 +662,10 @@ class Accountability{
 								echo "<input type=\"hidden\" name=\"term_incurred\" value=$term_incurred />";
 								echo "<td>Loan Amount: </td>";
 								echo "<td><input type=\"text\" name=\"loaned_amount\"/></td>";
-								echo "<td><input type=\"submit\" value=\"Add\" />&nbsp;";
-								echo "<a href=\"accountingEM.php\"><input type=\"submit\" value=\"Back\" /></a></td>";
+								echo "<td><input type=\"submit\" value=\"Add\" />";
 								echo "</tr>";
 								echo "</form>";
+								echo "</table>";
 							}
 						}
 					}
@@ -667,6 +678,7 @@ class Accountability{
 						echo "<tr>";
 						echo "<td>PAID ALREADY</td>";
 						echo "</tr>";
+						echo "</table>";
 					}
 										
 				}
@@ -738,9 +750,10 @@ class Accountability{
 			$academic_year= $_POST['academic_year'];
 			$semester = $_POST['semester'];
 			
-			$query_enrollment = "SELECT * FROM accountability WHERE accountability_type_id = 5;";
+			$query_enrollment = "SELECT * FROM payment, accountability WHERE accountability.accountability_type_id = 7 AND accountability.accountability_id = payment.accountability_id;";
 			$enrollment = mysql_query($query_enrollment);
 			
+						
 			
 			echo "<table border =1>";
 			echo "<tr>";
@@ -786,15 +799,18 @@ class Accountability{
 			echo "<td>Date Paid</td>";
 			echo "<td>Collected By</td></tr>";
 			
-			
 			$i = 0;
 			
 			while($i < mysql_numrows($enrollment)){
-				$student_number = mysql_result($cashReport,$i,"student_number");
+				$accountability_id = mysql_result($enrollment,$i,"accountability_id");
+				$student_number = mysql_result($enrollment,$i,"student_number");
 				$query_student = "SELECT * FROM student where student_number = $student_number;";
 				$student = mysql_query($query_student);
-				$query_cashReport = "SELECT * FROM payment WHERE academic_year=$academic_year AND semester=$semester AND $accountability_id=5;";
-				$cash_report = mysql_query($query_cashReport);
+				$query_assessment = "SELECT * FROM assessment_table;";
+				$result_assessment = mysql_query($query_assessment);
+				$check_assessment = "SELECT * from assessment where student_number=$student_number;";
+				$result_check_assessment = mysql_query($check_assessment);
+				
 				
 				$last_name = mysql_result($student,0,"last_name");
 				$first_name = mysql_result($student,0,"first_name");
@@ -813,9 +829,9 @@ class Accountability{
 				$lab = 0;
 				while ($j < $num) {
 					$course_code = mysql_result($result,$j,"course_code");
-					$query2 = "select * from subject WHERE course_code = $course_code;";
+					$query2 = "select * from subject WHERE course_code = '$course_code';";
 					$result2 = mysql_query($query2);
-					$query3 = "SELECT * from section WHERE course_code = $course_code";
+					$query3 = "SELECT * from section WHERE course_code = '$course_code';";
 					$result3 = mysql_query($query3);
 					if(mysql_numrows($result3)!=0){
 						$lab_fee = mysql_result($result2, 0, "lab_fee");
@@ -829,7 +845,7 @@ class Accountability{
 							$lab = $lab + $lab_fee;
 						}
 					}	
-					$i++;
+					$j++;
 				}
 					
 				$total_enrolled_units = $units;
@@ -843,6 +859,7 @@ class Accountability{
 					$scholarship = mysql_result($result_scholarship,0,"scholarship_name");
 				}
 				
+				$stfap_bracket_id = mysql_result($student,0,"stfap_bracket_id");
 				$query_stfap = "select * from stfap where stfap_bracket_id = $stfap_bracket_id;";
 				$result_stfap = mysql_query($query_stfap);
 				$amount_per_unit = mysql_result($result_stfap, 0, "amount_per_unit");
@@ -870,64 +887,64 @@ class Accountability{
 				$total_tuition_to_pay = $tuition - $total_less;
 				
 				//miscellaneous start
-				$athletics = 55;
-				$cultural = 50;
-				$energy = 250;
-				$internet = 260;
-				$library = 700;
-				$medical = 50;
-				$registration = 40;
+					$athletics = mysql_result($result_assessment,0,"athletics");
+					$cultural = mysql_result($result_assessment,0,"cultural");
+					$energy = mysql_result($result_assessment,0,"energy");
+					$internet = mysql_result($result_assessment,0,"internet");
+					$library = mysql_result($result_assessment,0,"library");
+					$medical = mysql_result($result_assessment,0,"medical");
+					$registration = mysql_result($result_assessment,0,"registration");
+					
+					$athletics_less_stfap = 0;
+					$cultural_less_stfap = 0;
+					$energy_less_stfap = 0;
+					$internet_less_stfap = 0;
+					$library_less_stfap = 0;
+					$medical_less_stfap = 0;
+					$registration_less_stfap = 0;
+					
+					if($stfap_bracket_id == 6){
+						$athletics_less_stfap = 55;
+						$cultural_less_stfap = 50;
+						$energy_less_stfap = 250;
+						$internet_less_stfap = 260;
+						$library_less_stfap = 700;
+						$medical_less_stfap = 50;
+						$registration_less_stfap = 40;
+					}
+					
+					$athletics_amount_shouldered = 0;
+					$cultural_amount_shouldered = 0;
+					$energy_amount_shouldered = 0;
+					$internet_amount_shouldered = 0;
+					$library_amount_shouldered = 0;
+					$medical_amount_shouldered = 0;
+					$registration_amount_shouldered = 0;
+					
+					$athletics_total_less = $athletics_less_stfap + $athletics_amount_shouldered;
+					$cultural_total_less = $cultural_less_stfap + $cultural_amount_shouldered;
+					$energy_total_less = $energy_less_stfap + $energy_amount_shouldered;
+					$internet_total_less = $internet_less_stfap + $internet_amount_shouldered;
+					$library_total_less = $library_less_stfap + $library_amount_shouldered;
+					$medical_total_less = $medical_less_stfap + $medical_amount_shouldered;
+					$registration_total_less = $registration_less_stfap + $registration_amount_shouldered;
+					
+					
+					
+					$athletics_to_pay = $athletics - $athletics_total_less;
+					$cultural_to_pay = $cultural - $cultural_total_less;
+					$energy_to_pay = $energy - $energy_total_less;
+					$internet_to_pay = $internet - $internet_total_less;
+					$library_to_pay= $library - $library_total_less;
+					$medical_to_pay = $medical - $medical_total_less;
+					$registration_to_pay = $registration - $registration_total_less;
+					//miscellaneous end
 				
-				$athletics_less_stfap = 0;
-				$cultural_less_stfap = 0;
-				$energy_less_stfap = 0;
-				$internet_less_stfap = 0;
-				$library_less_stfap = 0;
-				$medical_less_stfap = 0;
-				$registration_less_stfap = 0;
 				
-				if($stfap_bracket_id == 6){
-					$athletics_less_stfap = 55;
-					$cultural_less_stfap = 50;
-					$energy_less_stfap = 250;
-					$internet_less_stfap = 260;
-					$library_less_stfap = 700;
-					$medical_less_stfap = 50;
-					$registration_less_stfap = 40;
-				}
-				
-				$athletics_amount_shouldered = 0;
-				$cultural_amount_shouldered = 0;
-				$energy_amount_shouldered = 0;
-				$internet_amount_shouldered = 0;
-				$library_amount_shouldered = 0;
-				$medical_amount_shouldered = 0;
-				$registration_amount_shouldered = 0;
-				
-				$athletics_total_less = $athletics_less_stfap + $athletics_amount_shouldered;
-				$cultural_total_less = $cultural_less_stfap + $cultural_amount_shouldered;
-				$energy_total_less = $energy_less_stfap + $energy_amount_shouldered;
-				$internet_total_less = $internet_less_stfap + $internet_amount_shouldered;
-				$library_total_less = $library_less_stfap + $library_amount_shouldered;
-				$medical_total_less = $medical_less_stfap + $medical_amount_shouldered;
-				$registration_total_less = $registration_less_stfap + $registration_amount_shouldered;
-				
-				
-				
-				$athletics_to_pay = $athletics - $athletics_total_less;
-				$cultural_to_pay = $cultural - $cultural_total_less;
-				$energy_to_pay = $energy - $energy_total_less;
-				$internet_to_pay = $internet - $internet_total_less;
-				$library_to_pay= $library - $library_total_less;
-				$medical_to_pay = $medical - $medical_total_less;
-				$registration_to_pay = $registration - $registration_total_less;
-				//miscellaneous end
-				
-				
-				//student fund
-				$community_chest = 0.50;
-				$publication = 40;
-				$student_council = 6;
+				//student fund start
+				$community_chest = mysql_result($result_assessment,0,"community_chest");
+				$publication = mysql_result($result_assessment,0,"publication");
+				$student_council = mysql_result($result_assessment,0,"student_council");
 				
 				$community_chest_less_stfap = 0;
 				$publication_less_stfap= 0;
@@ -947,46 +964,52 @@ class Accountability{
 				//student fund end
 				
 				//other payment names start
-				$nstp_cwts_ms = 0;
-				$non_citizen_fee = 0;
-				$entrance = 0;
-				$deposit = 0;
-				$id_fee = 0;
-				$in_residence = 0;
-				$other_fees = 0;
+					$nstp_flag = mysql_result($result_check_assessment,0,"nstp");
 				
-				$nstp_cwts_ms_less_stfap = 0;
-				$non_citizen_fee_less_stfap = 0;
-				$entrance_less_stfap = 0;
-				$deposit_less_stfap = 0;
-				$id_fee_less_stfap = 0;
-				$in_residence_less_stfap = 0;
-				$other_fees_less_stfap = 0;
-				
-				$nstp_cwts_ms_amount_shouldered = 0;
-				$non_citizen_fee_amount_shouldered = 0;
-				$entrance_amount_shouldered = 0;
-				$deposit_amount_shouldered = 0;
-				$id_fee_amount_shouldered = 0;
-				$in_residence_amount_shouldered = 0;
-				$other_fees_amount_shouldered = 0;
-				
-				$nstp_cwts_ms_total_less = $nstp_cwts_ms_less_stfap + $nstp_cwts_ms_amount_shouldered;
-				$non_citizen_fee_total_less = $non_citizen_fee_less_stfap + $non_citizen_fee_amount_shouldered;
-				$entrance_total_less = $entrance_less_stfap + $entrance_amount_shouldered;
-				$deposit_total_less = $deposit_less_stfap + $deposit_amount_shouldered;
-				$id_fee_total_less = $id_fee_less_stfap + $id_fee_amount_shouldered;
-				$in_residence_total_less = $in_residence_less_stfap + $in_residence_amount_shouldered;
-				$other_fees_total_less = $other_fees_less_stfap + $other_fees_amount_shouldered;
-				
-				$nstp_cwts_ms_to_pay = $nstp_cwts_ms - $nstp_cwts_ms_total_less;
-				$non_citizen_fee_to_pay = $non_citizen_fee - $non_citizen_fee_total_less;
-				$entrance_to_pay = $entrance - $entrance_total_less;
-				$deposit_to_pay = $deposit - $deposit_total_less;
-				$id_fee_to_pay = $id_fee - $id_fee_total_less;
-				$in_residence_to_pay = $in_residence - $in_residence_total_less;
-				$other_fees_to_pay = $other_fees - $other_fees_total_less;
-				//other payment names end
+					if($nstp_flag==1){
+						$nstp_cwts_ms = 100;
+					}
+					else{
+						$nstp_cwts_ms = 0;
+					}
+					$non_citizen_fee = mysql_result($result_check_assessment,0,"non_citizen_fee");
+					$entrance = mysql_result($result_check_assessment,0,"entrance");
+					$deposit = mysql_result($result_check_assessment,0,"deposit");
+					$id_fee = mysql_result($result_check_assessment,0,"id_fee");
+					$in_residence = mysql_result($result_check_assessment,0,"in_residence");
+					
+					$nstp_cwts_ms_less_stfap = 0;
+					$non_citizen_fee_less_stfap = 0;
+					$entrance_less_stfap = 0;
+					$deposit_less_stfap = 0;
+					$id_fee_less_stfap = 0;
+					$in_residence_less_stfap = 0;
+					$other_fees_less_stfap = 0;
+					
+					$nstp_cwts_ms_amount_shouldered = 0;
+					$non_citizen_fee_amount_shouldered = 0;
+					$entrance_amount_shouldered = 0;
+					$deposit_amount_shouldered = 0;
+					$id_fee_amount_shouldered = 0;
+					$in_residence_amount_shouldered = 0;
+					$other_fees_amount_shouldered = 0;
+					
+					$nstp_cwts_ms_total_less = $nstp_cwts_ms_less_stfap + $nstp_cwts_ms_amount_shouldered;
+					$non_citizen_fee_total_less = $non_citizen_fee_less_stfap + $non_citizen_fee_amount_shouldered;
+					$entrance_total_less = $entrance_less_stfap + $entrance_amount_shouldered;
+					$deposit_total_less = $deposit_less_stfap + $deposit_amount_shouldered;
+					$id_fee_total_less = $id_fee_less_stfap + $id_fee_amount_shouldered;
+					$in_residence_total_less = $in_residence_less_stfap + $in_residence_amount_shouldered;
+					$other_fees_total_less = $other_fees_less_stfap + $other_fees_amount_shouldered;
+					
+					$nstp_cwts_ms_to_pay = $nstp_cwts_ms - $nstp_cwts_ms_total_less;
+					$non_citizen_fee_to_pay = $non_citizen_fee - $non_citizen_fee_total_less;
+					$entrance_to_pay = $entrance - $entrance_total_less;
+					$deposit_to_pay = $deposit - $deposit_total_less;
+					$id_fee_to_pay = $id_fee - $id_fee_total_less;
+					$in_residence_to_pay = $in_residence - $in_residence_total_less;
+					$other_fees_to_pay = $other_fees - $other_fees_total_less;
+					//other payment names end
 				
 				//lab stuff
 				$lab_less_stfap = 0;
@@ -1015,7 +1038,7 @@ class Accountability{
 				}
 			
 				$query_SLB = "select * FROM slb WHERE student_number = $student_number;";
-				$SLB = mysql_result($query_SLB);
+				$SLB = mysql_query($query_SLB);
 				
 				if(mysql_numrows($SLB)!=0){
 					$total_loan = mysql_result($SLB,0,"loaned_amount");
@@ -1024,10 +1047,10 @@ class Accountability{
 					$total_loan = 0;
 				}
 				
-				$total_amount_paid = mysql_result($cash_report,$i,"amount_paid");
-				$official_receipt_number = mysql_result($cash_report,$i,"official_receipt_number");
-				$date_paid = mysql_result($cash_report,$i,"date_paid");
-				$employee_id = mysql_result($cash_report,$i,"employee_id");
+				$total_amount_paid = mysql_result($enrollment,$i,"amount_paid");
+				$official_receipt_number = mysql_result($enrollment,$i,"official_receipt_number");
+				$date_paid = mysql_result($enrollment,$i,"date_paid");
+				$employee_id = mysql_result($enrollment,$i,"employee_id");
 				$query_employee = "SELECT * FROM employee WHERE employee_id = $employee_id;";
 				$employee = mysql_query($employee);
 				$employee_last_name = mysql_result($employee,0,"last_name");
@@ -1058,7 +1081,7 @@ class Accountability{
 				echo "<td>".$miscellaneous_1."</td>";
 				echo "<td>".$miscellaneous_1_to_pay."</td>";
 				echo "<td>".$miscellaneous_2."</td>";
-				echo "<td>".$misecellaneous_2_to_pay."</td>";
+				echo "<td>".$miscellaneous_2_to_pay."</td>";
 				echo "<td>".$lab."</td>";
 				echo "<td>".$lab_to_pay."</td>";
 				echo "<td>".$nstp_cwts_ms."</td>";
@@ -1079,9 +1102,10 @@ class Accountability{
 				echo "<td>".$official_receipt_number."</td>";
 				echo "<td>".$date_paid."</td>";
 				echo "<td>".$collected_by."</td></tr>";
-				echo "</table>";
+				$i++;
 			}
-		}			
+			echo "</table>";
+		}				
 		
 		function acctg_addAccountabilitySearch(){
 			$search_option= $_GET['search_option'];
@@ -1136,9 +1160,10 @@ class Accountability{
 							echo "<td>".$last_name.", ".$first_name." ".$middle_name."</td>";
 							echo "<td>".$degree_program." ".$year_level."</td>";
 							echo "<td><a href=\"accountingAddAccountability.php?student_number=$student_number\"><input type=\"submit\" value=\"Add\" /></a></td></tr>";
-							echo "</table>";
+							
 							$i++;
 						}
+						echo "</table>";
 					}
 				}
 			}

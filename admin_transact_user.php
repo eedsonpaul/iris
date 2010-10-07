@@ -166,7 +166,7 @@ if (isset($_REQUEST['action'])) {
       if ($row = mysql_fetch_array($result)) {
         session_start();
         $_SESSION['student_number'] = $row['student_number'];
-	      $_SESSION['password'] = $row['password'];
+	    $_SESSION['password'] = $row['password'];
         $_SESSION['access_level_id'] = $row['access_level_id'];
           
 	      if(isset($_POST['remember'])){

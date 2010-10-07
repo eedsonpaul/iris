@@ -32,7 +32,7 @@
 	function retrieve_account_osa($student_number)
 	{
 		$q	=	mysql_query("SELECT a.accountability_type, b.details, b.amount_due, b.year_incurred, c.semester_type
-				FROM semester_mapping c, accountability b, accountability_type a
+				FROM semester c, accountability b, accountability_type a
 				WHERE b.accountability_type_id = a.accountability_type_id
 				and b.accountability_status='pending'
 				AND c.semester_id = b.semester_incurred

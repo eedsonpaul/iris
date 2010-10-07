@@ -29,12 +29,6 @@
 ?>
 <div class="main">
 	<div id="navigation">
-	<p>
-    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
-      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
-      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
-        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
- 	</p>
     <ul>
 	  	<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
         <li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
@@ -58,22 +52,28 @@
 	</div>
     
 <div id="right_side">
+	<p>
+    	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
+      	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
+      	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
+        <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
+ 	</p>
 	  <p class="head"><strong>General Registration</strong></p>
   <p class="headfont">&nbsp;</p>
     <table width="494" border="0" align="center">
       <tr>
-        <td><div align="center" class="normaltext"><strong>ENROLL STUDENT</strong></div></td>
+        <td colspan="2"><div align="center" class="normaltext"><strong>ENROLL STUDENT</strong></div></td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
       </tr>
-      <form action="cso_enroll_student.php" method="get">
+      <form action=" cso_enroll_student.php" method="get">
       <tr>
-        <td width="208"><div align="right" class="normaltext">Enter Student Number:</div></td>
+        <td colspan="2"><div align="right" class="normaltext">Enter Student Number:</div></td>
         <td width="11">&nbsp;</td>
         <td width="261"><input type="text" name="id" id="id"></td>
       </tr>
       <tr>
-        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
         <td>&nbsp;</td>
         <td><label>
           <div align="center">
@@ -82,19 +82,19 @@
         </label></td>
       </tr>
       </form>
-      <form action="" method="post">
+      <form action="cso_enroll_student.php" method="get">
       <tr>
-        <td><div align="center" class="normaltext"><strong>STAMP REGISTERED</strong></div></td>
+        <td colspan="2"><div align="center" class="normaltext"><strong>STAMP REGISTERED</strong></div></td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
       </tr>
       <tr>
-        <td><div align="right" class="normaltext">Enter Student Number</div></td>
+        <td colspan="2"><div align="right" class="normaltext">Enter Student Number</div></td>
         <td>&nbsp;</td>
-        <td><input type="text" name="student_number" id="student_number"></td>
+        <td><input type="text" name="id" id="id"></td>
       </tr>
       <tr>
-        <td>&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
         <td>&nbsp;</td>
         <td><div align="center">
           <label>
@@ -102,9 +102,25 @@
           </label>
         </div></td>
       </tr>
+      <tr>
+        <td colspan="2" class="normaltext"><strong>SELECT ACTION</strong></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="120">&nbsp;</td>
+        <td colspan="3" class="normaltext"><a href="cso_view_available_classes.php">View Available Subject</a>
+        	<br /><a href="cso_search_student_schedule.php">View Student Schedule</a>
+            <br /><a href="cso_select_building.php">View Room Utilization</a>
+            <br /><a href="cso_search_faculty.php">View Faculty Schedule</a>
+            <br />View Class List
+            <br />View Officially Enrolled Students
+            <br /><a href="cso_view_students_confirmed_not_enrolled.php">View All Unenrolled With Confirmed Subjects</a>
+            <br /><a href="cso_edit_class_restrictions_search.php">Edit Class Restrictions</a></td>
+        </tr>
       </form>
     </table>
-    <p>
+<p>
       <center>
         </a>
       </center>

@@ -26,17 +26,9 @@ require_once 'admin_sql_query.php';
       {
         echo '<a href="index.php?action=SearchAcct">Search Account &raquo;';
         echo '</a>';
-        echo ' | <a href="index.php?action=SearchAcct">Reset';
-        echo '</a>';
-        echo ' | <a href="index.php?action=SearchAcct">Backup';
-        echo '</a>';
         if ($_SESSION['access_level_id'] == 3) {
           echo ' | <a href="index.php?action=Logs">Logs</a> | ';
-        }
-        if ($_SESSION['access_level_id'] >1) {
-          echo ' <a href="admin_useraccount.php?userid=' . $_SESSION['employee_id'] .
-               '" title="' . htmlspecialchars($_SESSION['username']) . '">' . $_SESSION['username'];
-
+          echo ' <a href="admin_panel.php">' . $_SESSION['username'];
         } else if ($_SESSION['access_level_id'] == 1) {
           echo ' | <a href="admin_accountpanel.php">' . $_SESSION['student_number'];
         }
@@ -45,9 +37,12 @@ require_once 'admin_sql_query.php';
       }
       ?>
     </div>
-    <br/>
 
+  <table width="100%" cellspacing=0>
+    <tr>
+    <td width="25%">
     <div id="left_side">
+      <li>
       <ul class="left_list">
         <li><a href="index.php?action=SysAd">System Administrator</a></li>
         <li><a href="index.php?action=Osa">Office of Student Affairs</a></li>
@@ -60,11 +55,14 @@ require_once 'admin_sql_query.php';
         <li><a href="index.php?action=Student">Student</a></li>
         <br/>
 
-        <li><span class="red"><a href="admin_createaccount.php">Create Staff Account </a>&raquo;</span></li>
-        <li><span class="red"><a href="student/add_student_record.php">Add Student Record </a>&raquo;</span></li>
+        <li><span class="red"><a href="admin_createaccount.php">Create Staff Account&raquo;</a></span></li>
+        <li><span class="red"><a href="cso/cso_add_student_record.php">Add Student Record&raquo;</a></span></li>
       </ul>
+      </li>
     </div>
+    </td>
 
+    <td width="75%"><br/>
     <div id="right_side">
       <?php
       if (isset($_GET['action'])) {
@@ -113,7 +111,7 @@ require_once 'admin_sql_query.php';
               
               <td align="right">
                 <div id="override">
-                <a href="divisionosa/osa/osa.php">
+                <a href="divisionosa/osa/osa.php" target="_new">
                 <input type="submit" class="submit" name="action" value="Override&rarr;">
                 </div>
                 </a>
@@ -143,7 +141,7 @@ require_once 'admin_sql_query.php';
               </td>
               <td>
                 <div id="override">
-                <a href="cso/cso.php">
+                <a href="cso/cso.php" target="_new">
                 <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
                 </a>
               </td>
@@ -172,7 +170,7 @@ require_once 'admin_sql_query.php';
               </td>
               <td>
                 <div id="override">
-                <a href="accounting/accounting.php">
+                <a href="accounting/accounting.php" target="_new">
                 <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
                 </a>
               </td>
@@ -201,7 +199,7 @@ require_once 'admin_sql_query.php';
               </td>
               <td>
                 <div id="override">
-                <a href="divisionosa/faculty/faculty.php">
+                <a href="divisionosa/faculty/faculty.php" target="blank">
                 <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
                 </a>
               </td>
@@ -229,7 +227,7 @@ require_once 'admin_sql_query.php';
               </td>
               <td>
                 <div id="override">
-                <a href="accounting/library.php">
+                <a href="accounting/library.php" target="blank">
                 <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
                 </a>
               </td>
@@ -257,7 +255,7 @@ require_once 'admin_sql_query.php';
               </td>
               <td>
                 <div id="override">
-                <a href="accounting/cashier.php">
+                <a href="accounting/cashier.php" target="blank">
                 <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
                 </a>
               </td>
@@ -285,7 +283,7 @@ require_once 'admin_sql_query.php';
               </td>
               <td>
                 <div id="override">
-                <a href="divisionosa/clerk/clerk.php">
+                <a href="divisionosa/clerk/clerk.php" target="blank">
                 <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
                 </a>
               </td>
@@ -351,15 +349,15 @@ require_once 'admin_sql_query.php';
           <?php } ?>
           
           <form method="post" action="admin_search.php">
-          <table width="50%" align="left" style="font-size: 12px;">          
+          <table width="60%" align="left" style="font-size: 12px;">          
             <tr>
-              <td>Keyword</td>
+              <td>Enter Username / Name / ID</td>
               <td>Filter</td>
             </tr>
             
             <tr>
               <td>
-              <input id="searchkeywords" type="text" name="keywords"
+              <input id="searchkeywords" type="text" name="keywords" size=40
               <?php
               if (isset($_POST['keywords'])) {
                 echo ' value="' . htmlspecialchars($_POST['keywords']) . '" ';
@@ -369,8 +367,8 @@ require_once 'admin_sql_query.php';
               </td>
 
               <td valign=top>
-              <select name="access_level">
-              <option value="" selected><i>All</i></option>
+              <select name="filter">
+              <option value="All">All</option>
               <?php
               foreach ($accessList as $key => $value) {
                 echo "<option value=\"$key\" ";
@@ -402,6 +400,9 @@ require_once 'admin_sql_query.php';
       }
     ?>
       </div>
+    </td>
+    </tr>
+  </table>
   </div>
       
   <?php } else {
