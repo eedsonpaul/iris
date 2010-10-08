@@ -19,14 +19,14 @@
  				$subject = "";
 				$section = "";
 				
-	  			$sql = "select * from grade where student_number = '$student_number' && status = 'inc'";
+	  			$sql = "select * from grade where student_number = '$student_number' && grade_status = 'inc'";
 				$res = mysql_query($sql);
 				$count1 = 0;
 				while($row = mysql_fetch_array($res)){
 					$count1++;
 				}
 				if($count1 != 0){
-				$sql2= "select * from grade where student_number = '$student_number' && status = 'inc'";
+				$sql2= "select * from grade where student_number = '$student_number' && grade_status = 'inc'";
 				$res2 = mysql_query($sql2);
 				while ($row = mysql_fetch_array($res2)){
 					$subject_name = $row['course_code'];

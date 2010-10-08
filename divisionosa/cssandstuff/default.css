@@ -16,6 +16,31 @@ body{
   padding: 10px;
 }
 
+#for_admin {
+  background: #FCADAD;
+  padding: 12px;
+  padding-top: 14px;
+}
+
+#admin_nav {
+  float: right;
+  padding-right: 0px;
+  margin-top: -10px;
+  padding-bottom: 10px;
+}
+
+#admin_nav.right {
+  float: right;
+}
+
+#admin_nav.left {
+  float: left;
+}
+
+#admin_nav a:link {text-decoration:none; color: #880606;}
+#admin_nav a:visited {text-decoration:none; color: #880606;}
+#admin_nav a:hover {text-decoration: underline; color: #880606;}
+
 #osa_menu {
   width: 950px;
   margin-left: auto;
@@ -24,6 +49,7 @@ body{
 
 #banner
 {
+  
   width: 950px;
   margin-left: auto;
   margin-right: auto;
@@ -345,7 +371,7 @@ html>body #menu {
 {
   background: url("../../img/footer.jpg") repeat-x scroll 0 0 white;
   width: 950px;
-
+	height: 350px;
   margin-left: auto;
   margin-right: auto;
   text-align: right;

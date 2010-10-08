@@ -126,10 +126,12 @@
 					//miscellaneous end
 					
 					$miscellaneous_1 = $athletics + $cultural + $energy + $internet + $library + $medical + $registration;
+					$miscellaneous_1_total = $athletics_to_pay + $cultural_to_pay + $energy_to_pay + $internet_to_pay + $library_to_pay + $medical_to_pay + $registration_to_pay;
 					$miscellaneous_1_less_stfap = $athletics_less_stfap + $cultural_less_stfap + $energy_less_stfap + $internet_less_stfap + $library_less_stfap + $medical_less_stfap + $registration_less_stfap;
 					$miscellaneous_1_amount_shouldered = $athletics_amount_shouldered + $cultural_amount_shouldered + $energy_amount_shouldered + $internet_amount_shouldered + $library_amount_shouldered + $medical_amount_shouldered + $registration_amount_shouldered;
 					$miscellaneous_1_total_less = $athletics_less_stfap + $cultural_less_stfap + $energy_less_stfap + $internet_less_stfap + $library_less_stfap + $medical_less_stfap + $registration_less_stfap + $athletics_amount_shouldered + $cultural_amount_shouldered + $energy_amount_shouldered + $internet_amount_shouldered + $library_amount_shouldered + $medical_amount_shouldered + $registration_amount_shouldered;
 					$miscellaneous_1_to_pay = $miscellaneous_1 - $miscellaneous_1_total_less;
+					$miscellaneous_1_total_to_pay = $miscellaneous_1_total - $miscellaneous_1_total_less;
 					
 					echo "<h3>Breakdown of Miscellaneous Payment</h3>";
 					echo "<table border=1>";

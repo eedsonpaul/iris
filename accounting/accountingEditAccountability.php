@@ -79,7 +79,7 @@
 <body>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
 <meta name="Content-Script-Type" content="text/javascript"> 
-<form action="editAccountability.php?id=<?php echo $id;?>" method="post">
+<form action="editAccountability.php?id=<?php echo $id;?>" method="post" name="accoutingform">
 	<input type="hidden" name="accountability_id" value="<?php echo $id; ?>"/>
 <table>
 	<tr>
@@ -173,6 +173,18 @@
 	</tr>
 	</table>
 </form>
+
+<script language="JavaScript" type="text/javascript">
+
+    var frmvalidator  = new Validator("accountingform");
+    
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("details","req","Account Details required.");
+    frmvalidator.addValidation("amount_due","req","Amount Due required.");
+   
+    </script>
+
 </body>
 </html>
 <option id="<?php $returned_value; ?>" select><?php $returned_value; ?></option></select>	

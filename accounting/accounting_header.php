@@ -24,11 +24,14 @@
 <script language="JavaScript">
 
 	function init(){
-		document.loginform.reset();
+		document.accountingform.reset();
 		
-		oStringMask = new Mask("#########");
-		oStringMask.attach(document.loginform.student_number);
+		oStringMask = new Mask("##########");
+		oStringMask.attach(document.accountingform.id);
 		
+		oStringMask = new Mask("##########");
+		oStringMask.attach(document.accountingform.student_number);
+
 	}
 </script>
 

@@ -40,26 +40,30 @@ body{
 #footer a:visited {text-decoration:none; color: maroon;}
 #footer a:hover {text-decoration: underline; color: maroon;}
 
-#nav {
+#admin_nav {
   float: right;
   padding-right: 0px;
   margin-top: -10px;
   padding-bottom: 10px;
 }
 
-#nav.right {
+#admin_nav.right {
   float: right;
-  position: fixed;
 }
 
-#nav.left {
+#admin_nav.left {
   float: left;
-  position: relative;
 }
 
-#nav a:link {text-decoration:none; color: #880606;}
-#nav a:visited {text-decoration:none; color: #880606;}
-#nav a:hover {text-decoration: underline; color: #880606;}
+#admin_nav a:link {text-decoration:none; color: #880606;}
+#admin_nav a:visited {text-decoration:none; color: #880606;}
+#admin_nav a:hover {text-decoration: underline; color: #880606;}
+
+#for_admin {
+  background: #FCADAD;
+  padding: 12px;
+  padding-top: 14px;
+}
 
 #menu {
   width: 950px;
@@ -242,10 +246,9 @@ body{
 
 
 #right_side {
-
   background: white;
   min-height: 443px;
-  height: auto;
+  height: 100%;
   padding-left: 25px;
   border: 2px solid black;
   border-left: 0px;

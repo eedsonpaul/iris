@@ -26,10 +26,8 @@
 	<p class=notice>
 		<b>REPORT<br/>
 		<u>current semester, A.Y. current academic year</u></b><br/>
-		as of day  month date time pht year
+		AS OF <?php echo date("D M d H:i:s T Y"); ?>
 	</p>
-	
-	<p class=superheadfont>academic standing of students</p>
 	<br/><br/><br/><br/>
 	
 	<!-- BODY -->

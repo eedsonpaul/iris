@@ -57,11 +57,11 @@
 <br>
 <br>
 <center>
-<form action="searchAssessment.php" method="get">
+<form action="searchAssessment.php" method="get" name="accountingform">
 	<table>
 		<tr>
 			<td>Student Number:</td>
-			<td><input type="text" name="student_number" value="XXXXXXXXX" onFocus="javascript:this.value=''">
+			<td><input type="text" name="student_number" onFocus="javascript:this.value=''">
 			</td>
 		</tr>
 	</table>

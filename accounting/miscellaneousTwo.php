@@ -73,10 +73,12 @@
 					//student fund end
 					
 					$miscellaneous_2 = $community_chest + $publication + $student_council;
+					$miscellaneous_2_total = $community_chest + $publication + $student_council;
 					$miscellaneous_2_less_stfap = $community_chest_less_stfap + $publication_less_stfap + $student_council_less_stfap;
 					$miscellaneous_2_amount_shouldered = $community_chest_amount_shouldered + $publication_amount_shouldered + $student_council_amount_shouldered;
 					$miscellaneous_2_total_less = $community_chest_less_stfap + $publication_less_stfap + $student_council_less_stfap + $community_chest_amount_shouldered + $publication_amount_shouldered + $student_council_amount_shouldered;
 					$miscellaneous_2_to_pay = $miscellaneous_2 - $miscellaneous_2_total_less;
+					$miscellaneous_2_total_to_pay = $miscellaneous_2_total - $miscellaneous_2_total_less;
 					
 					echo "<h3>Breakdown of Student Fund Payment</h3>";
 					echo "<table border=1>";

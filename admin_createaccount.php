@@ -17,28 +17,27 @@ if ($_SESSION['access_level_id'] != 3)  {
 
 <div class="main">
 
-  <div id="nav" class="left">
+  <div id="for_admin">
+    <div id="admin_nav" class="left">
       <a href="index.php?action=Logs"><span class="left">&larr;Back</span></a>
-  </div>
+    </div>
 
-  <div id="nav">
-    <span class="right">
-    <?php
-    if (isset($_SESSION['employee_id']) or isset($_SESSION['student_number']))
-    {
-      echo '<a href="index.php?action=SearchAcct">Search Account &raquo;';
-      echo '</a>';
-      if ($_SESSION['access_level_id'] == 3) {
-        echo ' | <a href="index.php?action=Logs">Logs</a> | ';
-        echo ' <a href="admin_panel.php">' . $_SESSION['username'];
-      } else if ($_SESSION['access_level_id'] == 1) {
-        echo ' | <a href="admin_accountpanel.php">' . $_SESSION['student_number'];
+    <div id="admin_nav" class="right">
+      <?php
+      if (isset($_SESSION['employee_id']) or isset($_SESSION['student_number']))
+      {
+        echo '<a href="index.php?action=SearchAcct">Search Account &raquo;';
+        echo '</a>';
+        if ($_SESSION['access_level_id'] == 3) {
+          echo ' | <a href="index.php?action=Logs">Logs</a> | ';
+          echo ' <a href="admin_panel.php">' . $_SESSION['username'];
+        } else if ($_SESSION['access_level_id'] == 1) {
+          echo ' | <a href="admin_accountpanel.php">' . $_SESSION['student_number'];
+        }
+        echo '</a>';
       }
-      echo '</a>';
-    }
-
-    ?>
-     </span>
+      ?>
+    </div>
   </div>
 
   <div id="fill_up">  
@@ -91,7 +90,7 @@ if ($_SESSION['access_level_id'] != 3)  {
       <br/>
 
       <tr>
-        <td class="login">Middle Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td class="login">Middle Name:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
         <td><input type="text" id="middle_name" name="middle_name" maxlength="50" size=25px></td>
       </tr>
       <br/>
@@ -203,7 +202,7 @@ if ($_SESSION['access_level_id'] != 3)  {
     frmvalidator.addValidation("password","req","Please enter a password.");
     frmvalidator.addValidation("password2","req","Please verify password");
     frmvalidator.addValidation("first_name","req","Please enter First Name.");
-    //frmvalidator.addValidation("middle_name","req","Please enter Middle Name.");
+    frmvalidator.addValidation("middle_name","req","Please enter Middle Name.");
     frmvalidator.addValidation("last_name","req","Please enter Last Name.");
     
     /*

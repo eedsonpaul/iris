@@ -2,8 +2,6 @@
   require_once 'accounting_header.php';
 ?>
 
-
-
 <div class="main">
 	<div id="navigation">
 
@@ -15,14 +13,7 @@
 			</ul>
 
 <br>
-
 </div>
-
-
-
-
-
-
 
 <?php 
   require_once 'cashier_footer.php';

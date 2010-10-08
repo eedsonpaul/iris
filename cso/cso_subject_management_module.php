@@ -28,29 +28,6 @@
 	$unit = $data1['unit_name'];
 ?>
 
-<div class="main">
-	<div id="navigation">
-    <ul>
-	  	<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
-        <li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
-	</ul>
-
-	<ul>
-		<li><a href="cso_students_concerns.php">STUDENT'S CONCERNS</a></li>
-		<li><a href="cso_subject_module.php">SUBJECT</a></li>
-    	<li><a href="cso_degree_programs.php">DEGREE PROGRAMS</a></li>
-		<li> <a href="cso_grades_menu.php">GRADES</a></li>
-		<li> <a href="cso_classes_menu.php">CLASSES</a></li>
-	</ul>
-	<ul>
-		<li> <a href="#">REGISTRATION</a>
-			<ul> <a href="cso_reports_utilities.php">&nbsp;&nbsp;&nbsp;REPORTS/UTILITIES</a></ul>
-			<ul> <a href="cso_preenlistment_module.php">&nbsp;&nbsp;&nbsp;Pre-enlistment Module</a></ul>
-			<ul> <a href="cso_confirmation_module.php">&nbsp;&nbsp;&nbsp;Confirmation Module</a></ul>
-            <ul><a href="cso_general_registration.php">&nbsp;&nbsp;&nbsp;General Registration Module</a></ul>
-		</li>
-	</ul>
-	</div>
 <div id="right_side">
 	<p><a href='javascript:history.go(-1)'>Back</a></p>
 	<p>
@@ -79,17 +56,16 @@
         <th width="86"><div align="center"><strong>Minimum Year Level</strong></div></td>
         <th width="81"><div align="center"><strong>Degree Level</strong></div></td>
         <th width="87"><div align="center"><strong>Pre-requisites</strong></div></td>
-      	<th width="90"><div align="center"><strong>Action</strong></div></td>      </tr>
       
         <?php
-			include("connect_to_database.php");
-			$query = "SELECT *from subject";
-			$result = mysql_query($query);
+		include("connect_to_database.php");
+		$query = "SELECT *from subject";
+		$result = mysql_query($query);
         	while ($row = mysql_fetch_array($result)) {
 				extract($row);       
-			?>
+	?>
       <tr>
-        <td><div align="right"><strong><?php echo $course_code;?></strong></div></td>
+        <td><div align="right"><strong><?php echo strtoupper($course_code);?></strong></div></td>
         <td><strong><?php echo $subject_title;?></strong><br>
         <strong>Full Name:</strong> <?php extract($row); echo $subject_title;?><br>
         <strong>Title:</strong> <?php extract($row); echo $subject_title;?><br>
@@ -108,8 +84,33 @@
         <td><div align="center"><?php extract($row); echo $units;?></div></td>
         <td><div align="center"><?php extract($row); //echo //$minimum_year_level;?></div></td>
         <td><div align="center"><?php extract($row); echo $degree_level;?></div></td>
-        <td><div align="center"><?php extract($row); //echo //$pre_requisites;?></div></td>
-        <td><strong><center>Edit | Remove</center></strong></td>
+        <td><div align="center"><b>
+		<?php
+			$query1 = "SELECT prereq_course_code from prerequisite WHERE course_code = '$course_code'";
+			$result1 = mysql_query($query1);
+			$count = 0;
+        		while ($row = mysql_fetch_array($result1)) {
+				//echo $row['prereq_course_code'].',';
+				$count++;
+			} 
+			
+			if($count!=0) {
+				if($count>1) {
+				$query1 = "SELECT prereq_course_code from prerequisite WHERE course_code = '$course_code'";
+				$result1 = mysql_query($query1);
+        				while ($row = mysql_fetch_array($result1)) {
+						echo strtoupper($row['prereq_course_code']).',';	
+					}
+				} else {
+					$query1 = "SELECT prereq_course_code from prerequisite WHERE course_code = '$course_code'";
+					$result1 = mysql_query($query1);
+        				while ($row = mysql_fetch_array($result1)) {
+						echo strtoupper($row['prereq_course_code']);	
+					}
+				}	
+			}
+		?>
+	</b></div></td>
       </tr>
       <?php } ?>
     </table>

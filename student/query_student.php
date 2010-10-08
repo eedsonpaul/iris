@@ -1,5 +1,7 @@
 <?php
 
+	$employer_name	= " ";
+    $employer_address = " ";    
 
 
 function getScholarshipId($student_number){
@@ -105,7 +107,7 @@ function getProgramCode($student_number){
 	while($row = mysql_fetch_array($result)){		
 		$program_code = $row['program_code'];
 	 }
-		return $program_codew;
+		return $program_code;
 }
 function getProgramRevCode($student_number){
 	$result=mysql_query("SELECT program_rev_code from student where student_number=$student_number");	 
@@ -338,7 +340,7 @@ function getLastUpdatedBy($student_number){
 	 }
 		return $last_updated_by;
 }
-function getPresentHomeNumber($student_number){
+function getHomeNumber($student_number){
 	$result=mysql_query("SELECT home_house_number from student where student_number=$student_number");	 
 	while($row = mysql_fetch_array($result)){		
 		$home_house_number = $row['home_house_number'];
@@ -436,6 +438,13 @@ function getGuardianHouseNum($student_number){
 	 }
 		return $guardian_house_number;
 }
+function getGuardianStreet($student_number){
+	$result=mysql_query("SELECT guardian_street from student where student_number=$student_number");	 
+	while($row = mysql_fetch_array($result)){		
+		$guardian_street = $row['guardian_street'];
+	 }
+		return $guardian_street;
+}
 function getGuardianBarangay($student_number){
 	$result=mysql_query("SELECT guardian_barangay from student where student_number=$student_number");	 
 	while($row = mysql_fetch_array($result)){		
@@ -453,56 +462,56 @@ function getGuardianCityMunicipality($student_number){
 function getGuardianProvince($student_number){
 	$result=mysql_query("SELECT guardian_province from student where student_number=$student_number");	 
 	while($row = mysql_fetch_array($result)){		
-		$guardian_province  = $row['guardian_province '];
+		$guardian_province  = $row['guardian_province'];
 	 }
 		return $guardian_province;
 }
 function getGuardianContactNum($student_number){
 	$result=mysql_query("SELECT guardian_contact_number from student where student_number=$student_number");	 
 	while($row = mysql_fetch_array($result)){		
-		$guardian_contact_number  = $row['guardian_contact_number '];
+		$guardian_contact_number  = $row['guardian_contact_number'];
 	 }
 		return $guardian_contact_number;
 }
-function getReciepientName($student_number){
-	$result=mysql_query("SELECT recepient_name from student where student_number=$student_number");	 
+function getRecipientName($student_number){
+	$result=mysql_query("SELECT recipient_name from student where student_number=$student_number");	 
 	while($row = mysql_fetch_array($result)){		
-		$recepient_name  = $row['recepient_name '];
+		$recipient_name  = $row['recipient_name'];
 	 }
-		return $recepient_name;
+		return $recipient_name;
 }
-function getReciepientStreet($student_number){
-	$result=mysql_query("SELECT recepient_street from student where student_number=$student_number");	 
+function getRecipientStreet($student_number){
+	$result=mysql_query("SELECT recipient_street from student where student_number=$student_number");	 
 	while($row = mysql_fetch_array($result)){		
-		$recepient_street  = $row['recepient_street '];
+		$recipient_street  = $row['recipient_street'];
 	 }
-		return $recepient_street;
+		return $recipient_street;
 }
-function getReciepientCity($student_number){
-	$result=mysql_query("SELECT recepient_city from student where student_number=$student_number");	 
+function getRecipientCity($student_number){
+	$result=mysql_query("SELECT recipient_city from student where student_number=$student_number");	 
 	while($row = mysql_fetch_array($result)){		
-		$recepient_city= $row['recepient_city '];
+		$recipient_city= $row['recipient_city'];
 	 }
-		return $recepient_city;
+		return $recipient_city;
 }
-function getReciepientZipcode($student_number){
-	$result=mysql_query("SELECT recepient_zipcode from student where student_number=$student_number");	 
+function getRecipientZipcode($student_number){
+	$result=mysql_query("SELECT recipient_zipcode from student where student_number=$student_number");	 
 	while($row = mysql_fetch_array($result)){		
-		$recepient_zipcode= $row['recepient_zipcode '];
+		$recipient_zipcode= $row['recipient_zipcode'];
 	 }
-		return $recepient_zipcode;
+		return $recipient_zipcode;
 }
-function getReciepientPhone($student_number){
-	$result=mysql_query("SELECT recepient_phone from student where student_number=$student_number");	 
+function getRecipientPhone($student_number){
+	$result=mysql_query("SELECT recipient_phone from student where student_number=$student_number");	 
 	while($row = mysql_fetch_array($result)){		
-		$recepient_phone= $row['recepient_phone '];
+		$recipient_phone= $row['recipient_phone'];
 	 }
-		return $recepient_phone;
+		return $recipient_phone;
 }
 function getMaxUnitsAllowed($student_number){
 	$result=mysql_query("SELECT max_units_allowed from student where student_number=$student_number");	 
 	while($row = mysql_fetch_array($result)){		
-		$max_units_allowed= $row['max_units_allowed '];
+		$max_units_allowed= $row['max_units_allowed'];
 	 }
 		return $max_units_allowed;
 }

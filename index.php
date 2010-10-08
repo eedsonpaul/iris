@@ -20,7 +20,9 @@ require_once 'admin_sql_query.php';
 	  else if ($_SESSION['access_level_id'] == 8) redirect('divisionosa/clerk/clerk.php');
   ?>
   <div class="main">
-    <div id="nav">
+
+  <div id="for_admin">
+    <div id="admin_nav">
       <?php
       if (isset($_SESSION['employee_id']) or isset($_SESSION['student_number']))
       {
@@ -37,6 +39,7 @@ require_once 'admin_sql_query.php';
       }
       ?>
     </div>
+  </div>
 
   <table width="100%" cellspacing=0>
     <tr>
@@ -111,7 +114,7 @@ require_once 'admin_sql_query.php';
               
               <td align="right">
                 <div id="override">
-                <a href="divisionosa/osa/osa.php" target="_new">
+                <a href="divisionosa/osa/osa.php" target="_tab">
                 <input type="submit" class="submit" name="action" value="Override&rarr;">
                 </div>
                 </a>
@@ -141,7 +144,7 @@ require_once 'admin_sql_query.php';
               </td>
               <td>
                 <div id="override">
-                <a href="cso/cso.php" target="_new">
+                <a href="cso/cso.php" target="_tab">
                 <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
                 </a>
               </td>
@@ -227,7 +230,7 @@ require_once 'admin_sql_query.php';
               </td>
               <td>
                 <div id="override">
-                <a href="accounting/library.php" target="blank">
+                <a href="accounting/library.php" target="_tab">
                 <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
                 </a>
               </td>
@@ -255,7 +258,7 @@ require_once 'admin_sql_query.php';
               </td>
               <td>
                 <div id="override">
-                <a href="accounting/cashier.php" target="blank">
+                <a href="accounting/cashier.php" target="_tab">
                 <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
                 </a>
               </td>

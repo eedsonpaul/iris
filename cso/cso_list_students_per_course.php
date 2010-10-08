@@ -17,7 +17,7 @@
   <p><a href="javascript:history.go(-1)"><b>BACK</b></a></p>
 <body>
 	<!-- HEADER -->
-	<p align=center>UP LOGO HERE</p>
+	<p align=center><img src="up_logo.jpg" width=80 height=80></p>
 	<p class=headfont>
 		UNIVERSITY OF THE PHILIPPINES VISAYAS CEBU COLLEGE
 		<br/><br/>
@@ -26,7 +26,7 @@
 	<p class=notice>
 		<b>REPORT<br/>
 		<u>current semester, A.Y. current academic year</u></b><br/>
-		as of day  month date time pht year
+		AS OF <?php echo date("D M d H:i:s T Y"); ?>
 	</p>
 	<br/><br/><br/><br/>
 	

@@ -8,8 +8,6 @@
 			$subject = $_POST['subject'];
 			$unit = 0;
 			$count = 0;
-			$semester = $_SESSION['current_semester'];
-			$academic_year = $_SESSION['current_year'];
 			
 			$sql = "SELECT * from section where course_code like '$subject%'";
 			$res = mysql_query($sql);

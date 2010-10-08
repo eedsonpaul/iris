@@ -1,5 +1,6 @@
 <?php
 require 'dbconnect.php';
+require_once 'query_student.php';
 require_once 'function_subject.php';
 require_once 'function_student.php';
 require_once 'function_section.php';
@@ -15,7 +16,7 @@ require_once 'function_section_schedule.php';
 	//CHECK TOTAL # OF UNITS ENLISTED
 	$total_units = totalUnitsAdded($student_number,$course_code);
 	//CHECK MAX UNITS STUDENT IS ALLOWED TO TAKE
-	$max_units_allowed = getMaxUnits($student_number);
+	$max_units_allowed = getMaxUnitsAllowed($student_number);
 	
 	if(($total_units+$units)<=$max_units_allowed){
 	

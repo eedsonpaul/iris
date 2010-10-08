@@ -88,15 +88,20 @@ table th {
 	text-weight: bold;
 	font-size: 11px;
 	padding: 1px;
+	border-style: solid;
+	border-color: #000000;
+	border-width: 1px;
 }
 
 table tr {
-	border-right-width: 1px;
-	border-right-style: solid;
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
+	border-style: solid;
+	border-color: #000000;
+	border-width: 1px;
 }
 
 table td {
 	padding: 5px;
+	border-style: solid;
+	border-color: #000000;
+	border-width: 1px;
 }

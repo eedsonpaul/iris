@@ -3,7 +3,6 @@
 ?>
 
 <div class="main">
-<center><h1>SEARCH ACCOUNTABILITY</h1></center>
 <title></title>
 <p>
   <?php

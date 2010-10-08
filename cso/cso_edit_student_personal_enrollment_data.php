@@ -26,32 +26,6 @@
 	$res1 = mysql_query("SELECT unit_name FROM unit WHERE unit_id='$unit_id'");
 	$data1 = mysql_fetch_array($res1);
 	$unit = $data1['unit_name'];
-?>
-<div class="main">
-	<div id="navigation">
-    <ul>
-	  	<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
-        <li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
-	</ul>
-
-	<ul>
-		<li><a href="cso_students_concerns.php">STUDENT'S CONCERNS</a></li>
-		<li><a href="cso_subject_module.php">SUBJECT</a></li>
-    	<li><a href="cso_degree_programs.php">DEGREE PROGRAMS</a></li>
-		<li> <a href="cso_grades_menu.php">GRADES</a></li>
-		<li> <a href="cso_classes_menu.php">CLASSES</a></li>
-	</ul>
-	<ul>
-		<li> <a href="#">REGISTRATION</a>
-			<ul> <a href="cso_reports_utilities.php">&nbsp;&nbsp;&nbsp;REPORTS/UTILITIES</a></ul>
-			<ul> <a href="cso_preenlistment_module.php">&nbsp;&nbsp;&nbsp;Pre-enlistment Module</a></ul>
-			<ul> <a href="cso_confirmation_module.php">&nbsp;&nbsp;&nbsp;Confirmation Module</a></ul>
-            <ul><a href="cso_general_registration.php">&nbsp;&nbsp;&nbsp;General Registration Module</a></ul>
-		</li>
-	</ul>
-	</div>
-
-  <?php
 
 	include("connect_to_database.php");
 	
@@ -73,6 +47,7 @@
 		echo "<script> alert('Student number does not exist. Please input another student number.'); window.location.href = 'cso_search_edit_student_personal_enrollment_data.php';</script>";
 	} else {
   ?>
+  
 <div id="right_side">
 	<p>
     	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
@@ -94,7 +69,7 @@
       </tr>
     </table>
   <p>&nbsp;</p>
-  <form action="" method="post">
+  <form action="cso_process_add_student_record.php?id=<?php echo $student_ID;?>&action=ADD PERSONAL INFO" method="post" name = "csoform">
     <table width="494" border="0" align="center" class="tab">
      <tr>
         <td width="180"><div align="right">Student ID:</div></td>
@@ -103,18 +78,61 @@
       </tr>
    <?php 
    		//include("connect_to_database.php");
+			$civil_status = " ";
+			$gender = " ";
+			$birthdate = " ";
+			$gender = " ";
+			$eadd = " ";
+			$civil_stat = " ";
+			$contact_no = " ";
+			$father = " ";
+			$mother = " ";
+			$pres_strt = " ";
+			$pres_brgy = " ";
+			$pres_city = " ";
+			$pres_contact = " ";
+			$home_number = " ";
+			$home_strt = " ";
+			$home_brgy = " ";
+			$home_city = " ";
+			$guard_strt = " ";
+			$guard_brgy = " ";
+			$guard_brgy = " ";
+			$guard_city = " ";
+			$guard_contact = " ";
+			$pres_number = " ";
+
 		$query = "SELECT *from student WHERE student_number = '$student_ID'";
 		$result = mysql_query($query);
         while ($row = mysql_fetch_array($result)) {
-			$maiden_name = "";
 			$last_name = $row['last_name'];
 			$first_name = $row['first_name'];
 			$middle_name = $row['middle_name'];
 			$civil_status = $row['civil_status'];
 			$gender = $row['gender'];
 			$birthdate = $row['birthdate'];
-			
-				
+			$gender = $row['gender'];
+			$eadd = $row['email_address'];
+			$civil_stat = $row['civil_status'];
+			$contact_no = $row['contact_number'];
+			$father = $row['father_name'];
+			$mother = $row['mother_name'];
+			$pres_number = $row['present_home_number'];
+			$pres_strt = $row['present_street'];
+			$pres_brgy = $row['present_barangay'];
+			$pres_city = $row['present_city_municipality'];
+			$pres_contact = $row['present_contact_number'];
+			$home_number = $row['home_house_number'];
+			$home_strt = $row['home_street'];
+			$home_brgy = $row['home_barangay'];
+			$home_city = $row['home_city_municipality'];
+			$home_contact = $row['home_contact_number'];
+			$guard = $row['guardian'];
+			$guard_number = $row['guardian_house_number'];
+			$guard_strt = $row['guardian_street'];
+			$guard_brgy = $row['guardian_barangay'];
+			$guard_city = $row['guardian_city_municipality'];
+			$guard_contact = $row['guardian_contact_number'];				
 		}
 	?> 
       <tr>
@@ -153,32 +171,32 @@
       <tr>
         <td><div align="right">Civil Status:</div></td>
         <td>&nbsp;</td>
-        <td colspan="2"><input type="text" name="civil_status" id="civil_status"></td>
+        <td colspan="2"><input type="text" name="civil_status" id="civil_status" value="<?php echo $civil_status;?>"></td>
       </tr>
       <tr>
         <td><div align="right">Birthdate:</div></td>
         <td>*</td>
-        <td colspan="2"><input type="text" name="birthdate" id="birthdate"></td>
+        <td colspan="2"><input type="text" name="birthdate" id="birthdate" value="<?php echo $birthdate;?>"> (yyyy-mm-dd)</td>
       </tr>
       <tr>
         <td><div align="right">LandLine/Mobile Phone #:</div></td>
         <td>&nbsp;</td>
-        <td colspan="2"><input type="text" name="phone_no" id="phone_no"></td>
+        <td colspan="2"><input type="text" name="phone_no" id="phone_no" value="<?php echo $contact_no;?>"></td>
       </tr>
       <tr>
         <td><div align="right">Email Address:</div></td>
         <td>*</td>
-        <td colspan="2"><input type="text" name="email_address" id="email_address"></td>
+        <td colspan="2"><input type="text" name="email_address" id="email_address" value="<?php echo $eadd;?>"></td>
       </tr>
       <tr>
         <td><div align="right">Father's Name:</div></td>
         <td>&nbsp;</td>
-        <td colspan="2"><input type="text" name="fathers_name" id="fathers_name"></td>
+        <td colspan="2"><input type="text" name="fathers_name" id="fathers_name" value="<?php echo $father;?>"></td>
       </tr>
       <tr>
         <td><div align="right">Mother's Name:</div></td>
         <td>&nbsp;</td>
-        <td colspan="2"><input type="text" name="mothers_name" id="mothers_name"></td>
+        <td colspan="2"><input type="text" name="mothers_name" id="mothers_name" value="<?php echo $mother;?>"></td>
       </tr>
       <tr>
         <td><div align="right"></div></td>
@@ -193,27 +211,27 @@
       <tr>
         <td><div align="right">House/Bldg #:</div></td>
         <td>&nbsp;</td>
-        <td colspan="2"><input type="text" name="present_house_no" id="present_house_no"></td>
+        <td colspan="2"><input type="text" name="present_house_no" id="present_house_no" value="<?php echo $pres_number;?>"></td>
       </tr>
       <tr>
         <td><div align="right">Street:</div></td>
         <td>&nbsp;</td>
-        <td colspan="2"><input type="text" name="present_street" id="present_street"></td>
+        <td colspan="2"><input type="text" name="present_street" id="present_street" value="<?php echo $pres_strt;?>"></td>
       </tr>
       <tr>
         <td><div align="right">Barangay/District:</div></td>
         <td>*</td>
-        <td colspan="2"><input type="text" name="present_brgy" id="present_brgy"></td>
+        <td colspan="2"><input type="text" name="present_brgy" id="present_brgy" value="<?php echo $pres_brgy;?>"></td>
       </tr>
       <tr>
         <td><div align="right">City/Municipality:</div></td>
         <td>*</td>
-        <td colspan="2"><input type="text" name="present_city" id="present_city"></td>
+        <td colspan="2"><input type="text" name="present_city" id="present_city" value="<?php echo $pres_city;?>"></td>
       </tr>
       <tr>
         <td><div align="right">Phone #:</div></td>
         <td>&nbsp;</td>
-        <td colspan="2"><input type="text" name="present_phone_no" id="present_phone_no"></td>
+        <td colspan="2"><input type="text" name="present_phone_no" id="present_phone_no" value="<?php echo $pres_contact;?>"></td>
       </tr>
       <tr>
         <td><div align="right"></div></td>
@@ -228,27 +246,27 @@
       <tr>
         <td><div align="right">House/Bldg #:</div></td>
         <td>&nbsp;</td>
-        <td colspan="2"><input type="text" name="home_house_no" id="home_house_no"></td>
+        <td colspan="2"><input type="text" name="home_house_no" id="home_house_no" value="<?php echo $home_number;?>"></td>
       </tr>
       <tr>
         <td><div align="right">Street:</div></td>
         <td>&nbsp;</td>
-        <td colspan="2"><input type="text" name="home_street" id="home_street"></td>
+        <td colspan="2"><input type="text" name="home_street" id="home_street" value="<?php echo $home_strt;?>"></td>
       </tr>
       <tr>
         <td><div align="right">Barangay/District:</div></td>
         <td>*</td>
-        <td colspan="2"><input type="text" name="home_brgy" id="home_brgy"></td>
+        <td colspan="2"><input type="text" name="home_brgy" id="home_brgy" value="<?php echo $home_brgy;?>"></td>
       </tr>
       <tr>
         <td><div align="right">City/Municipality:</div></td>
         <td>*</td>
-        <td colspan="2"><input type="text" name="home_city" id="home_city"></td>
+        <td colspan="2"><input type="text" name="home_city" id="home_city" value="<?php echo $home_city;?>"></td>
       </tr>
       <tr>
         <td><div align="right">Phone #:</div></td>
         <td>&nbsp;</td>
-        <td colspan="2"><input type="text" name="home_phone_no" id="home_phone_no"></td>
+        <td colspan="2"><input type="text" name="home_phone_no" id="home_phone_no" value="<?php echo $home_contact;?>"></td>
       </tr>
       <tr>
         <td><div align="right"></div></td>
@@ -263,32 +281,32 @@
       <tr>
         <td><div align="right">Contact Person/Guardian's Name:</div></td>
         <td>*</td>
-        <td colspan="2"><input type="text" name="contact_person_name" id="contact_person_name"></td>
+        <td colspan="2"><input type="text" name="contact_person_name" id="contact_person_name" value="<?php echo $guard;?>"></td>
       </tr>
       <tr>
         <td><div align="right">Landline/Mobile Phone #:</div></td>
         <td>&nbsp;</td>
-        <td colspan="2"><input type="text" name="contact_person_phone_no" id="contact_person_phone_no"></td>
+        <td colspan="2"><input type="text" name="contact_person_phone_no" id="contact_person_phone_no" value="<?php echo $guard_contact;?>"></td>
       </tr>
       <tr>
         <td><div align="right">House/Bldg #:</div></td>
         <td>&nbsp;</td>
-        <td colspan="2"><input type="text" name="contact_person_house_no" id="contact_person_house_no"></td>
+        <td colspan="2"><input type="text" name="contact_person_house_no" id="contact_person_house_no" value="<?php echo $guard_number;?>"></td>
       </tr>
       <tr>
         <td><div align="right">Street:</div></td>
         <td>&nbsp;</td>
-        <td colspan="2"><input type="text" name="contact_person_street" id="contact_person_street"></td>
+        <td colspan="2"><input type="text" name="contact_person_street" id="contact_person_street" value="<?php echo $guard_strt;?>"></td>
       </tr>
       <tr>
         <td><div align="right">Barangay/District:</div></td>
         <td>*</td>
-        <td colspan="2"><input type="text" name="contact_person_brgy" id="contact_person_brgy"></td>
+        <td colspan="2"><input type="text" name="contact_person_brgy" id="contact_person_brgy" value="<?php echo $guard_brgy;?>"></td>
       </tr>
       <tr>
         <td><div align="right">City/Municipality</div></td>
         <td>*</td>
-        <td colspan="2"><input type="text" name="contact_person_city" id="contact_person_city"></td>
+        <td colspan="2"><input type="text" name="contact_person_city" id="contact_person_city" value="<?php echo $guard_city;?>"></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
@@ -299,6 +317,7 @@
         <td><div align="right">
           <input type="submit" name="update_personal_enrollment_data" id="update_personal_enrollment_data" value="UPDATE">
         </div></td>
+  </form>
         <td>&nbsp;</td>
         <td width="137"><div align="center">
           <a href ="cso_edit_student_personal_enrollment_data.php?action=NOT&id=<?php echo $student_ID;?>"><input type="submit" name="reset_personal_enrollment_data2" id="reset_personal_enrollment_data2" value="RESET"></a>
@@ -306,8 +325,28 @@
         <td width="140"><a href="javascript:history.go(-1)"><input type="submit" name="cancel_personal_enrollment_data3" id="cancel_personal_enrollment_data3" value="CANCEL"></a></td>
       </tr>
     </table>
+	
+<script language="JavaScript" type="text/javascript">
+
+    var frmvalidator  = new Validator("csoform");
+    
+    frmvalidator.EnableMsgsTogether();
+	
+    frmvalidator.addValidation("last_name","req","Input Last Name.");
+    frmvalidator.addValidation("first_name","req","Input First Name.");
+    frmvalidator.addValidation("birthdate","req","Input Birthdate.");
+    frmvalidator.addValidation("email_address","email");
+	frmvalidator.addValidation("present_brgy","req","Input Present Barangay.");
+	frmvalidator.addValidation("present_city","req","Input Present City.");
+	frmvalidator.addValidation("home_brgy","req","Input Home Barangay.");
+	frmvalidator.addValidation("home_city","req","Input Home City.");
+	frmvalidator.addValidation("contact_person_name","req","Input Contact Person.");
+	frmvalidator.addValidation("contact_person_brgy","req","Input Contact Person Barangay.");
+	frmvalidator.addValidation("contact_person_city","req","Input Contact Person City.");
+	
+ 
+  </script>
     <p>&nbsp;</p>
-  </form>
   <p>&nbsp;</p>
 </div>
 <?php }

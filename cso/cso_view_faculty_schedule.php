@@ -27,29 +27,7 @@
 	$unit = $data1['unit_name'];
 ?>
 
-<div class="main">
-	<div id="navigation">
-    <ul>
-	  	<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
-        <li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
-	</ul>
 
-	<ul>
-		<li><a href="cso_students_concerns.php">STUDENT'S CONCERNS</a></li>
-		<li><a href="cso_subject_module.php">SUBJECT</a></li>
-    	<li><a href="cso_degree_programs.php">DEGREE PROGRAMS</a></li>
-		<li> <a href="cso_grades_menu.php">GRADES</a></li>
-		<li> <a href="cso_classes_menu.php">CLASSES</a></li>
-	</ul>
-	<ul>
-		<li> <a href="#">REGISTRATION</a>
-			<ul> <a href="cso_reports_utilities.php">&nbsp;&nbsp;&nbsp;REPORTS/UTILITIES</a></ul>
-			<ul> <a href="cso_preenlistment_module.php">&nbsp;&nbsp;&nbsp;Pre-enlistment Module</a></ul>
-			<ul> <a href="cso_confirmation_module.php">&nbsp;&nbsp;&nbsp;Confirmation Module</a></ul>
-            <ul><a href="cso_general_registration.php">&nbsp;&nbsp;&nbsp;General Registration Module</a></ul>
-		</li>
-	</ul>
-	</div>
     
 <div id="right_side">
 <?php
@@ -104,8 +82,6 @@
         <th width="167" align="center" valign="middle"><div align="center"><strong>Day / Time / Class Type / Room</strong></div></td>
         <th width="51" align="center" valign="middle"><div align="center"><strong>Units</strong></div></td>
         <th width="122" align="center" valign="middle"><div align="center"><strong># of Enrolled Students</strong></div></td>
-        <th width="132" align="center" valign="middle"><div align="center"><strong>Date Submitted</strong></div></td>
-        <th width="132" align="center" valign="middle"><div align="center"><strong>Action</strong></div></td>
       </tr>
 <?php
 	include("cso_view_search_faculty_results.php");

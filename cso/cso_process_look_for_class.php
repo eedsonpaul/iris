@@ -27,32 +27,9 @@
 	$unit = $data1['unit_name'];
 ?>
 
-<div class="main">
-	<div id="navigation">
-		<ul>
-			<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
-			<li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
-		</ul>
-		<ul>
-			<li><a href="cso_students_concerns.php">STUDENT'S CONCERNS</a></li>
-			<li><a href="cso_subject_module.php">SUBJECT</a></li>
-			<li><a href="cso_degree_programs.php">DEGREE PROGRAMS</a></li>
-			<li> <a href="cso_grades_menu.php">GRADES</a></li>
-			<li> <a href="cso_classes_menu.php">CLASSES</a></li>
-		</ul>
-		<ul>
-			<li> <a href="#">REGISTRATION</a>
-				<ul> <a href="cso_reports_utilities.php">&nbsp;&nbsp;&nbsp;REPORTS/UTILITIES</a></ul>
-				<ul> <a href="cso_preenlistment_module.php">&nbsp;&nbsp;&nbsp;Pre-enlistment Module</a></ul>
-				<ul> <a href="cso_confirmation_module.php">&nbsp;&nbsp;&nbsp;Confirmation Module</a></ul>
-				<ul><a href="cso_general_registration.php">&nbsp;&nbsp;&nbsp;General Registration Module</a></ul>
-			</li>
-		</ul>
-	</div>
-	<!-- end of div navigation -->
 	
 	<div id="right_side">
-		<p><a href="cso_classes_menu.php">Back to Menu</a></p>
+		<p><a href='javascript:history.go(-1)'>Back</a></p>
 		<p>
 			<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
 			<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
@@ -149,7 +126,7 @@
 										.$faculty_first_name. " ";
 										
 										if ($dissolved == 1) echo $faculty_last_name. "</td><td align=center width=120><b>Dissolved</b></td></tr>";
-										else if ($dissolved == 0) echo $faculty_last_name. "</td><td align=center width=120>LIST | <a href='cso_process_dissolve_class.php?id=$course_code&sec=$section'>DISSOLVE</a> | <a href='cso_edit_class.php?id=$course_code&sec=$section'>EDIT</a></td></tr>";						
+										else if ($dissolved == 0) echo $faculty_last_name. "</td><td align=center width=120><a href='cso_view_list.php?class=$course_code&section=$section''>LIST</a> | <a href='cso_process_dissolve_class.php?id=$course_code&sec=$section'>DISSOLVE</a> | <a href='cso_edit_class.php?id=$course_code&sec=$section'>EDIT</a></td></tr>";						
 				}
 				$c++;
 			}

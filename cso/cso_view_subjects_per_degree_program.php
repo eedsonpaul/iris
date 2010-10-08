@@ -26,7 +26,7 @@
 	<p class=notice>
 		<b>REPORT<br/>
 		<u>current semester, A.Y. current academic year</u></b><br/>
-		as of day  month date time pht year
+		AS OF <?php echo date("D M d H:i:s T Y"); ?>
 	</p>
 	<br/><br/><br/><br/>
 	
@@ -43,7 +43,7 @@
 			echo "<p class=superheadfont><u>".$degree_name ."</u></p>";
 			
 			echo "<center><table width=900>
-				<tr>
+				<tr bgcolor=#D5D5D5>
 					<th width=150>COURSE CODE</th>
 					<th width=600>Subject Title</th>
 					<th width=150>UNITS</th>
@@ -63,7 +63,7 @@
 				}
 			}
 			
-			echo "</table></center><br/><br/>";
+			echo "</table></center><br/><br/><br/>";
 		}
 		
 	?>

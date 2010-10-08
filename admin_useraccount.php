@@ -14,9 +14,8 @@ require_once 'admin_db_connect.php';
 require_once 'admin_header.php';
 require_once 'admin_sql_query.php';
 
-if ($_SESSION['access_level_id'] != 3)  {
+if (!isset($_SESSION['access_level_id']))
   redirect('error.php');
-}
 ?>
 
 <?php
@@ -56,47 +55,50 @@ $id = $user['employee_id'];
 ?>
 <div class="main">
 
-  <div id="nav" class="left">
-    <?php if ($user['access_level_id'] == 3) { ?>
-      <a href="index.php?action=SysAd"><span class="left">&larr;Back to list</span></a>
-    <?php } else if ($user['access_level_id'] == 2) { ?>
-      <a href="index.php?action=Faculty"><span class="left">&larr;Back to list</span></a>
-    <?php } else if ($user['access_level_id'] == 4) { ?>
-      <a href="index.php?action=Acctg"><span class="left">&larr;Back to list</span></a>
-    <?php } else if ($user['access_level_id'] == 5) { ?>
-      <a href="index.php?action=Lib"><span class="left">&larr;Back to list</span></a>
-    <?php } else if ($user['access_level_id'] == 6) { ?>
-      <a href="index.php?action=Cashier"><span class="left">&larr;Back to list</span></a>
-    <?php } else if ($user['access_level_id'] == 7) { ?>
-      <a href="index.php?action=Cso"><span class="left">&larr;Back to list</span></a>
-    <?php } else if ($user['access_level_id'] == 8) { ?>
-      <a href="index.php?action=Osa"><span class="left">&larr;Back to list</span></a>
-    <?php } else if ($user['access_level_id'] == 9) { ?>
-      <a href="index.php?action=Clerk"><span class="left">&larr;Back to list</span></a>
+  <div id="for_admin">
+    <?php if ($_SESSION['access_level_id'] == 3) { ?>
+    <div id="admin_nav" class="left">
+      <?php if ($user['access_level_id'] == 3) { ?>
+        <a href="index.php?action=SysAd"><span class="left">&larr;Back to list</span></a>
+      <?php } else if ($user['access_level_id'] == 2) { ?>
+        <a href="index.php?action=Faculty"><span class="left">&larr;Back to list</span></a>
+      <?php } else if ($user['access_level_id'] == 4) { ?>
+        <a href="index.php?action=Acctg"><span class="left">&larr;Back to list</span></a>
+      <?php } else if ($user['access_level_id'] == 5) { ?>
+        <a href="index.php?action=Lib"><span class="left">&larr;Back to list</span></a>
+      <?php } else if ($user['access_level_id'] == 6) { ?>
+        <a href="index.php?action=Cashier"><span class="left">&larr;Back to list</span></a>
+      <?php } else if ($user['access_level_id'] == 7) { ?>
+        <a href="index.php?action=Cso"><span class="left">&larr;Back to list</span></a>
+      <?php } else if ($user['access_level_id'] == 8) { ?>
+        <a href="index.php?action=Osa"><span class="left">&larr;Back to list</span></a>
+      <?php } else if ($user['access_level_id'] == 9) { ?>
+        <a href="index.php?action=Clerk"><span class="left">&larr;Back to list</span></a>
+      <?php } ?>
+    </div>
+
+    <div id="admin_nav" class="right">
+      <?php
+      if (isset($_SESSION['employee_id']) or isset($_SESSION['student_number']))
+      {
+        echo '<a href="index.php?action=SearchAcct">Search Account &raquo;';
+        echo '</a>';
+        if ($_SESSION['access_level_id'] == 3) {
+          echo ' | <a href="index.php?action=Logs">Logs</a> | ';
+          echo ' <a href="admin_panel.php">' . $_SESSION['username'];
+        } else if ($_SESSION['access_level_id'] == 1) {
+          echo ' | <a href="admin_accountpanel.php">' . $_SESSION['student_number'];
+        }
+        echo '</a>';
+      }
+      ?>
+    </div>
+    <?php } else { ?>
+    <div id="admin_nav" class="left">
+      <a href="javascript:history.back(-1);">&larr;Back</a>
+    </div>
     <?php } ?>
   </div>
-
-  <div id="nav">
-    <span class="right">
-    <?php
-    if (isset($_SESSION['employee_id']) or isset($_SESSION['student_number']))
-    {
-      echo '<a href="index.php?action=SearchAcct">Search Account &raquo;';
-      echo '</a>';
-      if ($_SESSION['access_level_id'] == 3) {
-        echo ' | <a href="index.php?action=Logs">Logs</a> | ';
-        echo ' <a href="admin_panel.php">' . $_SESSION['username'];
-      } else if ($_SESSION['access_level_id'] == 1) {
-        echo ' | <a href="admin_accountpanel.php">' . $_SESSION['student_number'];
-      }
-      echo '</a>';
-    }
-
-    ?>
-     </span>
-  </div>
-  <br/>
-
 
   <div id="fill_up">
   <form method="post" action= "admin_transact_user.php">
@@ -393,12 +395,11 @@ $id = $user['employee_id'];
 } else if (isset($_GET['reset'])) {
 ?>
 <div class="main">
-  <div id="nav" class="left">
+  <div id="admin_nav" class="left">
       <a href="javascript:history.back(-1);"><span class="left">&larr;Back</span></a>
   </div>
 
-  <div id="nav">
-    <span class="right">
+  <div id="admin_nav" class="right">
     <?php
     if (isset($_SESSION['employee_id']) or isset($_SESSION['student_number']))
     {

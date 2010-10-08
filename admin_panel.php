@@ -14,27 +14,27 @@ require_once 'admin_http.php';
 
 <div class="main">
 
-  <div id="nav" class="left">
-      <a href="index.php?action=Logs"><span class="left">&larr;Back</span></a>
-  </div>
+  <div id="for_admin">
+    <div id="admin_nav" class="left">
+        <a href="index.php?action=Logs"><span class="left">&larr;Back</span></a>
+    </div>
 
-  <div id="nav">
-    <span class="right">
-    <?php
-    if (isset($_SESSION['employee_id']) or isset($_SESSION['student_number']))
-    {
-      echo '<a href="index.php?action=SearchAcct">Search Account &raquo;';
-      echo '</a>';
-      if ($_SESSION['access_level_id'] == 3) {
-        echo ' | <a href="index.php?action=Logs">Logs</a> | ';
-        echo ' <a href="admin_panel.php">' . $_SESSION['username'];
-      } else if ($_SESSION['access_level_id'] == 1) {
-        echo ' | <a href="admin_accountpanel.php">' . $_SESSION['student_number'];
+    <div id="admin_nav" class="right">
+      <?php
+      if (isset($_SESSION['employee_id']) or isset($_SESSION['student_number']))
+      {
+        echo '<a href="index.php?action=SearchAcct">Search Account &raquo;';
+        echo '</a>';
+        if ($_SESSION['access_level_id'] == 3) {
+          echo ' | <a href="index.php?action=Logs">Logs</a> | ';
+          echo ' <a href="admin_panel.php">' . $_SESSION['username'];
+        } else if ($_SESSION['access_level_id'] == 1) {
+          echo ' | <a href="admin_accountpanel.php">' . $_SESSION['student_number'];
+        }
+        echo '</a>';
       }
-      echo '</a>';
-    }
-    ?>
-     </span>
+      ?>
+    </div>
   </div><br/>
 
   <table class=table_panel width="85%" cellspacing=0>

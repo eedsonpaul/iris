@@ -20,8 +20,8 @@
 	
 
 	
-		<br><center><h4>ADD ACCOUNTABILITY</h4></center><br><br><br><br><br><br><br><br><br>
-		<form action="accountingAddAccountabilitySearch.php?search_option=<?php $_GET['search_option'];?>&search_query=<?php $_GET['search_query'];?>" method="get">
+		<br><br><br><br><br><br><br><br><br><br><br><br>
+		<form action="accountingAddAccountabilitySearch.php?search_option=<?php $_GET['search_option'];?>&search_query=<?php $_GET['search_query'];?>" method="get" name="accountingform">
 <font size="-3"><table>
 	<tr>
 		<td>Enter <select name="search_option">
@@ -38,6 +38,18 @@
 	</tr>
 	</table>
     </font>
+	</form>
+	
+	<script language="JavaScript" type="text/javascript">
+
+    var frmvalidator  = new Validator("accountingform");
+    
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("search_query","req","Query Required.");
+   
+    </script>
+	
     <br>
     <?php
 	include('connect.php');

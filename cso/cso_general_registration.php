@@ -27,29 +27,21 @@
 	$data1 = mysql_fetch_array($res1);
 	$unit = $data1['unit_name'];
 ?>
-<div class="main">
-	<div id="navigation">
-    <ul>
-	  	<li><a href="cso.php"><center>CSO FUNCTIONS</center></a></li>
-        <li><a href="cso_personal_data_employee_login.php">PERSONAL DATA/EMPLOYEE LOGIN</a></li>
-	</ul>
+<script language="JavaScript">
 
-	<ul>
-		<li><a href="cso_students_concerns.php">STUDENT'S CONCERNS</a></li>
-		<li><a href="cso_subject_module.php">SUBJECT</a></li>
-    	<li><a href="cso_degree_programs.php">DEGREE PROGRAMS</a></li>
-		<li> <a href="cso_grades_menu.php">GRADES</a></li>
-		<li> <a href="cso_classes_menu.php">CLASSES</a></li>
-	</ul>
-	<ul>
-		<li> <a href="#">REGISTRATION</a>
-			<ul> <a href="cso_reports_utilities.php">&nbsp;&nbsp;&nbsp;REPORTS/UTILITIES</a></ul>
-			<ul> <a href="cso_preenlistment_module.php">&nbsp;&nbsp;&nbsp;Pre-enlistment Module</a></ul>
-			<ul> <a href="cso_confirmation_module.php">&nbsp;&nbsp;&nbsp;Confirmation Module</a></ul>
-            <ul><a href="cso_general_registration.php">&nbsp;&nbsp;&nbsp;General Registration Module</a></ul>
-		</li>
-	</ul>
-	</div>
+	function init(){
+		document.csoform.reset();
+		document.formcso.reset();
+		
+		oStringMask = new Mask("#########");
+		oStringMask.attach(document.csoform.id);
+		
+		oStringMask = new Mask("#########");
+		oStringMask.attach(document.formcso.id);
+	
+		
+	}
+</script>
     
 <div id="right_side">
 	<p>
@@ -66,7 +58,7 @@
         <td>&nbsp;</td>
         <td>&nbsp;</td>
       </tr>
-      <form action=" cso_enroll_student.php" method="get">
+      <form action=" cso_enroll_student.php" method="get" name="csoform">
       <tr>
         <td colspan="2"><div align="right" class="normaltext">Enter Student Number:</div></td>
         <td width="11">&nbsp;</td>
@@ -82,7 +74,7 @@
         </label></td>
       </tr>
       </form>
-      <form action="cso_enroll_student.php" method="get">
+      <form action="cso_enroll_student.php" method="get" name="formcso">
       <tr>
         <td colspan="2"><div align="center" class="normaltext"><strong>STAMP REGISTERED</strong></div></td>
         <td>&nbsp;</td>
@@ -113,8 +105,8 @@
         	<br /><a href="cso_search_student_schedule.php">View Student Schedule</a>
             <br /><a href="cso_select_building.php">View Room Utilization</a>
             <br /><a href="cso_search_faculty.php">View Faculty Schedule</a>
-            <br />View Class List
-            <br />View Officially Enrolled Students
+            <br /><a href="cso_print_classlist.php">View Class List</a>
+            <br /><a href="cso_list_officially_enrolled_students.php">View Officially Enrolled Students</a>
             <br /><a href="cso_view_students_confirmed_not_enrolled.php">View All Unenrolled With Confirmed Subjects</a>
             <br /><a href="cso_edit_class_restrictions_search.php">Edit Class Restrictions</a></td>
         </tr>

@@ -1,19 +1,19 @@
 <?php
 //File: CSO View Faculty Schedule Search Results
+//Version 2: Date: October 08, 2010
 //Version 1: Date: October 06, 2010
 //By: Mae Ann A. Amarado
 //CSO TEAM
 
+	//displays faculty search results
 	class facultyResults {
 		function viewFaculty() {
-			$ffirst_name = $_POST['first_name'];
 			$flast_name = $_POST['last_name'];
-			$fname = '';
 			$lname = '';
 			$mname = ' ';
 			$emp_id = '';
 			
-			$sql = "SELECT * from employee WHERE (first_name LIKE '$ffirst_name%' && access_level_id = 2) || (last_name LIKE '$flast_name%' && access_level_id = 2)";
+			$sql = "SELECT * from employee WHERE (last_name LIKE 'flast_name%' && access_level_id = 2) || (last_name = 'flast_name' && access_level_id = 2)";
 			$result = mysql_query($sql);
 			while ($faculty = mysql_fetch_array($result)) {
 				$fname = $faculty['first_name'];
@@ -29,6 +29,7 @@
 			}
 		}
 		
+		//displays the schedule of the faculty searched
 		function viewFacultySchedule($emp_id) {
 			$sql = "select * from section WHERE employee_id = '$emp_id'";
 			$res = mysql_query($sql);
@@ -64,8 +65,6 @@
 					<td><div align=center>".$day." / ".$start." - ".$end." / ".$class." / ".$room."</div></td>
 					<td><div align=center>".$unit."</div></td>
 					<td><div align=center>".$enrolled."</div></td>
-					<td><div align=center></div></td>
-					<td><div align=center></div></td>
 				</tr>";
 				
 				$units = $units + $unit;

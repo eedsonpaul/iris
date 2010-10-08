@@ -188,15 +188,14 @@ class Accountability{
 		function acctg_addAccountabilitySearch(){
 			$search_option= $_GET['search_option'];
 			$search_query= $_GET['search_query'];
-			
 			if(($search_option!="")&&($search_query!="")){
 				if($search_option=='student_number'){
 					$student_number=$search_query;
 					$last_name ="";
-					$query_lastName="SELECT * FROM student WHERE student_number=$student_number;";
+					$query_lastName="SELECT * FROM student WHERE student_number='$student_number';";
 					$lastName=mysql_query($query_lastName);
-					
-					if(mysql_numrows($lastName)==0){
+					$num = mysql_numrows($lastName);
+					if($num==0){
 					echo"<table>No student found with that Student Number.</table>";
 					}
 				}
@@ -204,8 +203,8 @@ class Accountability{
 					$last_name=$search_query;
 					$query_lastName="SELECT * FROM student WHERE last_name='$last_name';";
 					$lastName = mysql_query($query_lastName);
-					
-					if((mysql_numrows($lastName)==0)||(is_numeric($last_name)){
+					$num = mysql_numrows($lastName);
+					if($num==0){
 						echo"<table>No student found with that Last Name.</table>";
 					}
 					else{

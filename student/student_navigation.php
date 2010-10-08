@@ -14,11 +14,11 @@
 		<li> <a href="#">Registration</a>
 
 		  <ul>
-			<li> <a href="student_view_accountabilities.php">View Accountabilities </a></li>
-			<li><a href="student_view study plan.php">View Study Plan</a>
+			<li> <a href="student_accountabilities.php">View Accountabilities </a></li>
+			<li><a href="student_studyplan.php">View Study Plan</a>
 			  <ul>
 				<ul>
-				  <li><a href="student_view_grades.php">View Grades per Semester</a></li>
+				  <li><a href="student_grades.php">View Grades per Semester</a></li>
 				</ul>
 			  </ul>
 			</li>

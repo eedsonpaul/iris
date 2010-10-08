@@ -5,6 +5,31 @@ body{
   font-size: 12px;
 }
 
+#for_admin {
+  background: #FCADAD;
+  padding: 12px;
+  padding-top: 14px;
+}
+
+#admin_nav {
+  float: right;
+  padding-right: 0px;
+  margin-top: -10px;
+  padding-bottom: 10px;
+}
+
+#admin_nav.right {
+  float: right;
+}
+
+#admin_nav.left {
+  float: left;
+}
+
+#admin_nav a:link {text-decoration:none; color: #880606;}
+#admin_nav a:visited {text-decoration:none; color: #880606;}
+#admin_nav a:hover {text-decoration: underline; color: #880606;}
+
 .headfont {
 	font-size: 11px;
 	text-align: center;
@@ -409,7 +434,7 @@ html>body #menu {
   min-height: 350px;
   height: auto;
   margin-left: 220px;
-  margin-top: -300px;
+  margin-top: -320px;
   padding-left: 10px;
   padding-top: 10px;
   border-top-width: 3px;

@@ -191,16 +191,26 @@ if (isset($_REQUEST['action'])) {
 		    setcookie("cookpass", "", time()-60*60*24*100, "/");
 	    }
 	    $id = $_SESSION['access_level_id'];
+	    
 	    if ($id == 3) {
-	      redirect('login.php?action=Admin');
+	      session_unset();
+	      session_destroy();	    
+	      session_start();
+	      $_SESSION['flash'] = 'Successfully Logged Out';
+          redirect('login.php?action=Admin');
 	    } else if ($id == 1) {
-	      redirect('login.php?action=Student');
+		    session_unset();
+		    session_destroy();
+		    session_start();
+		    $_SESSION['flash'] = 'Successfully Logged Out';
+	        redirect('login.php?action=Student');
 	    } else {
-	      redirect('login.php?action=Employee');
+		    session_unset();
+		    session_destroy();
+		    session_start();
+		    $_SESSION['flash'] = 'Successfully Logged Out';
+	        redirect('login.php?action=Employee');
 	    }
-	 
-      session_unset();
-      session_destroy();
       break;
 
     case 'Create':

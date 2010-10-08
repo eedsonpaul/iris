@@ -128,14 +128,15 @@ $(document).ready(function(){
       echo "<td align='center' width='60'><font size='2'>" . checkDay($course_code[$i],$section_label[$i]) . " " . checkStartTime($course_code[$i],$section_label[$i]) . "-" . checkEndTime($course_code[$i],$section_label[$i]) . " "  . checkRoom($course_code[$i],$section_label[$i]) .  "</td>";
       echo "<td align='center' width='60'><font size='2'>" . $waitlist_counter[$i] . "</td>";
       echo "<td align='center' width='60'><font size='2'><span class='status-".$course_code[$i]."'>" . $status[$i] . "</td>";
-      checkStatus($status[$i],$course_code[$i],$section_label[$i]);
+      checkAction1($status[$i],$course_code[$i],$section_label[$i]);
       /*echo ' >>> <a href="student_remove_subject.php?subjectid='.$course_code[$i].'&sectionlabel='.$section_label[$i].'"> remove </a> </td>';*/
-      echo ' >>> <span id="subjectaction" class="remove" course_code="'.$course_code[$i].'" section_label="'.$section_label[$i].'">remove</span></td>';
+      echo ' >>> ';
+	 checkAction2($status[$i],$course_code[$i],$section_label[$i]);
       echo "</tr>";
     }
   }
 
-function checkStatus($status,$course_code,$section_label){
+function checkAction1($status,$course_code,$section_label){
 
       if($status=="confirmed"){
       /*echo '<td><a href="student_unconfirm_subject.php?subjectid='.$course_code.'&sectionlabel='.$section_label.'">unconfirm</a>';    */
@@ -145,8 +146,17 @@ function checkStatus($status,$course_code,$section_label){
       /*echo '<td><a href="student_confirm_subject.php?subjectid='.$course_code.'&sectionlabel='.$section_label.'">confirm</a>';      */
       echo '<td><span id="subjectaction" class="confirm" course_code="'.$course_code.'" section_label="'.$section_label.'">confirm</span>';
       }
-      else if($status=="waitlisted"){
+      else if($status=="waitlisted" || $status=="enrolled" || $status=="assessed" || $status=="paid"){
         echo "<td>-------";
+      }
+}
+function checkAction2($status,$course_code,$section_label){
+
+	  if($status=="confirmed" || $status=="unconfirmed" || $status=="waitlisted"){
+		echo '<span id="subjectaction" class="remove" course_code="'.$course_code.'" section_label="'.$section_label.'">remove</span></td>';
+	  }
+      else if($status=="waitlisted" || $status=="enrolled" || $status=="assessed" || $status=="paid"){
+        echo "-------</td>";
       }
 }
 

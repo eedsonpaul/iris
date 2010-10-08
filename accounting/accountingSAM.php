@@ -13,16 +13,23 @@
 			<li><a href="accounting.php">Return</a></li>
 		</ul>
 
-<br>
-	</div>
-
-	<div id="right_side">
-
-		<br><br><br><br><br><br><br><br><br><br><br><br>
-		<h4><form action="searchAccountability.php" method="post">
+		<center>
+		<h4><form action="searchAccountability.php" method="post" name="accountingform">
 		Enter Last name:<input type="text" name="last_name" />
 		<input type="submit" value="Search" /> &nbsp;
 		</form>
+		
+	<script language="JavaScript" type="text/javascript">
+
+    var frmvalidator  = new Validator("accountingform");
+    
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("last_name","req","Last Name required.");
+    frmvalidator.addValidation("last_name","alpha","Last Name contains invalid characters.");
+   
+    </script>
+		
 		<br><br><br>
 	<?php
 		include('connect.php');

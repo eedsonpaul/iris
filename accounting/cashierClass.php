@@ -48,13 +48,13 @@ class Accountability{
 			
 			echo "<table>";
 			echo "<tr>";
-			echo "<td>Student Name: ".$student_lastname.", ".$student_firstname."</td>";
-			echo "<td>Degree Program: ".$degree_program."</td>";
-			echo "<td>Degree Level: ".$degree_level."</td>";
+			echo "<td><font size='1'>Student Name: ".$student_lastname.", ".$student_firstname."</font></td>";
+			echo "<td><font size='1'>Degree Program: ".$degree_program."</font></td>";
+			echo "<td><font size='1'>Degree Level: ".$degree_level."</font></td>";
 			echo "</tr>";
 			echo "<tr>";
-			echo "<td>Student Number: ".$student_number."</td>";
-			echo "<td>Year Level: ".$year_level."</td>";
+			echo "<td><font size='1'>Student Number: ".$student_number."</font></td>";
+			echo "<td><font size='1'>Year Level: ".$year_level."</font></td>";
 			if ($citizenship == 'Filipino'){
 				$foreign_student = 'false';
 				$filipino_citizen = 'true';
@@ -63,17 +63,18 @@ class Accountability{
 				$foreign_student = 'true';
 				$filipino_citizen = 'false';
 			}
-			echo "<td>Citizenship: ".$citizenship."</td>";
+			echo "<td><font size='1'>Citizenship: ".$citizenship."</font></td>";
 			echo "</tr>";
-			echo "<tr><td>Scholarship: ".$scholarship."</td>";
-			echo "<td>STFAP Bracket: ".$stfap_bracket."</td></tr>";
+			echo "<tr><font size='1'><td>Scholarship: ".$scholarship."</font></td>";
+			echo "<td><font size='1'>STFAP Bracket: ".$stfap_bracket."</font></td></tr>";
 			echo "<tr></tr></table>";
 			
 			
 
 			
-			
-			$num = mysql_numrows($result);
+			$query_isStatusPaid = "SELECT * FROM student_status where student_number=$student_number AND status='paid';";
+			$isStatusPaid = mysql_query($query_isStatusPaid);
+			$num = mysql_numrows($isStatusPaid);
 			$query_isAssessed = "SELECT * FROM student_assessment WHERE student_number=$student_number;";
 			$query_isAccountable = "SELECT * FROM accountability WHERE student_number=$student_number AND accountability_status = 'pending';";
 			$query_isSLB = "SELECT * FROM slb WHERE student_number = $student_number;";
@@ -89,6 +90,7 @@ class Accountability{
 			
 			if(($num == 0)&&(mysql_numrows($isAccountable)==0)){
 					echo "<div align=\"center\"><font color=\"gray\"><b><i>The student has not enrolled in any subject.</font></i></b></div>";
+					echo "<a href=\"cashier.php\"><input type=\"submit\" value=\"Back\" /></a></td>";
 			}
 			else{
 				if(mysql_numrows($isAccountable)!=0){
@@ -199,7 +201,6 @@ class Accountability{
 					$deposit_less_stfap = 0;
 					$id_fee_less_stfap = 0;
 					$in_residence_less_stfap = 0;
-					$other_fees_less_stfap = 0;
 					
 					$nstp_cwts_ms_amount_shouldered = 0;
 					$non_citizen_fee_amount_shouldered = 0;
@@ -207,7 +208,6 @@ class Accountability{
 					$deposit_amount_shouldered = 0;
 					$id_fee_amount_shouldered = 0;
 					$in_residence_amount_shouldered = 0;
-					$other_fees_amount_shouldered = 0;
 					
 					$nstp_cwts_ms_total_less = $nstp_cwts_ms_less_stfap + $nstp_cwts_ms_amount_shouldered;
 					$non_citizen_fee_total_less = $non_citizen_fee_less_stfap + $non_citizen_fee_amount_shouldered;
@@ -215,7 +215,6 @@ class Accountability{
 					$deposit_total_less = $deposit_less_stfap + $deposit_amount_shouldered;
 					$id_fee_total_less = $id_fee_less_stfap + $id_fee_amount_shouldered;
 					$in_residence_total_less = $in_residence_less_stfap + $in_residence_amount_shouldered;
-					$other_fees_total_less = $other_fees_less_stfap + $other_fees_amount_shouldered;
 					
 					$nstp_cwts_ms_to_pay = $nstp_cwts_ms - $nstp_cwts_ms_total_less;
 					$non_citizen_fee_to_pay = $non_citizen_fee - $non_citizen_fee_total_less;
@@ -223,7 +222,6 @@ class Accountability{
 					$deposit_to_pay = $deposit - $deposit_total_less;
 					$id_fee_to_pay = $id_fee - $id_fee_total_less;
 					$in_residence_to_pay = $in_residence - $in_residence_total_less;
-					$other_fees_to_pay = $other_fees - $other_fees_total_less;
 					//other payment names end
 					
 					
@@ -239,7 +237,8 @@ class Accountability{
 					echo "<td><h4>TO PAY</td>";
 				
 					echo "</tr>";
-					$i=0;
+					
+					/*$i=0;
 					$j=0;
 					$total_units = 0;
 					$lab = 0;
@@ -262,7 +261,10 @@ class Accountability{
 							}
 						}	
 						$i++;
-					}
+					}*/
+					
+					$total_units = mysql_result($result_check_assessment,0,"unit_count");
+					$lab = mysql_result($result_check_assessment,0,"lab_count");
 					
 					$tuition = $total_units*600;
 					$tuition_to_pay = $total_units*$amount_per_unit;
@@ -305,72 +307,72 @@ class Accountability{
 				
 					//to be changed, depending on STFAP and scholarship
 					echo "<tr>";
-					echo "<td>Tuition</td>";
-					echo "<td>".$tuition."</td>";
-					echo "<td>".$less_stfap."</td><td>".$amount_shouldered."</td><td>".$total_less."</td>";
-					echo "<td>".$total_tuition_to_pay."</td></tr>";
+					echo "<td><font size='1'>Tuition</td>";
+					echo "<td><font size='1'>".$tuition."</td>";
+					echo "<td><font size='1'>".$less_stfap."</td><td>".$amount_shouldered."</td><td>".$total_less."</td>";
+					echo "<td><font size='1'>".$total_tuition_to_pay."</td></tr>";
 					
 					
 					echo "<tr>";
-					echo "<td><a href=\"miscellaneousOne.php?student_number=".$student_number."\">Miscellaneous</a></td>";
-					echo "<td>".$miscellaneous_1."</td>";
-					echo "<td>".$miscellaneous_1_less_stfap."</td><td>".$miscellaneous_1_amount_shouldered."</td><td>".$miscellaneous_1_total_less."</td>";
-					echo "<td>".$miscellaneous_1_to_pay."</td></tr>";
+					echo "<td><font size='1'><a href=\"cashierMiscellaneousOne.php?student_number=".$student_number."\">Miscellaneous</a></td>";
+					echo "<td><font size='1'>".$miscellaneous_1."</td>";
+					echo "<td><font size='1'>".$miscellaneous_1_less_stfap."</td><td>".$miscellaneous_1_amount_shouldered."</td><td>".$miscellaneous_1_total_less."</td>";
+					echo "<td><font size='1'>".$miscellaneous_1_to_pay."</td></tr>";
 					
 					
 					echo "<tr>";
-					echo "<td><a href=\"miscellaneousTwo.php?student_number=".$student_number."\">Student Fund</a></td>";
-					echo "<td>".$miscellaneous_2."</td>";
-					echo "<td>".$miscellaneous_2_less_stfap."</td><td>".$miscellaneous_2_amount_shouldered."</td><td>".$miscellaneous_2_total_less."</td>";
-					echo "<td>".$miscellaneous_2_to_pay."</td></tr>";
+					echo "<td><font size='1'><a href=\"cashierMiscellaneousTwo.php?student_number=".$student_number."\">Student Fund</a></td>";
+					echo "<td><font size='1'>".$miscellaneous_2."</td>";
+					echo "<td><font size='1'>".$miscellaneous_2_less_stfap."</td><td>".$miscellaneous_2_amount_shouldered."</td><td>".$miscellaneous_2_total_less."</td>";
+					echo "<td><font size='1'>".$miscellaneous_2_to_pay."</td></tr>";
 					
 					echo "<tr>";
-					echo "<td>Laboratory Fee</td>";
-					echo "<td>".$lab."</td>";
-					echo "<td>".$lab_less_stfap."</td><td>".$lab_amount_shouldered."</td><td>".$lab_total_less."</td>";
-					echo "<td>".$lab_to_pay."</td></tr>";
+					echo "<td><font size='1'>Laboratory Fee</td>";
+					echo "<td><font size='1'>".$lab."</td>";
+					echo "<td><font size='1'>".$lab_less_stfap."</td><td>".$lab_amount_shouldered."</td><td>".$lab_total_less."</td>";
+					echo "<td><font size='1'>".$lab_to_pay."</td></tr>";
 					
 					echo "<tr>";
-					echo "<td>NSTP-CWTS / MS</td>";
-					echo "<td>".$nstp_cwts_ms."</td>";
-					echo "<td>".$nstp_cwts_ms_less_stfap."</td><td>".$nstp_cwts_ms_amount_shouldered."</td><td>".$nstp_cwts_ms_total_less."</td>";
-					echo "<td>".$nstp_cwts_ms_to_pay."</td></tr>";
+					echo "<td><font size='1'>NSTP-CWTS / MS</td>";
+					echo "<td><font size='1'>".$nstp_cwts_ms."</td>";
+					echo "<td><font size='1'>".$nstp_cwts_ms_less_stfap."</td><td>".$nstp_cwts_ms_amount_shouldered."</td><td>".$nstp_cwts_ms_total_less."</td>";
+					echo "<td><font size='1'>".$nstp_cwts_ms_to_pay."</td></tr>";
 					
 					echo "<tr>";
-					echo "<td>Non-Citizen Fee</td>";
-					echo "<td>".$non_citizen_fee."</td>";
-					echo "<td>".$non_citizen_fee_less_stfap."</td><td>".$non_citizen_fee_amount_shouldered."</td><td>".$non_citizen_fee_total_less."</td>";
-					echo "<td>".$non_citizen_fee_to_pay."</td></tr>";
+					echo "<td><font size='1'>Non-Citizen Fee</td>";
+					echo "<td><font size='1'>".$non_citizen_fee."</td>";
+					echo "<td><font size='1'>".$non_citizen_fee_less_stfap."</td><td>".$non_citizen_fee_amount_shouldered."</td><td>".$non_citizen_fee_total_less."</td>";
+					echo "<td><font size='1'>".$non_citizen_fee_to_pay."</td></tr>";
 					
 					echo "<tr>";
-					echo "<td>Entrance</td>";
-					echo "<td>".$entrance."</td>";
-					echo "<td>".$entrance_less_stfap."</td><td>".$entrance_amount_shouldered."</td><td>".$entrance_total_less."</td>";
-					echo "<td>".$entrance_to_pay."</td></tr>";
+					echo "<td><font size='1'>Entrance</td>";
+					echo "<td><font size='1'>".$entrance."</td>";
+					echo "<td><font size='1'>".$entrance_less_stfap."</td><td>".$entrance_amount_shouldered."</td><td>".$entrance_total_less."</td>";
+					echo "<td><font size='1'>".$entrance_to_pay."</td></tr>";
 					
 					echo "<tr>";
-					echo "<td>Deposit</td>";
-					echo "<td>".$deposit."</td>";
-					echo "<td>".$deposit_less_stfap."</td><td>".$deposit_amount_shouldered."</td><td>".$deposit_total_less."</td>";
-					echo "<td>".$deposit_to_pay."</td></tr>";
+					echo "<td><font size='1'>Deposit</td>";
+					echo "<td><font size='1'>".$deposit."</font></td>";
+					echo "<td><font size='1'>".$deposit_less_stfap."</font></td><td><font size='1'>".$deposit_amount_shouldered."</font></td><td><font size='1'>".$deposit_total_less."</font></td>";
+					echo "<td><font size='1'>".$deposit_to_pay."</font></td></tr>";
 					
 					echo "<tr>";
-					echo "<td>I.D. fee</td>";
-					echo "<td>".$id_fee."</td>";
-					echo "<td>".$id_fee_less_stfap."</td><td>".$id_fee_amount_shouldered."</td><td>".$id_fee_total_less."</td>";
-					echo "<td>".$id_fee_to_pay."</td></tr>";
+					echo "<td><font size='1'>I.D. fee</td>";
+					echo "<td><font size='1'>".$id_fee."</font></td>";
+					echo "<td><font size='1'>".$id_fee_less_stfap."</font></td><td><font size='1'>".$id_fee_amount_shouldered."</font></td><td><font size='1'>".$id_fee_total_less."</font></td>";
+					echo "<td><font size='1'>".$id_fee_to_pay."</font></td></tr>";
 					
 					echo "<tr>";
-					echo "<td>In Residence</td>";
-					echo "<td>".$in_residence."</td>";
-					echo "<td>".$in_residence_less_stfap."</td><td>".$in_residence_amount_shouldered."</td><td>".$in_residence_total_less."</td>";
-					echo "<td>".$in_residence_to_pay."</td></tr>";
+					echo "<td><font size='1'>In Residence</font></td>";
+					echo "<td><font size='1'>".$in_residence."</font></td>";
+					echo "<td><font size='1'>".$in_residence_less_stfap."</font></td><td><font size='1'>".$in_residence_amount_shouldered."</font></td><td><font size='1'>".$in_residence_total_less."</font></td>";
+					echo "<td><font size='1'>".$in_residence_to_pay."</font></td></tr>";
 					
 					echo "<tr>";
 					echo "<td></td>";
-					echo "<td>".$total_amount_due."</td>";
-					echo "<td>".$total_less_stfap."</td><td>".$total_amount_shouldered."</td><td>".$total_total_less."</td>";
-					echo "<td>".$true_total_to_pay."</td></tr>";
+					echo "<td><font size='1'>".$total_amount_due."</font></td>";
+					echo "<td><font size='1'>".$total_less_stfap."</font></td><td><td><font size='1'>".$total_amount_shouldered."</font></td><td>".$total_total_less."</font></td>";
+					echo "<td><font size='1'>".$true_total_to_pay."</font></td></tr>";
 				
 					if(mysql_numrows($isAccountable)==0){
 						if(mysql_numrows($isAssessed)==0){
@@ -381,13 +383,22 @@ class Accountability{
 							$to_pay_amount = mysql_result($isAssessed,0,"to_pay_amount");
 							$academic_year = 2010; //SET TO SESSION
 							if(mysql_numrows($isPaid)==1){
+								if(mysql_numrows($isSLB)==1){
+									$loaned_amount = mysql_result($isSLB,0,"loaned_amount");
+									$total_pay = $true_total_to_pay;
+									$to_pay_amount = $total_pay - $loaned_amount;
+									echo "<td><font size='1'>TO PAY: </font></td><td><font size='1'>".$total_pay." - ".$loaned_amount." = ".$to_pay_amount."</font></td>";
+									echo "<td><font size='1'>(SLB)</font></td></tr>";
+								}
+								else{
+									echo "<tr>";
+									echo "<td><font size='1'>TO PAY: </font></td>";
+									echo "<td><font size='1'>".$to_pay_amount."</font></td>";
+									echo "</tr>";
+								}
 								echo "<tr>";
-								echo "<td>TO PAY: </td>";
-								echo "<td>".$to_pay_amount."</td>";
-								echo "</tr>";
-								echo "<tr>";
-								echo "<td>PAID ALREADY</td>";
-								echo "<td><a href=\"cashierEM.php\"><input type=\"submit\" value=\"Back\" /></a></td>";
+								echo "<td><font size='1'>PAID ALREADY</font></td>";
+								echo "<td><font size='1'><a href=\"cashierEM.php\"><input type=\"submit\" value=\"Back\" /></a></font></td>";
 								echo "</tr>";
 								echo "</table>";
 							}
@@ -396,26 +407,26 @@ class Accountability{
 									$loaned_amount = mysql_result($isSLB,0,"loaned_amount");
 									$total_pay = $true_total_to_pay;
 									$to_pay_amount = $total_pay - $loaned_amount;
-									echo "<td>TO PAY: </td><td>".$total_pay." - ".$loaned_amount." = ".$to_pay_amount."</td>";
-									echo "<td>(SLB)</td></tr>";
+									echo "<td><font size='1'>TO PAY: </font></td><td><font size='1'>".$total_pay." - ".$loaned_amount." = ".$to_pay_amount."</font></td>";
+									echo "<td><font size='1'>(SLB)</font></td></tr>";
 									
 									$update_SLB = "UPDATE student_assessment SET to_pay_amount = $to_pay_amount WHERE student_number=$student_number;";
 									$updateSLB = mysql_query($update_SLB);
 								}
 								else{
 									echo "<tr>";
-									echo "<td>TO PAY: </td>";
-									echo "<td>".$to_pay_amount."</td></tr>";
+									echo "<td><font size='1'>TO PAY: </font></td>";
+									echo "<td><font size='1'>".$to_pay_amount."</font></td></tr>";
 								}
 								echo "<tr>";
 								echo "<form action=\"cashierEnrollStudent.php?student_number=$student_number\" method=\"POST\">";
 								echo "<input type=\"hidden\" name=\"student_number\" value=\"<?php echo $student_number;?>\"/>";
 								echo "<input type=\"hidden\" name=\"academic_year\" value=\"<?php echo $academic_year;?>\"/>";
-								echo "<td>OR number:</td>";
-								echo "<td><input type=\"text\" name=\"official_receipt_number\"/></td>";
-								echo "<td>Amount:</td>";
-								echo "<td><input type=\"text\" name=\"amount_paid\"/></td>";
-								echo "<td><input type=\"submit\" value=\"Enroll\" />";
+								echo "<td><font size='1'>OR number:</font></td>";
+								echo "<td><font size='1'><input type=\"text\" name=\"official_receipt_number\"/></font></td>";
+								echo "<td><font size='1'>Amount:</font></td>";
+								echo "<td><font size='1'><input type=\"text\" name=\"amount_paid\"/></font></td>";
+								echo "<td><font size='1'><input type=\"submit\" value=\"Enroll\" /></font></td>";
 								echo "</tr>";
 								echo "</table>";
 							}
@@ -423,7 +434,7 @@ class Accountability{
 					}
 					else{
 						echo "<tr>";
-						echo "<td> Unable to process request. Please clear all accountabilities.</td>";
+						echo "<td><font size='1'> Unable to process request. Please clear all accountabilities.</font></td>";
 						echo "</tr>";
 						echo "</table>";
 					}
@@ -438,13 +449,12 @@ class Accountability{
 		$is_clear = mysql_query($query_clear);
 		$clear = mysql_result ($is_clear, 0, "student_number");
 		$official_receipt_number = $_POST['official_receipt_number'];
-		$employee_id = 1; //update please, session variable tah ni dapat
 		$amount_paid = $_POST['amount_paid'];
 		$date_paid = date('Ymd');
 		$accountability_type_id = 7; //for editing
 		$semester = 1; //for update by me
 		$academic_year = 2010; //for update by me too
-		$employee_id = 1; //for session
+		$employee_id = $_SESSION['employee_id']; //for session
 		
 		$i = 0;
 		$query = "select * from student_status WHERE student_number = $student_number AND status='confirmed';";
@@ -469,10 +479,13 @@ class Accountability{
 			$clear = "UPDATE student_assessment SET assessment_status = 'paid' WHERE student_number=$student_number;";
 			$clearAssessment= mysql_query($clear);
 			
+			$num = mysql_numrows($result);
+			
 			while ($i < $num) {
 				$course_code = mysql_result($result,$i,"course_code");
 				$update_status = "UPDATE student_status SET status='paid' WHERE course_code='$course_code';";
 				$result_update_status= mysql_query($update_status);
+				echo $update_status;
 				$i++;
 			}
 			header("Location:searchCashierAssessment.php?student_number=$student_number");
@@ -492,14 +505,14 @@ class Accountability{
 				$i=0;
 				echo "<table border=\"1\">";
 				echo "<tr>";
-				echo "<td>Student Number</td>";
-				echo "<td>Name & Course</td>";
-				echo "<td>Year Incurred</td>";
-				echo "<td>Semester Incurred</td>";
-				echo "<td>Date Added</td>";
-				echo "<td>Accountability Type</td>";
-				echo "<td>Accountability Details</td>";
-				echo "<td>Amount Due</td>";
+				echo "<td><font size='1'>Student Number</font></td>";
+				echo "<td><font size='1'>Name & Course</font></td>";
+				echo "<td><font size='1'>Year Incurred</font></td>";
+				echo "<td><font size='1'>Semester Incurred</font></td>";
+				echo "<td><font size='1'>Date Added</font></td>";
+				echo "<td><font size='1'>Accountability Type</font></td>";
+				echo "<td><font size='1'>Accountability Details</font></td>";
+				echo "<td><font size='1'>Amount Due</font></td>";
 			
 				while ($i < $num) {
 					$student_number = mysql_result($result2,$i,"student_number");
@@ -516,15 +529,15 @@ class Accountability{
 					$accountability_id = mysql_result($result2,$i,"accountability_id"); 
 				
 					echo "<tr>";
-					echo "<td height = \"20\">".$student_number."</td>";
-					echo "<td>".$last_name.", ".$first_name." ".$middle_name."<br>".$degree_program."</td>";
-					echo "<td>".$year_incurred."</td>";
-					echo "<td>".$semester_incurred."</td>";
-					echo "<td>".$date_added."</td>";
-					echo "<td>".$accountability_type."</td>";
-					echo "<td>".$details."</td>";
-					echo "<td>".$amount_due."</td>";
-					echo "<td><a href=\"cashierClearAccountability.php?id=".$accountability_id."\">Clear</a></td>";
+					echo "<td height = \"20\"><font size='1'>".$student_number."</font></td>";
+					echo "<td><font size='1'>".$last_name.", ".$first_name." ".$middle_name."<br>".$degree_program."</font></td>";
+					echo "<td><font size='1'>".$year_incurred."</font></td>";
+					echo "<td><font size='1'>".$semester_incurred."</font></td>";
+					echo "<td><font size='1'>".$date_added."</font></td>";
+					echo "<td><font size='1'>".$accountability_type."</font></td>";
+					echo "<td><font size='1'>".$details."</font></td>";
+					echo "<td><font size='1'>".$amount_due."</font></td>";
+					echo "<td><font size='1'><a href=\"cashierClearAccountability.php?id=".$accountability_id."\">Clear</a></font></td>";
 					echo "</tr>";							
 					$i++;
 				}
@@ -547,13 +560,13 @@ class Accountability{
 				$i=0;
 				echo "<table border=\"1\">";
 				echo "<tr>";
-				echo "<td>Student Number</td>";
-				echo "<td>Name & Course</td>";
-				echo "<td>Year Incurred</td>";
-				echo "<td>Semester Incurred</td>";
-				echo "<td>Date Added</td>";
-				echo "<td>Accountability Details</td>";
-				echo "<td>Amount Due</td>";
+				echo "<td><font size='1'>Student Number</font></td>";
+				echo "<td><font size='1'>Name & Course</font></td>";
+				echo "<td><font size='1'>Year Incurred</font></td>";
+				echo "<td><font size='1'>Semester Incurred</font></td>";
+				echo "<td><font size='1'>Date Added</font></td>";
+				echo "<td><font size='1'>Accountability Details</font></td>";
+				echo "<td><font size='1'>Amount Due</font></td>";
 			
 			while($i < mysql_numrows($isSLB)){
 				$student_number = mysql_result($result2,$i,"student_number");
@@ -569,17 +582,18 @@ class Accountability{
 				$accountability_id = mysql_result($isSLB,$i,"accountability_id"); 
 			
 				echo "<tr>";
-				echo "<td height = \"20\">".$student_number."</td>";
-				echo "<td>".$last_name.", ".$first_name." ".$middle_name."<br>".$degree_program."</td>";
-				echo "<td>".$year_incurred."</td>";
-				echo "<td>".$semester_incurred."</td>";
-				echo "<td>".$date_added."</td>";
-				echo "<td>".$details."</td>";
-				echo "<td>".$amount_due."</td>";
-				echo "<td><a href=\"cashierClearSLB.php?id=".$accountability_id."\">Input Payment</a></td>";
+				echo "<td height = \"20\"><font size='1'>".$student_number."</font></td>";
+				echo "<td><font size='1'>".$last_name.", ".$first_name." ".$middle_name."<br>".$degree_program."</font></td>";
+				echo "<td><font size='1'>".$year_incurred."</font></td>";
+				echo "<td><font size='1'>".$semester_incurred."</font></td>";
+				echo "<td><font size='1'>".$date_added."</font></td>";
+				echo "<td><font size='1'>".$details."</font></td>";
+				echo "<td><font size='1'>".$amount_due."</font></td>";
+				echo "<td><font size='1'><a href=\"cashierClearSLB.php?id=".$accountability_id."\">Input Payment</a></font></td>";
 				echo "</tr>";							
 				$i++;
 			}
+			echo "</table>";
 		 }
 		 
 	}
@@ -657,6 +671,7 @@ class Accountability{
 				echo "</tr>";							
 				$i++;
 			}
+			echo "</table>";
 		 }
 	}
 	
@@ -731,6 +746,7 @@ class Accountability{
 				echo "</tr>";							
 				$i++;
 			}
+			echo "</table>";
 		 }
 	}
 	
