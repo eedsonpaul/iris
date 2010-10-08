@@ -96,7 +96,7 @@
 			$civil_status = $row['civil_status'];
 			$place_of_birth = $row['home_city_municipality'];
 			$stfap_id = $row['stfap_bracket_id'];
-			$presadd_no = $row['present_house_number'];
+			$presadd_no = $row['present_home_number'];
 			$presadd_strt = $row['present_street'];
 			$presadd_brgy = $row['present_barangay'];
 			$presadd_city = $row['present_city_municipality'];

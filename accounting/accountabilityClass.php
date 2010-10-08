@@ -1070,7 +1070,7 @@ class Accountability{
 				$total_amount_paid = mysql_result($enrollment,$i,"amount_paid");
 				$official_receipt_number = mysql_result($enrollment,$i,"official_receipt_number");
 				$date_paid = mysql_result($enrollment,$i,"date_paid");
-				$employee_id = mysql_result($enrollment,$i,"employee_id");
+				$employee_id = $_SESSION['employee_id'];
 				$query_employee = "SELECT * FROM employee WHERE employee_id = $employee_id;";
 				$employee = mysql_query($query_employee);
 				$employee_last_name = mysql_result($employee,0,"last_name");

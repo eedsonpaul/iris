@@ -83,7 +83,7 @@
 		$tf=0;
 		if($scholarship>=$total_amount-$less_stfap)
 		{
-			if($stfap==E1 or $stfap==E2) $tf=0;
+			if($stfap=='E1' or $stfap=='E2') $tf=0;
 			else $tf=1;
 		}
 		return $tf;
