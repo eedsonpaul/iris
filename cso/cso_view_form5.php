@@ -78,7 +78,10 @@
 	$parent = '';
 	$scholarship_id = '';
 	$scholarship = '';
-	
+	$reg_stat = "";
+	$grad_stat = "";
+	$graduating = "";
+
 	$query = new SqlQueries();
 	$result = $query->querysql("SELECT * from student WHERE student_number = '$student_id'");
 	
@@ -112,8 +115,14 @@
 			$parent_contact = $row['guardian_contact_number'];
 			$degree_program = $row['degree_program'];
 			$scholarship_id = $row['scholarship_id'];
+			$reg_stat = $row['registration_stat'];
+			$grad_stat = $row['graduating'];
 	}
-	
+	if($grad_stat==0) {
+		$graduating = "NO";
+	} else if($grad_stat==1) {
+		$graduating = "NO";
+	}
 	$query = new SqlQueries();
 	$result = $query->querysql("SELECT * from stfap WHERE stfap_bracket_id = '$stfap_id'");
 	
@@ -154,6 +163,16 @@
 
 	$accountability_id = "";
 	$or_number = "";
+	$date_paid = "";
+	$amount_paid = "";
+	$sem = "";
+	$ay = "";
+	$emp_id_paid = "";
+	$fname_cashier = "";
+	$lname_cashier = "";
+	$mname_cashier = "";
+	$name_cashier = "";
+
 	$query = new SqlQueries();
 	$result = $query->querysql("SELECT * from accountability WHERE student_number = '$student_id' && accountability_type_id = 7");
 	
@@ -167,8 +186,26 @@
 	
 	while ($row = mysql_fetch_array($result)) {
 		$or_number = $row['official_receipt_number'];
+		$date_paid = $row['date_paid'];
+		$amount_paid = $row[''];
+		$sem = $row['semester'];
+		$ay = $row['academic_year'];
+		$emp_id_paid = $row['employee_id'];
 	}
+	
+	
+	$query = new SqlQueries();
+	$result = $query->querysql("SELECT * from employee WHERE employee_id = '$emp_id_paid'");
+	
+	while ($row = mysql_fetch_array($result)) {
+		$fname_cashier = $row['first_name'];
+		$lname_cashier = $row['last_name'];
+		$mname_cashier = $row['middle_name'];
 	}
+		$name_cashier = $lname_cashier.', '.$fname_cashier.' '.$mname_cashier[0].'.';
+	}
+
+	
 	
 	require_once 'cso_date_converter.php';
 	$newdate = new dateConverter();
@@ -182,7 +219,20 @@
     <td width="170" class="style5">
     <div align="right">
 	<script>
-		document.write("<input type='button' " + "onClick='window.print()' " + "class='printbutton' " + "value='Print Form 5'/>");
+		document.write("<input type='button' " + "onClick='printForm5()' " + "class='printbutton' " + "value='Print Form 5'/>");
+		
+		function printForm5() {
+			window.print();
+			
+			<?php
+				$last_update = time();
+				$sql = "UPDATE student_status SET
+					status =  'enrolled'
+					WHERE student_number = '$student_id'";
+				
+				mysql_query($sql);						 
+			?>
+		}
 	</script>
 	</div></td>
   </tr>
@@ -196,7 +246,7 @@
 <table width="1056" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td width="32" height="27"><span class="style7"><img src="logo.jpg" width="30" height="25" /></span></td>
-    <td width="907"><span class="style7"> UP FORM 5. UNIVERSITY OF THE PHILIPPINES VISAYAS CERTIFICATE OF REGISTRATION (REV. 05-2010)</span></td>
+    <td width="907"><span class="style7"> UP FORM 5. UNIVERSITY OF THE PHILIPPINES CEBU COLLEGE CERTIFICATE OF REGISTRATION (REV. 05-2010)</span></td>
     <td class="style7">Semester, AY</td>
   </tr>
 </table>
@@ -227,7 +277,7 @@
           		<td width="84" height="25">PLACE OF BIRTH
                 	<br /><div align="center"><strong><?php echo $place_of_birth;?></strong></div></td>
           		<td height="25">DEGREE LEVEL
-                	<br /><div align="center"><strong><?php echo $degree_level;?></strong></div></td>
+                	<br /><div align="center"><strong><?php echo strtoupper($degree_level);?></strong></div></td>
           		<td valign="top">STUDENT TYPE <br /></td>
         	</tr>
       	</table>
@@ -246,9 +296,9 @@
         	</tr>
         	<tr>
           		<td colspan="2" height="25" valign="top">REGISTRATION STATUS 
-                	<br /> </td>
+                	<br /><center><?php echo $reg_stat;?></center> </td>
           		<td valign="top" height="25">GRADUATING? 
-                	<br /> </td>
+                	<br /><?php echo $graduating;?> </td>
         	</tr>
       	</table>
     </div>
@@ -274,9 +324,9 @@
     	<br /><strong><div align="right"><?php echo number_format($units, 1, '.', '');?></div></strong></td>
     <td colspan="2" class="style10" valign="top">IF UNDERLOAD, SPECIFY REASON</td>
     <td width="70" class="style10" valign="bottom"><div align="center"><?php echo $or_number?><br/>O.R. No.</div></td>
-    <td width="109" class="style10" valign="bottom"><div align="center">Date</div></td>
-    <td width="75" class="style10" valign="bottom"><div align="center">Amount Paid</div></td>
-    <td width="112" class="style10" valign="bottom"><div align="center">Collected By</div></td>
+    <td width="109" class="style10" valign="bottom"><div align="center"><?php echo $date_paid;?><br/>Date</div></td>
+    <td width="75" class="style10" valign="bottom"><div align="center"><?php echo $amount_paid?><br/>Amount Paid</div></td>
+    <td width="112" class="style10" valign="bottom"><div align="center"><?php echo $name_cashier;?><br/>Collected By</div></td>
   </tr>
   <tr>
     <td height="37" rowspan="2" class="style10" valign="top">ADVISER: (Name and Signature)</td>

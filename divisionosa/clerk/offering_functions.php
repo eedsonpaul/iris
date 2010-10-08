@@ -107,7 +107,7 @@
 	}*/
 	function options_faculty()
 	{
-		$q1 = mysql_query("select employee_id,last_name,first_name from employee where designation_id='2'");
+		$q1 = mysql_query("select employee_id,last_name,first_name from employee where designation_id='2' and access_level_id='2'");
 		if(!$q1) die("unable to retrieve id,firstname, and last name".mysql_error());
 		//print("<select name=''>");
 		options_3(cols_3($q1,"employee_id","last_name","first_name"));

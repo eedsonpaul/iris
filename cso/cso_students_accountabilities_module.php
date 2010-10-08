@@ -92,7 +92,7 @@
     <tr>
       <td height="50"class="tab"><p align="left">
         <center>
-          <strong> <a href="cso_students_accountabilities_module.php?action=NA">ALL</a> | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z </strong>
+          <strong> <a href="cso_students_accountabilities_module.php?action=NA">ALL</a> </strong>
         </center>
       </p></td>
     </tr>

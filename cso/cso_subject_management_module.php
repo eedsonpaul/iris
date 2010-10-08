@@ -52,6 +52,7 @@
 	</ul>
 	</div>
 <div id="right_side">
+	<p><a href='javascript:history.go(-1)'>Back</a></p>
 	<p>
     	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
       	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
@@ -67,13 +68,7 @@
       </div></td></form>
     </tr>
   </table>
-  <table width="650" border="0" align="center">
-    <tr>
-      <td height="50"class="tab"><p align="left"><strong><center>
-        ALL | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
-      </center></strong></p>      </td>
-    </tr>
-  </table>
+
   <p>&nbsp;</p>
   <form action="" method="post">
     <table width="680" border="0" align="center" class="tab">

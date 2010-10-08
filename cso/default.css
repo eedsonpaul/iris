@@ -1,15 +1,8 @@
 /** BASIC */
 
-body {
-	margin: 0px;
-	padding: 0px;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 0.8em;
-	color: #750000;
-	margin-left: 5px;
-	margin-top: 5px;
-	overflow: scroll;
-	width: 102%;
+body{
+  font-family: Verdana, sans-serif; 
+  font-size: 12px;
 }
 
 .headfont {

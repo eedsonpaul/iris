@@ -11,7 +11,7 @@ require_once 'admin_http.php';
 ?>
 
 <div class="main">
-  <h1><span class="red">Error! The page you requested does not exist!</span> </h1>
+  <h1><span class="red">Error! Access forbidden!</span> </h1>
 
   <a href="javascript:history.back(-1);">&laquo;Back</a>
 

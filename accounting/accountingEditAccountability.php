@@ -168,7 +168,7 @@
 	<tr>
 		<td>
 		<input type="submit" value="Save" />&nbsp;
-		<input type=button value="Back" onClick="history.go(-1)">
+		<a href="accountingSAM.php"><input type=button value="Back"></a>
 		</td>
 	</tr>
 	</table>

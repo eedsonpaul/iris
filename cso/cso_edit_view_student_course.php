@@ -115,6 +115,7 @@
 	} else {
   ?>
 <div id="right_side">
+	<p><a href='javascript:history.go(-1)'>Back</a></p>
 	<p>
     	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
       	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
@@ -268,9 +269,10 @@
 		  }?></td>
       </tr>
     </table>
-    <p>
+    <p><?php if($edit=="YES") { ?>
       <center><input type="submit" name="edit_view_student_course" id="edit_view_student_course" value="UPDATE Student's Course">
       </center>
+<?php } ?>
     </p>
   </form>
   <p>&nbsp;</p>

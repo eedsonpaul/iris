@@ -23,9 +23,9 @@
 
 
 				$sql = "INSERT INTO student 
-					(student_number, last_name, first_name, middle_name, gender, entry_academic_year, entry_semester, login_expiration, password, degree_program, degree_level, access_level_id, last_updated, last_updated_by)
+					(student_number, last_name, first_name, middle_name, gender, entry_academic_year, entry_semester, login_expiration, password, degree_program, degree_level, access_level_id, last_updated, last_updated_by, graduating)
 				
-					VALUES ('".$_POST['student_id']."', '".$_POST['last_name']."', '".$_POST['first_name']."', '".$_POST['middle_name']."', '".$_POST['gender']."', '".$_POST['entry_academic_year']."', '".$_POST['entry_semester']."','".$_POST['login_expiration']."', '" . md5($_POST['student_id']) . "', '".$_POST['course']."', '$degree_level', '1', '$last_update', '$emp_id')";
+					VALUES ('".$_POST['student_id']."', '".$_POST['last_name']."', '".$_POST['first_name']."', '".$_POST['middle_name']."', '".$_POST['gender']."', '".$_POST['entry_academic_year']."', '".$_POST['entry_semester']."','".$_POST['login_expiration']."', '" . md5($_POST['student_id']) . "', '".$_POST['course']."', '$degree_level', '1', '$last_update', '$emp_id', 'No')";
 	
 						
 

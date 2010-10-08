@@ -1,4 +1,5 @@
-<?php require_once 'header.php' ?>
+<?php require_once 'header.php'; ?>
+
 <p align="left" class="style4">staff's logged in page content here </p>
 <h4 align="right">First Semester, &nbsp; A.Y.2010-2011 </h4>
 <h4>Staff Profile </h4>
@@ -20,5 +21,6 @@
 		<td>MASTER PROFESSOR 5000</td>
     </tr>
 </table>
-<?php require_once 'footer.php' ?>
+
+<?php require_once 'footer.php'; ?>
 

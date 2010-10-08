@@ -2,7 +2,8 @@
   require_once 'library_header.php';
 ?>
 
-
+<div class="main">
+<center><h1>ADD ACCOUNTABILITY</h1></center>
 <p>&nbsp;</p>
 <center>
 <?php
@@ -58,13 +59,18 @@
 	</tr>
 	<tr>
 		<td>
-		<input type="submit" value="Save" />&nbsp;
-		<input type=button value="Back" onClick="history.go(-1)">
+		<center> 
+		<input type="submit" value="Save" />&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type=button value="Back" onClick="history.go(-1)"></center>
 		</td>
 	</tr>
 	</table>
 </form>
 </body>
 </html>
+</div>
 
+<?php 
+  require_once 'cashier_footer.php';
+?>
 

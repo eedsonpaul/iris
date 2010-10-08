@@ -3,22 +3,9 @@
 ?>
 
 <div class="main">
-	<div id="navigation">
-
-	  <ul>
-			<li><a href="libraryAddAccountabilitySearch.php?search_option=&search_query=">Add Accountability</a><br></li>
-			</ul>
-
-<br>
-
-</div>
-
-<div id="right_side">
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<p>
-<center>
 <body>
-
+<br><center><h1>ADD ACCOUNTABILITY</h1></center>
+<br><br><br><br>
 <center>
 <form action="libraryAddAccountabilitySearch.php?search_option=<?php $_GET['search_option'];?>&search_query=<?php $_GET['search_query'];?>" method="get">
 <table>
@@ -46,7 +33,6 @@
 </body>
 </title>
 </div>
-
 
 <?php 
   require_once 'cashier_footer.php';

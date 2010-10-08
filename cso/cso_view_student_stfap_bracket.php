@@ -52,7 +52,7 @@
 	<!-- end of div navigation -->
 	
 	<div id="right_side">
-		<p><a href="cso_student_record_management.php">Back to Menu</a></p>
+		<p><a href='javascript:history.go(-1)'>Back</a></p>
 		<p>
 			<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
 			<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
@@ -98,7 +98,6 @@
 			?>
 
 		</table>
-		<p><center><a href='javascript:history.go(-1)'>Back</a></center></p>
 		<p>&nbsp;</p>
 	</div>
 

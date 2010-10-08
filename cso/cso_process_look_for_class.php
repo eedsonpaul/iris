@@ -72,13 +72,7 @@
 			</table>
 		</form>
 		
-		<table width="650" border="0" align="center">
-			<tr>
-				<td height="50"class="tab"><p align="left"><strong><center>
-					ALL | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
-				</center></strong></p></td>
-			</tr>
-		</table>
+
 		
 		<?php
 			include("connect_to_database.php");

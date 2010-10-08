@@ -9,9 +9,7 @@
 	 $question=$_POST['question']; //
 	 $answer=$_POST['answer']; // 
 	 
-	if($password!=NULL&&$retype!=NULL&&$question!=NULL&&$answer!=NULL){
 	
-	 if($password==$retype){
 	 
 		$hashedPassword = MD5($password);
 	
@@ -20,17 +18,6 @@
 		
 		header("location: student_success_edit_login.php");
 		
-	}
-	else{
-		header("location: student_invalid_edit_login.php?error='Passwords do not match'");
-	}
-	
-	}
-	
-	else
-	{
-		header("location: student_invalid_edit_login.php?error='Fill out all fields'");
-	}
 	
 
 ?>

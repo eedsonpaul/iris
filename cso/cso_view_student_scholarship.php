@@ -52,7 +52,7 @@
 	<!-- end of div navigation -->
 
 	<div id="right_side">
-		<p><a href="cso_student_record_management.php">Back to Menu</a></p>
+		<p><a href='javascript:history.go(-1)'>Back</a></p>
 		<p>
 			<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
 			<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
@@ -64,6 +64,17 @@
 		<table width="494" border="0" align="center" class="normaltext">
 			<?php 
 				$student_id = $_GET['id'];
+				$count = 0;
+	$query = "SELECT * from student WHERE student_number = '$student_id'";
+	$result = mysql_query($query);
+	while ($row = mysql_fetch_array($result)) {
+		$count++;
+	}
+	
+	if($count==0){
+		echo "<script> alert('Student number does not exist. Please input another student number.'); window.location.href = 
+		    'cso_students_scholarship_module.php';</script>";
+	} else {
 				include("connect_to_database.php");
 				$sql = "SELECT * from student WHERE student_number = '$student_id'";
 				$result = mysql_query($sql);
@@ -98,11 +109,10 @@
 		?>
 		
 		</table>
-		<p><center><a href='javascript:history.go(-1)'>Back</a></center></p>
 		<p>&nbsp;</p>
 	</div>
 
-<?php
+<?php }
 	//Page Footer
 	require_once 'cso_footer.php';
 ?>

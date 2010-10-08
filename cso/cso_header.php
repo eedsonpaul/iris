@@ -1,16 +1,14 @@
-<?php
-	require_once '../admin_db_connect.php';
-	session_start(); 
+<?php 
+  session_start();
+  require_once '../admin_db_connect.php';
+  require_once '../admin_http.php';
+	if($_SESSION['access_level_id'] != 7 and $_SESSION['access_level_id'] != 3) 
+	  redirect('../error.php');
 ?>
 
 <html>
 <head>
-  <?php if (isset($_SESSION['employee_id'])) {
-        //and  isset($_SESSION['access_level_id']) == 3)*/ { ?>
-    <title><?php echo $_SESSION['access_level_id']; ?> | UP Cebu IRIS</title>
-  <?php } else { ?>
-    <title>Welcome to UP Cebu IRIS!</title>
-  <?php } ?>
+  <title>CSO | UP Cebu IRIS</title>
   <link rel="icon" href="img/seal2.png" type="image/x-icon">
   
   <script language="JavaScript" src="gen_validatorv31.js" type="text/javascript"></script>

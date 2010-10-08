@@ -325,7 +325,7 @@ if (isset($_GET['action'])) {
             <li>Important: Always update your personal data.</li>
             </ul>
         </p>
-        Problems, Comments, Suggestions? Email us at   edsonpaul7512[at]gmail[dot]com   or call   (033)338-1535 / (033)315-9631 loc 190. 
+        Problems, Comments, Suggestions? Email us at   ourupcebu[at]gmail[dot]com   or call   (033)338-1535 / (033)315-9631 loc 190. 
         </p>
       </div>
     </td>

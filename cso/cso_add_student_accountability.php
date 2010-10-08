@@ -64,6 +64,7 @@
 	</ul>
 	</div>
 <div id="right_side">
+	<p><a href='javascript:history.go(-1)'>Back</a></p>
 	<p>
     	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
       	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
@@ -74,7 +75,7 @@
     <?php 
 		$student_id = $_GET['id'];
 		$act = $_GET['action'];
-		
+
 		if($act=="ADD") {
 			$button_name = "ADD";
 			$path = "cso_process_add_accountability.php?id=$student_id";

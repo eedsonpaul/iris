@@ -27,14 +27,13 @@ class Accountability{
 				//store in database
 				$add = "INSERT INTO accountability VALUES ('', $accountability_type, $student_number, '$details', $amount_due, $year_incurred, $semester_incurred, $date_added, 1, 'pending', '1');";
 				$addAccountability= mysql_query($add);
-				header("Location:librarySAM.php");
+				header("Location:library.php");
 			}
 		}
 		
 	function acctg_displayAccountabilities(){
 		$query =  "Select * from accountability WHERE accountability_status='pending' AND accountability_type_id = 2;";
 		$query2 = "SELECT * FROM accountability, student, accountability_type WHERE accountability.accountability_type_id = accountability_type.accountability_type_id AND accountability.student_number = student.student_number AND accountability.accountability_status='pending' AND accountability.accountability_type_id = 2;";
-			
 		$result = mysql_query($query);
 		$result2 = mysql_query($query2);
 		$num = mysql_numrows($result);
@@ -101,7 +100,7 @@ class Accountability{
 			//store in database
 			$add = "UPDATE accountability SET accountability_type_id=$accountability_type, details ='$details', amount_due=$amount_due, year_incurred=$year_incurred, semester_incurred=$semester_incurred, date_added=$date_added, student_number=$student_number, accountability_status='pending' WHERE accountability_id=$id;";
 			$addAccountability= mysql_query($add);
-			header("Location:librarySAM.php");	
+			header("Location:library.php");	
 		}
 		
 		function acctg_clearAccountability(){
@@ -124,7 +123,7 @@ class Accountability{
 				$addOR= mysql_query($add);
 				$update = "UPDATE accountability SET accountability_status='cleared', date_cleared = $date_cleared Where accountability_id=$id;";
 				mysql_query($update);
-				header("Location:librarySAM.php");
+				header("Location:library.php");
 			}
 		}
 	
@@ -206,7 +205,7 @@ class Accountability{
 					$query_lastName="SELECT * FROM student WHERE last_name='$last_name';";
 					$lastName = mysql_query($query_lastName);
 					
-					if(mysql_numrows($lastName)==0){
+					if((mysql_numrows($lastName)==0)||(is_numeric($last_name)){
 						echo"<table>No student found with that Last Name.</table>";
 					}
 					else{

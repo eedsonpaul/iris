@@ -1,10 +1,22 @@
 <?php 
   require_once 'cashier_header.php';
 ?>
+<div class="main">
+<div id="navigation">
+Employee ID : <?php echo $_SESSION['employee_id']?><br>
+<?php $query_employee = "SELECT * FROM employee WHERE employee_id ='".$_SESSION['employee_id']."';";
+$employee = mysql_query($query_employee);
+$employee_last_name = mysql_result($employee,0,"last_name");
+$employee_first_name = mysql_result($employee,0,"first_name");
+$employee_middle_name = mysql_result($employee,0,"middle_name");?>
 
+Name   :  <?php echo $employee_last_name.", ". $employee_first_name." ".$employee_middle_name;?><br>
+Designation :  <br>
+Unit:  <br>
 <br>
 <br>
 <br>
+<center><h1>Enroll Student</h1></center>
 <br>
 <br>
 <center>
@@ -21,12 +33,13 @@
 	  <tr>
 	    <td width="54">&nbsp;</td>
 	    <td width="104"><input type="submit" value="Submit" /></td>
-	    <td width="55"><a href="cashier.php"><input type=button value="Back" /></a></td>
+	    <td width="55"><a href="cashier.php"><input type=button value='Back'></a></td>
 	    <td width="55">&nbsp;</td>
       </tr>
   </table>
 	<p>&nbsp;</p>
 </form>
+</div>
 
 <?php 
   require_once 'cashier_footer.php';

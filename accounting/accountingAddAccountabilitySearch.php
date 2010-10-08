@@ -11,19 +11,18 @@
 			<li><a href="accountingAddAccountabilitySearch.php?search_option=&search_query=">Add Accountability</a></li>
 			<li><a href="viewClearedAccounts.php">View Already Cleared</a></li>
             <li><a href="generateSLB.php">Generate Student Accountabilities</a></li>
-			<li><a href="accounting.php">Return</a></li>
+			<li><a href="accountingSAM.php">Return</a></li>
 		</ul>
 
 <br>
 	</div>
-
 	<div id="right_side">
 	
 
 	
-		<br><br><br><br><br><br><br><br><br><br>
+		<br><center><h4>ADD ACCOUNTABILITY</h4></center><br><br><br><br><br><br><br><br><br>
 		<form action="accountingAddAccountabilitySearch.php?search_option=<?php $_GET['search_option'];?>&search_query=<?php $_GET['search_query'];?>" method="get">
-<table>
+<font size="-3"><table>
 	<tr>
 		<td>Enter <select name="search_option">
 		<option value="last_name"> Last Name</option>
@@ -37,8 +36,8 @@
 		<a href="accountingSAM.php"><input type=button value="Back"></a>
 		</td>
 	</tr>
-    
 	</table>
+    </font>
     <br>
     <?php
 	include('connect.php');

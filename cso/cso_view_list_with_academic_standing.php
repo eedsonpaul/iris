@@ -17,7 +17,7 @@
   <p><a href="javascript:history.go(-1)"><b>BACK</b></a></p>
 <body>
 	<!-- HEADER -->
-	<p align=center>UP LOGO HERE</p>
+	<p align=center><img src="up_logo.jpg" width=80 height=80></p>
 	<p class=headfont>
 		UNIVERSITY OF THE PHILIPPINES VISAYAS CEBU COLLEGE
 		<br/><br/>
@@ -41,8 +41,8 @@
 		
 		echo "<center><table width = 800>
 			<tr>
-				<th>Name</th>
-				<th>Academic Standing</th>
+				<th align=left>Name</th>
+				<th align=left>Academic Standing</th>
 			</tr>";
 			
 		while ($students = mysql_fetch_array($student_array)) {

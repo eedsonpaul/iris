@@ -106,13 +106,14 @@
 		$query = "SELECT *from student WHERE student_number = '$student_ID'";
 		$result = mysql_query($query);
         while ($row = mysql_fetch_array($result)) {
-				$maiden_name = "";
+			$maiden_name = "";
 			$last_name = $row['last_name'];
 			$first_name = $row['first_name'];
 			$middle_name = $row['middle_name'];
 			$civil_status = $row['civil_status'];
 			$gender = $row['gender'];
 			$birthdate = $row['birthdate'];
+			
 				
 		}
 	?> 
@@ -302,7 +303,7 @@
         <td width="137"><div align="center">
           <a href ="cso_edit_student_personal_enrollment_data.php?action=NOT&id=<?php echo $student_ID;?>"><input type="submit" name="reset_personal_enrollment_data2" id="reset_personal_enrollment_data2" value="RESET"></a>
         </div></td>
-        <td width="140"><a href="cso_students_concerns.php"><input type="submit" name="cancel_personal_enrollment_data3" id="cancel_personal_enrollment_data3" value="CANCEL"></a></td>
+        <td width="140"><a href="javascript:history.go(-1)"><input type="submit" name="cancel_personal_enrollment_data3" id="cancel_personal_enrollment_data3" value="CANCEL"></a></td>
       </tr>
     </table>
     <p>&nbsp;</p>

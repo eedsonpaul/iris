@@ -141,7 +141,7 @@ tr:hover {
 	background-color: #FEEBEB;
 	/*position:absolute;*/
 	float:right;
-	z-index: 2;
+	margin-left:250;
 	left: 218px;
 	top: 261px;
 	border-top-width: 1px;
