@@ -4,8 +4,10 @@
 
 ?>
 
-<div class="main">
+
 	<div id="navigation">
+    
+    <center><h1>ADD ACCOUNTABILITY</h1></center>
 		
 	  <ul>
 			<li><a href="accountingAddAccountabilitySearch.php?search_option=&search_query=">Add Accountability</a></li>

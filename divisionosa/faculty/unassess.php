@@ -41,7 +41,7 @@
 	echo $id_fee.' ';
 	echo $in_residence.' ';*/
 	
-	echo $lm[0];
+	//echo $lm[0];
 	
 	//NSTP and Laboratory
 	//CONSTANT AMOUNT

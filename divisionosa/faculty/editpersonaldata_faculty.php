@@ -100,4 +100,5 @@
         <td>Computer Science</td>
       </tr>
     </table>
-<?php require_once 'footer.php' ?>
+<br/><br/>
+<?php require_once '../../admin_footer.php' ?>

@@ -1,9 +1,6 @@
 <?php
 	require_once 'student_header.php';
     $student_number = $_SESSION['student_number'];
-?>
-<div class="main">
-<?php
 	require_once 'student_navigation.php';
 ?>
 
@@ -50,5 +47,5 @@ function checkAccountability($accountability_type_id){
 </div>
 
 <?php
-	require_once 'student_footer.php';
+	require_once '../admin_footer.php';
 ?>

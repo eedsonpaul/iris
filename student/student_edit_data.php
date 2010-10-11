@@ -1,17 +1,13 @@
 <?php
 	require_once 'student_header.php';
 	$student_number = $_SESSION['student_number'];	 
-?>
-
-<div class="main">
-
-<?php
+	 $message = $_GET['message'];
 	require_once 'student_navigation.php';
 ?>
 	
 	<div id="right_side">															   
 	<form name="form1" method="post" action="student_edit_enrolldata1.php">
-
+	<strong><?php echo $message; ?></strong><br><br>
 
 	  <p>Enrollment Information&hellip;.<br><br>
 		Select Academic Year: 
@@ -35,5 +31,5 @@
 </div>
 
 <?php
-	require_once 'student_footer.php';
+  require_once '../admin_footer.php';
 ?>

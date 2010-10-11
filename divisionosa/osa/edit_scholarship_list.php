@@ -7,7 +7,6 @@
 	<table align='center' class='tablestyle'>
 	<!--<form action='process_osa.php' method='post'>-->
 		<tr>
-			<th width='200'>Scholarship Id</th>
 			<th width='200'>Scholarship Name</th>
 			<th width='200'>Amount Shouldered</th>
 			<th width='200'>Action</th>
@@ -15,6 +14,5 @@
 		<?php print_table_search_scholarship(search_approved_scholarship($sid)) ?>
 	<!--</form>-->
 	</table>
-<?php
-	require_once 'footer.php';
-?>
+<br/></br>
+<?php require_once '../../admin_footer.php' ?>

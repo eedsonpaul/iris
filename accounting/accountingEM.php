@@ -1,6 +1,5 @@
 <?php 
   require_once 'accounting_header.php';
-  include('connect.php');
 ?>
 
 <!--
@@ -38,7 +37,7 @@
 <img src="mb1.1.jpg" width="140" height="30"><a href="/iris/admin_transact_user.php?action=Logout"><img src="mblogout.gif" width="120" height="30" border="0"></a><img src="mb1.2.jpg" width="33" height="30"><img src="mb1.3.jpg" width="657" height="30"><img src="mb1.4.gif" width="950" height="33"></p>
 -->
 
-<div class="main">
+
 	<div id="navigation">
 		
 	  <ul>
@@ -52,11 +51,13 @@
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <body>
 <br>
-<br>
-<br>
-<br>
-<br>
+
 <center>
+
+<h1><center>ENROLL STUDENT</center></h1>
+<br>
+<br>
+<br>
 <form action="searchAssessment.php" method="get" name="accountingform">
 	<table>
 		<tr>

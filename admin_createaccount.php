@@ -43,19 +43,32 @@ if ($_SESSION['access_level_id'] != 3)  {
   <div id="fill_up">  
     <form method="post" action= "admin_transact_user.php" name="createform">
 
-      <TABLE width="60%" class="table_create" style='background: pink;'>
+      <TABLE width="60%" class="table_create" style='background: #e0e0e0;'>
       <TR>
         <td colspan=2 align="center" style='background: maroon; color: white;'>
           <h2>Add Employee Record</h2>
         </td>
       </TR>
 
-      <tr>
-        <td>
-          <br/>
+      <tr
+        <?php
+        if (isset($_SESSION['flash'])) {
+        ?>
+        <td colspan=2 align="center">
+          <center>
+          <div id="flash_login">
+            <center><?php echo $_SESSION['flash']; ?></center>
+            <?php unset($_SESSION['flash']); ?>
+          </div>
+          </center>
         </td>
+        <?php } else { ?>
+          <td>
+            <br/>
+          </td>
+        <?php } ?>
       </tr>
-      
+
       <tr>
         <td class="login">Employee ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
         <td<input type="text" class="txtinput" name="employee_id" maxlength="100" size=25px></td>
@@ -66,7 +79,7 @@ if ($_SESSION['access_level_id'] != 3)  {
         <td class="login">Grant Access Right:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
         <td>
         <select name="access_level">
-        <!-- <option value="" selected><i>Select</i></option> -->
+        <option value="" selected>Select Access Right</option>
         <?php
         foreach ($accessList as $key => $value) {
           if($key != '1') {
@@ -123,6 +136,7 @@ if ($_SESSION['access_level_id'] != 3)  {
         <td class="login">Gender:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
         <td>
         <select name="gender">
+          <option value="" selected>Select Gender</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
         </select>
@@ -202,9 +216,14 @@ if ($_SESSION['access_level_id'] != 3)  {
     frmvalidator.addValidation("password","req","Please enter a password.");
     frmvalidator.addValidation("password2","req","Please verify password");
     frmvalidator.addValidation("first_name","req","Please enter First Name.");
+    frmvalidator.addValidation("first_name","alpha_s","First Name: Characters only.");
     frmvalidator.addValidation("middle_name","req","Please enter Middle Name.");
+    frmvalidator.addValidation("middle_name","alpha_s","Middle Name: Characters only.");
     frmvalidator.addValidation("last_name","req","Please enter Last Name.");
-    
+    frmvalidator.addValidation("last_name","alpha_s","Last Name: Characters only.");
+    frmvalidator.addValidation("gender","dontselect=0","Please choose a Gender.");
+    frmvalidator.addValidation("access_level","dontselect=0","Access Level required.");
+
     /*
     frmvalidator.addValidation("email_address","req","Please enter Email Address.");
     frmvalidator.addValidation("email_address","email");

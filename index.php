@@ -41,9 +41,6 @@ require_once 'admin_sql_query.php';
     </div>
   </div>
 
-  <table width="100%" cellspacing=0>
-    <tr>
-    <td width="25%">
     <div id="left_side">
       <li>
       <ul class="left_list">
@@ -63,9 +60,7 @@ require_once 'admin_sql_query.php';
       </ul>
       </li>
     </div>
-    </td>
 
-    <td width="75%"><br/>
     <div id="right_side">
       <?php
       if (isset($_GET['action'])) {
@@ -114,7 +109,7 @@ require_once 'admin_sql_query.php';
               
               <td align="right">
                 <div id="override">
-                <a href="divisionosa/osa/osa.php" target="_tab">
+                <a href="divisionosa/osa/osa.php" target="_new">
                 <input type="submit" class="submit" name="action" value="Override&rarr;">
                 </div>
                 </a>
@@ -144,7 +139,7 @@ require_once 'admin_sql_query.php';
               </td>
               <td>
                 <div id="override">
-                <a href="cso/cso.php" target="_tab">
+                <a href="cso/cso.php" target="_new">
                 <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
                 </a>
               </td>
@@ -230,7 +225,7 @@ require_once 'admin_sql_query.php';
               </td>
               <td>
                 <div id="override">
-                <a href="accounting/library.php" target="_tab">
+                <a href="accounting/library.php" target="_new">
                 <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
                 </a>
               </td>
@@ -258,7 +253,7 @@ require_once 'admin_sql_query.php';
               </td>
               <td>
                 <div id="override">
-                <a href="accounting/cashier.php" target="_tab">
+                <a href="accounting/cashier.php" target="_new">
                 <input type="submit" class="submit" name="action" value="Override&rarr;"></div>
                 </a>
               </td>
@@ -351,7 +346,7 @@ require_once 'admin_sql_query.php';
             </center>
           <?php } ?>
           
-          <form method="post" action="admin_search.php">
+          <form method="post" action="index.php?action=">
           <table width="60%" align="left" style="font-size: 12px;">          
             <tr>
               <td>Enter Username / Name / ID</td>
@@ -403,9 +398,6 @@ require_once 'admin_sql_query.php';
       }
     ?>
       </div>
-    </td>
-    </tr>
-  </table>
   </div>
       
   <?php } else {

@@ -17,6 +17,5 @@
 		</tr>
 		<?php print_table_handled_sections(search_handled_sections($employee_id),$employee_id) ?>
 	</table>
-<?php
-	require_once 'footer.php';
-?>
+<br/></br>
+<?php require_once '../../admin_footer.php' ?>

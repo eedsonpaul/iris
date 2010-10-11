@@ -2,8 +2,6 @@
   require_once 'accounting_header.php';
   include('connect.php');
 ?>
-
-<div class="main">
 	<div id="navigation">
 		
 	  <ul>
@@ -14,7 +12,7 @@
 	</div>
 
 	<div id="right_side">
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br>
 <body>
 <br>
 <br>

@@ -46,6 +46,19 @@
 		echo "<script> alert('Student number does not exist. Please input another student number.'); window.location.href = 'cso_change_students_degree_program.php';</script>";
 	} else {
   ?>
+  <script language="JavaScript">
+
+	  function init(){
+		  document.csoform.reset();
+		
+		  oStringMask = new Mask("#########");
+		  oStringMask.attach(document.csoform.student_id);
+
+		
+	  }
+  </script>
+  
+  
   
 <div id="right_side">
 	<p><a href='javascript:history.go(-1)'>Back</a></p>
@@ -68,7 +81,7 @@
 			$pass = $password;
 	}
   ?>
-  <form action="cso_process_edit_student_number.php?action=EDIT STUDENT NUMBER&id=<?php echo $student_ID;?>" method="post">
+  <form action="cso_process_edit_student_number.php?action=EDIT STUDENT NUMBER&id=<?php echo $student_ID;?>" method="post" name="csoform">
     <table width="494" border="0" align="center" class="tab">
       <tr>
         <td width="181"><div align="right">Student ID:</div></td>
@@ -96,6 +109,17 @@
       </center>
     </p>
   </form>
+  <script language="JavaScript" type="text/javascript">
+
+    var frmvalidator  = new Validator("csoform");
+    
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("student_id","req","Student Number required.");
+	frmvalidator.addValidation("student_id","minlen=9");
+
+	
+  </script>
   <p>&nbsp;</p>
 </div>
 <?php } 

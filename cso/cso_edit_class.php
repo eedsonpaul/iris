@@ -47,6 +47,16 @@
 		echo "<script> alert('Class does not exist. Please input another student number.'); window.location.href = 'cso_change_students_degree_program.php';</script>";
 	} else {
   ?>
+
+<script language="JavaScript">
+
+	function init(){
+		document.csoform.reset();
+		
+		oStringMask = new Mask("##");
+		oStringMask.attach(document.csoform.new_max_slots);		
+	}
+</script>
 <div id="right_side">
 	<p><a href='javascript:history.go(-1)'>Back</a></p>
 	<p>
@@ -73,7 +83,7 @@
 			$total_slots = $total_slots;
 	}
   ?>
-  <form action="cso_process_edit_maximum_slots.php?id=<?php echo $subject_code;?>&sec=<?php echo $section_lab;?>" method="post">
+  <form action="cso_process_edit_maximum_slots.php?id=<?php echo $subject_code;?>&sec=<?php echo $section_lab;?>" method="post" name="csoform">
     <table width="494" border="0" align="center" class="tab">
       <tr>
         <td width="181"><div align="right">Subject:</div></td>

@@ -82,7 +82,7 @@ require 'dbconnect.php';
 			}
 		}
 		else if($stat=='waitlisted'){
-
+				$wait = $wait - 1;
 				$count=mysql_query("SELECT student_number,course_code,section_label ,waitlist_counter from student_status where waitlist_counter>$counter  order by waitlist_counter");	 
 					 $index=0;
 				while($row = mysql_fetch_array($count)){		

@@ -79,9 +79,11 @@ function checkScheduleConflict($student_number,$course_code,$section_label){
 function isSameDay($day1, $day2){
 
 	if($day1=='M'&&$day2=='M'){ return true;}
+	else if($day1=='MTh'&&$day2=='MTh'){ return true;}
 	else if(($day1=='M'&&$day2=='MTh')||($day1=='MTh'&&$day2=='M')){ return true;}
 	else if($day1=='T'&&$day2=='T'){ return true;}
 	else if(($day1=='T'&&$day2=='TF')||($day1=='TF'&&$day2=='T')){ return true;}
+	else if($day1=='TF'&&$day2=='TF'){ return true;}
 	else if($day1=='W'&&$day2=='W'){ return true;}
 	else if($day1=='Th'&&$day2=='Th'){ return true;}
 	else if($day1=='F'&&$day2=='F'){ return true;}

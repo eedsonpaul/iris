@@ -18,3 +18,5 @@
 </tr>
 </form>
 </table>
+<br/><br/>
+<?php require_once '../../admin_footer.php' ?>

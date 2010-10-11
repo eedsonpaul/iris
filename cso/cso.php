@@ -27,7 +27,27 @@
 	$data1 = mysql_fetch_array($res1);
 	$unit = $data1['unit_name'];
 ?>
-
+  <?php
+	$cur_sem_id = " ";
+	$cur_ay_id = " ";
+	$cur_sem = " ";
+	
+	$sql = "SELECT * FROM current_semester_id order by current_id";
+	$result = mysql_query($sql);
+	while($row = mysql_fetch_array($result)) {
+		$cur_sem_id = $row['semester_id'];
+		$cur_ay_id = $row['academic_year'];
+	}
+	
+	$sql = "SELECT * FROM semester WHERE semester_id = '$cur_sem_id'";
+	$result = mysql_query($sql);
+	while($row = mysql_fetch_array($result)) {
+		$cur_sem = $row['semester_type'];
+	}
+	$end_ay = $cur_ay_id + 1;
+	$_SESSION['semester'] = $cur_sem;
+	$_SESSION['academic_year'] = $cur_ay_id.' - '.$end_ay;
+  ?>
 <div id="right_side">
 	<p>
     	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>

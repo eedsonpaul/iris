@@ -7,9 +7,8 @@
 
 <?php 
 	 $student_number = $_SESSION['student_number'];	 
-	
-//	echo $academic_year=$_POST['academic_year']; 
-//	echo $semester=$_POST['semester']; 
+    //$academic_year=$_POST['academic_year']; 
+	//$semester=$_POST['semester']; 
 ?>
 
 
@@ -28,7 +27,7 @@
 		oStringMask.attach(document.form1.familyincome);
 		oStringMask.attach(document.form1.employer_number);
 		
-		oStringMask = new Mask("####-##-##");
+		oStringMask = new Mask("########");
 		oStringMask.attach(document.form1.birthdate);
 		
 
@@ -71,30 +70,20 @@
 <div class = "main">
 
 <div id="right_side2">
-<?php
-	 $res=mysql_query("SELECT student_number,first_name,middle_name,last_name,degree_program,year_level,
-	 stfap_bracket_id,scholarship_id from student where student_number=$student_number");
-	 
-	 while($row = mysql_fetch_array($res)){		
-		$id = $row['student_number'];
-		$name = $row['first_name']." ".$row['middle_name']." ".$row['last_name'];
-			
-	 }
-  ?>
   
   <p>
   <form name="form1" method="post" action="student_update_enrolldata1.php?academic_year=$academic_year&semester=$semester">
   <table width="900" class="tablestyle">
   
   <tr>
-    <th width="20%">STUDENT NUMBER<BR><?php echo $id ?> </th>
-    <th width="20%">NAME(Last,Given,Middle)<br><?php echo $name ?></th>
-    <th width="20%">COLLEGE<br>UPVCC</th>
-    <th width="20%">DEGREE<br>B.S. COMPUTER SCIENCE</th>
-    <th width="20%">TERM/AY<br><?php //echo $semester." ".$academic_year ?></th>
+    <th width='200'>STUDENT NUMBER<BR><?php echo $student_number ?> </th>
+    <th width='200'>NAME(Last,Given,Middle)<br><?php echo getFirstName($student_number) . " " . getMiddleName($student_number)  . " " . getLastName($student_number)?></th>
+    <th width='200' colspan='2'>COLLEGE<br>UPCC</th>
+    <th width='300'>DEGREE<br><?php echo getDegreeProgram($student_number) ?></th>
+
   </tr>
   <tr>
-    <td class="nohover" width="33%">
+    <td class="nohover" width="30%">
 	<p align="left"><strong>STUDENT TYPE *</strong><br>
 	<input type="radio" name="student-type" value="A" <?php if(getStudentType($student_number)=='A'){echo 'checked';} ?> >Cross-registrant(from a non-UP unit)<br>
 	<input type="radio" name="student-type" value="B" <?php if(getStudentType($student_number)=='B'){echo 'checked';} ?> >Cross-registrant(from UP unit)<br>
@@ -114,13 +103,13 @@
 	<input type="radio" name="employed" value="no" onclick=disableEmployerField() <?php if(getEmployment($student_number)=='no'){echo 'checked';} ?> >No<br>
 
 	<br>EMPLOYER INFORMATION:<br>
-	Name:    <br><input type="text" name="employer_name" disabled=<?php if(getEmployment($student_number)=='no'){ echo "true";} else { echo "false"; } ?>  value = <?php echo getEmployerName($student_number) ?> ><br>
-	Address: <br><input type="text" name="employer_address" disabled=<?php if(getEmployment($student_number)=='no'){ echo "true";} else { echo "false"; } ?> value = <?php echo getEmployerAddress($student_number) ?> ><br>
-	Zipcode: <br><input type="text" name="employer_zipcode" disabled=<?php if(getEmployment($student_number)=='no'){ echo "true";} else { echo "false"; } ?> value = <?php echo getEmployerZipcode($student_number) ?> ><br>
-	Phone#:  <br><input type="text" name="employer_number"  disabled=<?php if(getEmployment($student_number)=='no'){ echo "true";} else { echo "false"; } ?> value = <?php echo getEmployerNum($student_number) ?> ><br>
+	Name:    <br><input type="text" name="employer_name"  value = <?php echo getEmployerName($student_number) ?> ><br>
+	Address: <br><input type="text" name="employer_address"  value = <?php echo getEmployerAddress($student_number) ?> ><br>
+	Zipcode: <br><input type="text" name="employer_zipcode"  value = <?php echo getEmployerZipcode($student_number) ?> ><br>
+	Phone#:  <br><input type="text" name="employer_number"   value = <?php echo getEmployerNum($student_number) ?> ><br>
 	
 	</td>
-	 <td class="nohover" width="33%">
+	 <td class="nohover" width="30%">
 	<p align="left"><strong>REGISTRATION STATUS *</strong><br>
 	<input type="radio" name="reg-status" value="A" <?php if(getRegStat($student_number)=='A' || getRegStat($student_number)==null){echo 'checked';} ?> >Continuing<br>
 	<input type="radio" name="reg-status" value="B" <?php if(getRegStat($student_number)=='B'){echo 'checked';} ?> >New Cross Registrant/non-degree<br>
@@ -140,14 +129,14 @@
 	<input type="radio" name="country" value="usa" onclick=disableCountryField() <?php if(getCitizenship($student_number)=='usa'){echo 'onclick=disableCountryField() checked';} ?> >USA<br>
 	<input type="radio" name="country" value="dual" onclick=disableCountryField() <?php if(getCitizenship($student_number)=='dual'){echo ' onclick=disableCountryField() checked';} ?> >Philippines and USA (dual)<br>
 	<input type="radio" name="country" value="others" onclick=enableCountryField() <?php if(getCitizenship($student_number)!='philippines' && getCitizenship($student_number)!='usa' && getCitizenship($student_number)!='dual'   ){echo 'checked';} ?> >Other..specify full country name: <br>
-	<input type="text" name="other_country" disabled=<?php if(getCitizenship($student_number)!='philippines' && getCitizenship($student_number)!='usa' && getCitizenship($student_number)!='dual'){ echo "false";} ?> value= <?php  if(getCitizenship($student_number)!='philippines' && getCitizenship($student_number)!='usa' && getCitizenship($student_number)!='dual') echo getCitizenship($student_number) ?> ><br>
+	<input type="text" name="other_country"  value= <?php  if(getCitizenship($student_number)!='philippines' && getCitizenship($student_number)!='usa' && getCitizenship($student_number)!='dual') echo getCitizenship($student_number) ?> ><br>
 	
 	<br><strong>RESIDENT OF PHILIPPINES? *</strong><br>
 	<input type="radio" name="resident" value="yes" <?php if(getResidency($student_number)=='yes'){echo 'checked';} ?>>Yes<br>
 	<input type="radio" name="resident" value="no" <?php if(getResidency($student_number)=='no'){echo 'checked';} ?>>No<br>
 	<br>
 	</td>
-	<td class="nohover" width = "33%" >
+	<td class="nohover" width = "25%" >
 	<p align="left">
 	<br>MAJOR &nbsp; &nbsp;<input type="text" name="major" size="10" disabled="true" value = <?php echo getMajor($student_number) ?> ><br>
 	<br>MINOR &nbsp; &nbsp; <input type="text" name="minor" size="10" disabled="true" value = <?php echo getMinor($student_number) ?> ><br></strong>
@@ -161,21 +150,21 @@
 	PhP: <input type="text" name="personalincome" value= <?php echo getPersonalIncome($student_number) ?> >
 	<br><br>
 	<p align="left"><strong>ADDITIONAL INFORMATION </strong><br>
-	Birthdate:(yyyy-mm-dd)*<input type="text" name="birthdate" value = <?php echo getBirthdate($student_number) ?> ><br>
+	Birthdate:(YyyyMmDd)*<input type="text" name="birthdate" value = <?php echo getBirthdate($student_number) ?> ><br>
 	Birth Place: * <br><input type="text" name="birthplace" value = <?php echo getBirthplace($student_number) ?> ><br> 
 	Email Address: *<br><input type="text" name="emailadd" value = <?php echo getEmailAdd($student_number) ?>  ><br><br><br><br><br><br><br>
 	</td>
 	
-	<td class="nohover"  width = "33%"  colspan="2">
+	<td class="nohover"  width = "15%"  colspan="2">
 	<p align="left">	
 	YEAR LEVEL *<br>
-	<input type="radio" name="year-level"  value=1 <?php if(getYearLevel($student_number)==1){echo 'checked';} ?>>1st<br>
+	<input type="radio" name="year-level" disabled="true" value=1 <?php if(getYearLevel($student_number)==1){echo 'checked';} ?>>1st<br>
 	<input type="radio" name="year-level" disabled="true" value=2 <?php if(getYearLevel($student_number)==2){echo 'checked';} ?>>2nd<br>
 	<input type="radio" name="year-level" disabled="true" value=3 <?php if(getYearLevel($student_number)==3){echo 'checked';} ?>>3rd<br>
 	<input type="radio" name="year-level" disabled="true" value=4 <?php if(getYearLevel($student_number)==4){echo 'checked';} ?>>4th<br>
 	<br>SEX *<br>
-	<input type="radio" name="sex" disabled="true" value="female" <?php if(getGender($student_number)=='female'){echo 'checked';} ?>>Female<br>
-	<input type="radio" name="sex" disabled="true" value="male" <?php if(getGender($student_number)=='male'){echo 'checked';} ?>>Male<br>
+	<input type="radio" name="sex" disabled="true" value="Female" <?php if(getGender($student_number)=='Female'){echo 'checked';} ?>>Female<br>
+	<input type="radio" name="sex" disabled="true" value="Male" <?php if(getGender($student_number)=='Male'){echo 'checked';} ?>>Male<br>
 	
 	<br>CIVIL STATUS *<br>
 	
@@ -193,9 +182,9 @@
 <br>
 <input type="submit" name="back" value="CONTINUE"> 
 </form>
-<p align="center">
-<input type="submit" name="back"  onclick= history.go(-1) value="BACK">
-</p>
+ <form name="back" method="post" action="student_edit_data.php?message=">
+<input type="submit" name="back"  value="BACK">
+</form>
 
 
    
@@ -222,13 +211,11 @@
   frmvalidator.addValidation("birthplace","req","Please input birthplace.");
   frmvalidator.addValidation("emailadd", "req", "Input Email.");
   frmvalidator.addValidation("emailadd","email");
-  
-  
-  
-  frmvalidator.addValidation("employer_name","req","Please input employer name."); 
-  frmvalidator.addValidation("employer_address","req","Please input employer address."); 
-  frmvalidator.addValidation("employer_zipcode","req","Please input employer zipcode."); 
-  frmvalidator.addValidation("employer_number","req","Please input employer number.");   
+ 
+ // frmvalidator.addValidation("employer_name","req","Please input employer name."); 
+ // frmvalidator.addValidation("employer_address","req","Please input employer address."); 
+ // frmvalidator.addValidation("employer_zipcode","req","Please input employer zipcode."); 
+ // frmvalidator.addValidation("employer_number","req","Please input employer number.");   
   
   
   

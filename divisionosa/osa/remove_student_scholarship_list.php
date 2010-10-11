@@ -13,6 +13,5 @@
 		</tr>
 		<?php print_table_remove_student_scholarship(search_student_scholarship($sid)) ?>
 	</table>
-<?php
-	require_once 'footer.php';
-?>
+<br/></br>
+<?php require_once '../../admin_footer.php' ?>

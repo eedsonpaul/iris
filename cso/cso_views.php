@@ -42,8 +42,10 @@
 			function viewStudentRegistration($stud_num) {
 				$_SESSION['stud_num'] = $stud_num;
 				$unit_confirm = 0;
+				$unit_enrolled = 0;
 				$count = 0;
 				$st = "";
+				$stat = "";
 				$action = "";
 				$sql = "select * from student_status where student_number = '$stud_num'";
 				$res = mysql_query($sql);
@@ -108,22 +110,26 @@
       				echo "</tr>";
 					
 					$count++;
-					if($st=="Confirmed"){
-					$unit_confirm = $unit_confirm + $unit;
+					if($stat=="confirmed"){
+						$unit_confirm = $unit_confirm + $unit;
+					} else if($stat=="enrolled") {
+						$unit_enrolled = $unit_enrolled + $unit;
 					}
-					
 				}
-						
-					return $unit_confirm;
+					if($stat=="confirmed"){
+						return $unit_confirm;
+					} else if($stat=="enrolled") {
+						return $unit_enrolled;
+					}
 			}
 				
 				
 				function viewStudentMenus($studnum) {
 					echo "<table width='450' border='0' align='center' cellpadding='0' cellspacing='0' class=normaltext>
 						<tr height='25'>
-						 <td><a href='cso_generate_password_change_student_login_account.php?c=NOT&id=".$studnum."'>Login Account</a></td>
+						 <td><a href='cso_generate_password_change_student_login_account.php?c=NOT&p=NO&id=".$studnum."'>Login Account</a></td>
 						 <td><a href='cso_add_student_accountability.php?action=ADD&id=".$studnum."'>Accountability</a></td>
-						 <td>Enrollment Info</td>
+						 <td><a href='cso_edit_enrolldata1.php'>Enrollment Info</a></td>
 						</tr>
 						<tr height='25'>
 						 <td><a href='cso_edit_student_personal_enrollment_data.php?action=NOT&id=".$studnum."'>Personal Data</a></td>

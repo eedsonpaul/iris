@@ -5,8 +5,7 @@ $course_code = $_POST['course_code'];
 $section = $_POST['section'];
 $classes = mysql_fetch_array(retrieve_class_offering($course_code,$section));
 ?>
-<h1 align="center">Remove Course</h1>
-<h5 align="center">Key in the course code</h5>
+<h1 align="center">Remove Section</h1>
 	<form action='process.php' method='post'>
 	<input type=hidden name='course_code' value='<?php echo $course_code?>'>
 	<input type=hidden name='section' value='<?php echo $section?>'>
@@ -20,7 +19,6 @@ $classes = mysql_fetch_array(retrieve_class_offering($course_code,$section));
 			<th width='200'>Class Type</th>
 			<th width='200'>Time</th>
 			<th width='200'>Day</th>
-			<th width='200'>Action</th>
 		</tr>
 		<tr>
 			<td><?php echo $classes[0]?></td>
@@ -33,7 +31,8 @@ $classes = mysql_fetch_array(retrieve_class_offering($course_code,$section));
 			<td><?php echo $classes[9]?></td>
 		</tr>
 	</table>
-	<p>Do you want to Remove the selected Course?</p>
+	<p>Do you want to Remove the selected Section?</p>
 	<input type='submit' name='c' value='Proceed'/>
 	<input type='submit' name='c' value='Not'/>
-<?php require_once 'footer.php' ?>
+<br/><br/>
+<?php require_once '../../admin_footer.php' ?>

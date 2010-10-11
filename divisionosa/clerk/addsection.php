@@ -1,14 +1,17 @@
 <?php require_once 'header.php' ?>
   <script language="JavaScript" src="masks.js"></script>
-
-
 <?php
-	include("offering_functions.php");
+	require_once 'offering_functions.php';
 	$r = (int)date('Y');
 ?>
-<h1 align="center">ADD CLASS OFFERING</h1>
+<h1 align="center">ADD Section</h1>
+<?php
+	if(!(isset($_POST['error']))) $_POST['error'] = '';
+	echo '<h4 align=center>'.$_POST['error'].'</h4>';
+?>
 <table align="center" class="tablestyle">
 <form action="process.php" method="post" name="osaform">
+<input type='hidden' name='error'>
 	<tr>
 		<td>Course Code</td>
 		<td><select name="course_code">
@@ -102,4 +105,5 @@
   
 </script>
 </table>
-<?php require_once 'footer.php' ?>
+<br/><br/>
+<?php require_once '../../admin_footer.php' ?>

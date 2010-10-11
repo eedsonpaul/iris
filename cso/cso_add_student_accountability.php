@@ -17,7 +17,7 @@
 	$access_level_id = $_SESSION['access_level_id'];
 	$res = mysql_query("SELECT last_name, first_name, middle_name, designation_id, unit_id FROM employee WHERE employee_id='$employee_id'");
 	$data = mysql_fetch_array($res);
-	$employee_name = $data['last_name'] . ', ' . $data['first_name'] . ' ' . $data['middle_name'];
+	$employee_name = $data['last_name'] . ', ' . $data['first_name'] . ' ' . $data['middle_name'][0].'.';
 	$unit_id = $data['unit_id'];
 	$designation_id = $data['designation_id'];
 	$res2= mysql_query("SELECT designation FROM designation WHERE designation_id='$designation_id'");
@@ -32,7 +32,7 @@
 	function init(){
 		document.csoform.reset();
 		
-		oStringMask = new Mask("####-##-##");
+		oStringMask = new Mask("########");
 		oStringMask.attach(document.csoform.exact_date_incurred);
 		
 		oStringMask = new Mask("####");
@@ -53,22 +53,29 @@
     <?php 
 		$student_id = $_GET['id'];
 		$act = $_GET['action'];
-
+				
+		$accountability = "";
+		$acct_details = "";
+		$amt_due = "";
+		$ay_incurred = "";
+		$sem_incurred = "";
+		$date = "";
 		if($act=="ADD") {
 			$button_name = "ADD";
 			$path = "cso_process_add_accountability.php?id=$student_id";
 		} else if($act=="EDIT") {
 			$button_name = "UPDATE";
-			$acct_id = $_GET['acct'];
+			$acc_id = $_GET['acct'];
 						
-			$sqll = "SELECT * from accountability WHERE student_number = '$student_id' && accountability_type_id = '$acct_id'";
+			$sqll = "SELECT * from accountability WHERE student_number = '$student_id' && accountability_id = '$acc_id'";
 			$result2 = mysql_query($sqll);
         		while ($row = mysql_fetch_array($result2)) {
 				$acct_details = $row['details'];
 				$amt_due = $row['amount_due'];
 				$ay_incurred = $row['year_incurred'];
 				$date = $row['date_added'];
-				$acc_id = $row['accountability_id'];
+				$acct_id = $row['accountability_type_id'];
+				$sem_inc = $row['semester_incurred'];
 			}
 
 			$path = "cso_process_edit_accountability.php?id=$student_id&acc_id=$acc_id";
@@ -80,13 +87,7 @@
       
 	  <?php 
 	  	include("connect_to_database.php");
-		
-		$accountability = "";
-		$acct_details = "";
-		$amt_due = "";
-		$ay_incurred = "";
-		$sem_incurred = "";
-		$date = "";
+
 
 		$sql = "SELECT * from student WHERE student_number = '$student_id'";
 		$result = mysql_query($sql);
@@ -114,6 +115,9 @@
         <td>
 	<label>
           <select name="accountability" id="accountability">
+		<?php
+			if($act=="ADD") {
+		?>
 		<option value="-1">Choose Accountability..</option>
            <?php 
 		 	$query = "SELECT * from accountability_type WHERE accountability_type_id = 5 || accountability_type_id = 6";
@@ -123,6 +127,23 @@
 			?>
             <option value="<?php echo $accountability_type_id;?>"><?php echo $accountability_type;?></option>
 			<?php }
+			} else if($act=="EDIT") {
+				$query = "SELECT * from accountability_type WHERE accountability_type_id = '$acct_id'";
+			$result = mysql_query($query);
+			while ($row = mysql_fetch_array($result)) {
+				extract($row);
+
+            echo "<option value='$accountability_type_id' selected>$accountability_type</option>";
+			}
+
+			$query = "SELECT * from accountability_type WHERE accountability_type_id = 5 || accountability_type_id = 6";
+			$result = mysql_query($query);
+			while ($row = mysql_fetch_array($result)) {
+				extract($row);
+
+            echo "<option value='$accountability_type_id'>$accountability_type</option>";
+			}
+			}
 			?>
           </select>
           </label></td>
@@ -145,13 +166,22 @@
           <select name="semester_incurred" id="semester_incurred">
 		<option value="-1">Choose Semester..</option>
            <?php 
-		 	$query = "SELECT * from semester";
+		 	$query = "SELECT * from semester WHERE semester_id = '$sem_inc'";
 			$result = mysql_query($query);
 			while ($row = mysql_fetch_array($result)) {
 				extract($row);
-			?>
-            <option value="<?php echo $semester_id;?>"><?php echo $semester_type;?></option>
-			<?php }
+				 echo "<option value='$semester_id' selected>$semester_type</option>";			
+			
+			 }
+
+			
+			$query = "SELECT * from semester WHERE semester_id != '$sem_inc'";
+			$result = mysql_query($query);
+			while ($row = mysql_fetch_array($result)) {
+				extract($row);
+
+            			echo "<option value='$semester_id'>$semester_type</option>";
+				}
 			?>
           </select>
           </label></td>
@@ -160,7 +190,7 @@
         <td><div align="right">Exact Date Incurred: *</div></td>
         <td>&nbsp;</td>
         <td><input type="text" name="exact_date_incurred" id="exact_date_incurred" value="<?php echo $date;?>"></>
-        (yyyy-mm-dd)</td>
+        (yyyymmdd)</td>
       </tr>
     </table>
     <p>
@@ -175,7 +205,6 @@
     
     frmvalidator.EnableMsgsTogether();
 
-    frmvalidator.addValidation("exact_date_incurred","req","Exact Date Incurred field requires an input.");
     frmvalidator.addValidation("academic_year_incurred","req","Academic Year required.");
  
   </script>

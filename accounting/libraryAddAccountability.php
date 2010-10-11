@@ -2,7 +2,7 @@
   require_once 'library_header.php';
 ?>
 
-<div class="main">
+<div id="navigation">
 <center><h1>ADD ACCOUNTABILITY</h1></center>
 <p>&nbsp;</p>
 <center>
@@ -22,7 +22,7 @@
 	echo "<tr><td>Name: </td><td>".$last_name.", ".$first_name." ".$middle_name."</td></tr>";
 	echo "<tr><td>Degree Program: </td><td>".$degree_program."</td></tr>";
 ?>
-<form action="addLibraryAccountability.php?student_number=<?php echo $student_number; ?>" method="post">
+<form action="addLibraryAccountability.php?student_number=<?php echo $student_number; ?>" method="post" name="accountingform">
 	<tr>
 		<td>Accountability:</td>
 		<td>
@@ -49,6 +49,7 @@
 	<tr>
 		<td>Semester Incurred:</td>
 		<td><select name="semester_incurred">
+		<option value="0">summer</option>
 		<option value="1">first semester</option>
 		<option value="2">second semester</option>
 		<option value="3">first trimester</option>
@@ -66,8 +67,19 @@
 	</tr>
 	</table>
 </form>
-</body>
-</html>
+
+<script language="JavaScript" type="text/javascript">
+
+    var frmvalidator  = new Validator("accountingform");
+    
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("details","req","Details Required.");
+    frmvalidator.addValidation("amount_due","req","Amount Due Required.");
+    frmvalidator.addValidation("amount_due","num","Amount Due contains invalid characters.");
+
+  </script>
+
 </div>
 
 <?php 

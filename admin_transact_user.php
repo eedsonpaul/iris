@@ -1,114 +1,77 @@
 <?php
 require_once 'admin_http.php';
-
-//redirect('error.php');
-
-?>
-
-<?php
 require_once 'admin_db_connect.php';
-//require_once 'admin_http.php';
 require_once 'admin_echolist.php';
 
-if (isset($_GET['admindelete'])) {
-  $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['admindelete'] . "' LIMIT 1";
-  $result = mysql_query($sql, $conn)
-    or die('Could not look up user data; ' . mysql_error());
-  session_start();
-  $_SESSION['flash'] =  'Account succesfully deleted!';
-  redirect('index.php?action=SysAd');
+  if (isset($_GET['admindelete'])) {
+    $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['admindelete'] . "' LIMIT 1";
+    $result = mysql_query($sql, $conn)
+      or die('Could not look up user data; ' . mysql_error());
+    session_start();
+    $_SESSION['flash'] =  'Account succesfully deleted!';
+    redirect('index.php?action=SysAd');
 
-} else if (isset($_GET['divdelete'])) {
-  $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['divdelete'] . "' LIMIT 1";
-  $result = mysql_query($sql, $conn)
-    or die('Could not look up user data; ' . mysql_error());
-  session_start();
-  $_SESSION['flash'] =  'Account succesfully deleted!';    
-  redirect('index.php?action=Faculty');
-  
-} else if (isset($_GET['acctgdelete'])) {
-  $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['acctgdelete'] . "' LIMIT 1";
-  $result = mysql_query($sql, $conn)
-    or die('Could not look up user data; ' . mysql_error());
-  session_start();
-  $_SESSION['flash'] =  'Account succesfully deleted!';    
-  redirect('index.php?action=Acctg');
-  
-} else if (isset($_GET['csodelete'])) {
-  $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['csodelete'] . "' LIMIT 1";
-  $result = mysql_query($sql, $conn)
-    or die('Could not look up user data; ' . mysql_error());
-  session_start();
-  $_SESSION['flash'] =  'Account succesfully deleted!';    
-  redirect('index.php?action=Cso');
-  
-} else if (isset($_GET['osadelete'])) {
-  $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['osadelete'] . "' LIMIT 1";
-  $result = mysql_query($sql, $conn)
-    or die('Could not look up user data; ' . mysql_error());
-  session_start();
-  $_SESSION['flash'] =  'Account succesfully deleted!';    
-  redirect('index.php?action=Osa');
-  
-} else if (isset($_GET['libdelete'])) {
-  $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['libdelete'] . "' LIMIT 1";
-  $result = mysql_query($sql, $conn)
-    or die('Could not look up user data; ' . mysql_error());
-  session_start();
-  $_SESSION['flash'] =  'Account succesfully deleted!';    
-  redirect('index.php?action=Lib');
+  } else if (isset($_GET['divdelete'])) {
+    $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['divdelete'] . "' LIMIT 1";
+    $result = mysql_query($sql, $conn)
+      or die('Could not look up user data; ' . mysql_error());
+    session_start();
+    $_SESSION['flash'] =  'Account succesfully deleted!';    
+    redirect('index.php?action=Faculty');
+    
+  } else if (isset($_GET['acctgdelete'])) {
+    $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['acctgdelete'] . "' LIMIT 1";
+    $result = mysql_query($sql, $conn)
+      or die('Could not look up user data; ' . mysql_error());
+    session_start();
+    $_SESSION['flash'] =  'Account succesfully deleted!';    
+    redirect('index.php?action=Acctg');
+    
+  } else if (isset($_GET['csodelete'])) {
+    $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['csodelete'] . "' LIMIT 1";
+    $result = mysql_query($sql, $conn)
+      or die('Could not look up user data; ' . mysql_error());
+    session_start();
+    $_SESSION['flash'] =  'Account succesfully deleted!';    
+    redirect('index.php?action=Cso');
+    
+  } else if (isset($_GET['osadelete'])) {
+    $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['osadelete'] . "' LIMIT 1";
+    $result = mysql_query($sql, $conn)
+      or die('Could not look up user data; ' . mysql_error());
+    session_start();
+    $_SESSION['flash'] =  'Account succesfully deleted!';    
+    redirect('index.php?action=Osa');
+    
+  } else if (isset($_GET['libdelete'])) {
+    $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['libdelete'] . "' LIMIT 1";
+    $result = mysql_query($sql, $conn)
+      or die('Could not look up user data; ' . mysql_error());
+    session_start();
+    $_SESSION['flash'] =  'Account succesfully deleted!';    
+    redirect('index.php?action=Lib');
 
-} else if (isset($_GET['cashierdelete'])) {
-  $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['cashierdelete'] . "' LIMIT 1";
-  $result = mysql_query($sql, $conn)
-    or die('Could not look up user data; ' . mysql_error());
-  session_start();
-  $_SESSION['flash'] =  'Account succesfully deleted!';    
-  redirect('index.php?action=Cashier');
-  
-} else if (isset($_GET['clerkdelete'])) {
-  $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['clerkdelete'] . "' LIMIT 1";
-  $result = mysql_query($sql, $conn)
-    or die('Could not look up user data; ' . mysql_error());
-  session_start();
-  $_SESSION['flash'] =  'Account succesfully deleted!';    
-  redirect('index.php?action=Clerk');
-}
+  } else if (isset($_GET['cashierdelete'])) {
+    $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['cashierdelete'] . "' LIMIT 1";
+    $result = mysql_query($sql, $conn)
+      or die('Could not look up user data; ' . mysql_error());
+    session_start();
+    $_SESSION['flash'] =  'Account succesfully deleted!';    
+    redirect('index.php?action=Cashier');
+    
+  } else if (isset($_GET['clerkdelete'])) {
+    $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['clerkdelete'] . "' LIMIT 1";
+    $result = mysql_query($sql, $conn)
+      or die('Could not look up user data; ' . mysql_error());
+    session_start();
+    $_SESSION['flash'] =  'Account succesfully deleted!';    
+    redirect('index.php?action=Clerk');
+  }
 
 if (isset($_REQUEST['action'])) {
   switch ($_REQUEST['action']) {
-  /////Administrative Login
-    case 'Admin Login':
-      if (isset($_POST['username'])
-          and isset($_POST['password']))
-      {
-        $sql = "SELECT employee_id, access_level_id, username " .
-               "FROM employee " .
-               "WHERE username='" . $_POST['username'] . "' " .
-               "AND password='" . md5($_POST['password']) . "'" .
-               "AND access_level_id=3";
-               
-        $result = mysql_query($sql, $conn)
-          or die('Could not look up user information; ' . 
-                 mysql_error());
-
-        if ($row = mysql_fetch_array($result)) {
-          session_start();
-          $_SESSION['employee_id'] = $row['employee_id'];
-          $_SESSION['access_level_id'] = $row['access_level_id'];
-          $_SESSION['username'] = $row['username'];
-
-          redirect('index.php?action=Logs');
-        } else {
-          session_start();
-          $_SESSION['flash'] = 'Invalid Username/Password Combination';
-          redirect('login.php?action=Admin');
-        }
-      }
-      break;
-
-    //////Employee Login
-    case 'Employee Login':
+  /////Staff Login
+    case 'Login':
       if (isset($_POST['username'])
           and isset($_POST['password']))
       {
@@ -116,7 +79,8 @@ if (isset($_REQUEST['action'])) {
                "FROM employee " .
                "WHERE username='" . $_POST['username'] . "' " .
                "AND password='" . md5($_POST['password']) . "'" . 
-			   "AND access_level_id!=3";;
+			         "AND access_level_id != 1";
+
         $result = mysql_query($sql, $conn)
           or die('Could not look up user information; ' . 
                  mysql_error());
@@ -126,7 +90,9 @@ if (isset($_REQUEST['action'])) {
           $_SESSION['employee_id'] = $row['employee_id'];
           $_SESSION['access_level_id'] = $row['access_level_id'];
           $_SESSION['username'] = $row['username'];
-          if ($row['access_level_id'] == 4) header("Location: accounting/accounting.php");
+
+          if ($row['access_level_id'] == 3) header("Location: index.php?action=Logs");
+          else if ($row['access_level_id'] == 4) header("Location: accounting/accounting.php");
 		      else if ($row['access_level_id'] == 2) header("Location: divisionosa/faculty/faculty.php");
 		      else if ($row['access_level_id'] == 5) header("Location: accounting/library.php");
 		      else if ($row['access_level_id'] == 6) header("Location: accounting/cashier.php");
@@ -136,7 +102,7 @@ if (isset($_REQUEST['action'])) {
         } else {
           session_start();
           $_SESSION['flash'] = 'Invalid Username/Password Combination';
-          redirect('login.php?action=Employee');
+          redirect('login.php?action=Staff');
         }
       }
       break;
@@ -192,13 +158,7 @@ if (isset($_REQUEST['action'])) {
 	    }
 	    $id = $_SESSION['access_level_id'];
 	    
-	    if ($id == 3) {
-	      session_unset();
-	      session_destroy();	    
-	      session_start();
-	      $_SESSION['flash'] = 'Successfully Logged Out';
-          redirect('login.php?action=Admin');
-	    } else if ($id == 1) {
+	    if ($id == 1) {
 		    session_unset();
 		    session_destroy();
 		    session_start();
@@ -209,7 +169,7 @@ if (isset($_REQUEST['action'])) {
 		    session_destroy();
 		    session_start();
 		    $_SESSION['flash'] = 'Successfully Logged Out';
-	        redirect('login.php?action=Employee');
+	        redirect('login.php?action=Staff');
 	    }
       break;
 
@@ -227,22 +187,6 @@ if (isset($_REQUEST['action'])) {
           and isset($_POST['designation_id'])
           and isset($_POST['last_updated_by'])
           and $_POST['password'] == $_POST['password2'])          
-          /*
-          and isset($_POST['email_address'])
-          and isset($_POST['parent_address'])
-          and isset($_POST['present_address'])
-          and isset($_POST['civil_status'])
-          and isset($_POST['birthdate'])
-          and isset($_POST['contact_number'])
-          and isset($_POST['spouse_name'])
-          and isset($_POST['spouse_number'])
-          and isset($_POST['father_name'])
-          and isset($_POST['mother_name'])
-          and isset($_POST['housing_type'])
-          and isset($_POST['citizenship'])
-          and isset($_POST['sec_quest'])
-          and isset($_POST['sec_ans'])
-          */
       {
         $uName = generateUsername($_POST['first_name'], $_POST['last_name']);
 
@@ -257,34 +201,93 @@ if (isset($_REQUEST['action'])) {
                '" . $_POST['middle_name'] . "','" . $_POST['last_name'] . "',
                '" . $_POST['gender'] . "','" . $_POST['last_updated_by'] . "',
                '" . $_POST['unit_id'] . "','" . $_POST['designation_id'] . "')";
-               /*
-               '" . $_POST['parent_address'] . "','" . $_POST['present_address'] . "',
-               '" . $_POST['civil_status'] . "','" . $_POST['birthdate'] . "',
-               '" . $_POST['contact_number'] . "','" . $_POST['spouse_name'] . "',
-               '" . $_POST['spouse_number'] . "','" . $_POST['father_name'] . "',
-               '" . $_POST['mother_name'] . "','" . $_POST['last_updated_by'] . "',
-               '" . $_POST['housing_type'] . "','" . $_POST['citizenship'] . "',
-               '" . $_POST['sec_quest'] . "','" . $_POST['sec_ans'] . "')";
-               */
 
-        mysql_query($sql, $conn)
-          or die('Could not create user account; ' . mysql_error());
+        //or die('Could not create user account; ' . mysql_error());
+
+        if (mysql_query($sql, $conn)) {
+          session_start();
+          $_SESSION['flash'] =  'Account successfully created!';
+          /*
+          $action_flag = 1;
+          $target_type = 1;
+          $id = $_POST['employee_id'];
+          $section_label = NULL;
+          $this -> tracker($employee_id, $action_flag, $target_type, $id, $section_label);
+          */
+          redirect('admin_useraccount.php?userid=' . $_POST['employee_id']);
+        } else {
+          session_start();
+          $_SESSION['flash'] =  'Employee ID already exists!';
+          redirect('admin_createaccount.php');
+        }
       }
 
-      session_start();
-      $_SESSION['flash'] =  'Account succesfully created!';
-      redirect('admin_useraccount.php?userid=' . $_POST['employee_id']);
-      break;
+    break;
 
-    case 'Save':
+    case 'Edit Login Account':
+      if (isset($_POST['password'])
+          and isset($_POST['password2'])
+          or isset($_POST['sec_quest'])
+          or isset($_POST['sec_ans'])
+          and $_POST['password'] == $_POST['password2'])
+      {
+        if ($_POST['password'] != $_POST['password2']) {
+          session_start();
+          $_SESSION['flash'] =  'Password doesn\'t match!';
+          redirect('admin_useraccount.php?editlogin=' . $_POST['employee_id']);          
+        } else {
+          $hashedPassword = md5($_POST['password']);
+
+          $sql = "UPDATE employee " .
+                 "SET password='" . $hashedPassword .
+                 "', security_question='" . $_POST['sec_quest'] .
+                 "', security_answer='" . $_POST['sec_ans'] . "' " .
+                 "WHERE employee_id=" . $_POST['employee_id'];
+
+          if (mysql_query($sql, $conn)) {
+            session_start();
+            $_SESSION['flash'] =  'Login account succesfully updated!';
+            
+            redirect('admin_useraccount.php?editlogin=' . $_POST['employee_id']);
+          }
+        }
+      }
+    break;
+
+    case 'Save Login Account':
+      if (isset($_POST['password'])
+          and isset($_POST['password2'])
+          or isset($_POST['sec_quest'])
+          or isset($_POST['sec_ans'])
+          and $_POST['password'] == $_POST['password2'])
+      {
+        if ($_POST['password'] != $_POST['password2']) {
+          session_start();
+          $_SESSION['flash'] =  'Password doesn\'t match!';
+          redirect('admin_useraccount.php?editlogin=' . $_POST['employee_id']);          
+        } else {
+          $hashedPassword = md5($_POST['password']);
+
+          $sql = "UPDATE employee " .
+                 "SET password='" . $hashedPassword .
+                 "', security_question='" . $_POST['sec_quest'] .
+                 "', security_answer='" . $_POST['sec_ans'] . "' " .
+                 "WHERE employee_id=" . $_POST['employee_id'];
+
+          if (mysql_query($sql, $conn)) {
+            session_start();
+            $_SESSION['flash'] =  'Login account succesfully updated!';
+            
+            redirect('admin_panel.php?v=editlogin');
+          }
+        }
+      }
+    break;
+
+    case 'Save Changes' or 'Save Profile':
       if (isset($_POST['employee_id'])
           and isset($_POST['access_level'])
-          and isset($_POST['first_name'])
-          or isset($_POST['middle_name'])
-          and isset($_POST['last_name'])
           and isset($_POST['username'])
-          //and isset($_POST['password'])
-          //and isset($_POST['password2'])
           and isset($_POST['gender'])          
           and isset($_POST['unit_id'])
           and isset($_POST['designation_id'])
@@ -302,23 +305,16 @@ if (isset($_REQUEST['action'])) {
           or isset($_POST['housing_type'])
           or isset($_POST['citizenship'])
           or isset($_POST['sec_quest'])
-          or isset($_POST['sec_ans'])
-          /*and $_POST['password'] == $_POST['password2']*/)
+          or isset($_POST['sec_ans']))
 
       {
-        $uName = generateUsername($_POST['first_name'], $_POST['last_name']);
-
-        $hashedPassword = md5($_POST['password']);
 
         $sql = "UPDATE employee " .
-               "SET employee_id='" . $_POST['employee_id'] . 
-               "', username= '$uName
-               ', access_level_id='" . $_POST['access_level'] .               
-               "', first_name='" . $_POST['first_name'] .
-               "', middle_name='" . $_POST['middle_name'] .
-               "', last_name='" . $_POST['last_name'] .
+               "SET employee_id='" . $_POST['employee_id'] .
+               "', access_level_id='" . $_POST['access_level'] .
                "', gender='" . $_POST['gender'] .
                "', last_updated_by='" . $_POST['last_updated_by'] .
+               "', email_address='" . $_POST['email_address'] .
                "', unit_id='" . $_POST['unit_id'] .
                "', designation_id='" . $_POST['designation_id'] . 
                "', parent_address='" . $_POST['parent_address'] .
@@ -340,13 +336,24 @@ if (isset($_REQUEST['action'])) {
           or die('Could not create user account; ' . mysql_error());
           
         session_start();
+          /*
+          $action_flag = 2;
+          $target_type = 1;
+          $id = $_POST['employee_id'];
+          $section_label = NULL;
+          $this -> tracker($employee_id, $action_flag, $target_type, $id, $section_label);
+          */
         $_SESSION['flash'] =  'Account updated!';
       } else {
         session_start();
         $_SESSION['flash'] =  'Update Failed!';
       }
-      redirect('admin_useraccount.php?userid=' . $_POST['employee_id']);
-    
+      if ($_REQUEST['action'] == 'Save Changes') {
+        redirect('admin_useraccount.php?userid=' . $_POST['employee_id']);
+      } else {
+        redirect('admin_panel.php');
+      }
+
       break;
 
     case 'Create Student':

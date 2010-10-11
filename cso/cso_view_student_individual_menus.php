@@ -17,7 +17,7 @@
 	$access_level_id = $_SESSION['access_level_id'];
 	$res = mysql_query("SELECT last_name, first_name, middle_name, designation_id, unit_id FROM employee WHERE employee_id='$employee_id'");
 	$data = mysql_fetch_array($res);
-	$employee_name = $data['last_name'] . ', ' . $data['first_name'] . ' ' . $data['middle_name'];
+	$employee_name = $data['last_name'] . ', ' . $data['first_name'] . ' ' . $data['middle_name'][0].'.';
 	$unit_id = $data['unit_id'];
 	$designation_id = $data['designation_id'];
 	$res2= mysql_query("SELECT designation FROM designation WHERE designation_id='$designation_id'");
@@ -41,6 +41,7 @@
 	<p class="head">&nbsp;</p>
 	<?php
 		$student_number = $_GET['id'];
+		$_SESSION['student_number'] = $student_number;
 		$sql="select * from student where student_number = '$student_number'";
 		$res=mysql_query($sql);
 		while($row=mysql_fetch_array($res)){

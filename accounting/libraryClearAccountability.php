@@ -16,10 +16,24 @@
 	$result = mysql_query($query);
 	$student_number = mysql_result($result,0,"student_number");
 ?>
+ <script language="JavaScript" src="gen_validatorv31.js" type="text/javascript"></script>
+<script language="JavaScript">
+
+	function init(){
+		document.accountingform.reset();
+		
+		oStringMask = new Mask("############");
+		oStringMask.attach(document.accountingform.or_number);
+		
+		oStringMask = new Mask("############");
+		oStringMask.attach(document.accountingform.amount_paid);
+
+</script>
+
 <html>
 	<head><title>Clear Accountability</title></head>
 	<body>
-		<form action="clearLibraryAccountability.php" method="post">
+		<form action="clearLibraryAccountability.php" method="post" name="accountingform">
 		<input type="hidden" name="student_number" value="<?php echo $student_number;?>"/>
 		<input type="hidden" name="id" value="<?php echo $id;?>"/>
 		<table>
@@ -48,6 +62,20 @@
 		  </table>
 		<p>&nbsp;</p>
         </form>
+		
+		
+	<script language="JavaScript" type="text/javascript">
+
+    var frmvalidator  = new Validator("accountingform");
+    
+    frmvalidator.EnableMsgsTogether();
+
+	frmvalidator.addValidation("or_number","req","OR Number required.");
+	frmvalidator.addValidation("or_number","num","OR Number contains invalid characters.");
+	frmvalidator.addValidation("amount_paid","req","Amount Paid required.");
+	frmvalidator.addValidation("amount_paid","num","Amount Paid contains invalid characters.");
+   
+  </script>
 		
 	</body>
 </html>

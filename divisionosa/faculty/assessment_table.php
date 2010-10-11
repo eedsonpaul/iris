@@ -417,6 +417,5 @@ function acctg_feeAssessment(){
 	}
 	acctg_feeAssessment()
 	?>
-<?php
-	require_once 'footer.php';
-?>
+<br/><br/>
+<?php require_once '../../admin_footer.php' ?>

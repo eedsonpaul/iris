@@ -1,10 +1,17 @@
 <?php require_once 'header.php' ?>
-  <p align="left" class="style4">&nbsp;</p>
-  <ul>
-  	<li><a href=#"">Student Grade management module</a></li>
-    <ul>
-    	<li><a href="">View Grade per Class</a>
-        <li><a href="select_section.php">Submit Grade per Class</a>
-    </ul>
-  </ul>
-<?php require_once 'footer.php' ?>
+<br/><br/>
+
+<table id="insidecontent" align="center">
+	<tr>
+		<th>Student Grade Management Module</th>
+	</tr>
+	<tr>
+		<td><a href="#">View Grade per Class &raquo;</a></td>
+	</tr>
+	<tr>
+		<td><a href="select_section.php">Submit Grade per Class &raquo;</a></td>
+	</tr>
+</table>
+
+<br/><br/>
+<?php require_once '../../admin_footer.php' ?>

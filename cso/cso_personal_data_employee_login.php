@@ -36,8 +36,8 @@
       	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
         <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
  	</p>
-		<li><a href="../admin_useraccount.php?userid=<?php echo $employee_id;?>">Edit My Login/Personal Data</a></li>
-
+		<li><a href="../admin_useraccount.php?editlogin=<?php echo $employee_id;?>">Edit My Login</a></li>
+		<li><a href="../admin_useraccount.php?userid=<?php echo $employee_id;?>">Edit Personal Data</a></li>
 </div>
 
 <?php

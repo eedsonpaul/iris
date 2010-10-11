@@ -2,9 +2,9 @@
   require_once 'accounting_header.php';
 ?>
 
-<div class="main">
+
 <title></title>
-<p>
+<p><center>
   <?php
 	include('connect.php');
 	include('accountabilityClass.php');
@@ -13,7 +13,7 @@
 ?>
 </p>
 <p>&nbsp;</p>
-<p>
+<p><center>
   <input type=button value="Back" onClick="history.go(-1)">
 </p>
 </body>

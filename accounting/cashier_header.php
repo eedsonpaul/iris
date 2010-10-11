@@ -8,6 +8,9 @@
 
 <html>
 <head>
+  <?php if ($_SESSION['access_level_id'] == 3) { ?> 
+  <title>Admin &raquo; Cashier | UP Cebu IRIS </title>
+  <?php } ?>
   <title>Cashier | UP Cebu IRIS!</title>
   <link rel="icon" href="../img/seal2.png" type="image/x-icon">
   
@@ -15,7 +18,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   
   <style type="text/css">
-  @import url("css/cashier.css");
+  @import url("../css/accounting.css");
   </style>
   
   <script language="JavaScript" src="masks.js" type="text/JavaScript"></script>
@@ -23,10 +26,16 @@
   <script language="JavaScript">
 
 	  function init(){
-		  document.loginform.reset();
+		  document.cashierform.reset();
 		
 		  oStringMask = new Mask("#########");
-		  oStringMask.attach(document.loginform.student_number);
+		  oStringMask.attach(document.cashierform.student_number);
+		  
+		  oStringMask = new Mask("#################");
+		  oStringMask.attach(document.cashierform.or_form);
+		  
+		  oStringMask = new Mask("#################");
+		  oStringMask.attach(document.cashierform.amount_paid);
 		
 	  }
   </script>
@@ -36,9 +45,9 @@
 <body onLoad="init();">
   <div id="banner">
     <?php if (!isset($_SESSION['employee_id'])) { ?>
-      <a href="index.php"><img src="../img/banner.jpg" width="950" height="163" border="0"></a>
+      <a href="cashier.php"><img src="../img/banner.jpg" width="950" height="163" border="0"></a>
     <?php } else { ?>
-      <a href="index.php?action=Logs"><img src="../img/banner.jpg" width="950" height="163" border="0"></a>
+      <a href="cashier.php?action=Logs"><img src="../img/banner.jpg" width="950" height="163" border="0"></a>
     <?php } ?>
   </div>
   </div>

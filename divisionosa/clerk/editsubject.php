@@ -7,9 +7,14 @@
 ?>
 <table align="center" class="tablestyle">
 <h1 align="center">Edit Course</h1>
+<?php
+	if(!(isset($_POST['error']))) $_POST['error'] = '';
+	echo '<h4 align=center>'.$_POST['error'].'</h4>';
+?>
 <form action="process.php" method="post" name="osaform">
 <input type="hidden" name="sub" value="<?php echo $sub ?>">
 <h4 align="center">You are currently Editing for Course Code <strong><?php print($values[0]) ?></strong></h4>
+<input type='hidden' name='error'>
 <input type="hidden" name="course_code" value="<?php print($values[0]) ?>">
 	<tr>
 		<td>Course Title</td>
@@ -92,4 +97,5 @@
 </script>
 
 </table>
-<?php require_once 'footer.php' ?>
+<br/><br/>
+<?php require_once '../../admin_footer.php' ?>

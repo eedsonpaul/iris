@@ -41,7 +41,7 @@
 	  <p class="head"><strong>Change Student Degree Program</strong></p>
       <p class="headfont"><strong>Search Student</strong></p>
       <p>&nbsp;</p>
-  <form action="cso_edit_view_student_course.php?c=NA&change=YES" method="post">
+  <form action="cso_edit_view_student_course.php?c=NA&change=NO" method="post" name="csoform">
     <?php
 		include ("cso_search_student.php");
 		
@@ -49,6 +49,18 @@
 		$searchForm->searchStudentForm();
 	?>
   </form>
+  
+  <script language="JavaScript" type="text/javascript">
+
+    var frmvalidator  = new Validator("csoform");
+    
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("student_id","req","Student Number required.");
+
+	
+  </script>
+  
   <p>&nbsp;</p>
 </div>
 <?php

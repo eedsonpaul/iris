@@ -31,18 +31,19 @@
 	
 	function retrieve_account_osa($student_number)
 	{
-		$q	=	mysql_query("SELECT a.accountability_type, b.details, b.amount_due, b.year_incurred, c.semester_type
-				FROM semester c, accountability b, accountability_type a
+		$q	=	mysql_query("SELECT d.student_number, d.last_name, d.first_name, a.accountability_type, b.details, b.amount_due, b.year_incurred, c.semester_type
+				FROM student d, semester c, accountability b, accountability_type a
 				WHERE b.accountability_type_id = a.accountability_type_id
-				and b.accountability_status='pending'
+				AND b.accountability_status = 'pending'
 				AND c.semester_id = b.semester_incurred
-				AND b.student_number =  '$student_number'
-				and a.accountability_type_id='3'");
+				AND b.student_number = d.student_number
+				and d.student_number='$student_number'
+				and a.accountability_type_id='1'");
 		if(!$q) die("unable to retrieve osa accountability".mysql_error());
 		return $q;
 	}
 	
-	function print_table_account($a)
+	/*function print_table_account($a)
 	{
 		$i=0;
 		while($row = mysql_fetch_array($a))
@@ -64,5 +65,55 @@
 			$i=0;
 			echo "</tr>";
 		}
+	}*/
+	
+	function print_table_account($a)
+	{
+		$i=0;
+		while($row = mysql_fetch_array($a))
+		{
+			echo '<tr>';
+			while($i<8)//sizeof($row)
+			{
+				echo '<td>';
+				if($i==1)
+				{
+					echo $row[$i].", ".$row[$i+1];
+					$i++;
+				}
+				else if($i==6) {
+					echo ($row[$i]-1)."-".$row[$i];
+					echo "/".$row[$i+1];
+					$i++;
+				}
+				else echo $row[$i]." ";
+				$i++;
+				echo '</td>';
+			}
+			$i=0;
+			echo "</tr>";
+		}
 	}
+	
+	function retrieve_name($employee_id)
+	{
+		$q = mysql_query("SELECT a.employee_id, a.first_name, a.last_name, b.unit_name, c.designation
+			FROM employee a, unit b, designation c
+			WHERE a.employee_id = '$employee_id'
+			AND a.unit_id = b.unit_id
+			AND a.designation_id = c.designation_id");
+		if(!$q) die('cannot retrieve info'.mysql_error());
+		return $q;
+	}
+	
+	function exist($num,$table,$attribute)
+	{
+		$q = mysql_query("SELECT * 
+			FROM ".$table." 
+			WHERE ".$attribute."='$num'");
+		if(!$q) die('Individual does not exist'.mysql_error());
+		return $q;
+	}
+	
+	//echo mysql_numrows(exist(1,'accountability','student_number'));
 ?>

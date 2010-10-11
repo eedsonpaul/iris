@@ -1,3 +1,6 @@
+<?php 
+ 	 require_once 'cashier_header.php';
+?>
 <?php
 	include('connect.php');
 	include('cashierClass.php');

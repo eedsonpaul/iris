@@ -7,7 +7,7 @@
 			<ul>
 			  <li><a href="student.php">student profile </a><a href="student_edit_login_account.php">Edit Login account</a></li>
 			</ul>
-			<li><a href="student_edit_data.php">Edit Personal Data</a></li>
+			<li><a href="student_edit_data.php?message=">Edit Personal Data</a></li>
 		  </ul>
 		</li>
 		

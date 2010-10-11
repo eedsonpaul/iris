@@ -43,7 +43,7 @@
 	  <p class="head"><strong>Change Student Login Account</strong></p>
       <p class="headfont"><strong>Search Student</strong></p>
       <p>&nbsp;</p>
-  <form action="cso_generate_password_change_student_login_account.php?c=NA" method="post" name="csoform">
+  <form action="cso_generate_password_change_student_login_account.php?c=NA&p=NO" method="post" name="csoform">
     <?php
 		include ("cso_search_student.php");
 		

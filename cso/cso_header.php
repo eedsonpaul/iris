@@ -8,6 +8,9 @@
 
 <html>
 <head>
+  <?php if ($_SESSION['access_level_id'] == 3) { ?> 
+  <title>Admin &raquo; CSO | UP Cebu IRIS </title>
+  <?php } ?>
   <title>CSO | UP Cebu IRIS</title>
   <link rel="icon" href="../img/seal2.png" type="image/x-icon">
   
@@ -15,7 +18,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <style type="text/css">
-  @import url("default.css");
+  @import url("../css/cso.css");
   </style>
   
 <script language="JavaScript" src="masks.js" type="text/JavaScript"></script>
@@ -44,7 +47,7 @@
     <?php if (!isset($_SESSION['employee_id'])) { ?>
       <a href="index.php"><img src="../img/banner.jpg" width="950" height="163" border="0"></a>
     <?php } else { ?>
-      <a href="index.php?action=Logs"><img src="../img/banner.jpg" width="950" height="163" border="0"></a>
+      <a href="../index.php"><img src="../img/banner.jpg" width="950" height="163" border="0"></a>
     <?php } ?>
   </div>
   </div>

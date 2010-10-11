@@ -1,0 +1,141 @@
+BUGS as of October 10,2010
+
+ADMIN TEAM
+
+
+SESSIONS
+1. login as osa, url: http://10.48.1.113/iris/cso/cso_search/faculty_results.php
+	Not Found
+2. student no session. can still access 
+url:http://10.48.1.113/iris/student/student_register_subject.php
+
+Mandatory:
+1. login as sysadd. click "account", all buttons not working:) 
+	account profile 404 not found!
+	The requested URL /iris/osa.php was not found on this server.
+2. Modify osa account -> No ERROR checking 
+	Mother's name,spouse name, mother's name, citizenship,lastname, firstname, middlename
+	email address not updating,answer not updating
+3. After Override, Click Header
+	404 not found
+
+Not mandatory:
+1. Forgot your password, no error catching
+	output:Could not look up password; Unknown column 'email' in 'where clause'
+
+
+OVERRIDE OSA (OSA sessions okay:)
+1. edit login account not clickable
+2. need to check data regarding faculty profile.
+3. edit personal data??
+4. Student Accountability module not clickable
+5. ADD student Accountability-> student number does not exist and student number input (invalid)
+	Student Accountability assigned.
+6. View Accountability, student number input invalid and does not exist and input null
+	no checking
+7.stfap bracket management module not clickable
+8.stfap bracketing -> stfap bracketing-> button not working
+9. edit stfap bracket -> null student number, invalid input and d.n.e. student number
+	->STFAP Bracket assigned -> no error checking
+10. Scholarship management module ->scholarship management module not working
+11. view scholarship list button not working
+12. Add approved scholarship ? (not working) and no error checking
+13. edit scholarship info -> amount shouldered: characters (no checking) 
+	-> after saving, view scholarship infor amount shouldered is 0.
+14. student scholarship module ->student scholarship module-> not clickable
+15. add student scholarship->student number:kdlfjkdf
+	Scholarship updated for student number kdlfjkdf. (no checking)
+	but does not exist in database
+16. add student scholarship-> student number: (student number with existing scholarship)
+	successfully add but not in the database. ( no checking)
+17. edit student scholarship -> updates! but the retrieved scholarship not
+	the scholarship of the that specific student number (always SWAT ang display)
+18. login as sysad, does not retrieve name, designation and unit of "demigod(sysadd user)"
+
+OVERRIDE CSO
+1. edit my account no error checking:
+	>fathers name, mothers name, email address, spouse name
+	>birthdate and contact number 
+		(dili xa mu-update if invalid error pwo walai notification or popup)
+2.add student record (no checking)
+	> student number null
+	>lastname, first name, middle name: after characters symbols and numbers
+	>login expiration (input not checked if complete date e.g. 2001-)
+3.student concerns ->student record mngt -> student record mngt -> no back button, status: (FIXED)
+4. change student login account
+		-> password retrieved kay hashed!! pati ang retyped password status: (FIXED)
+5.edit student personal data -> change student personal data
+	> no back button, status: (FIXED)
+6.change student degree program ->(student number: input characters) not masked!
+7. list of faculty submitted grades 
+	-> The requested URL /iris/cso/cso_list_faculty_with_submitted_grades.php was not found on this server. (WALA NI XA)
+8.grades->grades module -> no back button, status ; fixed!
+9.report/utilities-> summary of enrollment 
+	>back to main menu ?? not working
+			STATUS: fixed!
+10.pre-enlistment module
+	->clasess utilities, list of pre-registered students, pre-enlistment results 
+		>Not Found:) found:) status:(WALA NI LABOT):)
+11.confirmation module
+	-> all buttons not found:) status:(WALA NI LABOT):)
+12. genral registration module
+	-> no back button	
+
+OVERRIDE ACCOUNTING
+1. edit employee profile -> "back to list button"
+	> should not redirect to list of sysAdd but
+	to accounting index
+2.students' accountability module 
+	>no back button to accounting index
+	// naa d.i dili maklaro kay return xa:)
+3.students' accountability module
+	-> edit a specific account (e.g. catubig)
+		>Parse error: parse error in C:\wamp\www\iris\accounting\accountingEditAccountability.php on line 130
+	-> clear
+		>Label: "Add accountability"
+		>no validations
+
+OVERRIDE FACULTY
+1. back button not working:)
+	status: FIXED
+2.staff profile and edit login acckount button not working
+3.edit personal data
+	>wrong retrieved data
+	>fields not editable
+4.student grade mngt -> view grades per class button
+	>nothing happend
+5.student record mngt
+	>all buttons under this not working
+6.general registration->register student->assessment
+	Notice: Undefined variable: lm in C:\wamp\www\iris\divisionosa\faculty\unassess.php on line 44
+7.register student-> student number (no checking or not masked)
+8.view course offerings 
+	>all buttons under this not working
+9.click home
+	>Not Found
+	The requested URL /iris/divisionosa/faculty/index.php was not found on this server.
+
+OVERRIDE LIBRARY
+1.Edit Employee Profile
+	> no back button( only back to admin account)
+2.Add accountability
+	> no checking if (lastname) input: integers
+	>no checking also for student number
+	>no checking amount due (can input characters)
+3. from index, edit a particular student library accountability
+	>Parse error: parse error in C:\wamp\www\iris\accounting\libraryEditAccountability.php on line 79
+4. clear accountability
+	>no checking for amount (should be exact value)
+
+OVERRIDE CASHIER
+1.edit employee profile
+	>no back button (dapat sa index) aside sa back-to-admin account
+2.SLB payment -> input valid student number
+	>Parse error: parse error in C:\wamp\www\iris\accounting\cashierClass.php on line 6
+3.scholarship payment ->input valid student number
+	>Parse error: parse error in C:\wamp\www\iris\accounting\cashierClass.php on line 6
+4.input others payment ->input valid student number
+	>Parse error: parse error in C:\wamp\www\iris\accounting\cashierClass.php on line 6
+5.enrollment module ->enroll student ->input valid student number
+	>Parse error: parse error in C:\wamp\www\iris\accounting\cashierClass.php on line 6
+

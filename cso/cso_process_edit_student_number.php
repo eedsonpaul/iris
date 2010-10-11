@@ -29,7 +29,38 @@
 				$sql = "UPDATE student SET
 						student_number = '".$_POST['student_id']."', 
 						last_updated = '$last_update' WHERE student_number='$student_num'";
-					
+				$sql1 = "UPDATE students_degree SET
+						student_number = '".$_POST['student_id']."', 
+						last_updated = '$last_update' WHERE student_number='$student_num'";
+				$sql2 = "UPDATE accountability SET
+						student_number = '".$_POST['student_id']."' 
+						WHERE student_number='$student_num'";
+				$sql3 = "UPDATE assessment SET
+						student_number = '".$_POST['student_id']."' 
+						WHERE student_number='$student_num'";
+				$sql4 = "UPDATE grade SET
+						student_number = '".$_POST['student_id']."' 
+						WHERE student_number='$student_num'";
+				$sql5 = "UPDATE scholars SET
+						student_number = '".$_POST['student_id']."' 
+						WHERE student_number='$student_num'";
+				$sql6 = "UPDATE slb SET
+						student_number = '".$_POST['student_id']."' 
+						WHERE student_number='$student_num'";
+				$sql7 = "UPDATE student_assessment SET
+						student_number = '".$_POST['student_id']."' 
+						WHERE student_number='$student_num'";
+				$sql8 = "UPDATE student_status SET
+						student_number = '".$_POST['student_id']."' 
+						WHERE student_number='$student_num'";
+				mysql_query($sql1);
+				mysql_query($sql2);
+				mysql_query($sql3);
+				mysql_query($sql4);
+				mysql_query($sql5);
+				mysql_query($sql6);
+				mysql_query($sql7);
+				mysql_query($sql8);
 				echo "<script> alert('Student number successfully updated.'); window.location.href = 'cso_student_record_management.php';</script>";
 				} else if($stud_num==$student_ID){
 						echo "<script> alert('Student number already exists. Please input another student number'); window.location.href = 'cso_edit_student_number.php?id=$stnum';</script>";

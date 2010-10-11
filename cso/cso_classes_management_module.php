@@ -28,6 +28,7 @@
 ?>
 
 	<div id="right_side">
+		<p><a href='javascript:history.go(-1)'>Back</a></p>
 		<p>
 			<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
 			<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
@@ -37,12 +38,12 @@
 		<p class="head"><strong>Classes Management Module</strong></p>
 		<!-- <p class="headfont"><strong>Add Class</strong></p> --> 
 		<p>&nbsp;</p>
-		<form action="cso_process_look_for_class.php" method="post">
+		<form action="cso_process_look_for_class.php?" method="get">
 			<table width=75% border="0" align="center">
 				<tr>
 					<td align=right><strong>Look for: &nbsp; </strong></td>
-					<td  width=150><input type="text" name="class_name" id="class_name"></td>
-					<td><input type="submit" name="look_for_class" id="look_for_class" value="SUBMIT"></td>
+					<td  width=150><input type="text" name="class" id="class"></td>
+					<td><input type="submit" value="SUBMIT"></td>
 				</tr>
 			</table>
 		</form>

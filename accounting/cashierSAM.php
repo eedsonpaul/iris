@@ -17,10 +17,11 @@
 <br>
 <br>
 <br>
+</div>
 <center>
  <a href="cashier.php"><input type="submit" value='Back'></a>
  </center>
-</div>
+
 
 <?php 
   require_once 'cashier_footer.php';

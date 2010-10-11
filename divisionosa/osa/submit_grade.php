@@ -10,6 +10,4 @@
 	print(mysql_numrows($result));
 ?>
 
-<?php
-	require_once 'footer.php';
-?>
+<?php require_once '../../admin_footer.php' ?>

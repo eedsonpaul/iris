@@ -117,8 +117,13 @@
 	$d = (int)date('Y');
 ?>
 <h1 align="center">ADD COURSE</h1>
+<?php
+	if(!(isset($_POST['error']))) $_POST['error'] = '';
+	echo '<h4 align=center>'.$_POST['error'].'</h4>';
+?>
 <table align="center" class="tablestyle">
-<form action="process.php" method="post" name="addcourse">
+<form action="process.php" method="post" name="osaform">
+<input type='hidden' name='error'>
 	<tr>
 		<td>Course Code</td>
 		<td><input type="text" name="course_code"></td>

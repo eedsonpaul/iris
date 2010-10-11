@@ -11,6 +11,8 @@
 	<title>CSO</title>
 	<style type="text/css">
 		@import url("documents.css");
+		.row0 { background-color: #EAEAEA; }
+		.row1 { background-color:#FFFFFF;	}	
   </style>
 </head>
 
@@ -25,34 +27,35 @@
 	
 	<p class=notice>
 		<b>REPORT<br/>
-		<u>current semester, A.Y. current academic year</u></b><br/>
+		<u><?php session_start(); echo $_SESSION['semester'];?>, <?php echo $_SESSION['academic_year'];?></u></b><br/>
 		AS OF <?php echo date("D M d H:i:s T Y"); ?>
 	</p>
 	<br/><br/><br/><br/>
 	
 	<!-- BODY -->
-
-		<?php
+	<?php
+	
+		include ('connect_to_database.php');
+		include ('cso_enrollment_functions.php');
 		
-			include ('connect_to_database.php');
-			
-			$program_array = mysql_query("SELECT * FROM degree_program");
-			while ($programs = mysql_fetch_array($program_array))  {
-				$prog_id = $programs['degree_program_id'];
+		$program_array = mysql_query("SELECT * FROM degree_program");
+		while ($programs = mysql_fetch_array($program_array))  {
+			$prog_id = $programs['degree_program_id'];
 
-				$stud_array = mysql_query("SELECT * FROM student WHERE degree_program_id='$prog_id' ORDER BY last_name asc");
-				$count=1;
-				
-				echo "<ul><p class=headdata><u><b>" .$programs['degree_name'] ."</b></u></p>";
-				while ($students= mysql_fetch_array($stud_array)) {
-					extract($students);
+			$stud_array = mysql_query("SELECT * FROM student WHERE degree_program_id='$prog_id' ORDER BY last_name asc");
+			$count=1;
+			
+			echo "<ul><p class=headdata><u><b>" .$programs['degree_name'] ."</b></u></p>";
+			while ($students= mysql_fetch_array($stud_array)) {
+				extract($students);
+				$enrolled = checkEnrolledSubjects($student_number);
+				if ($enrolled == 1) {
 					echo	"<li>&nbsp; &nbsp;" .$count ." . &nbsp;" .$last_name. ", " .$first_name. " " .$middle_name. "</li>";
 					$count++;
 				}
-				
+			}			
 			echo "</ul><br/>";
-			}
-		?>
-
+		}
+	?>
 </body>
 </html>

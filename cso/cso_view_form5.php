@@ -78,6 +78,8 @@
 	$parent = '';
 	$scholarship_id = '';
 	$scholarship = '';
+	$scholarship_set_by = '';
+	$scholarship_set = "";
 	$reg_stat = "";
 	$grad_stat = "";
 	$graduating = "";
@@ -128,6 +130,20 @@
 	
 	while ($row = mysql_fetch_array($result)) {
 		$bracket = $row['stfap_bracket'];
+	}
+	
+	$query = new SqlQueries();
+	$result = $query->querysql("SELECT * from scholars WHERE scholarship_id = '$scholarship_id'");
+	
+	while ($row = mysql_fetch_array($result)) {
+		$scholaship_set = $row['set_by'];
+	}
+	
+	$query = new SqlQueries();
+	$result = $query->querysql("SELECT * from employee WHERE employee_id = '$scholarship_set'");
+	
+	while ($row = mysql_fetch_array($result)) {
+		$scholaship_set_by = $row['last_name'].', '.$row['first_name'].' '.$row['middle_name'][0].'.';
 	}
 	
 	$query = new SqlQueries();
@@ -222,15 +238,28 @@
 		document.write("<input type='button' " + "onClick='printForm5()' " + "class='printbutton' " + "value='Print Form 5'/>");
 		
 		function printForm5() {
-			window.print();
+			
 			
 			<?php
-				$last_update = time();
-				$sql = "UPDATE student_status SET
-					status =  'enrolled'
-					WHERE student_number = '$student_id'";
-				
-				mysql_query($sql);						 
+				$query = "SELECT * FROM student_status WHERE student_number = '$student_id'";
+				$result = mysql_query($query);
+				$status = "":
+				while ($row = mysql_fetch_array($result)) {
+					$status = $row['status'];
+					
+					if ($status=="paid") {
+						$last_update = time();
+						$sql = "UPDATE student_status SET
+						status =  'enrolled'
+						WHERE student_number = '$student_id'";
+						mysql_query($sql);						 
+			?>
+					window.print();
+			<?php
+					} else if($status!="paid") {
+						echo "<script> alert('Cannot print form 5.'); </script>";
+					}
+				}
 			?>
 		}
 	</script>
@@ -239,15 +268,15 @@
   </table>
 <?php
 	$loop_count = 0;
-	
+	$end_ay = $_SESSION['academic_year']+ 1;
 	while ($loop_count < 2) {
 ?>
 <br />
 <table width="1056" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td width="32" height="27"><span class="style7"><img src="logo.jpg" width="30" height="25" /></span></td>
-    <td width="907"><span class="style7"> UP FORM 5. UNIVERSITY OF THE PHILIPPINES CEBU COLLEGE CERTIFICATE OF REGISTRATION (REV. 05-2010)</span></td>
-    <td class="style7">Semester, AY</td>
+    <td width="880"><span class="style7"> UP FORM 5. UNIVERSITY OF THE PHILIPPINES CEBU COLLEGE CERTIFICATE OF REGISTRATION (REV. 05-2010)</span></td>
+    <td class="style7"><?php echo $_SESSION['semester'];?>, <?php echo $_SESSION['academic_year'];?></td>
   </tr>
 </table>
 <table width="1056" border="1" align="center" cellpadding="0" cellspacing="0">
@@ -263,21 +292,21 @@
           		<td width="95" height="26">COLLEGE
                 	<br /><strong><div align="center">UPCC</div></strong></td>
           		<td width="182" height="26">DEGREE
-                	<br /><strong><?php echo strtoupper($degree);?></strong></td>
+                	<br /><div valign="bottom"><strong><?php echo strtoupper($degree);?></strong></div></td>
         	</tr>
         	<tr>
-          		<td height="25">NATIONALITY
+          		<td height="25" valign="top">NATIONALITY
                 	<br /><strong><div align="center"><?php echo $citizenship;?></div></strong></td>
-          		<td width="65" height="25">GENDER
-                	<br /><strong><div align="center"><?php echo $gender;?></div></strong></td>
-          		<td width="77" height="25">CIVIL STATUS
-                	<br /><strong><div align="center"><?php echo $civil_status;?></div></strong></td>
-          		<td width="76" height="25">DATE OF BIRTH
-                	<br /><strong><div align="center"><?php echo $newbirthdate;?></div></strong></td>
-          		<td width="84" height="25">PLACE OF BIRTH
-                	<br /><div align="center"><strong><?php echo $place_of_birth;?></strong></div></td>
-          		<td height="25">DEGREE LEVEL
-                	<br /><div align="center"><strong><?php echo strtoupper($degree_level);?></strong></div></td>
+          		<td width="65" height="25" valign="top">GENDER
+                	<br /><strong><div align="center" valign="bottom"><?php echo $gender;?></div></strong></td>
+          		<td width="77" height="25" valign="top">CIVIL STATUS
+                	<br /><strong><div align="center"valign="bottom"><?php echo $civil_status;?></div></strong></td>
+          		<td width="76" height="25" valign="top">DATE OF BIRTH
+                	<br /><strong><div align="center" valign="bottom"><?php echo $newbirthdate;?></div></strong></td>
+          		<td width="84" height="25" valign="top">PLACE OF BIRTH
+                	<br /><div align="center" align="bottom"><strong><?php echo $place_of_birth;?></strong></div></td>
+          		<td height="25" valign="top">DEGREE LEVEL
+                	<br /><div align="center" valign="bottom"><strong><?php echo strtoupper($degree_level);?></strong></div></td>
           		<td valign="top">STUDENT TYPE <br /></td>
         	</tr>
       	</table>
@@ -296,9 +325,9 @@
         	</tr>
         	<tr>
           		<td colspan="2" height="25" valign="top">REGISTRATION STATUS 
-                	<br /><center><?php echo $reg_stat;?></center> </td>
-          		<td valign="top" height="25">GRADUATING? 
-                	<br /><?php echo $graduating;?> </td>
+                	<br /><b><center><?php echo $reg_stat;?></center></b> </td>
+          		<td valign="top" height="25" valign="top">GRADUATING? 
+                	<br /><div valign="bottom" align="center"><b><?php echo $graduating;?></b></div></td>
         	</tr>
       	</table>
     </div>
@@ -332,12 +361,12 @@
     <td height="37" rowspan="2" class="style10" valign="top">ADVISER: (Name and Signature)</td>
     <td width="132" height="27" class="style10" valign="top">STFAP BRACKET NUMBER</td>
     <td width="267" class="style10"><strong><div align="center"><?php echo $bracket;?></div></strong></td>
-    <td colspan="4" class="style10" valign="top">SCHOLARSHIP/PRIVILEGE &nbsp;&nbsp;&nbsp;&nbsp;<strong><?php echo $scholarship;?></div></strong></td>
+    <td colspan="4" class="style10" valign="top">SCHOLARSHIP/PRIVILEGE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $scholarship;?></div></b></td>
   </tr>
   <tr>
     <td height="23" class="style10" valign="bottom">ENCODED BY</td>
     <td height="23" class="style10">&nbsp;</td>
-    <td colspan="4" class="style10" valign="bottom">ENCODED BY</td>
+    <td colspan="4" class="style10" valign="bottom">ENCODED BY &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $scholarship_set_by;?></td>
   </tr>
   <tr>
     <td height="18" colspan="3" class="style10">PRESENT ADDRESS &nbsp;&nbsp;<strong><?php echo $presadd_no.' '.$presadd_strt.' '.$presadd_brgy.' '.$presadd_city.', '.$presadd_prov;?></div></strong></td>

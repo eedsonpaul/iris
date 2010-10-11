@@ -8,14 +8,17 @@
 
 <html>
 <head>
+  <?php if ($_SESSION['access_level_id'] == 3) { ?> 
+  <title>Admin &raquo; Library | UP Cebu IRIS </title>
+  <?php } ?>
   <title>Library | UP Cebu IRIS</title>
-  <link rel="icon" href="img/seal2.png" type="image/x-icon">
+  <link rel="icon" href="../img/seal2.png" type="image/x-icon">
   
   <script language="JavaScript" src="gen_validatorv31.js" type="text/javascript"></script>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   
   <style type="text/css">
-  @import url("css/cashier.css");
+  @import url("../css/accounting.css");
   </style>
   
   <script language="JavaScript" src="masks.js" type="text/JavaScript"></script>
@@ -23,10 +26,16 @@
 <script language="JavaScript">
 
 	function init(){
-		document.loginform.reset();
+		document.accountingform.reset();
 		
-		oStringMask = new Mask("#########");
-		oStringMask.attach(document.loginform.student_number);
+		oStringMask = new Mask("############");
+		oStringMask.attach(document.accountingform.or_number);
+		
+		oStringMask = new Mask("############");
+		oStringMask.attach(document.accountingform.amount_paid);
+		
+		oStringMask = new Mask("############");
+		oStringMask.attach(document.accountingform.amount_due);
 		
 	}
 </script>
@@ -36,9 +45,9 @@
 <body onLoad="init();">
   <div id="banner">
     <?php if (!isset($_SESSION['employee_id'])) { ?>
-      <a href="index.php"><img src="../img/banner.jpg" width="950" height="163" border="0"></a>
+      <a href="library.php"><img src="../img/banner.jpg" width="950" height="163" border="0"></a>
     <?php } else { ?>
-      <a href="index.php?action=Logs"><img src="../img/banner.jpg" width="950" height="163" border="0"></a>
+      <a href="library.php?action=Logs"><img src="../img/banner.jpg" width="950" height="163" border="0"></a>
     <?php } ?>
   </div>
   </div>
@@ -51,3 +60,54 @@
   <?php } ?>
       <img src="../img/mb1.4.gif" width="950" height="33">
   </div>
+  
+   <div class = "main">
+    <?php if ($_SESSION['access_level_id'] == 3) { ?>
+    <div id="for_admin">
+      <div id="admin_nav" class="left">
+          <a href="../index.php?action=Logs"><span class="left">&larr;Back to Admin Account</span></a>
+      </div>
+
+		  <div id="admin_nav" class="right">
+        <?php
+        if (isset($_SESSION['employee_id']) or isset($_SESSION['student_number']))
+        {
+          echo '<a href="../index.php?action=SearchAcct">Search Account &raquo;';
+          echo '</a>';
+          if ($_SESSION['access_level_id'] == 3) {
+            echo ' | <a href="../index.php?action=Logs">Logs</a> | ';
+            echo ' <a href="../admin_panel.php">' . $_SESSION['username'];
+          } else if ($_SESSION['access_level_id'] == 1) {
+            echo ' | <a href="admin_accountpanel.php">' . $_SESSION['student_number'];
+          }
+          echo '</a>';
+        }
+        ?>
+		</div>
+		
+		</div><br/><br/>
+		<?php } ?>
+
+		Employee ID : <?php echo $_SESSION['employee_id']?><br>
+		<?php 
+		$query_employee = "SELECT * FROM employee WHERE employee_id ='".$_SESSION['employee_id']."';";
+		$employee = mysql_query($query_employee);
+		$employee_last_name = mysql_result($employee,0,"last_name");
+		$employee_first_name = mysql_result($employee,0,"first_name");
+		$employee_middle_name = mysql_result($employee,0,"middle_name");
+		$designation_id = mysql_result($employee,0,"designation_id");
+		$unit_id = mysql_result($employee,0,"unit_id");
+
+		$query_designation = "SELECT * FROM designation WHERE designation_id=$designation_id;";
+		$result_designation = mysql_query($query_designation);
+		$designation = mysql_result($result_designation,0,"designation");
+
+		$query_unit = "SELECT * FROM unit WHERE unit_id = $unit_id;";
+		$result_unit=mysql_query($query_unit);
+		$unit = mysql_result($result_unit,0,"unit_name");
+		?>
+		Name   :  <?php echo $employee_last_name.", ". $employee_first_name." ".$employee_middle_name;?><br>
+		Designation : <?php echo $designation ?><br>
+		Unit:  <?php echo $unit ?><br><br>
+		<br>
+		<br>

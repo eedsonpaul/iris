@@ -1,10 +1,8 @@
 <?php
 	require_once 'student_header.php';
     $student_number = $_SESSION['student_number'];
-?>
-<div class="main">
-<?php
 	require_once 'student_navigation.php';
+	require_once 'function_student.php';
 ?>
 
 <div id="right_side">
@@ -14,19 +12,12 @@
 	<th width=150>#</th>
 	<th width=150>ACADEMIC YEAR</th>
 	<th width=150>SEMESTER</th>
-	<th width=150>PREVIOUS SEMESTER CLASS STANDING</th>
 	<th width=150>CURRENT SEMESTER CLASS STANDING</th>
 	<th width=150>GWA</th>
 	<th width=150>ACTION</th>
 	</tr>
 	 
-	 
 	 <?php
-	 
-
-		
-
-		
 	 $acad =mysql_query("SELECT DISTINCT academic_year from grade where student_number='$student_number'");	 
 	 $i= 0;
 	 $sub= mysql_num_rows($acad);
@@ -40,16 +31,15 @@
 	  $counter=1;
 		for($x = 0;$x < $i; $x++){
 		 $sem =mysql_query("SELECT DISTINCT semester from grade where student_number='$student_number' and academic_year='$academic[$x]'");
-		$sub= mysql_num_rows($sem);	$y=0; 
+		  $sub= mysql_num_rows($sem);	$y=0; 
 				while($row = mysql_fetch_array($sem)){	
 				$semester[$x][$y] = $row['semester'];
 				echo "<tr>";
 				echo "<td> " . $counter . "</td> ";
 				echo "<td>" .checkAcademicYear($academic[$x]). "</td>";
 				echo "<td>" .checkSemester($semester[$x][$y]).   "</td>";
-				echo "<td> </td>";
-				echo "<td> </td>";
-				echo "<td> </td>";
+				echo "<td>" . getClassStanding($student_number,$academic[$x],$semester[$x][$y]). "</td>";
+				echo "<td>" . getGWA($student_number,$academic[$x],$semester[$x][$y]). "</td>";
 				$a = $semester[$x][$y];
 				echo "<td><a href=\"student_display_grade.php?academic_year=$academic[$x]&semester=$a\">VIEW</a></td>";
 				echo "</tr>";
@@ -97,5 +87,5 @@
 </div>
 
 <?php
-	require_once 'student_footer.php';
+  require_once '../admin_footer.php';
 ?>

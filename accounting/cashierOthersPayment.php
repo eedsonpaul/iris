@@ -1,18 +1,9 @@
 <?php 
   require_once 'cashier_header.php';
 ?>
-<div class="main">
-<div id="navigation">
-Employee ID : <?php echo $_SESSION['employee_id']?><br>
-<?php $query_employee = "SELECT * FROM employee WHERE employee_id ='".$_SESSION['employee_id']."';";
-$employee = mysql_query($query_employee);
-$employee_last_name = mysql_result($employee,0,"last_name");
-$employee_first_name = mysql_result($employee,0,"first_name");
-$employee_middle_name = mysql_result($employee,0,"middle_name");?>
 
-Name   :  <?php echo $employee_last_name.", ". $employee_first_name." ".$employee_middle_name;?><br>
-Designation :  <br>
-Unit:  <br>
+<div id="navigation">
+
 <br>
 <br>
 <center><h1>Underassessment/Lab Fees Payment</h1></center>
@@ -20,11 +11,11 @@ Unit:  <br>
 <br>
 <br>
 <center>
-<form action="inputCashierOthers.php" method="get">
+<form action="inputCashierOthers.php" method="get" name="cashierform">
 	<table>
 		<tr>
 			<td>Student Number:</td>
-			<td><input type="text" name="student_number" value="XXXXXXXXX" onFocus="javascript:this.value=''">
+			<td><input type="text" name="student_number" onFocus="javascript:this.value=''">
 			</td>
 		</tr>
 	</table>
@@ -39,6 +30,17 @@ Unit:  <br>
   </table>
 	<p>&nbsp;</p>
 </form>
+
+<script language="JavaScript" type="text/javascript">
+
+    var frmvalidator  = new Validator("cashierform");
+    
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("student_number","req","Student Number Required.");
+
+  </script>
+
 </body>
 </html>
 </div>

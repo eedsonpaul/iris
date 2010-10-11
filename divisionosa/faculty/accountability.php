@@ -18,6 +18,5 @@
 	print_table_account(retrieve_account($student_number));
 ?>
 </table>
-<?php
-	require_once 'footer.php';
-?>
+<br/><br/>
+<?php require_once '../../admin_footer.php' ?>

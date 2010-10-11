@@ -16,31 +16,6 @@ body{
   padding: 10px;
 }
 
-#for_admin {
-  background: #FCADAD;
-  padding: 12px;
-  padding-top: 14px;
-}
-
-#admin_nav {
-  float: right;
-  padding-right: 0px;
-  margin-top: -10px;
-  padding-bottom: 10px;
-}
-
-#admin_nav.right {
-  float: right;
-}
-
-#admin_nav.left {
-  float: left;
-}
-
-#admin_nav a:link {text-decoration:none; color: #880606;}
-#admin_nav a:visited {text-decoration:none; color: #880606;}
-#admin_nav a:hover {text-decoration: underline; color: #880606;}
-
 #osa_menu {
   width: 950px;
   margin-left: auto;
@@ -49,7 +24,6 @@ body{
 
 #banner
 {
-  
   width: 950px;
   margin-left: auto;
   margin-right: auto;
@@ -73,6 +47,16 @@ body{
 	border-collapse: collapse;
 	background-image: url(bg.gif);
 }
+
+.tablestyle2 {
+	font-size: 12px;
+	font-weight:bold;
+	/*text-align: center; #E3EDE7*/
+	text-align: left;
+	border: 1px solid #000000;
+	border-collapse: collapse;
+	background-color:#ECE9D8;
+}
 .indent {
 	text-indent:15px;
 	font-weight:lighter;
@@ -85,6 +69,7 @@ th {
 	color:#016701;
 	background-color:#A5C9A5;
 	padding: 1px;
+	font-size:14px;
 }
 
 td {
@@ -103,7 +88,7 @@ tr {
 	border-bottom-color: #CCCCCC;
 	/*text-align:center;*/
 }
-tr:hover {
+/*tr:hover {
 	background-color: #FFAAAA;
 	color: #750000;
 	}
@@ -164,12 +149,10 @@ tr:hover {
 
 }
 #contentcolumn1 {
-	background-color: #FEEBEB;
-	/*position:absolute;*/
-	float:right;
-	margin-left:250;
+	/*background-color: #E3EDE7;#FEEBEB*/
+	margin-left: 210px;
 	left: 218px;
-	top: 261px;
+	top: 261px;/**/
 	border-top-width: 1px;
 	border-right-width: 1px;
 	border-bottom-width: 1px;
@@ -183,12 +166,33 @@ tr:hover {
 	border-bottom-color: #000000;
 	border-left-color: #FFFFFF;
 	padding: 10px;
-	/*width: 736px;*/
 	width:700px;
 	min-height:200px;
-	height: auto;
-	
 }
+
+#insidecontent {
+	width: 70%;
+	text-align: center;
+	border-collapse: collapse;
+	padding: 10px;
+}
+
+#insidecontent td:hover{
+	background: #FFAAAA;
+}
+
+#insidecontent td a{
+	display: block;
+	padding: 10px;
+	height:100%;
+	text-decoration:none;
+	cursor: pointer;
+}
+
+#insidecontent th {
+	padding: 10px;
+}
+
 #admin ul {
 	margin: 0px;
 	padding: 0px;
@@ -371,11 +375,12 @@ html>body #menu {
 {
   background: url("../../img/footer.jpg") repeat-x scroll 0 0 white;
   width: 950px;
-	height: 350px;
+
   margin-left: auto;
   margin-right: auto;
   text-align: right;
   color: maroon;
+  line-height: 20px;
 }
 
 #footer a {

@@ -51,7 +51,8 @@
  	</p>
     <p class="headfont">&nbsp;</p>
   <p class="head"><strong>Student's Accountabilities</strong></p>
-  <p class="headfont"><strong>Semester goes here, A.Y. Goes Here</strong></p>
+
+  <p class="headfont"><strong><?php echo $_SESSION['semester'];?>, <?php echo $_SESSION['academic_year'];?></strong></p>
   <p>
     <center>
     </center>

@@ -2,6 +2,10 @@
 
 	$employer_name	= " ";
     $employer_address = " ";    
+	$degree_name = " ";
+	$major =  " ";
+	$minor = " ";
+	$scholarship_name = " ";
 
 
 function getScholarshipId($student_number){
@@ -11,6 +15,17 @@ function getScholarshipId($student_number){
 	 }
 		return $scholarship_id;
 }
+
+function getScholarshipName($scholarship_id){
+	$scholarship_name = " ";
+	$result=mysql_query("SELECT scholarship_name from scholarship where scholarship_id=$scholarship_id");	 
+	while($row = mysql_fetch_array($result)){		
+		$scholarship_name = $row['scholarship_name'];
+	 }
+		return $scholarship_name;
+}
+
+
 function getUnitId($student_number){
 	$result=mysql_query("SELECT unit_id from student where student_number=$student_number");	 
 	while($row = mysql_fetch_array($result)){		
@@ -18,27 +33,46 @@ function getUnitId($student_number){
 	 }
 		return $unit_id;
 }
-function getDegreeProgram($student_number){
+function getDegreeProgramId($student_number){
 	$result=mysql_query("SELECT degree_program from student where student_number=$student_number");	 
 	while($row = mysql_fetch_array($result)){		
 		$degree_program = $row['degree_program'];
 	 }
 		return $degree_program;
 }
+
+
+function getDegreeProgram($student_number){
+
+	$degree_program = getDegreeProgramId($student_number);
+	
+	$result=mysql_query("SELECT degree_name from degree_program  where degree_program_id=$degree_program");	 
+	while($row = mysql_fetch_array($result)){		
+		$degree_name = $row['degree_name'];
+	 }
+		return $degree_name;
+		
+}
+
 function getMajor($student_number){
-	$result=mysql_query("SELECT major from student where student_number=$student_number");	 
+$degree_program = getDegreeProgramId($student_number);
+	$result=mysql_query("SELECT major from degree_program where degree_program_id=$degree_program");	 
 	while($row = mysql_fetch_array($result)){		
 		$major = $row['major'];
 	 }
 		return $major;
 }
 function getMinor($student_number){
-	$result=mysql_query("SELECT minor from student where student_number=$student_number");	 
+	$degree_program = getDegreeProgramId($student_number);
+	$result=mysql_query("SELECT minor from degree_program where degree_program_id=$degree_program");	 
 	while($row = mysql_fetch_array($result)){		
 		$minor = $row['minor'];
 	 }
 		return $minor;
 }
+
+
+
 function getYearLevel($student_number){
 	$result=mysql_query("SELECT year_level from student where student_number=$student_number");	 
 	while($row = mysql_fetch_array($result)){		
@@ -73,6 +107,13 @@ function getSTFAPId($student_number){
 		$stfap_bracket_id = $row['stfap_bracket_id'];
 	 }
 		return $stfap_bracket_id;
+}
+function getSTFAPBracket($stfap_bracket_id){
+	$result=mysql_query("SELECT stfap_bracket from stfap where stfap_bracket_id=$stfap_bracket_id");	 
+	while($row = mysql_fetch_array($result)){		
+		$stfap_bracket = $row['stfap_bracket'];
+	 }
+		return $stfap_bracket;
 }
 function getStudentType($student_number){
 	$result=mysql_query("SELECT student_type from student where student_number=$student_number");	 
@@ -312,13 +353,7 @@ function getAcademicStanding($student_number){
 	 }
 		return $academic_standing;
 }
-function getDegreeProgramId($student_number){
-	$result=mysql_query("SELECT degree_program_id from student where student_number=$student_number");	 
-	while($row = mysql_fetch_array($result)){		
-		$degree_program_id = $row['degree_program_id'];
-	 }
-		return $degree_program_id;
-}
+
 function getEmailAdd($student_number){
 	$result=mysql_query("SELECT email_address from student where student_number=$student_number");	 
 	while($row = mysql_fetch_array($result)){		

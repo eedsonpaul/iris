@@ -39,21 +39,19 @@
 		<p class="head"><strong>Classes Management Module</strong></p>
 		<!-- <p class="headfont"><strong>Add Class</strong></p> --> 
 		<p>&nbsp;</p>
-		<form action="cso_process_look_for_class.php" method="post">
+		<form action="cso_process_look_for_class.php?" method="get">
 			<table width=75% border="0" align="center">
 				<tr>
 					<td align=right><strong>Look for: &nbsp; </strong></td>
-					<td width=150><input type="text" name="class_name" id="class_name"></td>
-					<td><input type="submit" name="look_for_class" id="look_for_class" value="SUBMIT"></td>
+					<td width=150><input type="text" name="class" id="class"></td>
+					<td><input type="submit" value="SUBMIT"></td>
 				</tr>
 			</table>
 		</form>
-		
 
-		
 		<?php
 			include("connect_to_database.php");
-			$class_name = $_POST['class_name'];
+			$class_name = $_GET['class'];
 			$class_array = mysql_query ("SELECT * FROM subject WHERE course_code LIKE '%$class_name%' ");
 			$count = 1;
 			

@@ -105,18 +105,24 @@
 	//-->
 	</script>
 <?php
-	include("osa_functions.php");
+	require_once 'osa_functions.php';
 	$d = (int)date('Y');
 ?>
 <h1 align="center">Add accountability</h1>
+<?php
+	if(!(isset($_POST['error']))) $_POST['error'] = '';
+	echo '<h4 align=center>'.$_POST['error'].'</h4>';
+?>
 <table align="center" class="tablestyle">
 <form action="process_osa.php" method="post" name="osaform">
 	<input type="hidden" name="aid" value="0">
+	<input type=hidden name='error'>
 	<tr>
 		<td>Accountability Type</td>
 		<td><select name="atype">
 			<!--<option value="" selected>Select Accountability Type</option>-->
-			<option value="3" selected>Student Affairs</option>
+			<option value="1" selected>Scholarship</option>
+			<!--<option value="3" selected>Others</option>-->
 <!-- 
 options_account()
 -->
@@ -156,9 +162,9 @@ options_account()
 	<tr>
 		<td>Accountability Status</td>
 		<td><select name="astat">
-			<option value="" selected>Select Status</option>
+			<!--<option value="" selected>Select Status</option>-->
 			<option value="pending">Pending</option>
-			<option value="cleared">Cleared</option>
+			<!--<option value="cleared">Cleared</option>-->
 		</select></td>
 	</tr>
 <input type="hidden" name="date_cleared" value="0">
@@ -198,4 +204,4 @@ options_account()
 </script>
 
 </table>
-<?php 'footer.php' ?>
+<?php require_once '../../admin_footer.php' ?>

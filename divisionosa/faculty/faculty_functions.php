@@ -387,7 +387,7 @@
 	
 	function set_assessed($student_number)
 	{
-		$q = mysql_query("update`assessment`
+		$q = mysql_query("update `assessment`
 			set assessment_status='assessed' 
 			WHERE student_number='$student_number'");
 		if(!$q) die('Cannot set Assessed'.mysql_query());
@@ -481,8 +481,8 @@
 			USING ( student_number ) 
 			WHERE b.student_number IS NULL 
 			AND a.status =  'enrolled'
-			AND a.course_code =  'cmsc21'
-			AND a.section_label =  's'");
+			AND a.course_code =  '$course_code'
+			AND a.section_label =  '$section_label'");
 		if(!$q) die('Cannot retrieve students'.mysql_query());
 		return $q;
 	}
@@ -509,6 +509,9 @@
 			echo '<td><select name=initial_grade>';
 			grade_option();
 			echo '</select></td>';
+			//echo '<td><select name=grade_status>';
+			//grade_status();
+			//echo '</select></td>';
 			echo '<td><input type=text name=remarks></td>';
 			echo '<input type=hidden name=student_number value='.$row[0].'>';
 			echo '<input type=hidden name=course_code value='.$course_code.'>';
@@ -544,14 +547,24 @@
 		else $r = 'Confirm to Assess Complete';
 		return $r;
 	}
+	/*
+	function grade_status()
+	{
+		$i=0;
+		$grade=array('failed','passed','inc','removal');
+		while($i < sizeof($grade))
+		{
+			echo '<option value='.$grade[$i].'>'.$grade[$i++].'</option>';
+		}
+	}*/
 	
 	function grade_status($grade)
 	{
 		$status=0;
 		switch($grade)//strcasecmp(
 		{
-			case 'INC':
-				$status='INC';//removal
+			case '':
+				$status='inc';//removal
 			break;
 			case '4.0':
 				$status='removal';
@@ -570,7 +583,7 @@
 		$final=0;
 		switch($grade)
 		{
-			case 'INC':
+			case 'NULL':
 				$final='';
 			break;
 			case '4.0':
@@ -589,11 +602,15 @@
 	function grade_option()
 	{
 		$i=0;
-		$g = array(1.0,1.25,1.5,1.75,2.0,2.25,2.5,2.75,3.0,4.0,'INC',5.0);
+		$g = array(1.0,1.25,1.5,1.75,2.0,2.25,2.5,2.75,3.0,'INC',4.0,5.0);//'INC',
 		//echo '<select name=initial_grade>';
 		while($i < sizeof($g))
 		{
-			echo '<option value='.$g[$i].'>'.$g[$i].'</option>';
+			if($g[$i]=='INC')
+			{
+				echo "<option value=".NULL.">".$g[$i]."</option>";
+			}
+			else echo '<option value='.$g[$i].'>'.$g[$i].'</option>';
 			$i++;
 		}
 		//echo '</select>';
@@ -632,8 +649,80 @@
 		}
 		return $r;
 	}
+	
+	function retrieve_name($employee_id)
+	{
+		$q = mysql_query("SELECT a.employee_id, a.first_name, a.last_name, b.unit_name, c.designation
+			FROM employee a, unit b, designation c
+			WHERE a.employee_id = '$employee_id'
+			AND a.unit_id = b.unit_id
+			AND a.designation_id = c.designation_id");
+		if(!$q) die('cannot retrieve info'.mysql_error());
+		return $q;
+	}
+	
+	function exist($num,$table,$attribute)
+	{
+		$q = mysql_query("SELECT * 
+			FROM ".$table." 
+			WHERE ".$attribute."='$num'");
+		if(!$q) die('Individual does not exist'.mysql_error());
+		return $q;
+	}
+	
+	function assessed_by($student_number,$employee_id)
+	{
+		$r = 'cannot set assessed by';
+		$q = mysql_query("update assessment
+			set assessed_by='$employee_id'
+			where student_number='$student_number'");
+		if(!$q) die('Cannot set assessed by'.mysql_error());
+		else $r = 'assessed by set';
+		return $r;
+	}
+	
+	function retrieve_degree_program($degree_program_id)
+	{
+		$q = mysql_query("SELECT degree_name FROM `degree_program` WHERE degree_program_id='$degree_program_id'");
+		if(!$q) die('Cannot retrieve degree name'.mysql_error());
+		return $q;
+	}
+	
+	function view_course_year($year)
+	{
+		$q = mysql_query("SELECT course_code,subject_title,units,degree_level 
+			FROM `subject` 
+			WHERE academic_year='$year'");
+		if(!$q) die('Cannot retrieve course. '.mysql_error());
+		return $q;
+	}
+	
+	function view_course_year_sem($year,$sem)
+	{
+		$q = mysql_query("SELECT course_code,subject_title,units,degree_level 
+			FROM `subject` 
+			WHERE academic_year='$year'
+			and semester_offered='$sem'");
+		if(!$q) die('Cannot retrieve course. '.mysql_error());
+		return $q;
+	}
+	
+	function print_course_offering($array)
+	{
+		$i=0;
+		while($row = mysql_fetch_array($array))
+		{
+			while($i < 4)
+			{
+				echo '<td>'.$row[$i].'</td>'; 
+				$i++;
+			}
+			$i=0;
+		}
+	}
+	//if(mysql_numrows(exist(200700002,student,student_number))) echo "found";
+	//else echo "not found";
 	//print(mysql_numrows(is_assessed(201000000)));
 	//$check_nstp = mysql_numrows(check_nstp('201012345'));
 	//print(mysql_fetch_array(retrieve_assess_info(201000000)));
-
 ?>

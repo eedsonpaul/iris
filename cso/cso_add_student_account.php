@@ -31,7 +31,7 @@
 		oStringMask = new Mask("#########");
 		oStringMask.attach(document.csoform.student_id);
 		
-		oStringMask = new Mask("####-##-##");
+		oStringMask = new Mask("########");
 		oStringMask.attach(document.csoform.login_expiration);
 		
 		oStringMask = new Mask("####");
@@ -128,7 +128,7 @@
 				<td><div align="right">Login Expiration:</div></td>
 				<td>*</td>
 				<td><input type="text" name="login_expiration" id="login_expiration">
-					(yyyy-mm-dd)</td>
+					(yyyymmdd)</td>
 			</tr>
 			<tr>
 				<td><div align="right">Entry A.Y.:</div></td>
@@ -169,10 +169,15 @@
     frmvalidator.EnableMsgsTogether();
 
     frmvalidator.addValidation("last_name","req","Enter Last Name.");
+    frmvalidator.addValidation("last_name","alpha_s", "Last Name contains invalid characters.");
 	frmvalidator.addValidation("first_name","req","Enter First Name.");
+	frmvalidator.addValidation("first_name","alpha_s","First Name contains invalid characters.");
 	frmvalidator.addValidation("middle_name","req","Enter Middle Name.");
+	frmvalidator.addValidation("middle_name","alpha_s","Middle Name contains invalid characters.");
 	frmvalidator.addValidation("login_expiration","req","Enter Login Expiration.");
+	frmvalidator.addValidation("login_expiration","minlen=8");
 	frmvalidator.addValidation("entry_academic_year","req","Enter Academic Year.");
+	frmvalidator.addValidation("entry_academic_year","minlen=4");
  
   </script>
 	<p>&nbsp;</p>

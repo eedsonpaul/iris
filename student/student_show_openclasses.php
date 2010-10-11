@@ -1,5 +1,7 @@
 
 <?php
+
+
 	require_once 'student_sub_header.php';
 	require_once 'function_section.php';
 	require_once 'function_section_schedule.php';
@@ -24,7 +26,7 @@
 	 }
 
 	if($subs==0){
-		echo "I'm sorry no results were found.";
+		echo "There are no open classes right now.";
 	}	 
 
 	else{

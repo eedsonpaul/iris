@@ -17,4 +17,5 @@ $sub = $_POST['sub'];
 		</tr>
 		<?php print_table_search_course(search_course($sub)) ?>
 	</table>
-<?php require_once 'footer.php' ?>
+<br/><br/>
+<?php require_once '../../admin_footer.php' ?>

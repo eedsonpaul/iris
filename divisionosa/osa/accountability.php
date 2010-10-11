@@ -7,7 +7,8 @@
 <h4 align="center">You are currently viewing the accountability of <strong><?php echo $student_number ?></strong></h4>
 <table align="center" class="tablestyle">
 <tr>
-	<th width="150">Units</th>
+	<th width="150">Student #</th>
+	<th width="150">Student Name</th>
     <th width="150">Accountability</th>
 	<th width="150">Details</th>
     <th width="150">Amount Due</th>
@@ -17,6 +18,5 @@
 	print_table_account(retrieve_account_osa($student_number));
 ?>
 </table>
-<?php
-	require_once 'footer.php';
-?>
+<br/></br>
+<?php require_once '../../admin_footer.php' ?>

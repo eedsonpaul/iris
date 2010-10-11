@@ -52,11 +52,24 @@
 	
 	function checkRoom($course_code,$section_label){
 
-		$result=mysql_query("SELECT room_id from section where course_code='$course_code' AND section_label='$section_label'");	 
-		while($row = mysql_fetch_array($result)){		
-			$room= $row['room_id'];	
+		$building_name = " ";
+	
+		$room= mysql_query("SELECT room_id from section where course_code='$course_code' AND section_label='$section_label'");	 
+		while($row = mysql_fetch_array($room)){		
+			$room_id= $row['room_id'];	
 		}
-		return $room;
+		
+		$building=mysql_query("SELECT building_id from room where room_id='$room_id' ");	 
+		while($row = mysql_fetch_array($building)){		
+			$building_id= $row['building_id'];	
+		}
+		
+		$name=mysql_query("SELECT building_name from building where building_id='$room_id' ");	 
+		while($row = mysql_fetch_array($name)){		
+			$building_name= $row['building_name'];	
+		} 
+		$roomname = $building_name . " " . $room_id;
+		return $roomname;
 	}
 
 

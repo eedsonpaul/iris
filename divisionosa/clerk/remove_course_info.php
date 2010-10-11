@@ -28,6 +28,5 @@
 	<input type='submit' name='c' value='Yes'/>
 	<input type='submit' name='c' value='No'/>
 	</form>
-<?php
-	require_once 'footer.php';
-?>
+<br/><br/>
+<?php require_once '../../admin_footer.php' ?>

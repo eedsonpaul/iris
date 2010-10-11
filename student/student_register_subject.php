@@ -1,24 +1,26 @@
-
 <?php
   require_once 'student_header.php';
 ?>
 
-<div class = "main">
-
 <script type="text/javascript">
   function addSubject(){
-    window.open("student_search_subject.php", "info", "width=600,scrollbars=0,resizable=0");
+    window.open("student_search_subject.php", "info", "width=600, height=400, resizable=no");
   }
   function viewOpenClasses(){
-    window.open("student_show_openclasses.php", "info", "width=600,scrollbars=0,resizable=0");
+    window.open("student_show_openclasses.php", "info", "width=600, height=400, resizable=no");
   }
   function viewTempForm5(){
-    window.open("student_show_openclasses.php", "info", "width=600,scrollbars=0,resizable=0");
+    window.open("student_tempform5.php", "info", "width=650, height=400, resizable=no");
   }
 
 
 // for subject ajax
 $(document).ready(function(){
+  function updateTotalUnitsEnlistedAndUnitsToRemove(unitsToRemove) {
+    var totalUnits = parseInt($("#totalUnitsEnlisted").text());
+    totalUnits -= unitsToRemove;
+    $("#totalUnitsEnlisted").text(totalUnits);
+  }
 
   $("#subjectaction").live("click",function(){
     var action = $(this).attr("class");
@@ -53,10 +55,12 @@ $(document).ready(function(){
       }
     else if (action == "remove")
       {
-        var rowtodelete = $("#subject-"+course_code);      
+        var rowtodelete = $("#subject-"+course_code);  
+      var course_units = $(this).attr("course_units");
         $.get('student_remove_subject.php?subjectid='+course_code+'&sectionlabel='+section_label, function(data) {
         // remove the row
         $(rowtodelete).remove();
+    updateTotalUnitsEnlistedAndUnitsToRemove(course_units);
         });  
       }
   });  
@@ -64,6 +68,7 @@ $(document).ready(function(){
 </script>
 <?php
     require_once 'student_navigation.php';
+    require_once 'query_student.php';
     require_once 'function_section.php';
     require_once 'function_section_schedule.php';
     require_once 'function_subject.php';
@@ -78,8 +83,8 @@ $(document).ready(function(){
      $res = mysql_query("SELECT first_name,middle_name,last_name,degree_program,year_level FROM student WHERE student_number='" .  $student_number . "' ");
      while($row = mysql_fetch_array($res)){
       echo $student_number;
-      echo "    ".$row['first_name']." ".$row['middle_name']." ".$row['last_name'];
-      echo "<br>Degree Program:".$row['degree_program'];
+      echo "   : ".$row['first_name']." ".$row['middle_name']." ".$row['last_name'];
+      echo "<br>Degree Program: ". getDegreeProgram($student_number);
       echo "    ".$row['year_level'];  
      }
 
@@ -89,7 +94,7 @@ $(document).ready(function(){
 
     ?>  
   <p>
-  <table width="660" class="tablestyle">
+  <table width="680" class="tablestyle">
   <tr>
     <th width='100'><font size='1'>SUBJECT </font></th>
     <th width='75'><font size='1'>SECTION</th>
@@ -97,10 +102,12 @@ $(document).ready(function(){
     <th width='250'><font size='1'>SCHEDULE</th>
     <th width='100'><font size='1'>WAITLIST#</th>
     <th width='150'><font size='1'>STATUS</th>
-    <th width='300'><font size='1'>ACTION</th>
+    <th width='370'><font size='1'>ACTION</th>
   </tr>
 
   <?php
+  $units_enlisted = 0;
+  $units_confirmed = 0;
 
  $result=mysql_query("SELECT course_code,section_label,status,waitlist_counter from student_status where student_number='$student_number'");   
  $sub= mysql_num_rows($result);
@@ -128,33 +135,33 @@ $(document).ready(function(){
       echo "<td align='center' width='60'><font size='2'>" . checkDay($course_code[$i],$section_label[$i]) . " " . checkStartTime($course_code[$i],$section_label[$i]) . "-" . checkEndTime($course_code[$i],$section_label[$i]) . " "  . checkRoom($course_code[$i],$section_label[$i]) .  "</td>";
       echo "<td align='center' width='60'><font size='2'>" . $waitlist_counter[$i] . "</td>";
       echo "<td align='center' width='60'><font size='2'><span class='status-".$course_code[$i]."'>" . $status[$i] . "</td>";
-      checkAction1($status[$i],$course_code[$i],$section_label[$i]);
-      /*echo ' >>> <a href="student_remove_subject.php?subjectid='.$course_code[$i].'&sectionlabel='.$section_label[$i].'"> remove </a> </td>';*/
-      echo ' >>> ';
-	 checkAction2($status[$i],$course_code[$i],$section_label[$i]);
+      checkAction1($status[$i],$course_code[$i],$section_label[$i],$units_confirmed);
+      echo ' >> ';
+	checkAction2($status[$i],$course_code[$i],$section_label[$i]);
       echo "</tr>";
+    $units_enlisted = $units_enlisted + checkUnits($course_code[$i]);
+
     }
   }
 
-function checkAction1($status,$course_code,$section_label){
+function checkAction1($status,$course_code,$section_label,$units_confirmed){
 
       if($status=="confirmed"){
-      /*echo '<td><a href="student_unconfirm_subject.php?subjectid='.$course_code.'&sectionlabel='.$section_label.'">unconfirm</a>';    */
       echo '<td><span id="subjectaction" class="unconfirm" course_code="'.$course_code.'" section_label="'.$section_label.'">unconfirm</span>';
       }
       else if($status=="unconfirmed"){
-      /*echo '<td><a href="student_confirm_subject.php?subjectid='.$course_code.'&sectionlabel='.$section_label.'">confirm</a>';      */
       echo '<td><span id="subjectaction" class="confirm" course_code="'.$course_code.'" section_label="'.$section_label.'">confirm</span>';
       }
       else if($status=="waitlisted" || $status=="enrolled" || $status=="assessed" || $status=="paid"){
         echo "<td>-------";
       }
+
 }
 function checkAction2($status,$course_code,$section_label){
 
-	  if($status=="confirmed" || $status=="unconfirmed" || $status=="waitlisted"){
-		echo '<span id="subjectaction" class="remove" course_code="'.$course_code.'" section_label="'.$section_label.'">remove</span></td>';
-	  }
+    if($status=="confirmed" || $status=="unconfirmed" || $status=="waitlisted"){
+    echo '<span id="subjectaction" class="remove" course_code="'.$course_code.'" section_label="'.$section_label.'" course_units = '.checkUnits($course_code).'>remove</span></td>';
+    }
       else if($status=="waitlisted" || $status=="enrolled" || $status=="assessed" || $status=="paid"){
         echo "-------</td>";
       }
@@ -164,12 +171,12 @@ function checkAction2($status,$course_code,$section_label){
 
 </table>
 <br>
-Total Units Enlisted: <?php ?>
+Total Units Enlisted: <span id="totalUnitsEnlisted"><?php echo $units_enlisted;?></span>
 <br>
-Units Confirmed: <?php ?>
+Max Units Allowed: <?php echo getMaxUnitsAllowed($student_number); ?></span>
 </div>
 </div>
 
 <?php
-  require_once 'student_footer.php';
+  require_once '../admin_footer.php';
 ?>

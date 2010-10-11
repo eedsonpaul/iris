@@ -2,12 +2,19 @@
 	require_once 'header.php';
 ?>
 	<h1 align='center'>Add Approved Scholarship</h1>
+	<?php
+		if(!(isset($_POST['error']))) $_POST['error'] = '';
+		echo '<h4 align=center>'.$_POST['error'].'</h4>';
+	?>
 	<table align='center' class='tablestyle'>
 	<form action='process_osa.php' method='post'>
+		<input type='hidden' name='error'>
+		<!--
 		<tr>
 			<td>Scholarship Id</td>
 			<td><input type='text' name='scholarship_id'/></td>
 		</tr>
+		-->
 		<tr>
 			<td>Scholarship Name</td>
 			<td><input type='text' name='scholarship_name'/></td>
@@ -22,6 +29,5 @@
 		</tr>
 	</form>
 	</table>
-<?php
-	require_once 'footer.php';
-?>
+<br/></br>
+<?php require_once '../../admin_footer.php' ?>

@@ -18,11 +18,13 @@
 		document.form2.reset();
 		
 		oStringMask = new Mask("##########");
-		oStringMask.attach(document.form2.recipient_phone);
+
+		oStringMask.attach(document.form2.guardian_house_number);
 		oStringMask.attach(document.form2.guardian_contact_number);
 		oStringMask.attach(document.form2.number);
 		oStringMask.attach(document.form2.housenum);
-		
+		oStringMask.attach(document.form2.recipient_phone);
+
 		oStringMask = new Mask("#####");
 		oStringMask.attach(document.form2.recipient_zipcode);
 
@@ -35,11 +37,19 @@
 <div id="right_side2">
  
  <form name="form2" method="post" action="student_update_enrolldata2.php">
- <table width="900" class="tablestyle">
+   <table width="900" class="tablestyle">
+  
+  <tr>
+    <th width='250' colspan="2">STUDENT NUMBER<BR><?php echo $student_number ?> </th>
+    <th width='240' colspan="2">NAME(Last,Given,Middle)<br><?php echo getFirstName($student_number) . " " . getMiddleName($student_number)  . " " . getLastName($student_number)?></th>
+    <th width='200'>COLLEGE<br>UPCC</th>
+    <th width='200'>DEGREE<br><?php echo getDegreeProgram($student_number) ?></th>
+
+  </tr>
   
 
  <tr>
-    <td class="nohover"> 
+    <td class="nohover" colspan="2" width="33%"> 
 	<p align="left"><strong>PARENTS AND CONTACT PERSON DATA </strong><br>
 	Parents:<br> 
 	 &nbsp; &nbsp;Father:<br> &nbsp; &nbsp;<input type="text" name="father_name"  value = <?php echo getFatherName($student_number) ?> ><br>
@@ -59,15 +69,16 @@
 				&nbsp; &nbsp;
 				<input type="text" name="guardian_contact_number" value = <?php echo getGuardianContactNum($student_number) ?> ><br><br>
 	</td>
-    <td class="nohover" colspan="1">
+    <td class="nohover" colspan="2" width="33%">
 	<p align="left"><strong>STUDENT'S ADDRESS WHILE STUDYING AT UPV: </strong><br>
 	Housing Type: *<br><select name="house_type">
 		 <option>Apartment</option>
 		 <option>Dorm</option>
 		 <option>Condo</option>
       </select><br>
-	<input type="checkbox" value="true" name="sameaddress">..Check this if present address below is the same as your
-	home/provincial address<br>
+	Is this present address below same as your home/provincial address?<br>
+	<input type="radio" name="sameaddress" value="yes" checked >Yes  
+	<input type="radio" name="sameaddress" value="no">No<br>
 	House #: <br>
 			<input type="text" name="housenum"  value = <?php echo getPresentHomeNum($student_number) ?> ><br>
 	Street:  <br>
@@ -81,7 +92,7 @@
 	Landline/Mobile Phone #:<br> <input type="text" name="number"  value = <?php echo getPresentContactNum($student_number) ?>><br><br>
 	</td>
 	</td>
-	<td class="nohover" colspan="1">
+	<td class="nohover" colspan="2" width="33%">
 	<p align="left">
 	WHERE TO SEND DOCUMENTS/TO CONTACT IN CASE OF EMERGENCY<br>
 	(Put your mother,father,spouse or guardian's name and address here)<br><br>

@@ -157,7 +157,9 @@
 			$semname = "";
 			$subject = "";
 			$gwa = 0;
-			$grades = 0;	
+			$grades = 0;
+			$grade = 0;
+			$com_grade = 0;	
 			$query = "SELECT * FROM grade WHERE student_number = '$stud_num' order by academic_year";
 			$result = mysql_query($query);
 			while($grade = mysql_fetch_array($result)) {
@@ -181,6 +183,13 @@
 					$subtitle = $sub['subject_title'];
 					$unit = $sub['units'];
 				}
+				if ($com_grade==0) {
+					$grade = $igrade * $unit;
+				} else if($igrade==4){
+					$grade = ($com_grade*$unit) + ($igrade*$unit);
+				} else {
+					$grade = $com_grade*$unit;
+				}
 		?>
   <tr>
     <td><div align="left" class="style15"><?php echo $subject;?></div>
@@ -193,8 +202,15 @@
     <td><div align="center" class="style15"><?php echo number_format($unit, 1, '.', '');?></div></td>
   </tr>
  <?php $units = $units + $unit;
- 		$gwa  = ($gwa+$igrade)/$count;
+ 		$gwa  = (($gwa+$grade)/$units);
 		$count++;}
+		include("cso_functions.php");
+		session_start();
+		if ($gwa<=3) {
+			$standing = "Good Standing";
+		} else if ($gwa>3 && $gwa<=5) {
+			$standing = academicStanding($stud_num, $sem, $ay, $units, $_SESSION['access_level_id']);
+		}
  ?>
    <tr>
     <td><div align="left"><span class="style15"></span></div></td>
@@ -234,7 +250,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td class="style15">Class Standing: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo "standing";?></td>
+    <td class="style15">Class Standing: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $standing;?></td>
     <td class="style15">&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>

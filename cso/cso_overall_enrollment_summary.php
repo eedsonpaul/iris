@@ -11,14 +11,8 @@
 	<title>CSO</title>
 	<style type="text/css">
 		@import url("documents.css");
-		
-		.row0 {
-			background-color: #ffffff;
-		}
-
-		.row1 {
-			background-color:#D3DCE3;
-		}
+		.row0 { background-color: #EAEAEA; }
+		.row1 { background-color:#FFFFFF;	}	
   </style>
 </head>
 
@@ -33,7 +27,7 @@
 	
 	<p class=notice>
 		<b>REPORT<br/>
-		<u>current semester, A.Y. current academic year</u></b><br/>
+		<u><?php session_start(); echo $_SESSION['semester'];?>, <?php echo $_SESSION['academic_year'];?></u></b><br/>
 		AS OF <?php echo date("D M d H:i:s T Y"); ?>
 	</p>
 	<br/><br/><br/><br/>
@@ -41,7 +35,6 @@
 	<p class=headdata>
 		ENROLLMENT DATA<br/>
 		U.P. CEBU COLLEGE<br/>
-		Current Sem AY<br/>
 	</p>
 	<br/><br/>
 	
@@ -49,35 +42,37 @@
 	<?php
 
 		include ('connect_to_database.php');
-		
-		echo "<center><table width=100%>
-			<tr rowspan=2 bgcolor=#D5D5D5>
-				<th>course</th>
-				<th colspan=3>FIRST YEAR</th>
-				<th colspan=3>SECOND YEAR</th>
-				<th colspan=3>THIRD YEAR</th>
-				<th colspan=3>FOURTH YEAR</th>
-				<th colspan=3>TOTAL</th>
-			</tr>
-			<tr bgcolor=#D5D5D5>
-				<td></td>
-				<td>Male</td>
-				<td>Female</td>
-				<td>Total</td>
-				<td>Male</td>
-				<td>Female</td>
-				<td>Total</td>
-				<td>Male</td>
-				<td>Female</td>
-				<td>Total</td>
-				<td>Male</td>
-				<td>Female</td>
-				<td>Total</td>
-				<td>Male</td>
-				<td>Female</td>
-				<td>Total</td>
-			</tr>";
-		
+		include ('cso_enrollment_functions.php');
+	?>
+	<center><table width=100%>
+	<tr rowspan=2 bgcolor=#A2A2A2>
+		<th>course</th>
+		<th colspan=3>FIRST YEAR</th>
+		<th colspan=3>SECOND YEAR</th>
+		<th colspan=3>THIRD YEAR</th>
+		<th colspan=3>FOURTH YEAR</th>
+		<th colspan=3>TOTAL</th>
+	</tr>
+	<tr bgcolor=#A2A2A2 align=center valign=center>
+		<td></td>
+		<td>Male</td>
+		<td>Female</td>
+		<td>Total</td>
+		<td>Male</td>
+		<td>Female</td>
+		<td>Total</td>
+		<td>Male</td>
+		<td>Female</td>
+		<td>Total</td>
+		<td>Male</td>
+		<td>Female</td>
+		<td>Total</td>
+		<td>Male</td>
+		<td>Female</td>
+		<td>Total</td>
+	</tr>";
+	
+	<?php	
 		$rowclass=0;
 		$prog_array = mysql_query("SELECT degree_name, degree_program_id FROM degree_program");
 		while ($courses = mysql_fetch_array($prog_array)) {
@@ -90,26 +85,31 @@
 			$all_female_count=0;
 			
 			while ($year_level <= 4) {
-				$males = mysql_query("SELECT * FROM student WHERE year_level=$year_level AND gender='male' AND degree_program_id=$degree_program_id ");
-				if (!$males) die(mysql_error());
-				$male_count = mysql_num_rows($males);
-				echo "<td>" .$male_count ."</td>";
+			
+				$males = sprintf("SELECT * FROM student WHERE year_level='%s' AND gender='%s' AND degree_program_id='%s' ",
+					mysql_real_escape_string($year_level),
+					mysql_real_escape_string('male'),
+					mysql_real_escape_string($degree_program_id));
+				$male_count = countStudents($males);
 				$all_male_count+=$male_count;
 				
-				$females = mysql_query("SELECT * FROM student WHERE year_level=$year_level AND gender='female'  AND degree_program_id=$degree_program_id ");
-				if (!$females) die(mysql_error());
-				$female_count = mysql_num_rows($females);
-				echo "<td>" .$female_count ."</td>";
+				$females = sprintf("SELECT * FROM student WHERE year_level='%s' AND gender='%s' AND degree_program_id='%s' ",
+					mysql_real_escape_string($year_level),
+					mysql_real_escape_string('female'),
+					mysql_real_escape_string($degree_program_id));
+				$female_count = countStudents($females);
 				$all_female_count+=$female_count;
 				
 				$total = $male_count + $female_count;
-				echo "<td>". $total ."</td>";
 				
+				echo "<td align=center valign=center>" .$male_count ."</td>";
+				echo "<td align=center valign=center>" .$female_count ."</td>";
+				echo "<td align=center valign=center>". $total ."</td>";
 				$year_level++;
 			}
 			
 			$all_count = $all_male_count + $all_female_count;
-			echo "<td>" .$all_male_count ."</td><td>" .$all_female_count ."</td><td>" .$all_count ."</td></tr>";
+			echo "<td align=center valign=center>" .$all_male_count ."</td><td align=center valign=center>" .$all_female_count ."</td><td align=center valign=center>" .$all_count ."</td></tr>";
 		}	
 		echo "</table></center>";
 	?>

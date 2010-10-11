@@ -3,12 +3,15 @@
 	require_once 'faculty_functions.php';
 	require_once 'tuition_compute.php';
 	$student_number = $_POST['studnum'];
+	$employee_id = $_SESSION['employee_id'];
+	//echo $employee_id;
 	//$unit = $_POST['unitcount'];
 	//STFAP and Scholarship and student name
 	$stfap = print_bracket_degree(retrieve_bracket_degree($student_number));
 	$scholarship = mysql_fetch_array(view_student_scholarship($student_number));
 	$student_name = mysql_fetch_array(retrieve_student_name($student_number));
 	//echo $student_number;
+	$degree_name = mysql_fetch_array(retrieve_degree_program($stfap[1]));
 	
 	//Retrieve assess info
 	$retrieve_assess = mysql_fetch_array(retrieve_assess_info($student_number));
@@ -141,7 +144,7 @@
 		<td><p>STUDENT NAME: </p></td>
 		<td><p><?php echo $student_name[0].', '.$student_name[1]?></p></td>
 		<td><p>Degree Program: </p></td>
-		<td><p><?php echo $stfap[1]?></p></td>
+		<td><p><?php echo $degree_name[0]//$stfap[1]?></p></td>
 	</tr>
 	<tr>
 		<td><p>STUDENT Number: </p></td>
@@ -344,6 +347,7 @@
 	<form method="post" action="process_faculty.php">
 		<input type="hidden" name="studnum" value="<?php echo $student_number ?>">
 		<input type="hidden" name="total" value="<?php echo $total ?>">
+		<input type="hidden" name="employee_id" value="<?php echo $employee_id ?>">
 		<?php
 		if(mysql_numrows(is_assessed($student_number)))
 		echo '<h2 align=center>Student is already assessed!</h2>';
@@ -351,6 +355,5 @@
 		echo '<input type=submit name=action value="Assess Student"\/>';
 		?>
 	</form>
-<?php
-	require_once 'footer.php';
-?>
+<br/><br/>
+<?php require_once '../../admin_footer.php' ?>

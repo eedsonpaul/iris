@@ -1,25 +1,13 @@
 <?php
 	require_once 'student_header.php';
-?>
-
-<?php 
-	 /*
-	 require 'dbconnect.php';
-	 session_start();
-	 */
-	 $student_number = $_SESSION['student_number'];	 
-?>
-
-<div class="main">
-
-<?php
+	$student_number = $_SESSION['student_number'];	 
+	require_once 'query_student.php';
 	require_once 'student_navigation.php';
 ?>
 
 <script language="JavaScript" src="gen_validatorv31.js" type="text/javascript"></script>
 
 <div id="right_side">
-
   <p align="center"><strong>Change this Student&rsquo;s Record/Log-in Account</strong></p>
   <?php
 	 $res=mysql_query("SELECT student_number,first_name,middle_name,last_name,degree_program,year_level,
@@ -41,7 +29,7 @@
  <form name="form1" method="post" action="student_update_login.php">
   <p>
     Password:*
-    <input type="password" name="password"  id="textfield52" />
+    <input type="password" name="password1"  id="textfield52" />
     <br>
     Re-type Password:*
     <input type="password" name="password2" id="textfield53" />
@@ -60,9 +48,8 @@
 		 <option>Where is your home town?</option>
       </select>
   </p>
-  <p>Answer:*</p>
-  <p>
-    <textarea name="answer"  cols="30" rows="2" wrap="virtual" ></textarea>
+  <p>Answer:*
+    <input type="text" name="answer" value= <?php echo getAnswer($student_number); ?> >
   </p>
   <p>&nbsp;</p>
    <input type="submit" name="Update" value="update">
@@ -75,8 +62,8 @@
     
   frmvalidator.EnableMsgsTogether();
   
-  frmvalidator.addValidation("password","req","Password field requires input.");  
-  //frmvalidator.addValidation("retype","req","Password verification field requires input.");
+  frmvalidator.addValidation("password1","req","Password field requires input.");  
+  frmvalidator.addValidation("password2","req","Password verification field requires input.");
   frmvalidator.addValidation("answer","req","Answer field requires input.");
   
 </script>
@@ -84,5 +71,5 @@
 </div>
 
 <?php
-	require_once 'student_footer.php';
+  require_once '../admin_footer.php';
 ?>

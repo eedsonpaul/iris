@@ -1,13 +1,11 @@
 <?php 
   require_once 'library_header.php';
 ?>
-
 <div class="main">
 <center><h1>EDIT ACCOUNTABILITY</h1></center>
 
 <body>
 
-<p>&nbsp;</p>
 <center>
 <?php
 	include('connect.php');
@@ -34,16 +32,17 @@
 <meta name="Content-Script-Type" content="text/javascript"> 
 <form action="editLibraryAccountability.php?id=<?php echo $id;?>" method="post">
 	<input type="hidden" name="accountability_id" value="<?php echo $id; ?>"/>
+	<input type="hidden" name="student_number" value="<?php echo $student_number; ?>"/>
 <table>
 	<tr>
 		<td>Student Number:</td>
-		<td><input type="text" name="student_number" onfocus="this.blur()" readonly value="<?php echo $student_number; ?>">
+		<td><?php echo $student_number; ?>
 		</td>
 	</tr>
 	<tr>
 		<td>Accountability:</td>
 		<td>
-		<input type="hidden" name="accountability_type" onfocus="this.blur()" readonly value="2">Book</option>
+		<input type="hidden" name="accountability_type" onFocus="this.blur()" readonly value="2">Book</option>
 		</td>
 	</tr>
 	<tr>
@@ -76,8 +75,17 @@
 		<td>
 		<select name="semester_incurred">
 		<?php
+		if($semester_incurred == 0){
+			echo "<option value=\"0\">summer</option";
+			echo	"<option value=\"1\">first semester</option>";
+			echo	"<option value=\"2\">second semester</option>";
+			echo "<option value=\"3\">first trimester</option>";
+			echo "<option value=\"4\">second trimester</option>";
+			echo "<option value=\"5\">third trimester</option>";
+		}
 		if($semester_incurred == 1){
 			echo	"<option value=\"1\">first semester</option>";
+			echo "<option value=\"0\">summer</option";
 			echo	"<option value=\"2\">second semester</option>";
 			echo "<option value=\"3\">first trimester</option>";
 			echo "<option value=\"4\">second trimester</option>";
@@ -85,6 +93,7 @@
 		}
 		if($semester_incurred == 2){
 			echo	"<option value=\"2\">second semester</option>";
+			echo "<option value=\"0\">summer</option";
 			echo	"<option value=\"1\">first semester</option>";
 			echo "<option value=\"3\">first trimester</option>";
 			echo "<option value=\"4\">second trimester</option>";
@@ -92,6 +101,7 @@
 		}
 		if($semester_incurred == 3){
 			echo "<option value=\"3\">first trimester</option>";
+			echo "<option value=\"0\">summer</option";
 			echo	"<option value=\"1\">first semester</option>";
 			echo "<option value=\"2\">second semester</option>";
 			echo "<option value=\"4\">second trimester</option>";
@@ -99,6 +109,7 @@
 		}
 		if($semester_incurred == 4){
 			echo "<option value=\"4\">second trimester</option>";
+			echo "<option value=\"0\">summer</option";
 			echo	"<option value=\"1\">first semester</option>";
 			echo "<option value=\"2\">second semester</option>";
 			echo "<option value=\"3\">first trimester</option>";
@@ -106,6 +117,7 @@
 		}
 		if($semester_incurred == 5){
 			echo "<option value=\"5\">third trimester</option>";
+			echo "<option value=\"0\">summer</option";
 			echo	"<option value=\"1\">first semester</option>";
 			echo "<option value=\"2\">second semester</option>";
 			echo "<option value=\"3\">first trimester</option>";
@@ -115,14 +127,15 @@
 		</select>
 		</td>
 	</tr>
-	<tr>
-		<td>
-		<center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;<input type="submit" value="Save" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input type=button value="Back" onClick="history.go(-1)"></center>
-		</td>
-	</tr>
 	</table>
+<table width="393">
+  <tr>
+    <td width="113">&nbsp;</td>
+    <td width="95"><input type="submit" value="Save" /></td>
+    <td width="169"><input type=button value="Back" onClick="history.go(-1)"></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
 </form>
 </body>
 </html>

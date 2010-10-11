@@ -4,7 +4,7 @@
 
 <div class="main">
 	<div id="navigation">
-		
+		<center><h1>CLEARED ACCOUNTABILITIES</h1></center>
 	  <ul>
 			<li><a href="accountingAddAccountabilitySearch.php?search_option=&search_query=">Add Accountability</a></li>
 			<li><a href="viewClearedAccounts.php">View Already Cleared</a></li>

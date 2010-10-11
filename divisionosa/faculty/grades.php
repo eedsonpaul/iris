@@ -17,6 +17,5 @@
 		</tr>
 		<?php print_table_students_enrolled(students_enrolled($course_code,$section_label),$course_code,$section_label,$semester,$academic_year) ?>
 	</table>
-<?php
-	require_once 'footer.php';
-?>
+<br/><br/>
+<?php require_once '../../admin_footer.php' ?>

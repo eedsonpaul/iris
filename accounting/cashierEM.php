@@ -9,15 +9,19 @@
 <br>
 <br>
 <center>
-<form action="searchCashierAssessment.php" method="get">
+<form action="searchCashierAssessment.php" method="get" name="cashierform">
 	<table>
 		<tr>
 			<td>Student Number:</td>
-			<td><input type="text" name="student_number" value="XXXXXXXXX" onFocus="javascript:this.value=''">
+			<td><input type="text" name="student_number" onFocus="javascript:this.value=''">
 			</td>
 		</tr>
 	</table>
+	
 	<p>&nbsp;</p>
+	</center>
+	</div>
+	<center>
 	<table width="288">
 	  <tr>
 	    <td width="54">&nbsp;</td>
@@ -25,10 +29,12 @@
 	    <td width="55"><a href="cashier.php"><input type=button value='Back'></a></td>
 	    <td width="55">&nbsp;</td>
       </tr>
+	  </form>
   </table>
 	<p>&nbsp;</p>
-</form>
-</div>
+	</center>
+
+
 
 <?php 
   require_once 'cashier_footer.php';

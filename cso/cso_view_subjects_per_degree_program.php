@@ -25,7 +25,7 @@
 	
 	<p class=notice>
 		<b>REPORT<br/>
-		<u>current semester, A.Y. current academic year</u></b><br/>
+		<u><?php session_start(); echo $_SESSION['semester'];?>, <?php echo $_SESSION['academic_year'];?></u></b><br/>
 		AS OF <?php echo date("D M d H:i:s T Y"); ?>
 	</p>
 	<br/><br/><br/><br/>

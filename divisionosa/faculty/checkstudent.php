@@ -5,11 +5,12 @@
 	$u = count_confirmed(retrieve_confirmed($student_number));
 	$stfap = print_bracket_degree(retrieve_bracket_degree($student_number));
 	$check_nstp = mysql_numrows(check_nstp($student_number));
+	$degree_name = mysql_fetch_array(retrieve_degree_program($stfap[1]));
 ?>
 <h1 align="center">Register Student</h1>
 <h5 align="center">You are currently viewing the enlisted subjects of <strong><?php echo $student_number ?></strong></h5>
 <p>STFAP BRACKET: <?php echo $stfap[0] ?></p>
-<p>DEGREE PROGRAM: <?php echo $stfap[1] ?></p>
+<p>DEGREE PROGRAM: <?php echo $degree_name[0] ?></p>
 <table class="tablestyle">
 <tr>
 	<th width="107">Course Code</th>
@@ -43,6 +44,5 @@
 		<input type="submit" name="action" value="View Accountability"/>
 		<input type="submit" name="action" value="Assessment"/>
 	</form>
-<?php
-	require_once 'footer.php';
-?>
+<br/><br/>
+<?php require_once '../../admin_footer.php' ?>

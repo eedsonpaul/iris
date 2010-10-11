@@ -200,4 +200,6 @@
 </div>
 </body>
 </div>
+<br/><br/>
+<?php require_once '../../admin_footer.php' ?>
 </html>

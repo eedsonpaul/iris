@@ -145,6 +145,35 @@
 		return $q;
 	}
 	
+	function view_class_offering_year($year)
+	{	//, c.academic_year
+		$q = mysql_query("SELECT DISTINCT a.course_code, a.section_label, a.room_id, d.last_name, d.first_name, a.total_slots, a.class_type, b.start_time, b.end_time, b.day_of_the_week 
+			FROM section a, section_schedules b, subject c, employee d
+			WHERE a.course_code = b.course_code
+			AND b.course_code = c.course_code
+			AND a.section_label = b.section_label
+			AND d.employee_id = a.employee_id
+			AND a.course_code LIKE '%%'
+			and c.academic_year='$year'");
+		if(!$q) die('Cannot return class offerings in year '.$year.'. '.mysql_error());
+		return $q;
+	}
+	
+	function view_class_offering_year_sem($year,$sem)
+	{	//, c.academic_year
+		$q = mysql_query("SELECT DISTINCT a.course_code, a.section_label, a.room_id, d.last_name, d.first_name, a.total_slots, a.class_type, b.start_time, b.end_time, b.day_of_the_week 
+			FROM section a, section_schedules b, subject c, employee d
+			WHERE a.course_code = b.course_code
+			AND b.course_code = c.course_code
+			AND a.section_label = b.section_label
+			AND d.employee_id = a.employee_id
+			AND a.course_code LIKE '%%'
+			and c.academic_year='$year'
+			and c.semester_offered='$sem'");
+		if(!$q) die('Cannot return class offerings in year '.$year.' and semester. '.mysql_error());
+		return $q;
+	}
+	
 	function print_table_class_offering($a)
 	{
 		$i=0;
@@ -173,6 +202,33 @@
 			echo "<td><input type=submit name=c value='Edit Section'></td>";
 			$i=0;
 			echo "</tr></form>";
+		}
+	}
+	
+	function print_table_view_class_offering($a)
+	{
+		$i=0;
+		while($row = mysql_fetch_array($a))
+		{
+			while($i<10)
+			{
+				echo '<td>';
+				if($i==3)
+				{
+					echo $row[$i].', '.$row[$i+1];
+					$i++;
+				}
+				else if($i==7)
+				{
+					echo $row[$i].' - '.$row[$i+1];
+					$i++;
+				}
+				else echo $row[$i];
+				$i++;
+				echo '</td>';
+			}
+			$i=0;
+			echo "</tr>";
 		}
 	}
 	
@@ -217,6 +273,15 @@
 			AND a.course_code = '$course_code'
 			AND a.section_label = '$section'");
 		if(!$q) die('Cannot retrieve section'.mysql_error());
+		return $q;
+	}
+	
+	function retrieve_semester($sem)
+	{
+		$q = mysql_query("SELECT semester_type
+			FROM semester
+			WHERE semester_id='$sem'");
+		if(!$q) die('Cannot retrieve semester'.mysql_error());
 		return $q;
 	}
 	//options_cc();

@@ -3,7 +3,6 @@
 ?>
 
 
-<div class="main">
 	<div id="navigation">
 		
 	  <ul>

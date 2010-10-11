@@ -11,6 +11,8 @@
 	<title>CSO</title>
 	<style type="text/css">
 		@import url("documents.css");
+		.row0 { background-color: #EAEAEA; }
+		.row1 { background-color:#FFFFFF;	}		
   </style>
 </head>
 
@@ -25,75 +27,72 @@
 	
 	<p class=notice>
 		<b>REPORT<br/>
-		<u>current semester, A.Y. current academic year</u></b><br/>
+		<u><?php session_start(); echo $_SESSION['semester'];?>, <?php echo $_SESSION['academic_year'];?></u></b><br/>
 		AS OF <?php echo date("D M d H:i:s T Y"); ?>
 	</p>
 	<br/><br/><br/><br/>
 	
+	<?php
+	include ('connect_to_database.php');
+	include ('cso_enrollment_functions.php');
+	
+	$deg_level = array('undergraduate', 'graduate');
+	foreach ($deg_level as $degree_level) {
+	?>
 	<p class=headdata>
 		OFFICIALLY ENROLLED STUDENTS<br/>
-		UNDERGRADUATE<br/>
+		<?php echo strtoupper($degree_level) ?><br/>
 		U.P. CEBU COLLEGE<br/>
-		Current Sem AY<br/>
 	</p>
-	<br/><br/>
 	
 	<?php
-		function checkEnrolledSubjects ($student_number) {
+		$rowclass=0;
+		$count = 1;
+		$nationality = "";
+		$students = sprintf("SELECT *,d.degree_name FROM student a, degree_program d WHERE a.degree_level='%s' AND a.degree_program_id=d.degree_program_id ORDER BY a.last_name ASC",
+					mysql_real_escape_string($degree_level));
+		$enrolled_ids = enrolledStudents($students);
 		
-			$check_array = mysql_query("SELECT status FROM student_status WHERE student_number=$student_number ");
-			$status_count = mysql_num_rows($check_array);
-			if ($status_count == 0) return 0;
-			while ($check_all = mysql_fetch_array($check_array)) {
-				extract($check_all);
-				if ($status != 'enrolled') return 0;
-			}
-			return 1;
-		}
+		if ($enrolled_ids == NULL) { 
 	?>
-	<!-- BODY for UNDERGRADUATE-->
-	<center><table width=1120 align=center valign=center>
-		<tr>
+		<center><strong>NO STUDENT CURRENTLY ENROLLED!</strong></center>
+	<?php
+		} else {
+	?>
+		<center><table width=100% align=center valign=center>
+		<tr bgcolor=#A2A2A2>
 			<th width=50>COUNT</th>
 			<th width=150>STUDENT NUMBER</th>
-			<th width=250>NAME</th>
+			<th width=200>NAME</th>
 			<th width=70>GENDER</th>
 			<th width=250>COURSE</th>
-			<th width=100>YEAR LEVEL</th>
+			<th width=80>YEAR LEVEL</th>
 			<th width=100>NATIONALITY</th>
 			<th width=150>REGISTRATION STATUS</th>			
 		</tr>
-		<?php
-			include ('connect_to_database.php');
-			// $deg_level = ('undergraduate', 'graduate');
-			
-			// foreach ($deg_level) {
-				echo "<tr>";
-				$count = 1;
-				$students = mysql_query("SELECT *,d.degree_name FROM student a, degree_program d WHERE a.degree_level='undergraduate' AND a.degree_program_id=d.degree_program_id ORDER BY a.last_name ASC");
-				while ($student_ids = mysql_fetch_array($students)) {
-					extract($student_ids);
-					
-					$enrolled_all = checkEnrolledSubjects($student_number);
-					
-					if ($enrolled_all == 1) {
-						echo "<td align=center valign=center>" .$count  ."</td>". 
-							"<td align=center valign=center>" .$student_number ."</td>".
-							"<td align=center valign=center>" .$last_name .", " .$first_name ." " .$middle_name ."</td>".
-							"<td align=center valign=center>" .$gender ."</td>".
-							"<td align=center valign=center>" .$degree_name ."</td>".
-							"<td align=center valign=center>" .$year_level ."</td>".
-							"<td align=center valign=center>" .$foreign_info ."</td>".
-							"<td align=center valign=center>" .$registration_stat ."</td></tr>";
-						$count++;
-					}		
-				}
-			// }
-
-		?>
-		</table></center>
-	</table>
-
+	<?php
+			foreach ($enrolled_ids as $students) {
+	?>
+			<tr class=row<?php echo $rowclass ?>>
+				<td align=center valign=center><?php echo $students["count"] ?></td>
+				<td align=center valign=center><?php echo $students["student_number"] ?> </td>
+				<td align=center valign=center><?php echo $students["last_name"] .", " .$students["first_name"] ." " .$students["middle_name"] ?></td>
+				<td align=center valign=center><?php echo $students["gender"] ?></td>
+				<td align=center valign=center><?php echo $students["degree_name"] ?></td>
+				<td align=center valign=center><?php echo $students["year_level"] ?></td>
+				<td align=center valign=center><?php echo $students["citizenship"];?></td>
+				<td align=center valign=center><?php echo $students["registration_stat"] ?></td>
+			</tr>
+	<?php
+				$count++;
+				$rowclass = 1 - $rowclass;
+			}
+		}
+	?>
+		</table></center><br/><br/><br/>
+	<?php 
+	} 
+	?>
 </body>
 </html>
 	

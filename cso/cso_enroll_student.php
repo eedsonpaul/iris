@@ -17,7 +17,7 @@
 	$access_level_id = $_SESSION['access_level_id'];
 	$res = mysql_query("SELECT last_name, first_name, middle_name, designation_id, unit_id FROM employee WHERE employee_id='$employee_id'");
 	$data = mysql_fetch_array($res);
-	$employee_name = $data['last_name'] . ', ' . $data['first_name'] . ' ' . $data['middle_name'];
+	$employee_name = $data['last_name'] . ', ' . $data['first_name'] . ' ' . $data['middle_name'][0].'.';
 	$unit_id = $data['unit_id'];
 	$designation_id = $data['designation_id'];
 	$res2= mysql_query("SELECT designation FROM designation WHERE designation_id='$designation_id'");
@@ -38,7 +38,7 @@
  	</p>
     <p class="headfont">&nbsp;</p>
   <p class="head"><strong>General Registration</strong></p>
-  <p class="head"><strong>Semester goes here</strong></p>
+  <p class="head"><strong><?php echo $_SESSION['semester'].', '.$_SESSION['academic_year'];?></strong></p>
   <p class="head">&nbsp;</p>
   <?php
   	include("connect_to_database.php");
@@ -88,7 +88,7 @@
             <td class="tab2"><div align="right"><strong>YEAR LEVEL</strong></div></td>
             <td class="tab2"><strong>:</strong></td>
             <td class="tab2"><?php echo $year_level;?></td>
-            <td class="tab2"><div align="left">View Study Plan</div></td>
+            <td class="tab2"><div align="left"><?php //echo View Study Plan;?></div></td>
           </tr>
           <tr>
             <td>&nbsp;</td>
@@ -97,7 +97,7 @@
             <td><div align="right" class="tab2"><strong>ACADEMIC STANDING</strong></div></td>
             <td class="tab2"><strong>:</strong></td>
             <td class="tab2"><?php echo $academic_standing;?></td>
-            <td class="tab2"><div align="left">View Grade Summary</div></td>
+            <td class="tab2"><div align="left"><a href="cso_view_student_grades.php?id=<?php echo $student_number;?>">View Grade Summary</a></div></td>
           </tr>
         </table>
       </div></td>
@@ -134,7 +134,7 @@
       <center>
         <table width="703" border="0" cellpadding="0" cellspacing="0" class="tab2" align="center">
           <tr>
-            <td width="202" class="tab2">Total Units Earned:</td>
+            <td width="202" class="tab2">Total Units Earned: <?php echo 0;?></td>
             <td width="178" class="tab2">Total Units Confirmed: <?php echo $units;?></td>
             <td width="163" class="tab2">&nbsp;</td>
             <td width="160" class="tab2"><table width="150" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -142,7 +142,7 @@
                 <td height="5" class="tab2"><a href="cso_view_form5.php?id=<?php echo $stud_num;?>">Print Paid Form5 Here</a></td>
               </tr>
               <tr>
-                <td height="5" class="tab2">View Assessment Here</td>
+                <td height="5" class="tab2"><?php //echo View Assessment Here;?></td>
               </tr>
             </table></td>
           </tr>
@@ -154,7 +154,7 @@
               <a href="cso_students_accountabilities_module.php?id=<?php echo $stud_num;?>&action=GET"><input type="submit" name="check_accountability" id="check_accountability" value="CHECK ACCOUNTABILITY"></a>
             </div></td>
             <td><div align="center">
-              <a href=""><input type="submit" name="edit_enrollment_data" id="edit_enrollment_data" value="EDIT ENROLLMENT DATA"></a>
+              <a href="cso_edit_enrolldata1.php"><input type="submit" name="edit_enrollment_data" id="edit_enrollment_data" value="EDIT ENROLLMENT DATA"></a>
             </div></td>
           </tr>
         </table>

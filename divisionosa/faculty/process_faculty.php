@@ -13,6 +13,22 @@ if(isset($_REQUEST['action']))
 		case 'View Accountability':
 			if(isset($_POST['studnum'])) 
 			{
+				/*if(mysql_numrows(exist($_POST['studnum'],'student','student_number'))==0)
+				{
+					require_once 'exist.php';
+				}
+				else*/
+				if(mysql_numrows(exist($_POST['studnum'],'student','student_number'))==0)
+				{
+					$_POST['error']='student does not exist!';
+					require_once 'view_accnt.php';
+				}
+				else if($_POST['studnum']=='')
+				{
+					$_POST['error']='no student inputted!';
+					require_once 'view_accnt.php';
+				}
+				else 
 				require_once 'accountability.php';
 			}
 		break;
@@ -20,6 +36,17 @@ if(isset($_REQUEST['action']))
 		case 'Register Student':
 			if(isset($_POST['studnum']))
 			{
+				if($_POST['studnum']=='')
+				{
+					$_POST['error']='No student number inputted!';
+					require_once 'register.php';
+				}
+				else if(mysql_numrows(exist($_POST['studnum'],'student','student_number'))==0)
+				{
+					$_POST['error']='student does not exist!';
+					require_once 'register.php';
+				}
+				else
 				require_once 'checkstudent.php';
 			}
 		break;
@@ -52,11 +79,13 @@ if(isset($_REQUEST['action']))
 		
 		case 'Assess Student':
 			if(isset($_POST['studnum'])
-			and isset($_POST['total']))
+			and isset($_POST['total'])
+			and isset($_POST['employee_id']))
 			{
 				echo set_assessed($_POST['studnum']);
 				echo student_assess($_POST['studnum'],$_POST['total']);
 				echo confirm_to_assess($_POST['studnum']);
+				echo assessed_by($_POST['studnum'],$_POST['employee_id']);
 			}
 		break;
 		
@@ -73,6 +102,7 @@ if(isset($_REQUEST['action']))
 			and isset($_POST['section_label'])
 			and isset($_POST['student_number'])
 			and isset($_POST['initial_grade'])
+			//and isset($_POST['grade_status'])
 			and isset($_POST['semester'])
 			and isset($_POST['academic_year']))//and isset($_POST['student_number'])			
 			{
@@ -82,11 +112,33 @@ if(isset($_REQUEST['action']))
 							$_POST['remarks'],
 							time(),
 							$_POST['initial_grade'],
-							init_final($_POST['initial_grade']),
-							grade_status($_POST['initial_grade']),
+							'',//init_final($_POST['initial_grade']),
+							grade_status($_POST['initial_grade']),//$_POST['grade_status'],
 							$_POST['semester'],
 							$_POST['academic_year']).'</h1>';
 				require_once 'grades.php';
+			}
+		break;
+	}
+}
+elseif(isset($_REQUEST['view']))
+{
+	switch($_REQUEST['view'])
+	{
+		Case 'View':
+			if($_POST['sem']=='' and $_POST['year']=='')
+			{
+				$_POST['error']='Select a Year and a semester!';
+				require_once 'view_courses.php';
+			}
+			else if($_POST['year']=='')
+			{
+				$_POST['error']='Select a Year!';
+				require_once 'view_courses.php';
+			}
+			else
+			{
+				require_once 'view_courses_list.php';
 			}
 		break;
 	}

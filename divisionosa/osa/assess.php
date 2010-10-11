@@ -221,6 +221,6 @@
 		<input type="hidden" name="studnum" value="<?php echo $student_number ?>">
 		<input type="submit" name="action" value="Assess Student"/>
 	</form>
-<?php
-	require_once 'footer.php';
-?>
+	
+<br/></br>
+<?php require_once '../../admin_footer.php' ?>

@@ -17,7 +17,7 @@
 	$access_level_id = $_SESSION['access_level_id'];
 	$res = mysql_query("SELECT last_name, first_name, middle_name, designation_id, unit_id FROM employee WHERE employee_id='$employee_id'");
 	$data = mysql_fetch_array($res);
-	$employee_name = $data['last_name'] . ', ' . $data['first_name'] . ' ' . $data['middle_name'];
+	$employee_name = $data['last_name'] . ', ' . $data['first_name'] . ' ' . $data['middle_name'][0].'.';
 	$unit_id = $data['unit_id'];
 	$designation_id = $data['designation_id'];
 	$res2= mysql_query("SELECT designation FROM designation WHERE designation_id='$designation_id'");
@@ -47,8 +47,29 @@
 		echo "<script> alert('Student number does not exist. Please input another student number.'); window.location.href = 'cso_search_edit_student_personal_enrollment_data.php';</script>";
 	} else {
   ?>
-  
+ <script language="JavaScript">
+
+	function init(){
+		document.csoform.reset();
+		
+		oStringMask = new Mask("########");
+		oStringMask.attach(document.csoform.birthdate);		
+		
+		oStringMask = new Mask("###########");
+		oStringMask.attach(document.csoform.phone_no);
+
+		oStringMask = new Mask("###########");
+		oStringMask.attach(document.csoform.present_phone_no);	
+
+		oStringMask = new Mask("###########");
+		oStringMask.attach(document.csoform.home_phone_no);	
+
+		oStringMask = new Mask("###########");
+		oStringMask.attach(document.csoform.contact_person_phone_no);	
+	}
+</script>
 <div id="right_side">
+	<p><a href='javascript:history.go(-1)'>Back</a></p>
 	<p>
     	<b>&nbsp;&nbsp;Employee ID :</b> &nbsp; <?php echo $employee_id; ?> <br>
       	<b>&nbsp;&nbsp;Name &nbsp; :</b> &nbsp; <?php echo $employee_name; ?> <br>
@@ -176,7 +197,7 @@
       <tr>
         <td><div align="right">Birthdate:</div></td>
         <td>*</td>
-        <td colspan="2"><input type="text" name="birthdate" id="birthdate" value="<?php echo $birthdate;?>"> (yyyy-mm-dd)</td>
+        <td colspan="2"><input type="text" name="birthdate" id="birthdate" value="<?php echo $birthdate;?>"> (yyyymmdd)</td>
       </tr>
       <tr>
         <td><div align="right">LandLine/Mobile Phone #:</div></td>
@@ -314,16 +335,11 @@
         <td colspan="2">&nbsp;</td>
       </tr>
       <tr>
-        <td><div align="right">
+        <td colspan="3"><div align="right">
           <input type="submit" name="update_personal_enrollment_data" id="update_personal_enrollment_data" value="UPDATE">
-        </div></td>
-  </form>
-        <td>&nbsp;</td>
-        <td width="137"><div align="center">
-          <a href ="cso_edit_student_personal_enrollment_data.php?action=NOT&id=<?php echo $student_ID;?>"><input type="submit" name="reset_personal_enrollment_data2" id="reset_personal_enrollment_data2" value="RESET"></a>
-        </div></td>
-        <td width="140"><a href="javascript:history.go(-1)"><input type="submit" name="cancel_personal_enrollment_data3" id="cancel_personal_enrollment_data3" value="CANCEL"></a></td>
+       </div></td>
       </tr>
+  </form>
     </table>
 	
 <script language="JavaScript" type="text/javascript">
@@ -336,16 +352,17 @@
     frmvalidator.addValidation("first_name","req","Input First Name.");
     frmvalidator.addValidation("birthdate","req","Input Birthdate.");
     frmvalidator.addValidation("email_address","email");
-	frmvalidator.addValidation("present_brgy","req","Input Present Barangay.");
-	frmvalidator.addValidation("present_city","req","Input Present City.");
-	frmvalidator.addValidation("home_brgy","req","Input Home Barangay.");
-	frmvalidator.addValidation("home_city","req","Input Home City.");
-	frmvalidator.addValidation("contact_person_name","req","Input Contact Person.");
-	frmvalidator.addValidation("contact_person_brgy","req","Input Contact Person Barangay.");
-	frmvalidator.addValidation("contact_person_city","req","Input Contact Person City.");
+    frmvalidator.addValidation("present_brgy","req","Input Present Barangay.");
+    frmvalidator.addValidation("present_city","req","Input Present City.");
+    frmvalidator.addValidation("home_brgy","req","Input Home Barangay.");
+    frmvalidator.addValidation("home_city","req","Input Home City.");
+    frmvalidator.addValidation("contact_person_name","req","Input Contact Person.");
+    frmvalidator.addValidation("contact_person_brgy","req","Input Contact Person Barangay.");
+    frmvalidator.addValidation("contact_person_city","req","Input Contact Person City.");
 	
  
   </script>
+
     <p>&nbsp;</p>
   <p>&nbsp;</p>
 </div>

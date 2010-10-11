@@ -13,7 +13,7 @@
 			$mname = ' ';
 			$emp_id = '';
 			
-			$sql = "SELECT * from employee WHERE (last_name LIKE 'flast_name%' && access_level_id = 2) || (last_name = 'flast_name' && access_level_id = 2)";
+			$sql = "SELECT * from employee WHERE (last_name LIKE '$flast_name%' && access_level_id = 2) || (last_name = '$flast_name' && access_level_id = 2)";
 			$result = mysql_query($sql);
 			while ($faculty = mysql_fetch_array($result)) {
 				$fname = $faculty['first_name'];

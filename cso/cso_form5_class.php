@@ -11,7 +11,7 @@ include("sql_queries.php");
 	class form5 {
 	
 		function viewEnrolledSubjects($stud_num) {
-		
+			//session_start();
 			echo "<table height='350' width='680' border='1' cellspacing='0' cellpadding='0'>
         			<tr>
           				<td width='100' class='style3'><div align='center' class='style9'>SUBJECTS</div></td>
@@ -27,8 +27,8 @@ include("sql_queries.php");
 			$student_number = $stud_num;
 			$unit = 0;
 			$count = 0;
-			$semester = $_SESSION['current_semester'];
-			$academic_year = $_SESSION['current_year'];
+			$semester = $_SESSION['semester'];
+			$academic_year = $_SESSION['academic_year']+1;
 			
 			$sql = "select * from student_status where student_number = '$stud_num' && status = 'enrolled' && semester = '$semester' && academic_year = '$academic_year'";
 			$res = mysql_query($sql);

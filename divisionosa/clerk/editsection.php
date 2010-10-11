@@ -6,12 +6,17 @@
 	$v1 = retrieve_section($course_code,$section);
 	$v2 = retrieve_section_schedule($course_code,$section);
 ?>
-<h1 align="center">EDIT CLASS OFFERING</h1>
+<h1 align="center">EDIT Section</h1>
+<?php
+	if(!(isset($_POST['error']))) $_POST['error'] = '';
+	echo '<h4 align=center>'.$_POST['error'].'</h4>';
+?>
 <table align="center" class="tablestyle">
 <form action="process.php" method="post" name="osaform">
 <input type="hidden" name="ccode" value="<?php print($course_code) ?>">
 <input type="hidden" name="slbl" value="<?php print($section) ?>">
 
+<input type='hidden' name='error'>
 <input type="hidden" name="course_code" value="<?php print($v1[0]) ?>">
 <h4 align="center">You are currently Editing for Class Offering <strong><?php print($v1[0]) ?></strong></h4>
 <!--
@@ -109,4 +114,5 @@
   
 </script>
 </table>
-<?php require_once 'footer.php' ?>
+<br/><br/>
+<?php require_once '../../admin_footer.php' ?>

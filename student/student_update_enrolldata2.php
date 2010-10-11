@@ -3,13 +3,12 @@
 	require 'dbconnect.php';
 	session_start();
     $student_number = $_SESSION['student_number'];	
-	$sameaddress = "true";
 //	$academic_year=$_POST['academic_year']; 
 //	$semester=$_POST['semester']; 	
 	
 	$father_name 				=$_POST['father_name'];
 	$mother_name 				=$_POST['mother_name'];
-//	$sameaddress					=$_POST['sameaddress'];
+    echo $sameaddress				=$_POST['sameaddress'];
 	$guardian 					=$_POST['guardian'];
 	$guardian_house_number 		=$_POST['guardian_house_number'];
 	$guardian_street 			=$_POST['guardian_street'];
@@ -49,7 +48,7 @@
 									
 		WHERE student_number = $student_number");
 		
-	if($sameaddress=="true"){
+	if($sameaddress=="yes"){
 	
 	mysql_query("UPDATE student SET home_house_number 				=  $housenum,
 									home_street 					= '$street',
@@ -71,10 +70,24 @@
 	
 	else{
 	
-	
+	mysql_query("UPDATE student SET home_house_number 				=  0,
+									home_street 					= '',
+									home_barangay 					= '',
+									home_city_municipality 			= '',
+									home_province 					= '',
+									home_contact_number 			=  0,
+									present_home_number 			=  $housenum,
+									present_street 					= '$street',
+									present_barangay 				= '$barangay',
+									present_city_municipality 		= '$city',
+									present_province 				= '$province',
+									present_contact_number 			=  $number
+
+								
+	WHERE student_number = $student_number");
 	
 	}
 	
-	//header("location: student_edit_data.php");
+	header("location: student_edit_data.php?message='UPDATE SUCCESSFUL'");
 	
 ?>

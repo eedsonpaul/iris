@@ -1,33 +1,23 @@
 <?php
 class Accountability{
-	public $accountability_type_id = 0;
-	public $details = 'none';
-	public $amount_due = 0;
-	public $year_incurred = 0;
-	public $semester_incurred = 1;
-	public $date_added = 20100101;
-	public $student_number = 0000000000;
-	public $accountability_status = 'N';
-	public $employee_id = 0;
-	public $date_cleared = 20100101;
-	
 	function acctg_addAccountability(){
-			$accountability_type = $_POST['accountability_type'];
-			$details = $_POST['details'];
-			$amount_due = $_POST['amount_due'];
-			$year_incurred = $_POST['year_incurred'];
-			$semester_incurred = $_POST['semester_incurred'];
-			$student_number = $_GET['student_number'];
-			$query = "Select * from student WHERE student_number = $student_number;";
-			$result = mysql_query($query);
-			$date_added = date('Ymd');
-			$employee_id = $_SESSION['employee_id'];
-				//store in database
-				$add = "INSERT INTO accountability VALUES ('', $accountability_type, $student_number, '$details', $amount_due, $year_incurred, $semester_incurred, $date_added, $employee_id, 'pending', '1');";
-				$addAccountability= mysql_query($add);
-				header("Location:accountingSAM.php");
-			
-		}
+		include ('connect.php');
+		$accountability_type = $_POST['accountability_type'];
+		$details = $_POST['details'];
+		$amount_due = $_POST['amount_due'];
+		$year_incurred = $_POST['year_incurred'];
+		$semester_incurred = $_POST['semester_incurred'];
+		$student_number = $_GET['student_number'];
+		$query = "Select * from student WHERE student_number = $student_number;";
+		$result = mysql_query($query);
+		$date_added = date('Ymd');
+		$employee_id = $_SESSION['employee_id'];
+			//store in database
+			$add = "INSERT INTO accountability VALUES ('', $accountability_type, $student_number, '$details', $amount_due, $year_incurred, $semester_incurred, $date_added, $employee_id, 'pending', '1');";
+			$addAccountability= mysql_query($add);
+			header("Location:accountingSAM.php");
+		
+	}
 		
 	function acctg_displayAccountabilities(){
 		$query = "Select * from accountability WHERE accountability_status='pending' AND (accountability.accountability_type_id=1 OR accountability.accountability_type_id=3);";
@@ -62,6 +52,9 @@ class Accountability{
 					$degree_program = mysql_result($result2,$i,"degree_program");
 					$year_incurred = mysql_result($result2,$i,"year_incurred");
 					$semester_incurred = mysql_result($result2,$i,"semester_incurred");
+					if($semester_incurred==0){
+						$semester ="Summer";
+					}
 					if($semester_incurred==1){
 						$semester ="1st Semester";
 					}
@@ -82,13 +75,14 @@ class Accountability{
 					$details = mysql_result($result2,$i,"details");
 					$amount_due = mysql_result($result2,$i,"amount_due");
 					$accountability_id = mysql_result($result2,$i,"accountability_id"); 
+					$date_added_string = strval($date_added);
 				
 					echo "<tr><font size='1'></font>";
 					echo "<td height = \"20\"><font size='1'>".$student_number."</font></td>";
 					echo "<td><font size='1'>".$last_name.", ".$first_name." ".$middle_name."<br>".$degree_program."</font></td>";
 					echo "<td><font size='1'>".$year_incurred."</font></td>";
 					echo "<td><font size='1'>".$semester."</font></td>";
-					echo "<td><font size='1'>".$date_added."</font></td>";
+					echo "<td><font size='1'>".$date_added_string[0].$date_added_string[1].$date_added_string[2].$date_added_string[3]." / ".$date_added_string[4].$date_added_string[5]." / ".$date_added_string[6].$date_added_string[7]."</font></td>";
 					echo "<td><font size='1'>".$accountability_type."</font></td>";
 					echo "<td><font size='1'>".$details."</font></td>";
 					echo "<td><font size='1'>".$amount_due."</font></td>";
@@ -131,9 +125,9 @@ class Accountability{
 			//store in database
 			$query_amount_due = "SELECT * FROM accountability WHERE accountability_id = $id;";
 			$result_amount_due = mysql_query($query_amount_due);
-			$amount_due = mysql_result($result_amount_due, 0, amount_due);
-			$year_incurred = mysql_result($result_amount_due,0,year_incurred);
-			$semester_incurred = mysql_result($result_amount_due,0,semester_incurred);
+			$amount_due = mysql_result($result_amount_due, 0, "amount_due");
+			$year_incurred = mysql_result($result_amount_due,0,"year_incurred");
+			$semester_incurred = mysql_result($result_amount_due,0,"semester_incurred");
 			if(($official_receipt_number==NULL)&&($amount_paid==NULL)){
 				$update = "UPDATE accountability SET accountability_status='cleared', date_cleared = $date_cleared, year_incurred=$year_incurred, semester_incurred=$semester_incurred WHERE accountability_id=$id;";
 				$update_call = mysql_query($update);
@@ -199,13 +193,14 @@ class Accountability{
 					$date_cleared = mysql_result($result_accountability,0,"date_cleared");
 					$official_receipt_number = mysql_result($result, $i,"official_receipt_number");
 					$date_paid = mysql_result($result,$i,"date_paid");
+					$date_added_string = strval($date_added);
 	
 					echo "<tr>";
 					echo "<td height = \"20\"><font size='1'>".$student_number."</td>";
 					echo "<td><font size='1'>".$last_name.", ".$first_name." ".$middle_name."<br>".$degree_program."</font></td>";
 					echo "<td><font size='1'>".$year_incurred."</font></td>";
 					echo "<td><font size='1'>".$semester_incurred."</font></td>";
-					echo "<td><font size='1'>".$date_added."</font></td>";
+					echo "<td><font size='1'>".$date_added_string[0].$date_added_string[1].$date_added_string[2].$date_added_string[3]." / ".$date_added_string[4].$date_added_string[5]." / ".$date_added_string[6].$date_added_string[7]."</font></td>";
 					echo "<td><font size='1'>".$official_receipt_number."</font></td>";
 					echo "<td><font size='1'>".$amount_due."</font></td>";
 					echo "<td><font size='1'>".$date_paid."</font></td>";
@@ -252,27 +247,46 @@ class Accountability{
 					$degree_program = mysql_result($result2,$i,"degree_program");
 					$year_incurred = mysql_result($result2,$i,"year_incurred");
 					$semester_incurred = mysql_result($result2,$i,"semester_incurred");
+					if($semester_incurred==0){
+						$semester ="Summer";
+					}
+					if($semester_incurred==1){
+						$semester ="1st Semester";
+					}
+					if($semester_incurred==2){
+						$semester ="2nd Semester";
+					}
+					if($semester_incurred==3){
+						$semester ="1st Trimester";
+					}
+					if($semester_incurred==4){
+						$semester ="2nd Trimester";
+					}
+					if($semester_incurred==5){
+						$semester ="3rd Trimester";
+					}
 					$date_added = mysql_result($result2,$i,"date_added");
 					$accountability_type = mysql_result($result3,$i,"accountability_type");
 					$details = mysql_result($result2,$i,"details");
 					$amount_due = mysql_result($result2,$i,"amount_due");
 					$accountability_id = mysql_result($result2,$i,"accountability_id"); 
+					$date_added_string = strval($date_added);
 					
 					echo "<tr>";
 					echo "<td height = \"20\"><font size='1'>".$student_number."</font></td>";
 					echo "<td><font size='1'>".$last_name.", ".$first_name."<br>".$degree_program."</font></td>";
 					echo "<td><font size='1'>".$year_incurred."</font></td>";
-					echo "<td><font size='1'>".$semester_incurred."</font></td>";
-					echo "<td><font size='1'>".$date_added."</font></td>";
+					echo "<td><font size='1'>".$semester."</font></td>";
+					echo "<td><font size='1'>".$date_added_string[0].$date_added_string[1].$date_added_string[2].$date_added_string[3]." / ".$date_added_string[4].$date_added_string[5]." / ".$date_added_string[6].$date_added_string[7]."</font></td>";
 					echo "<td><font size='1'>".$accountability_type."</font></td>";
 					echo "<td><font size='1'>".$details."</font></td>";
 					echo "<td><font size='1'>".$amount_due."</font></td>";
 					echo "<td><a href=\"accountingEditAccountability.php?id=".$accountability_id."\"><font size='1'>Edit</font></a></td>";
 					echo "<td><a href=\"accountingClearAccountability.php?id=".$accountability_id."\"><font size='1'>Clear</font></a></td>";
 					echo "</tr>";
-					echo "</table>";					
 					$i++;
 				}
+				echo "</table>";					
 			}
 		}
 		
@@ -293,10 +307,12 @@ class Accountability{
 		
 		function acctg_feeAssessment(){
 			include('connect.php');
-			//$academic_year = $_SESSION['academic_year'];
-			//$semester = $_SESSION['semester'];
-			$term_incurred = 1; //for SESSION
-			$academic_year = 2010; //for SESSION
+			$query_current = "SELECT * FROM current_semester_id";
+			$result_current = mysql_query($query_current);
+			$current_id_minus_one = mysql_numrows($result_current);
+			$current_id = $current_id_minus_one - 1;			
+			$term_incurred = mysql_result($result_current,$current_id,"semester_id");
+			$academic_year = mysql_result($result_current,$current_id,"academic_year");
 			$student_number = $_GET['student_number'];
 			$s_number = "'".$student_number."'";
 			$query = "select * from student_status WHERE student_number = $s_number;";
@@ -412,13 +428,13 @@ class Accountability{
 					$registration_less_stfap = 0;
 					
 					if($stfap_bracket_id == 6){
-						$athletics_less_stfap = 55;
-						$cultural_less_stfap = 50;
-						$energy_less_stfap = 250;
-						$internet_less_stfap = 260;
-						$library_less_stfap = 700;
-						$medical_less_stfap = 50;
-						$registration_less_stfap = 40;
+						$athletics_less_stfap = $atheletics;
+						$cultural_less_stfap = $cultural;
+						$energy_less_stfap = $energy;
+						$internet_less_stfap = $internet;
+						$library_less_stfap = $library;
+						$medical_less_stfap = $medical;
+						$registration_less_stfap = $registration;
 					}
 					
 					$athletics_amount_shouldered = 0;
@@ -668,7 +684,7 @@ class Accountability{
 							echo "<td>".$loaned_amount."</td>";
 							//echo "</tr>";
 							//echo "<tr>";
-							echo "<form action=\"editSLB.php?student_number=$student_number\" method=\"POST\">";
+							echo "<form action=\"editSLB.php?student_number=$student_number\" method=\"POST\" name=\"accountingform\">";
 							echo "<input type=\"hidden\" name=\"slb_id\" value=$slb_id />";
 							echo "<input type=\"hidden\" name=\"term_incurred\" value=$term_incurred />";
 							echo "<input type=\"hidden\" name=\"academic_year\" value=$academic_year />";
@@ -683,7 +699,7 @@ class Accountability{
 								echo "<td>TO PAY: </td><td>".$true_total_to_pay."</td>";
 								echo "</tr>";
 								echo "<tr>";
-								echo "<form action=\"inputSLB.php?student_number=$student_number\" method=\"POST\">";
+								echo "<form action=\"inputSLB.php?student_number=$student_number\" method=\"POST\" name=\"accountingform\">";
 								echo "<input type=\"hidden\" name=\"academic_year\" value=$academic_year />";
 								echo "<input type=\"hidden\" name=\"term_incurred\" value=$term_incurred />";
 								echo "<td>Loan Amount: </td>";
@@ -713,7 +729,7 @@ class Accountability{
 		function acctg_inputStudentLoan(){
 			include('connect.php');
 			$loaned_amount = $_POST['loaned_amount'];
-			$employee_id = 0;//$_SESSION['employee_id'];
+			$employee_id = $_SESSION['employee_id'];
 			$student_number = $_GET['student_number'];
 			$term_incurred = $_POST['term_incurred'];
 			$academic_year = $_POST['academic_year'];
@@ -728,6 +744,9 @@ class Accountability{
 			$add = "INSERT INTO slb VALUES ('',$loaned_amount, $employee_id, $student_number, $term_incurred, $academic_year);";
 			$addOR= mysql_query($add);
 			$to_pay_amount = $amount_payable - $loaned_amount;
+			if($to_pay_amount < 0){
+				$to_pay_amount = 0;
+			}
 			$updateAssessment = "UPDATE student_assessment SET to_pay_amount = $to_pay_amount WHERE student_number=$student_number;";
 			$update = mysql_query($updateAssessment);
 			

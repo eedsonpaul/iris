@@ -23,9 +23,9 @@
 
 
 				$sql = "INSERT INTO student 
-					(student_number, last_name, first_name, middle_name, gender, entry_academic_year, entry_semester, login_expiration, password, degree_program, degree_level, access_level_id, last_updated, last_updated_by, graduating)
+					(student_number, academic_standing, year_level, last_name, first_name, middle_name, gender, entry_academic_year, entry_semester, login_expiration, password, degree_program_id, degree_program,degree_level, access_level_id, last_updated, last_updated_by, graduating)
 				
-					VALUES ('".$_POST['student_id']."', '".$_POST['last_name']."', '".$_POST['first_name']."', '".$_POST['middle_name']."', '".$_POST['gender']."', '".$_POST['entry_academic_year']."', '".$_POST['entry_semester']."','".$_POST['login_expiration']."', '" . md5($_POST['student_id']) . "', '".$_POST['course']."', '$degree_level', '1', '$last_update', '$emp_id', 'No')";
+					VALUES ('".$_POST['student_id']."', 'Good Standing', '1', '".$_POST['last_name']."', '".$_POST['first_name']."', '".$_POST['middle_name']."', '".$_POST['gender']."', '".$_POST['entry_academic_year']."', '".$_POST['entry_semester']."','".$_POST['login_expiration']."', '" . md5($_POST['student_id']) . "', '".$_POST['course']."', '".$_POST['course']."','$degree_level', '1', '$last_update', '$emp_id', 'No')";
 	
 						
 
@@ -47,19 +47,16 @@
 				$last_update = time();
 				$employee = $_SESSION['employee_id'];
 				$password = $_POST['password'];
-				$repassword = $_POST['repassword'];
-				
-				if($password==$repassword) {
+				$log_expire = $_POST['login_expiration'];
 					$sql = "UPDATE student SET
+								login_expiration = '$log_expire',
 								password = '".md5($_POST['password'])."',
 								last_updated = '$last_update',
 								last_updated_by = '$employee'
 								WHERE student_number = '$student_ID'";
 								
 					echo "<script> alert('Student login account successfully updated.'); window.location.href = 'cso_student_record_management.php';</script>";
-				} else if($password!=$repassword) {
-					echo "<script> alert('Passwords do not match. Please enter password again.'); window.location.href = 'cso_generate_password_change_student_login_account.php?c=NOT&id=$student_ID';</script>";
-				}
+				
 				//header("Location:cso_edit_student_personal_enrollment_data.php?id=$student_ID");
 			break;
 			
@@ -135,12 +132,15 @@
 				}
 				
 				$sqll = "UPDATE student SET
+						degree_program_id = '".$_POST['course']."',
+						degree_program = '".$_POST['course']."',
 						entry_academic_year = '".$_POST['start_ay']."', 
 						entry_semester = '".$_POST['start_semester']."', 
 						last_updated = '$last_update',
 						last_updated_by = '$employee'
 						WHERE student_number = '$student_ID'";
 				mysql_query($sqll);
+				//echo $sqll;
 				
 				echo "<script> alert('Student course successfully updated.'); window.location.href = 'cso_student_record_management.php';</script>";
 				break;

@@ -2,7 +2,6 @@
   require_once 'cashier_header.php';
 ?>
 <?php
-	include('connect.php');
 	$id = $_GET['id'];
 	$query = "Select student_number from accountability WHERE accountability_id='".$id."';";
 	$result = mysql_query($query);

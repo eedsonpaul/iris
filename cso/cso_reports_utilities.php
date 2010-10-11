@@ -36,7 +36,7 @@
       	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
         <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
  	</p>
-		<li><a href="cso_summary_of_enrollment.php">Summary of Enrollment</a></li>
+		<li><a href="cso_summary_of_enrollment.php?by=">Summary of Enrollment</a></li>
             <li>List of Students with Residency</li>
             <li><a href="cso_list_officially_enrolled_students.php">List of officially enrolled students</a></li>
             <li><a href="cso_list_students_per_course.php">List of Students per Course</a></li>

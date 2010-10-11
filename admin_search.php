@@ -4,7 +4,7 @@ require_once 'admin_header.php';
 require_once 'admin_http.php';
 
 $search = NULL;
-if (isset($_POST['keywords']) and isset($_POST['filter'])) {
+if (isset($_POST['keywords'])/* and isset($_POST['filter']) */) {
   if ($_POST['filter'] == 'System Administrator') {
   $sql = "SELECT employee_id, first_name, last_name, username FROM employee " .
          "WHERE MATCH (username, first_name, last_name, employee_id) " .

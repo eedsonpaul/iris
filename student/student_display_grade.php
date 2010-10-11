@@ -3,12 +3,9 @@
     $student_number = $_SESSION['student_number'];	 
 	$academic_year = $_GET['academic_year'];
 	$semester = $_GET['semester'];	
-?>
-
-<div class="main">
-
-<?php
 	require_once 'student_navigation.php';
+		require_once 'function_student.php';
+				require_once 'query_student.php';
 ?>
 
 	<div id="right_side">
@@ -25,9 +22,9 @@
 		 stfap_bracket_id,scholarship_id from student where student_number=$student_number");
 		 
 		 while($row = mysql_fetch_array($res)){
-			echo "<br><br>Student ID:".$row['student_number'];
-			echo "<br>Student Name:".$row['first_name']." ".$row['middle_name']." ".$row['last_name'];
-			echo "<br>Degree Program:".$row['degree_program'];
+			echo "<br><br>Student ID: ".$row['student_number'];
+			echo "<br>Student Name: ".$row['first_name']." ".$row['middle_name']." ".$row['last_name'];
+			echo "<br>Degree Program: ". getDegreeProgram($row['student_number']);
 			echo "<br><br>";		
 		 }
 	?>
@@ -70,15 +67,23 @@
 				echo "<td align='center' width='150'>" . $completion_grade[$i] . "</td>";
 				echo "<td align='center' width='150'>" . $grade_status[$i] . "</td>";
 				echo "</tr>";
-				$totalunits = $totalunits + checkUnits($course_code[$i]);
+				if((($initial_grade[$i]<=3) && ($initial_grade[$i]!=0)) ||(($completion_grade[$i]<3) && ($completion_grade[$i]!=0))){
+				  $totalunits = $totalunits + checkUnits($course_code[$i]);
+				}
 			}
 		echo "</table>";
 
 		echo "<br>TOTAL NUMBER OF UNITS EARNED :" .$totalunits;
-		echo "<br>CLASS STANDING :" ;
-		echo "<br>GWA :" ;
+		echo "<br>CLASS STANDING : " . getClassStanding($student_number,$academic_year,$semester) ;
+		echo "<br>GWA : " . getGWA($student_number,$academic_year,$semester) ;
 		
 		}
+	?>
+
+  <form name="form3" method="post" action="student_grades.php">
+  <input type="submit" name="back"  value="BACK">
+</form>
+	<?php
 	function checkUnits($course_code){
 	 
 	 $result=mysql_query("SELECT units from subject where course_code='$course_code'");	 
@@ -115,5 +120,5 @@
 </div>
 
 <?php
-	require_once 'student_footer.php';
+  require_once '../admin_footer.php';
 ?>

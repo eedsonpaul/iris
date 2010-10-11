@@ -1,4 +1,6 @@
 <?php
+
+	  
 	require_once 'student_sub_header.php';
 
     $student_number = $_SESSION['student_number'];	 

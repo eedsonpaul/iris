@@ -1,12 +1,12 @@
 <?php
-require 'dbconnect.php';
+	require_once 'student_sub_header.php';
+    $student_number = $_SESSION['student_number'];	 
 require_once 'query_student.php';
 require_once 'function_subject.php';
 require_once 'function_student.php';
 require_once 'function_section.php';
 require_once 'function_section_schedule.php';
-	session_start();
-    $student_number = $_SESSION['student_number'];	 
+
  
 	$course_code = $_GET['coursecode'];
 	$section_label =$_GET['sectionlabel'];
@@ -81,7 +81,10 @@ require_once 'function_section_schedule.php';
 	}
 ?>
 
-<script type="text/javascript">
+<script language="Javascript">
+<!-- Start
+document.write('<a href="student_search_subject.php"><br><br><br>BACK TO SEARCH<br></a>');
 
-
+document.write('<a href="javascript:self.close()" onClick="opener.location.reload(true);">CLOSE THIS WINDOW</a>');
+// Stop -->
 </script>

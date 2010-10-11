@@ -11,12 +11,10 @@
 	<input type=hidden name='scholarship_id' value='<?php echo $s[0]?>'>
 	<input type=hidden name='scholarship_name' value='<?php echo $s[1]?>'>
 		<tr>
-			<th width='200'>Scholarship Id</th>
 			<th width='200'>Scholarship Name</th>
 			<th width='200'>Amount Shouldered</th>
 		</tr>
 		<tr>
-			<td><?php echo $s[0] ?></td>
 			<td><?php echo $s[1] ?></td>
 			<td><?php echo $s[2] ?></td>
 		</tr>
@@ -25,6 +23,5 @@
 	<input type='submit' name='osa' value='Yes'/>
 	<input type='submit' name='osa' value='No'/>
 	</form>
-<?php
-	require_once 'footer.php';
-?>
+<br/></br>
+<?php require_once '../../admin_footer.php' ?>

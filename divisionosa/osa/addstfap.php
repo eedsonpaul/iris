@@ -118,8 +118,13 @@
 	$d = (int)date('Y');
 ?>
 <h1 align="center">Edit Stfap Bracket</h1>
+<?php
+	if(!(isset($_POST['error']))) $_POST['error'] = '';	
+	echo '<h4 align=center>'.$_POST['error'].'</h4>';
+?>
 <table align="center" class="tablestyle">
 <form action="process_osa.php" method="post" name="osaform">
+<input type='hidden' name='error'>
 	<tr>
 		<td width="100">Student ID</td>
 		<td width="144"><input type="text" name="student_id"></td>
@@ -159,4 +164,4 @@
   frmvalidator.addValidation("units","num","Units: Numbers only.."); 
 </script>
 </table>
-<?php 'footer.php' ?>
+<?php require_once '../../admin_footer.php' ?>

@@ -1,12 +1,23 @@
 <?php require_once 'header.php' ?>
-  <p align="left" class="style4">&nbsp;</p>
-  <ul>
-  	<li><a href=#"">Student Record management module</a></li>
-    <ul>
-    	<li><a href=#"">View Student Record</a>
-        <li><a href=#"">View Student List By Course</a>
-        <li><a href=#"">View Student Accountability</a>
-        <li><a href=#"">View Student Grade Summary/Study Plan</a>
-    </ul>
-  </ul>
-<?php require_once 'footer.php' ?>
+<br/><br/>
+
+<table id="insidecontent" align="center">
+	<tr>
+		<th>Student Record Management Module</th>
+	</tr>
+	<tr>
+		<td><a href="#">View Student Record &raquo;</a></td>
+	</tr>
+	<tr>
+		<td><a href="#">View Student List By Course &raquo;</a></td>
+	</tr>
+	<tr>
+		<td><a href="#">View Student Accountability &raquo;</a></td>
+	</tr>
+	<tr>
+		<td><a href="#">View Student Grade Summary / Study Plan &raquo;</a></td>
+	</tr>
+</table>
+
+<br/><br/>
+<?php require_once '../../admin_footer.php' ?>

@@ -35,7 +35,7 @@
 		oStringMask = new Mask("#########");
 		oStringMask.attach(document.csoform.student_id);
 		
-		oStringMask = new Mask("####-##-##");
+		oStringMask = new Mask("########");
 		oStringMask.attach(document.csoform.date_graduated);
 		
 		oStringMask = new Mask("####");
@@ -179,7 +179,7 @@
       <tr>
         <td><div align="right">Date Graduated:</div></td>
         <td>*</td>
-        <td><input type="text" name="date_graduated" id="date_graduated" value="<?php echo $date_grad;?>">(yyyy-mm-dd)</td>
+        <td><input type="text" name="date_graduated" id="date_graduated" value="<?php echo $date_grad;?>">(yyyymmdd)</td>
       </tr>
       <tr>
         <td><div align="right">G.W.A.:</div></td>

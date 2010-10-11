@@ -59,18 +59,18 @@
 	
 	$res2= mysql_query("SELECT * FROM degree_program WHERE degree_program_id ='$degree_id'");
 	$data2 = mysql_fetch_array($res2);
-	$degree = $data2['program_name'];
+	$degree = $data2['degree_name'];
 ?>
 	<p><a href='javascript:history.go(-1)'>Back</a></p> 
   	<p class="head"><strong>View Schedule</strong></p>
   	<div id="headlabel">
   	<p>
     	<b>Student Number :</b> &nbsp; <?php echo $student_id;?><br>
-      	<b>Name &nbsp; :</b> &nbsp; <?php echo $lname.', '.$fname.' '.$mname[0];?><br>
+      	<b>Name &nbsp; :</b> &nbsp; <?php echo $lname.', '.$fname.' '.$mname[0].'.';?><br>
       	<b>Degree Program :</b> &nbsp; <?php echo $degree;?><br>
   	</div>
   <p><center>
-    <strong>Semester Here, Academic Year Here</strong>
+    <strong><?php echo $_SESSION['semester'];?>, <?php echo $_SESSION['academic_year'];?></</strong>
   </center>
   </p>
   <table width="650" border="0" align="center">

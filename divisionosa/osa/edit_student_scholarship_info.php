@@ -2,12 +2,14 @@
 	require_once 'header.php';
 	require_once 'scholarship_stfap.php';
 	$student_number = $_POST['student_number'];
+	$employee_id = $_SESSION['employee_id'];
 	$s = mysql_fetch_array(retrieve_student_scholarship_info($student_number));
 ?>
 	<h1 align='center'>Edit Scholarship Information</h1>
 	<table align='center' class='tablestyle'>
 	<form action='process_osa.php' method='post'>
 		<input type='hidden' name='snum' value='<?php echo $student_number?>'>
+		<input type='hidden' name='employee_id' value='<?php echo $employee_id?>'>
 		<tr>
 			<td>Student Number</td>
 			<td><input type='text' name='student_number' value='<?php echo $s[0] ?>' disabled /></td>

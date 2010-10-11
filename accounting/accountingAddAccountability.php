@@ -2,9 +2,20 @@
   require_once 'accounting_header.php';
 ?>
 
+<script language="JavaScript">
+
+	function init(){
+		document.accountingform.reset();
+		
+		oStringMask = new Mask("##############");
+		oStringMask.attach(document.accountingform.amount_due);
+
+	}
+</script>
+
 <div class="main">
 	<div id="navigation">
-		
+		<center><h1>ADD ACCOUNTABILITY</h1></center>
 	  <ul>
 			<li><a href="accountingAddAccountabilitySearch.php?search_option=&search_query=">Add Accountability</a></li>
 			<li><a href="viewClearedAccounts.php">View Already Cleared</a></li>
@@ -35,7 +46,7 @@
 ?>
 
 
-<form action="addAccountability.php?student_number=<?php echo $student_number; ?>" method="post">
+<form action="addAccountability.php?student_number=<?php echo $student_number; ?>" method="post" name="accountingform">
 	<td>Accountability:</td>
 		<td>
 		<select name="accountability_type">
@@ -64,6 +75,7 @@
 	<tr>
 		<td>Semester Incurred:</td>
 		<td><select name="semester_incurred">
+		<option value="0">summer</option>
 		<option value="1">first semester</option>
 		<option value="2">second semester</option>
 		<option value="3">first trimester</option>
@@ -80,6 +92,19 @@
 	</tr>
 	</table>
 </form>
+
+<script language="JavaScript" type="text/javascript">
+
+    var frmvalidator  = new Validator("accountingform");
+    
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("amount_due","req","Amount Due required.");
+    frmvalidator.addValidation("details","req","Details required.");
+    frmvalidator.addValidation("amount_due","num","Amount Due should be numbers.");
+   
+  </script>
+
 </div>
 </body>
 </html>

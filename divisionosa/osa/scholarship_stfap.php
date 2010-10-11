@@ -1,11 +1,19 @@
 <?php
 	require_once '../cssandstuff/dbconnect.php';
-	function add_approved_scholarship($a1,$a2,$a3)
+	function add_approved_scholarship($a2,$a3)
 	{
 		$q = mysql_query("insert into scholarship
 							(scholarship_id,scholarship_name,amount_shouldered)
-							values ('$a1','$a2','$a3')");
+							values ('','$a2','$a3')");
 		if(!$q) die('Cannot add approved scholarship'.mysql_error());
+	}
+	
+	function employee_student_scholarship($scholarship_id,$student_number,$employee_id)
+	{
+		$q = mysql_query("insert into scholars
+							(scholarship_id,student_number,set_by)
+							values ('$scholarship_id','$student_number','$employee_id')");
+		if(!$q) die('Cannot addd set by employee. '.mysql_error());
 	}
 	
 	function retrieve_scholarship_information($a1)
@@ -42,7 +50,7 @@
 	
 	function print_table_search_scholarship($a)
 	{
-		$i=0;
+		$i=1;
 		while($row = mysql_fetch_array($a))
 		{
 			echo '<form action=process_osa.php method=post><tr>';
@@ -55,14 +63,32 @@
 			}
 			echo '<input type=hidden name=scholarship_id value='.$row[0].'>';
 			echo '<td><input type=submit name=osa value=Edit></td>';
-			$i=0;
+			$i=1;
+			echo "</tr></form>";
+		}
+	}
+	
+	function print_table_view_scholarship($a)
+	{
+		$i=1;
+		while($row = mysql_fetch_array($a))
+		{
+			echo '<form action=process_osa.php method=post><tr>';
+			while($i<3)
+			{
+				echo '<td>';
+				echo $row[$i];
+				$i++;
+				echo '</td>';
+			}
+			$i=1;
 			echo "</tr></form>";
 		}
 	}
 	
 	function print_table_remove_scholarship($a)
 	{
-		$i=0;
+		$i=1;
 		while($row = mysql_fetch_array($a))
 		{
 			echo '<form action=process_osa.php method=post><tr>';
@@ -75,19 +101,37 @@
 			}
 			echo '<input type=hidden name=scholarship_id value='.$row[0].'>';
 			echo '<td><input type=submit name=osa value=Remove></td>';
-			$i=0;
+			$i=1;
 			echo "</tr></form>";
 		}
 	}
 	
-	function edit_scholarship_info($a1,$a2,$a3,$sid)
+	function edit_scholarship_info($a2,$a3,$sid)
 	{
 		$q = mysql_query("update scholarship set 
-						scholarship_id='$a1',
 						scholarship_name='$a2',
 						amount_shouldered='$a3'
 						where scholarship_id='$sid'");
 		if(!$q) die('Cannot edit scholarship info'.mysql_error());
+	}
+	/*
+	update student a, scholars b set 
+							a.scholarship_id='12',
+							b.scholarship_id='12',
+							b.set_by='8'
+							where a.student_number='200700001'
+							and b.student_number='200700001'*/
+							
+	function update_employee_student_scholarship($scholarship_id,$student_number,$employee_id)
+	{
+		$q = mysql_query("update student a, scholars b set 
+							a.scholarship_id='$scholarship_id',
+							b.scholarship_id='$scholarship_id',
+							b.set_by='$employee_id'
+							where a.student_number='$student_number'
+							and b.student_number='$student_number'
+							");
+		if(!$q) die('Cannot update employee student scholarship. '.mysql_error());
 	}
 
 	function remove_scholarship($a1)
@@ -187,6 +231,12 @@
 						scholarship_id='0'
 						where student_number='$a1'");
 		if(!$q) die('Cannot Remove student Scholarship'.mysql_error());
+	}
+	
+	function delete_employee_scholarship($student_number)
+	{
+		$q = mysql_query("delete from scholars where student_number='$student_number'");
+		if(!$q) die('Cannot delete scholars. '.mysql_error());
 	}
 	
 	function search_name($employee_id)

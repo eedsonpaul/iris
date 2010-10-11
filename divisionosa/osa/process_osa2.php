@@ -11,6 +11,11 @@ if(isset($_REQUEST['remove']))
 		case 'Go':
 		if(isset($_POST['snum']))
 			{
+				if($_POST['snum']=='')
+				{
+					require_once 'remove_student_scholarship.php';
+				}
+				else
 				require_once 'remove_student_scholarship_list.php';
 			}
 		break;
@@ -30,6 +35,7 @@ if(isset($_REQUEST['remove']))
 			if(isset($_POST['student_number']))
 			{
 				remove_student_scholarship($_POST['student_number']);
+				delete_employee_scholarship($_POST['student_number']);
 				print('Student '.$_POST['student_number'].' scholarship has been removed');
 			}
 		break;

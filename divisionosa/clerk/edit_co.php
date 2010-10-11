@@ -1,5 +1,5 @@
 <?php require_once 'header.php' ?>
-<h1 align="center">Edit Class Offering</h1>
+<h1 align="center">Edit Section</h1>
 <h5 align="center">Key in the Course Code</h5>
 <table align="center">
 <form action="process.php" method="post">
@@ -24,4 +24,5 @@
 	</tr>
 </form>
 </table>
-<?php require_once 'footer.php' ?>
+<br/><br/>
+<?php require_once '../../admin_footer.php' ?>

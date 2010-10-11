@@ -14,7 +14,11 @@
 			$query = "SELECT * from accountability WHERE accountability_status = 'pending'";
 			$resu = mysql_query($query);
 			$count = 0;
-
+			$stud_name = " ";
+			$last_name = " ";
+			$first_name = " ";
+			$middle_name = " ";
+			
 			//show students with pending accountabilities
 			while($row = mysql_fetch_array($resu)) {
 				$stud_num = $row['student_number'];
@@ -24,14 +28,21 @@
 				$year = $row['year_incurred'];
 				$date = $row['date_added'];
 				$acctype_id = $row['accountability_type_id'];
+				$acc_id = $row['accountability_id'];
 				
 				//query student's last name, first name, and middle name
 				$res = "SELECT last_name, first_name, middle_name FROM student WHERE student_number='$stud_num'";
 				$data = mysql_query($res);
 				while($row = mysql_fetch_array($data)) {
-					$stud_name = $row['last_name'] . ', ' . $row['first_name'] . ' ' . strtoupper($row['middle_name'][0].'.');
+					$last_name = $row['last_name'];
+					$first_name = $row['first_name'];
+					$middle_name = $row['middle_name'];
 				}
-
+				if ($middle_name==NULL){
+					$stud_name = $last_name.', '.$first_name;
+				} else {
+					$stud_name = $last_name.', '.$first_name.' '.$middle_name[0].'.';
+				}
 				//query the type of accountability
 				$result = "SELECT accountability_type FROM accountability_type WHERE accountability_type_id ='$acctype_id'";
 				$datum = mysql_query($result);
@@ -57,8 +68,8 @@
         			
 				//if accountability is from the CSO, put edit and clear links beside the name
 				if($acctype_id == 5 || $acctype_id == 6) {
-				echo "<td><div align=center><a href='cso_add_student_accountability.php?action=EDIT&id=".$stud_num."&acct=".$acctype_id."'>EDIT</a> | 
-					<a href='cso_clear_accountability.php?id=".$stud_num."&acct=".$acctype_id."'>CLEAR</div></td>";
+				echo "<td><div align=center><a href='cso_add_student_accountability.php?action=EDIT&id=".$stud_num."&acct=".$acc_id."'>EDIT</a> | 
+					<a href='cso_clear_accountability.php?id=".$stud_num."&acct=".$acc_id."'>CLEAR</div></td>";
 				}
 				else {echo "<td><div align=center>N/A</div></td>";
       				echo "</tr>";
@@ -72,23 +83,19 @@
 		}
 
 		//Function to clear accountability
-		function clearAccountability($student_num, $acc_type_id) {
+		function clearAccountability($student_num, $acc_id) {
 
 			//clear accountability
 			$date_cleared = (int)date('yyyymmdd');
 			$sql = "UPDATE accountability SET
 				accountability_status = 'cleared',
 				date_cleared = '$date_cleared'
-				WHERE student_number = $student_num && accountability_type_id = $acc_type_id";
+				WHERE student_number = $student_num && accountability_id = $acc_id";
 			
 			//mysql_query($sql);
-			
-			$result = mysql_query("SELECT accountability_type FROM accountability_type WHERE accountability_type_id ='$acc_type_id'");
-			$datum = mysql_fetch_array($result);
-			$accountability = $datum['accountability_type'];
 
 			if(isset($sql) && !empty($sql)) {
-				echo "<script> alert('Student accountability $accountability cleared.'); window.location.href = 
+				echo "<script> alert('Student accountability cleared.'); window.location.href = 
 					'cso_students_accountabilities_module.php?action=NA';</script>";
 				$result = mysql_query($sql);
 			}
@@ -187,10 +194,10 @@
 			}
 			
 			if($count==0) {
-				echo "<tr><center>NO RECORD FOUND!</center></tr>";
+				echo "<tr><td colspan=7><center>NO RECORD FOUND!</center></td></tr>";
 			}
 			} else if($search=="") {
-				echo "<center>Please Enter a Search Name.</center><br>";
+				echo "<tr><td colspan=7><center>Please Enter a Search Name.</center><br></td></tr>";
 			}
 		}
 
@@ -199,7 +206,7 @@
 			session_start();
 			$accountability = $_POST['accountability'];
 			$details = $_POST['accountability_details'];
-			$due = $_POST['amount_due'];
+			//$due = $_POST['amount_due'];
 			$ay_incurred = $_POST['academic_year_incurred'];
 			$sem = $_POST['semester_incurred'];
 			$exact_date = $_POST['exact_date_incurred'];
@@ -207,7 +214,6 @@
 			$sql = "UPDATE accountability SET
 				 accountability_type_id = '$accountability', 
 				 details = '$details', 
-				 amount_due = '$due', 
 				 year_incurred = '$ay_incurred', 
 				 semester_incurred = '$sem', 
 				 date_added = '$exact_date',

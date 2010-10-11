@@ -57,10 +57,9 @@
 -->
 	<table width="703" border="0" cellpadding="0" cellspacing="0">
 		<tr>
-			<td width="275" class="normaltext"><p align="left"><strong>Legend:</strong><br />
+			<td width="300" class="normaltext"><p align="left"><strong>Legend:</strong><br />
               <strong>A</strong> = Available<br />
               <strong>S</strong> = Slots Alloted<br />
-              <strong>PE</strong> = Count of Pre-enlisted Students<br />
               <strong>C</strong> = Count of Confirmed Students<br />
               <strong>E</strong> = Count of Officially Enrolled Students<br />
               <strong>W </strong>= Count of Waitlisted Students</p></td>
