@@ -11,7 +11,7 @@
 		
 	  <ul>
 			<li><a href="accountingAddAccountabilitySearch.php?search_option=&search_query=">Add Accountability</a></li>
-			<li><a href="viewClearedAccounts.php">View Already Cleared</a></li>
+			<!--<li><a href="viewClearedAccounts.php">View Already Cleared</a></li>-->
             <li><a href="generateSLB.php">Generate Student Accountabilities</a></li>
 			<li><a href="accountingSAM.php">Return</a></li>
 		</ul>

@@ -112,6 +112,19 @@
             <br /><a href="cso_edit_class_restrictions_search.php">Edit Class Restrictions</a></td>
         </tr>
       </form>
+<script language="JavaScript" type="text/javascript">
+
+    var frmvalidator  = new Validator("csoform");
+	var frmsvalidator  = new Validator("formcso");
+    
+    frmvalidator.EnableMsgsTogether();
+	frmsvalidator.EnableMsgsTogether();
+	
+	frmsvalidator.addValidation("id","req","Student Number required.");
+    frmvalidator.addValidation("id","req","Student Number required.");
+
+	
+  </script>
     </table>
 <p>
       <center>

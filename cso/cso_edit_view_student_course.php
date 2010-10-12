@@ -52,42 +52,6 @@
 		$count++;
 	}
 	
-	$degree_program_ID = "";
-	$query = "SELECT * from students_degree WHERE student_number = '$student_ID'";
-	$result = mysql_query($query);
-	while ($row = mysql_fetch_array($result)) {
-		extract($row);
-		$degree_program_ID = $degree_program_id;
-		extract($row);
-		$entry_ay = $entry_academic_year;
-		extract($row);
-		$entry_sem = $entry_semester;
-		extract($row);
-		$encoded = $last_updated_by;
-		
-		$res = mysql_query("SELECT last_name, first_name, middle_name, designation_id, unit_id FROM employee WHERE employee_id='$encoded'");
-		$data = mysql_fetch_array($res);
-		$employee = $data['last_name'] . ', ' . $data['first_name'] . ' ' . $data['middle_name'];
-	}
-	$length=strlen($entry_ay);
-	$start_ay = substr($entry_ay, 0, 4);
-	$end_ay = substr($entry_ay, 4, $length-4);
-	$ay = $start_ay." - ".$end_ay;
-	
-	$query = "SELECT * from degree_program WHERE degree_program_id = '$degree_program_ID'";
-	$result = mysql_query($query);
-	while ($row = mysql_fetch_array($result)) {
-		extract($row);
-		$prog_name = $degree_name;
-	}
-	
-	$query = "SELECT * from semester WHERE semester_id = '$entry_sem'";
-	$result = mysql_query($query);
-	while ($row = mysql_fetch_array($result)) {
-		extract($row);
-		$sem = $semester_type;
-	}
-	
 	if($count==0){
 		echo "<script> alert('Student number does not exist. Please input another student number.'); window.location.href = 'cso_change_students_degree_program.php';</script>";
 	} else {
@@ -115,18 +79,54 @@
       <th width="46"><div align="center"><b>Action</b></div></td>
     </tr>
 <?php
+	$degree_program_ID = "";
+	$query = "SELECT * from students_degree WHERE student_number = '$student_ID'";
+	$result = mysql_query($query);
+	while ($row = mysql_fetch_array($result)) {
+		extract($row);
+		$degree_program_ID = $degree_program_id;
+		extract($row);
+		$entry_ay = $entry_academic_year;
+		extract($row);
+		$entry_sem = $entry_semester;
+		extract($row);
+		$encoded = $last_updated_by;
+		
+		$res = mysql_query("SELECT last_name, first_name, middle_name, designation_id, unit_id FROM employee WHERE employee_id='$encoded'");
+		$data = mysql_fetch_array($res);
+		$employee = $data['last_name'] . ', ' . $data['first_name'] . ' ' . $data['middle_name'];
+	
+	$length=strlen($entry_ay);
+	$start_ay = substr($entry_ay, 0, 4);
+	$end_ay = substr($entry_ay, 4, $length-4);
+	$enday = $entry_ay+1;
+	$ay = $start_ay." - ".$enday;
+	
+	$query1 = "SELECT * from degree_program WHERE degree_program_id = '$degree_program_ID'";
+	$result1 = mysql_query($query1);
+	while ($row = mysql_fetch_array($result1)) {
+		extract($row);
+		$prog_name = $degree_name;
+	}
+	
+	$query2 = "SELECT * from semester WHERE semester_id = '$entry_sem'";
+	$result2 = mysql_query($query2);
+	while ($row = mysql_fetch_array($result2)) {
+		extract($row);
+		$sem = $semester_type;
+	}
 	if($prog_name!="") {
 ?>
     <tr>
       <td><div align="center"><?php echo $prog_name;?></div></td>
-      <td><div align="center"><?php echo 'UNIT';?></div></td>
+      <td><div align="center"><?php echo 'UP Cebu College';?></div></td>
       <td><div align="center"><?php echo $ay?></div></td>
       <td><div align="center"><?php echo $sem;?></div></td>
       <td><div align="center"><?php echo $employee;?></div></td>
       <td><div align="center"><a href="cso_process_delete_student_course.php?id=<?php echo $student_ID;?>">DELETE</a></div></td>
     </tr>
 <?php
-	} else {
+	}	else {
 ?>
     <tr>
       <td><div align="center"></div></td>
@@ -136,7 +136,8 @@
       <td><div align="center"></div></td>
       <td><div align="center"></div></td>
     </tr>
-<?php } 
+<?php }
+} 
 ?>
   </table>
   <table width="650" border="0" align="center">
@@ -152,6 +153,14 @@
 	while ($row = mysql_fetch_array($result)) {
 			$last_name = $row['last_name'];
 			$first_name = $row['first_name'];
+			$acad_year = $row['entry_academic_year'];
+			$enter_sem = $row['entry_semester'];
+	}
+	
+	$query1 = "SELECT * from semester WHERE semester_id = '$enter_sem'";
+	$result1 = mysql_query($query1);
+	while ($row = mysql_fetch_array($result1)) {
+			$enter_sems = $row['semester_type'];
 	}
 			
 	?>
@@ -174,7 +183,7 @@
         <td><?php 
 			if($edit=="NO") { 
 			$degree_program_ID = "";
-			$query = "SELECT * from students_degree WHERE student_number = '$student_ID'";
+			$query = "SELECT * from student WHERE student_number = '$student_ID'";
 			$result = mysql_query($query);
 			while ($row = mysql_fetch_array($result)) {
 				extract($row);
@@ -215,7 +224,7 @@
       <tr>
         <td><div align="right">Start A.Y:</div></td>
         <td>&nbsp;</td>
-        <td><input type="text" name="start_ay" id="start_ay" value="<?php echo $entry_ay;?>"> 
+        <td><input type="text" name="start_ay" id="start_ay" value="<?php echo $acad_year;?>"> 
           (yyyy)</td>
       </tr>
       <tr>
@@ -224,18 +233,18 @@
         <td>
 		<?php 
 			if($edit=="NO") { 
-			?><input type="text" name="start_semester" id="start_semester" value="<?php echo $sem?>" readonly>
+			?><input type="text" name="start_semester" id="start_semester" value="<?php echo $enter_sems?>" readonly>
 			<?php } else if($edit=="YES"){?> 
           <label>
           <select name="start_semester" id="start_semester">
            <?php 
-		   $query = "SELECT * from semester WHERE semester_id = '$entry_sem'";
+		   $query = "SELECT * from semester WHERE semester_id = '$enter_sem'";
 			$result = mysql_query($query);
 			while ($row = mysql_fetch_array($result)) {
 				extract($row);
 				echo "<option value='$semester_id' selected>$semester_type</option>";
 			}
-		   	$query = "SELECT * from semester WHERE semester_id != '$entry_sem'";
+		   	$query = "SELECT * from semester WHERE semester_id != '$enter_sem'";
 			$result = mysql_query($query);
 			while ($row = mysql_fetch_array($result)) {
 				extract($row);

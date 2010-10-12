@@ -1,5 +1,6 @@
 <?php 
   session_start();
+  include("cso_functions.php");
   //require_once 'cso_header.php';
   require_once '../admin_db_connect.php';
   require_once '../admin_http.php';
@@ -184,8 +185,8 @@
         <?php
 			include("connect_to_database.php");
 			$count = 1;
-			//$semester = $_SESSION['current_semester'];
-			//$academic_year = $_SESSION['current_year'];
+			$semester = $_SESSION['sem'];
+			$academic_year = $_SESSION['ay'];
 			$ay = "";
 			$sem = "";
 			$standing = "";
@@ -195,56 +196,54 @@
 			$grades = 0;
 			$units = 0;
 			$unit = 0;
-			$query = "SELECT * FROM grade WHERE student_number = '$stud_num' order by academic_year";
-			$result = mysql_query($query);
-			while($grade = mysql_fetch_array($result)) {
-				$ay = $grade['academic_year'];
-				$sem = $grade['semester'];
-				$standing = $grade['remarks'];
-				$igrade = $grade['initial_grade'];
-				$cgrade = $grade['completion_grade'];
-				$course = $grade['course_code'];
+			$index = 0;
+			$c = 1;
+			$cc = 0;
+			$prev_ay = "";
+			$prev_sem = "";
+			$bleh = 0;
+			$que = "SELECT academic_year, semester FROM grade WHERE student_number = '$stud_num' order by academic_year";
+			$resu = mysql_query($que);
+			/*while( $row = mysql_fetch_array($resu)) {
+				$bleh++;
+			}
+			
+			echo "<script> alert('$bleh'); </script>";*/
 				
-				$query = "SELECT * FROM semester WHERE semester_id = '$sem'";
-				$result = mysql_query($query);
-				while($sems = mysql_fetch_array($result)) {
-					$semname = $sems['semester_type'];
-				}
-				$query = "SELECT * FROM subject WHERE course_code = '$course'";
-				$result = mysql_query($query);
-				while($unitz = mysql_fetch_array($result)) {
-					$unit = $unitz['units'];
-				}
-				if ($grades<=3) {
-					$standing = "Good Standing";
-					$_SESSION['prev_standing'] = $standing;
-					$sql = "UPDATE student SET
-								academic_standing = '$standing'";
-					mysql_query($sql);
-				} else if ($grades>3 && $grades<=5) {
-					$standing = academicStanding($stud_num, $sem, $ay, $units, $_SESSION['access_level_id']);
-				}
+		
+			while( $row = mysql_fetch_array($resu)) {
+				$ayz = $row['academic_year'];
+				$semzz = $row['semester'];
+				if($prev_ay != $ayz || $prev_sem != $semzz) {
 				
-				if ($cgrade==0) {
-					$grade = $igrade * $unit;
-				} else if($igrade==4){
-					$grade = ($cgrade*$unit) + ($igrade*$unit);
-				} else {
-					$grade = $cgrade*$unit;
-				}
+					$query1 = "SELECT * FROM semester WHERE semester_id = '$semzz'";
+					$result1 = mysql_query($query1);
+					while($sems = mysql_fetch_array($result1)) {
+						$semname = $sems['semester_type'];
+					}
 
+					$grades = getGWA($stud_num,$ayz, $semzz);
+					$_SESSION['prev_standing'] = $standing;
+					$standing = getClassStanding($stud_num,$ayz, $semzz);
+				
 		?>
 			<tr>
 			  <td><center><?php echo $count;?>.</center></td>
-				<td><div align="center"><?php echo $start = ($ay-1).' - '.$ay;?></div></td>
+				<td><div align="center"><?php echo $start = ($ayz-1).' - '.$ayz;?></div></td>
 				<td><div align="center"><?php echo $semname;?></div></td>
 				<td><div align="center"><?php if($count==1){ echo 'N/A'; } else { echo $_SESSION['prev_standing'];}?></div></td>
 				<td><div align="center"><?php echo $standing;?></div></td>
-				<td><div align="center"><?php echo number_format(($grades = (($grades * $units) + $grade)/($units = $units + $unit)), 2, '.', '');?></div></td>
-				<td><div align="center"><a href="cso_view_student_grade_ind.php?id=<?php echo $stud_num;?>&sem=<?php echo $sem;?>&ay=<?php echo $ay;?>">VIEW</a></div></td>
+				<td><div align="center"><?php echo number_format($grades, 2, '.', '');?></div></td>
+				<td><div align="center"><a href="cso_view_student_grade_ind.php?id=<?php echo $stud_num;?>&sem=<?php echo $semzz;?>&ay=<?php echo $ayz;?>">VIEW</a></div></td>
 			</tr>
-		<?php $count++;
-		} ?>
+		<?php 	 
+				$count++;
+				}
+				$prev_ay = $ayz;
+				$prev_sem = $semzz;
+
+				}		
+		?>
 		</table>
     <p>
       <center>

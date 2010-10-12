@@ -1,23 +1,21 @@
-<html>
-<head>
-
-  <title>Admin Panel | UP Cebu IRIS </title>
-
-</head>
-</html>
+<title>Admin Panel | UP Cebu IRIS </title>
 
 <?php
 require_once 'admin_db_connect.php';
 require_once 'admin_header.php';
 require_once 'admin_http.php';
 require_once 'admin_sql_query.php';
+
+if ($_SESSION['access_level_id'] != 3)  {
+  redirect('error.php');
+}
 ?>
 
 <div class="main">
 
   <div id="for_admin">
     <div id="admin_nav" class="left">
-        <a href="index.php?action=Logs"><span class="left">&larr;Back</span></a>
+        <a href="javascript:history.back(-1);"><span class="left">&larr;Back</span></a>
     </div>
 
     <div id="admin_nav" class="right">
@@ -53,6 +51,7 @@ require_once 'admin_sql_query.php';
               <li><a href="admin_panel.php?v=set_acadyear">Set Academic Year/Semester</a></li>
               <li><a href="admin_panel.php?v=reset">Reset System</a></li>
               <li><a href="admin_panel.php?v=backup">Backup Database</a></li>
+              <li><a href="tracker.txt" target="_new">View Logs &raquo;</a></li>
             </ul>
         </li>
       </ul>
@@ -60,7 +59,7 @@ require_once 'admin_sql_query.php';
     </td>
   </table>
 
-  <div id="contentcolumn">
+  <div id="panel">
 
   <?php
   if (isset($_REQUEST['v'])) {
@@ -91,7 +90,7 @@ require_once 'admin_sql_query.php';
     $id = $user['employee_id'];
   ?>
     <form method="post" action= "admin_transact_user.php" name="adminform">
-      <TABLE class="table_edit4" width="90%">
+      <TABLE class="table_edit6" width="90%">
         <tr style="background: gray;">
           <td colspan=2>
           <center><h2>Edit Login Account</h2></center>
@@ -648,9 +647,9 @@ require_once 'admin_sql_query.php';
     frmvalidator.addValidation("last_name","req","Please enter Last Name.");
     frmvalidator.addValidation("birthdate","req","Please enter Birthdate.");
     frmvalidator.addValidation("contact_number","req","Please enter Contact Number.");
-    frmvalidator.addValidation("first_name","alpha","First Name contains invalid characters.");
-    frmvalidator.addValidation("middle_name","alpha","Middle Name contains invalid characters.");
-    frmvalidator.addValidation("last_name","alpha","Last Name contains invalid characters.");
+    frmvalidator.addValidation("first_name","alpha_s","First Name contains invalid characters.");
+    frmvalidator.addValidation("middle_name","alpha_s","Middle Name contains invalid characters.");
+    frmvalidator.addValidation("last_name","alpha_s","Last Name contains invalid characters.");
 
     frmvalidator.addValidation("birthdate","num","Birthdate contains invalid characters.");
     frmvalidator.addValidation("contact_number","num","Contact Number contains invalid characters.");	

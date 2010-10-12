@@ -18,7 +18,7 @@
 		<center><h1>ADD ACCOUNTABILITY</h1></center>
 	  <ul>
 			<li><a href="accountingAddAccountabilitySearch.php?search_option=&search_query=">Add Accountability</a></li>
-			<li><a href="viewClearedAccounts.php">View Already Cleared</a></li>
+			<!--<li><a href="viewClearedAccounts.php">View Already Cleared</a></li>-->
             <li><a href="generateSLB.php">Generate Student Accountabilities</a></li>
 			<li><a href="accounting.php">Return</a></li>
 		</ul>
@@ -67,8 +67,8 @@
 		<td>Academic Year Incurred:</td>
 		<td>
 		<select name="year_incurred">
-		<option value="2009">2009-2010</option>
 		<option value="2010">2010-2011</option>
+		<option value="2011">2011-2012</option>
 		</select>
 		</td>
 	</tr>

@@ -1,8 +1,10 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+?>
 <html>
 <head>
   <?php if (isset($_SESSION['employee_id']))
-        /*and  isset($_SESSION['access_level_id']) == 3)*/ { ?>
+       /* and  ($_SESSION['access_level_id']) == 3)*/ { ?>
     <title>Admin | UP Cebu IRIS</title>
   <?php } else { ?>
     <title>Welcome to UP Cebu IRIS!</title>
@@ -33,7 +35,38 @@
 		  oStringMask.attach(document.loginform.contact_number);
 		
 	  }
+
+  function confirmation(id, lvl) {
+	  var answer = confirm("Are you sure you want to delete this account?");
+	  if (answer) {
+	    if(lvl == 3) {
+        window.location.href='admin_transact_user.php?admindelete='+id;
+      } 
+      else if(lvl == 2) {
+        window.location.href='admin_transact_user.php?divdelete='+id;
+      }
+      else if(lvl == 4) {
+        window.location.href='admin_transact_user.php?acctgdelete='+id;
+      }
+      else if(lvl == 5) {
+        window.location.href='admin_transact_user.php?libdelete='+id;
+      }
+      else if(lvl == 6) {
+        window.location.href='admin_transact_user.php?cashierdelete='+id;
+      }
+      else if(lvl == 7) {
+        window.location.href='admin_transact_user.php?csodelete='+id;
+      }
+      else if(lvl == 8) {
+        window.location.href='admin_transact_user.php?osadelete='+id;
+      }
+      else if(lvl == 9) {
+        window.location.href='admin_transact_user.php?clerkdelete='+id;
+      }
+    }
+  }
   </script>
+
 </head>
 
 <body onLoad="init();">

@@ -55,6 +55,16 @@
       </center>
     </p>
   </form>
+  <script language="JavaScript" type="text/javascript">
+
+    var frmvalidator  = new Validator("csoform");
+    
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("student_id","req","Student Number required.");
+
+	
+  </script>
   <p>&nbsp;</p>
 </div>
 

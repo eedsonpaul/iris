@@ -94,21 +94,16 @@ class Accountability{
 			$check_assessment = "SELECT * from assessment where student_number=$student_number and assessment_status='assessed' or assessment_status='paid';";
 			$result_check_assessment = mysql_query($check_assessment);
 			
-			if(($num2 == 0)&&(mysql_numrows($isAccountable)==0)&&($num ==0)){ //if dili pa siya assessed or naa siya accountability or if dili pa paid sa student_status
-					echo "<div align=\"center\"><font color=\"gray\"><b><i>The student has not enrolled in any subject.</font></i></b></div>";
-					echo "<a href=\"cashier.php\"><input type=\"submit\" value=\"Back\" /></a></td>";
-			}
-			else{
 				if(mysql_numrows($isAccountable)!=0){
 					echo "Unable to process request. Please clear accountabilities first.<br><br>";
 					echo "<a href=\"cashier.php\"><input type=\"submit\" value=\"Back\" /></a></td>";
 					
 				}
-				else if(mysql_numrows($result_check_assessment)==0){
+				else if(((mysql_numrows($result_check_assessment)==0)||(mysql_numrows($result)==0))&&(mysql_numrows($isPaid)==0)){
 					echo "Unable to process request. Please go to your adviser for your assessment.<br><br>";
 					echo "<a href=\"cashier.php\"><input type=\"submit\" value=\"Back\" /></a></td>";
-					
 				}
+
 				else{
 					//student fund start
 					$community_chest = mysql_result($result_assessment,0,"community_chest");
@@ -445,7 +440,7 @@ class Accountability{
 								echo "<td><font size='1'><input type=\"text\" name=\"official_receipt_number\"/></font></td>";
 								echo "<td><font size='1'>Amount:</font></td>";
 								echo "<td><font size='1'><input type=\"text\" name=\"amount_paid\"/></font></td>";
-								echo "<td><font size='1'><input type=\"submit\" value=\"Enroll\" /></font></td>";
+								echo "<td><font size='1'><input type=\"submit\" value=\"Save\" /></font></td>";
 								echo "</tr>";
 								echo "</table>";
 							}
@@ -458,7 +453,7 @@ class Accountability{
 						echo "</table>";
 					}
 				}
-			}	
+			
 		}
 	}
 		
@@ -668,28 +663,30 @@ class Accountability{
 			$id = $_POST['id'];
 			$date_paid = date('Ymd');
 			$date_cleared = date('Ymd');
+			$employee_id = $_SESSION['employee_id'];
 			
 			$query_current = "SELECT * FROM current_semester_id";
 			$result_current = mysql_query($query_current);
 			$current_id_minus_one = mysql_numrows($result_current);
 			$current_id = $current_id_minus_one - 1;			
 			$semester_id = mysql_result($result_current,$current_id,"semester_id");
-			
+			$academic_year = mysql_result($result_current,$current_id,"academic_year");
+						
 			//store in database
 			$query_amount_due = "SELECT * FROM accountability WHERE accountability_id = $id;";
 			$result_amount_due = mysql_query($query_amount_due);
 			$amount_due = mysql_result($result_amount_due, 0, "amount_due");
 			if($amount_paid != $amount_due || !is_numeric($official_receipt_number)){
-			header("Location: cashierClearSLB.php?id=$id");
+				header("Location: cashierClearSLB.php?id=$id");
 			}
 			else{
-				$add = "INSERT INTO payment VALUES ('$official_receipt_number','$amount_paid', '$date_paid', $semester_id, '$student_number');";
+				$add = "INSERT INTO payment VALUES ('$official_receipt_number',$employee_id, '$amount_paid', '$date_paid', $id, $semester_id, $academic_year);";
 				$addOR= mysql_query($add);
 				$update = "UPDATE accountability SET accountability_status='cleared', date_cleared = $date_cleared Where accountability_id=$id;";
 				mysql_query($update);
 				$delete = "DELETE FROM slb WHERE student_number=$student_number;";
 				mysql_query($delete);
-				header("Location:cashier.php");
+				header("Location: cashierClearSLB.php?id=$id");
 			}
 	}
 	
@@ -777,20 +774,21 @@ class Accountability{
 			$current_id_minus_one = mysql_numrows($result_current);
 			$current_id = $current_id_minus_one - 1;			
 			$semester_id = mysql_result($result_current,$current_id,"semester_id");
+			$academic_year = mysql_result($result_current,$current_id,"academic_year");
 			
 			//store in database
 			$query_amount_due = "SELECT * FROM accountability WHERE accountability_id = $id;";
 			$result_amount_due = mysql_query($query_amount_due);
 			$amount_due = mysql_result($result_amount_due, 0, "amount_due");
 			if($amount_paid != $amount_due || !is_numeric($official_receipt_number)){
-			header("Location: cashierClearSLB.php?id=$id");
+				header("Location: cashierClearScholarship.php?id=$id");
 			}
 			else{
-				$add = "INSERT INTO payment VALUES ('$official_receipt_number','$amount_paid', '$date_paid', $semester_id, '$student_number');";
+				$add = "INSERT INTO payment VALUES ('$official_receipt_number',$employee_id, '$amount_paid', '$date_paid', $id, $semester_id, $academic_year);";
 				$addOR= mysql_query($add);
 				$update = "UPDATE accountability SET accountability_status='cleared', date_cleared = $date_cleared Where accountability_id=$id;";
 				mysql_query($update);
-				header("Location:cashierSAM.php");
+				header("Location: cashierClearScholarship.php?id=$id");
 			}
 	}
 	
@@ -878,20 +876,21 @@ class Accountability{
 			$current_id_minus_one = mysql_numrows($result_current);
 			$current_id = $current_id_minus_one - 1;			
 			$semester_id = mysql_result($result_current,$current_id,"semester_id");
-			
+			$academic_year = mysql_result($result_current,$current_id,"academic_year");
+		
 			//store in database
 			$query_amount_due = "SELECT * FROM accountability WHERE accountability_id = $id;";
 			$result_amount_due = mysql_query($query_amount_due);
 			$amount_due = mysql_result($result_amount_due, 0, "amount_due");
 			if($amount_paid != $amount_due || !is_numeric($official_receipt_number)){
-			header("Location: cashierClearOthers.php?id=$id");
+				header("Location: cashierClearOthers.php?id=$id");
 			}
 			else{
-				$add = "INSERT INTO payment VALUES ('$official_receipt_number','$amount_paid', '$date_paid', $semester_id, '$student_number');";
+				$add = "INSERT INTO payment VALUES ('$official_receipt_number',$employee_id, '$amount_paid', '$date_paid', $id, $semester_id, $academic_year);";
 				$addOR= mysql_query($add);
 				$update = "UPDATE accountability SET accountability_status='cleared', date_cleared = $date_cleared Where accountability_id=$id;";
 				mysql_query($update);
-				header("Location:cashierSAM.php");
+				header("Location: cashierClearOthers.php?id=$id");
 			}
 	}
 }

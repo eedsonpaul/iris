@@ -3,7 +3,7 @@
   .style1 {color: #660000}
   .style2 {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: xx-small;
+    font-size: normal;
   }
   </style> 
 
@@ -117,7 +117,7 @@
               <td valign="top" class="style2"><p align="right"></p></td>
             </tr>
           </table>
-            <table width="80%" class="printtableau" align="center">
+            <table width="30%" class="printtableau" align="center">
 
               <tr>
                 <td><table width="100%" class="printtableau" border="1" align="center">
@@ -128,53 +128,27 @@
                     <td width="10%" valign="middle" class="style2"><p align="center"><b>DAY</b></p></td>
                     <td width="18%" valign="middle" class="style2"><p align="center"><b>CEBU CITY</b></p></td>
 
-                    <td width="18%" valign="middle" class="style2"><p align="center"><b>TACLOBAN CITY</b></p></td>
-                    <td width="18%" valign="middle" class="style2"><p align="center"><b>MIAG-AO <br>
-                      (CAS)</b></p></td>
-                    <td width="18%" valign="middle" class="style2"><p align="center"><b>MIAG-AO <br>
-                      (CFOS,SoTech)</b></p></td>
-                    <td width="18%" valign="middle" class="style2"><p align="center"><b>ILOILO CITY</b></p></td>
-
                   </tr>
                   <tr>
                     <td valign="top" class="style2"><p align="center">1st</p></td>
                     <td valign="top" class="style2"><p align="right">4th yr & graduating</p></td>
-                    <td valign="top" class="style2"><p align="right">2007xxxxx and below</p></td>
-                    <td valign="top" class="style2"><p align="right">4th yr & graduating</p></td>
-
-                    <td valign="middle" class="style2" rowspan="5"><p align="center">Open for All</p></td>
-                    <td valign="top" class="style2"><p align="right">4th and 5th yr</p></td>
                   </tr>
                   <tr>
                     <td valign="top" class="style2"><p align="center">2nd</p></td>
                     <td valign="top" class="style2"><p align="right">2010xxxxx</p></td>
-                    <td valign="top" class="style2"><p align="right">2008xxxxx</p></td>
 
-                    <td valign="top" class="style2"><p align="right">2010xxxxx</p></td>
-                    <td valign="top" class="style2"><p align="right">2010xxxxx</p></td>
+
                   </tr>
                   <tr>
                     <td valign="top" class="style2"><p align="center">3rd</p></td>
                     <td valign="top" class="style2"><p align="right">2008xxxxx</p></td>
-                    <td valign="top" class="style2"><p align="right">2009xxxxx</p></td>
-
-                    <td valign="top" class="style2"><p align="right">2009xxxxx</p></td>
-                    <td valign="top" class="style2"><p align="right">2009xxxxx</p></td>
                   </tr>
                   <tr>
                     <td valign="top" class="style2"><p align="center">4th</p></td>
                     <td valign="top" class="style2"><p align="right">2009xxxxx</p></td>
-                    <td valign="top" class="style2"><p align="right">2010xxxxx</p></td>
-
-                    <td valign="top" class="style2"><p align="right">2008xxxxx</p></td>
-                    <td valign="top" class="style2"><p align="right">2008xxxxx</p></td>
                   </tr>
                   <tr>
                     <td valign="top" class="style2"><p align="center">5th-last day</p></td>
-                    <td valign="top" class="style2"><p align="right">for All</p></td>
-                    <td valign="top" class="style2"><p align="right">for All</p></td>
-
-                    <td valign="top" class="style2"><p align="right">for All</p></td>
                     <td valign="top" class="style2"><p align="right">for All</p></td>
                   </tr>
                 </table></td>

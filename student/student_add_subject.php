@@ -1,11 +1,11 @@
 <?php
-	require_once 'student_sub_header.php';
+	require_once '../student/student_sub_header.php';
     $student_number = $_SESSION['student_number'];	 
-require_once 'query_student.php';
-require_once 'function_subject.php';
-require_once 'function_student.php';
-require_once 'function_section.php';
-require_once 'function_section_schedule.php';
+require_once '../student/query_student.php';
+require_once '../student/function_subject.php';
+require_once '../student/function_student.php';
+require_once '../student/function_section.php';
+require_once '../student/function_section_schedule.php';
 
  
 	$course_code = $_GET['coursecode'];

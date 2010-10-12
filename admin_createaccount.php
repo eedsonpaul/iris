@@ -1,8 +1,4 @@
-<html>
-<head>
-  <title>Create Account | UP Cebu IRIS</title>
-</head>
-</html>
+<title>Create Account | UP Cebu IRIS</title>
 
 <?php
 require_once 'admin_http.php';
@@ -19,7 +15,7 @@ if ($_SESSION['access_level_id'] != 3)  {
 
   <div id="for_admin">
     <div id="admin_nav" class="left">
-      <a href="index.php?action=Logs"><span class="left">&larr;Back</span></a>
+      <a href="javascript:history.back(-1);"><span class="left">&larr;Back</span></a>
     </div>
 
     <div id="admin_nav" class="right">
@@ -71,7 +67,12 @@ if ($_SESSION['access_level_id'] != 3)  {
 
       <tr>
         <td class="login">Employee ID:<span class="ast">*</span>&nbsp;&nbsp;&nbsp;</td>
-        <td<input type="text" class="txtinput" name="employee_id" maxlength="100" size=25px></td>
+        <td<input type="text" class="txtinput" name="employee_id" maxlength="100" size=25px 
+        <?php /* if ($_POST['employee_id']) { ?>
+        value="<?php echo $_POST['employee_id']; ?>"        
+        <?php } */ ?> 
+        >
+        </td>
       </tr>
       <br/>
 
@@ -188,18 +189,23 @@ if ($_SESSION['access_level_id'] != 3)  {
       <input type="hidden" id="last_updated_by" name="last_updated_by"
         value="<?php  htmlspecialchars($_SESSION['username']) ?>">
 
-      <center>
       <tr>
-        <td>
+        <td colspan=2>
+        <br/>
+        </td>
+      </tr>
+      <tr>
+        <td colspan=2>
+        <center>
         <div id="button">
           <p>
             <input type="submit" class="submit" name="action" value="Create">
             <input type="reset" value="Clear">
           </p>
         </div>
+        </center>
         </td>
       </tr>
-      </center>    
       </TABLE>
     </form>
   </div>
@@ -223,6 +229,7 @@ if ($_SESSION['access_level_id'] != 3)  {
     frmvalidator.addValidation("last_name","alpha_s","Last Name: Characters only.");
     frmvalidator.addValidation("gender","dontselect=0","Please choose a Gender.");
     frmvalidator.addValidation("access_level","dontselect=0","Access Level required.");
+    frmvalidator.addValidation("citizenship", "alpha_s", "Citizenship stays as character.")
 
     /*
     frmvalidator.addValidation("email_address","req","Please enter Email Address.");

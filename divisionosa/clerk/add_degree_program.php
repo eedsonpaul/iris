@@ -12,6 +12,7 @@ require_once 'degree_functions.php';
 </script>
 	<h1 align=center>Add Degree Program</h1>
 	<?php
+		if(!(isset($_POST['error']))) $_POST['error']='';
 		echo '<h4 align=center>'.$_POST['error'].'</h4>';
 	?>
 	<table align=center class='tablestyle'>

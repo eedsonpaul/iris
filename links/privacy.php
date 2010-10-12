@@ -8,15 +8,41 @@
       font-family: Verdana, sans-serif; 
       font-size: 10px;
       color: maroon;
+      background: #e3ede7;
     }
     @import url("../css/admin.css");
+    
+    a {
+      font-size: 12px;
+      color: balck;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    #privacy_contents {
+      border-top: solid 2px black;
+      border-bottom: solid 2px black;
+      width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+      min-height: 500px;
+    }
   </style>
 </head>
 
 <body>
-  <div class="main">
+  <br/>
+  <center>
+    <a href="javascript:history.back(-1);">&laquo;Back</a> | 
+    <a href="../index.php">Home</a>
+  </center>
+  <br/><br/>
+  
+  <div id="privacy_contents">
   <h2>Privacy Policy Under Construction</h2>
-  <a href="javascript:history.back(-1);">&laquo;Back</a>
   </div>
 
 </body>

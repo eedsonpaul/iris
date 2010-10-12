@@ -12,7 +12,7 @@ class Accountability{
 			
 			$query = "Select * from student WHERE student_number = $student_number;";
 			$result = mysql_query($query);
-			if(mysql_numrows($result)==0){header("Location:error.php");}
+			if(mysql_numrows($result)==0){header("Location:error_l.php");}
 			else{
 				//store in database
 				$add = "INSERT INTO accountability VALUES ('', $accountability_type, $student_number, '$details', $amount_due, $year_incurred, $semester_incurred, $date_added, $employee_id, 'pending', '1');";

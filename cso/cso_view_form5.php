@@ -118,12 +118,12 @@
 			$degree_program = $row['degree_program'];
 			$scholarship_id = $row['scholarship_id'];
 			$reg_stat = $row['registration_stat'];
-			$grad_stat = $row['graduating'];
+			$graduating = $row['graduating'];
 	}
 	if($grad_stat==0) {
 		$graduating = "NO";
 	} else if($grad_stat==1) {
-		$graduating = "NO";
+		$graduating = "YES";
 	}
 	$query = new SqlQueries();
 	$result = $query->querysql("SELECT * from stfap WHERE stfap_bracket_id = '$stfap_id'");
@@ -203,7 +203,7 @@
 	while ($row = mysql_fetch_array($result)) {
 		$or_number = $row['official_receipt_number'];
 		$date_paid = $row['date_paid'];
-		$amount_paid = $row[''];
+		$amount_paid = $row['amount_paid'];
 		$sem = $row['semester'];
 		$ay = $row['academic_year'];
 		$emp_id_paid = $row['employee_id'];
@@ -237,32 +237,7 @@
 	<script>
 		document.write("<input type='button' " + "onClick='printForm5()' " + "class='printbutton' " + "value='Print Form 5'/>");
 		
-		function printForm5() {
-			
-			
-			<?php
-				$query = "SELECT * FROM student_status WHERE student_number = '$student_id'";
-				$result = mysql_query($query);
-				$status = "":
-				while ($row = mysql_fetch_array($result)) {
-					$status = $row['status'];
-					
-					if ($status=="paid") {
-						$last_update = time();
-						$sql = "UPDATE student_status SET
-						status =  'enrolled'
-						WHERE student_number = '$student_id'";
-						mysql_query($sql);						 
-			?>
-					window.print();
-			<?php
-					} else if($status!="paid") {
-						echo "<script> alert('Cannot print form 5.'); </script>";
-					}
-				}
-			?>
-		}
-	</script>
+		</script>
 	</div></td>
   </tr>
   </table>
@@ -337,7 +312,7 @@
     <td height="300" colspan="3" valign="top"><div align="center">
       <?php
 	  	$enrolled_subj = new form5();
-		$enrolled_subj->viewEnrolledSubjects($student_id);
+		$enrolled_subj->viewEnrolledSubjects($student_number);
 	  ?>
     </div>
     </td>
@@ -418,5 +393,34 @@
 		$loop_count++;
 	}
 ?>
+<script type="text/javascript">
+function printForm5() {
+			
+			
+			<?php
+				$query = "SELECT * FROM student_status WHERE student_number = '$student_id'";
+				$result = mysql_query($query);
+				$status = "";
+				while ($row = mysql_fetch_array($result)) {
+					$status = $row['status'];
+					
+					if ($status=="paid") {
+						$last_update = time();
+						$sql = "UPDATE student_status SET
+						status =  'enrolled'
+						WHERE student_number = '$student_id'";
+						mysql_query($sql);						 
+			?>
+					window.print();
+			<?php
+					} else if($status!="paid") {
+			?>
+						alert('Cannot print form 5.');
+			<?php
+					}
+				}
+			?>
+		}
+</script>
 </body>
 </html>

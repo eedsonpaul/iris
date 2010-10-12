@@ -36,9 +36,9 @@
       	<b>&nbsp;&nbsp;Designation :</b> &nbsp; <?php echo strtoupper($designation); ?> <br>
         <b>&nbsp;&nbsp;Unit: </b> &nbsp; <?php echo $unit; ?>
  	</p>
-		<li><a href="cso_classes_status.php">Classes Status</a></li>
-                <li><a href="cso_list_preregistered_students.php">List of Pre-registered Students</a></li>
-                <li><a href="cso_preenlistment_results.php">Pre-Enlistment Results</a></li>
+		<li><a href="cso_page_underconstruction.php">Classes Status</a></li>
+                <li><a href="cso_page_underconstruction.php">List of Pre-registered Students</a></li>
+                <li><a href="cso_page_underconstruction.php">Pre-Enlistment Results</a></li>
 </div>
 
 <?php

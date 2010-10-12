@@ -13,7 +13,7 @@
 <br>
 <br>
 <br>
-		<form action="clearSLB.php" method="post">
+		<form action="clearSLB.php" method="post" name="cashierform">
 		<input type="hidden" name="student_number" value="<?php echo $student_number;?>"/>
 		<input type="hidden" name="id" value="<?php echo $id;?>"/>
 		<table>
@@ -31,7 +31,7 @@
 		</table>
 		<table width="62">
 		  <tr>
-		    <td width="54"><input type="submit" value="Clear" /></td>
+		    <td width="54"><input type="submit" value="Submit" /></td>
 		    <td width="51"><a href="cahierSAM.php"><input type=button value="Cancel"></a></td>
 	      </tr>
 		  </table>
@@ -44,6 +44,18 @@
 		  </table>
 		<p>&nbsp;</p>
         </form>
+
+ <script language="JavaScript" type="text/javascript">
+
+    var frmvalidator  = new Validator("cashierform");
+    
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("or_number","req","Please enter OR Number.");
+    frmvalidator.addValidation("amount_paid","req","Amount Paid required.");
+    
+  </script>
+
 		<center>
 <?php 
   require_once 'cashier_footer.php';

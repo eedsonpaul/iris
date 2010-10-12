@@ -112,11 +112,11 @@
 				$query = "SELECT * FROM students_degree WHERE student_number = '$student_ID'";
 				$res = mysql_query($query);
 				while ($row = mysql_fetch_array($res)) {
-					extract($row);
-					$count++;
+					$prev_ay =  $row['entry_academic_year'];
+					$prev_sem =  $row['entry_semester'];
 				}
 				
-				if($count!=0) {
+				if($prev_ay == $_POST['start_ay'] && $prev_sem == $_POST['start_semester']) {
 				$sql = "UPDATE students_degree SET
 						degree_program_id = '".$_POST['course']."',
 						entry_academic_year = '".$_POST['start_ay']."', 
@@ -134,8 +134,6 @@
 				$sqll = "UPDATE student SET
 						degree_program_id = '".$_POST['course']."',
 						degree_program = '".$_POST['course']."',
-						entry_academic_year = '".$_POST['start_ay']."', 
-						entry_semester = '".$_POST['start_semester']."', 
 						last_updated = '$last_update',
 						last_updated_by = '$employee'
 						WHERE student_number = '$student_ID'";

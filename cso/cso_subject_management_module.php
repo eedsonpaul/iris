@@ -38,10 +38,10 @@
  	</p> 
 
   <table width="650" border="0" align="center">
-    <tr><form action="" method="post">
+    <tr><form action="cso_subject_management_module.php" method="get">
       <td width="624"><div align="center"><strong>Look for</strong> 
-        <input name="search_subject" type="text" id="search_subject" size="50">
-        <input type="submit" name="search_subject_button" id="search_subject_button" value="Submit">
+        <input name="subject" type="text" id="subject" size="50">
+        <input type="submit" value="Submit">
       </div></td></form>
     </tr>
   </table>
@@ -56,12 +56,24 @@
         <th width="86"><div align="center"><strong>Minimum Year Level</strong></div></td>
         <th width="81"><div align="center"><strong>Degree Level</strong></div></td>
         <th width="87"><div align="center"><strong>Pre-requisites</strong></div></td>
+		<!--</div>
+	  </tr>-->
       
+	  
         <?php
 		include("connect_to_database.php");
+		
+		if(!isset($_GET['subject'])) {
+		
 		$query = "SELECT *from subject";
+		}else {
+		$subject = $_GET['subject'];
+		$query = "SELECT * FROM subject WHERE course_code LIKE '%$subject%'";
+		}
 		$result = mysql_query($query);
-        	while ($row = mysql_fetch_array($result)) {
+		if(mysql_num_rows($result) == 0 ) echo "<tr><b>NO RECORD FOUND<b></tr>";
+        else {	
+			while ($row = mysql_fetch_array($result)) {
 				extract($row);       
 	?>
       <tr>
@@ -112,7 +124,7 @@
 		?>
 	</b></div></td>
       </tr>
-      <?php } ?>
+      <?php } }?>
     </table>
     <p>
       <center>

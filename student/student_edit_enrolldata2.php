@@ -123,24 +123,24 @@ Save to Database and proceed to the next page<br>
   frmvalidator.EnableMsgsTogether();
   
   frmvalidator.addValidation("guardian","req","Please input Guardian's Name.");  
-  frmvalidator.addValidation("guardian","alpha","Guardian's Name: Alpha only.");
+  frmvalidator.addValidation("guardian","alpha_s","Guardian's Name: Alpha only.");
   frmvalidator.addValidation("guardian_house_number","req","Please input Guardian's House Number.");  
   frmvalidator.addValidation("guardian_street","req","Please input Guardian's Street.");  
   frmvalidator.addValidation("guardian_barangay","req","Please input Guardian's Barangay.");  
   frmvalidator.addValidation("guardian_city_municipality","req","Please input Guardian's City/Municipality.");  
   frmvalidator.addValidation("guardian_province","req","Please input Guardian's Province.");  
-  frmvalidator.addValidation("guardian_contact_number","req","Please input Guardian's contact number.");
+  //frmvalidator.addValidation("guardian_contact_number","req","Please input Guardian's contact number.");
   frmvalidator.addValidation("recipient_name","req","Please input Recipient's Name.");
   frmvalidator.addValidation("housenum","req","Please input present house #.");
   frmvalidator.addValidation("street","req","Please input present street.");
   frmvalidator.addValidation("barangay","req","Please input present barangay.");
   frmvalidator.addValidation("city","req","Please input present city.");
-  frmvalidator.addValidation("number","req","Please input contact number.");
-  frmvalidator.addValidation("recipient_name","alpha","Recipients's Name: Alpha only.");
+  //frmvalidator.addValidation("number","req","Please input contact number.");
+  frmvalidator.addValidation("recipient_name","alpha_s","Recipients's Name: Alpha only.");
   frmvalidator.addValidation("recipient_street","req","Please input Recipients's street.");
   frmvalidator.addValidation("recipient_city","req","Please input Recipients's city.");
   frmvalidator.addValidation("recipient_zipcode","req","Please input Recipients's zipcode.");
-  frmvalidator.addValidation("recipient_phone","req","Please input Recipients's contact number.");
+  //frmvalidator.addValidation("recipient_phone","req","Please input Recipients's contact number.");
  
 </script>
 

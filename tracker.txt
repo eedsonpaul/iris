@@ -1,0 +1,33 @@
+2010-10-12 10:23:13 1238001 adds accountability  200733333
+2010-10-12 10:23:22  extends slots  cmsc123-A
+2010-10-12 10:23:23  creates user  8945
+2010-10-12 10:23:27 1238001 edits accountability  200733333
+2010-10-12 10:23:39 1238001 removes accountability  200733333
+2010-10-12 10:23:51  edits user  8945
+2010-10-12 10:25:04  edits user  8
+2010-10-12 10:27:12  edits user  8
+2010-10-12 10:28:45  edits user  8
+2010-10-12 10:29:46  edits user  8
+2010-10-12 10:30:47  edits user  8
+2010-10-12 10:32:01 admin edits user  8
+2010-10-12 10:32:20 admin edits user  8
+2010-10-12 10:32:55  creates user  345445
+2010-10-12 10:34:30 admin creates user  123128888
+2010-10-12 10:38:11 admin edits user  2007
+2010-10-12 10:40:21 1238001 removes accountability  200733333
+2010-10-12 10:59:57 admin edits user  12089238
+2010-10-12 11:00:01 admin edits user  12089238
+2010-10-12 11:01:21 admin edits user  12089238
+2010-10-12 11:01:33 admin edits user  12089238
+2010-10-12 11:02:03 admin edits user  12089238
+2010-10-12 11:02:12 admin edits user  12089238
+2010-10-12 11:02:45 admin edits user  12089238
+2010-10-12 11:02:56 admin edits user  12089238
+2010-10-12 11:03:04 admin edits user  12089238
+2010-10-12 11:10:11 esemorio edits user  878787878
+2010-10-12 11:56:57 admin creates user  123
+2010-10-12 11:57:50 admin edits user  123
+2010-10-12 11:59:05 admin edits user  123
+2010-10-12 12:00:22 admin creates user  111
+2010-10-12 12:00:48 admin edits user  12089238
+2010-10-12 12:00:54 admin edits user  111

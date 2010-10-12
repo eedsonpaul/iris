@@ -19,6 +19,34 @@
     <br><br><br><br><br><br><br><br><br>
 <p>
 <center>
+	<form action="accountingViewClearedAccountsSearch.php?search_option=<?php $_GET['search_option'];?>&search_query=<?php $_GET['search_query'];?>" method="get" name="accountingform">
+	<font size="-3"><table>
+	<tr>
+		<td>Enter <select name="search_option">
+		<option value="last_name"> Last Name</option>
+		<option value="student_number">Student Number</option>
+		</select>
+		</td>
+		<td><input type="text" name="search_query">
+		</td>
+		<td>
+		<input type="submit" value="Search" />&nbsp;
+		</td>
+	</tr>
+	</table>
+    </font>
+	</form>
+
+<script language="JavaScript" type="text/javascript">
+
+    var frmvalidator  = new Validator("accountingform");
+    
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("search_query","alnum_s","Search Query contains invalid characters.");
+    
+  </script>
+
   <?php
 	include('connect.php');
 	include('accountabilityClass.php');

@@ -9,7 +9,7 @@
 		
 	  <ul>
 			<li><a href="accountingAddAccountabilitySearch.php?search_option=&search_query=">Add Accountability</a></li>
-			<li><a href="viewClearedAccounts.php">View Already Cleared</a></li>
+			<!--<li><a href="viewClearedAccounts.php">View Already Cleared</a></li>-->
             <li><a href="generateSLB.php">Generate Student Accountabilities</a></li>
 			<li><a href="accounting.php">Return</a></li>
 		</ul>
@@ -75,7 +75,7 @@
 		<p>&nbsp;</p>
         </form>
         
-		<script language="JavaScript" type="text/javascript">
+		<!--<script language="JavaScript" type="text/javascript">
 
   var frmvalidator  = new Validator("accountingform");
     
@@ -86,7 +86,7 @@
   frmvalidator.addValidation("amount_paid","num","Amount Paid contains invalid input.");
   frmvalidator.addValidation("or_number","num","OR Number contains invalid input.");
   
-</script>
+</script>-->
 		
 	</body>
 </html>

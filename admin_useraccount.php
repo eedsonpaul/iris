@@ -1,12 +1,8 @@
-<html>
-<head>
-  <?php if (isset($_GET['userid'])) { ?>
-  <title>Edit Profile | UP Cebu IRIS </title>
-  <?php } else { ?>
-  <title>Edit Login Account | UP Cebu IRIS </title>
-  <?php } ?>
-</head>
-</html>
+<?php if (isset($_GET['userid'])) { ?>
+<title>Edit Profile | UP Cebu IRIS </title>
+<?php } else { ?>
+<title>Edit Login Account | UP Cebu IRIS </title>
+<?php } ?>
 
 <script language="JavaScript">
 	  function init(){
@@ -86,7 +82,6 @@ $id = $user['employee_id'];
           <a href="index.php?action=Clerk"><span class="left">&larr;Back to list</span></a>
         <?php } ?>
       </div>
-
     <?php } else { ?>
       <div id="admin_nav" class="left">
         <a href="javascript:history.back(-1);">&larr;Back</a>
@@ -138,7 +133,7 @@ $id = $user['employee_id'];
 
         <input type="hidden" class="txtinput" name="access_level"
         value="<?php echo htmlspecialchars($user['access_level_id']); ?>">
-
+        <?php if ($_SESSION['access_level_id'] != 3) { ?>
         <tr>
           <td>Employee Name:&nbsp;&nbsp;</td>
           <td><span class="id"><?php
@@ -154,6 +149,31 @@ $id = $user['employee_id'];
           <td>Username:</td>
           <td><span class="id"><?php echo ($user['username']); ?></pan></td>
         </tr>
+        <?php } else {?>
+        <tr>
+          <td>Username:<span class="ast">*</span></td>
+          <td><input type="text" class="txtinput" name="username" size=25px
+          value="<?php echo htmlspecialchars($user['username']); ?>"></td>
+        </tr>
+
+        <tr>
+        <td>First Name:<span class="ast">*</span>
+        <td><input type="text" id="first_name" name="first_name" maxlength="50" size=25px
+        value="<?php echo htmlspecialchars($user['first_name']); ?>"></td>
+        </tr>
+
+        <tr>
+          <td>Middle Name:<span class="ast">*</span>
+          <td><input type="text" id="middle_name" name="middle_name" maxlength="50" size=25px
+          value="<?php echo htmlspecialchars($user['middle_name']); ?>"></td>
+        </tr>
+
+        <tr>
+        <td>Last Name:<span class="ast">*</span></td>
+        <td><input type="text" id="last_name" name="last_name" maxlength="50" size=25px
+        value="<?php echo htmlspecialchars($user['last_name']); ?>"></td>
+        </tr>
+        <?php } ?>
 
         </tr>
           <td>Gender:<span class="ast">*</span></td>
@@ -405,18 +425,22 @@ $id = $user['employee_id'];
           value="<?php echo htmlspecialchars($user['citizenship']); ?>">
           </td>
         </tr>
+
+        <tr>
+          <td colspan=2>
+          <center>
+          <div id="button">
+            <p>
+              <input type="submit" class="submit" name="action" value="Save Changes">
+            </p>
+          </div>
+          </center>          
+          <td>
+        </tr>
       </table>
     </TD>
   </TR>
   </TABLE>
-  
-    <center>
-    <div id="button">
-      <p>
-        <input type="submit" class="submit" name="action" value="Save Changes">
-      </p>
-    </div>
-    </center>
   
   </form>
   
@@ -432,9 +456,10 @@ $id = $user['employee_id'];
 	frmvalidator.addValidation("spouse_name","alpha_s","Spouse's Name contains invalid characters.");
 	frmvalidator.addValidation("father_name","alpha_s","Father's Name contains invalid characters.");
 	frmvalidator.addValidation("mother_name","alpha_s","Mother's Name contains invalid characters.");
+	frmvalidator.addValidation("Citizenship","alpha_s","Citizenship contains invalid characters.");
 	frmvalidator.addValidation("email_address","email","Invalid Email.");
-    frmvalidator.addValidation("birthdate","num","Birthdate contains invalid characters.");
-    frmvalidator.addValidation("contact_number","num","Contact Number contains invalid characters.");
+    	frmvalidator.addValidation("birthdate","num","Birthdate contains invalid characters.");
+    	frmvalidator.addValidation("contact_number","num","Contact Number contains invalid characters.");
 	
 	
   </script>
@@ -454,25 +479,31 @@ $user = mysql_fetch_array($result);
 
 $id = $user['employee_id'];
 ?>
-    <div id="admin_nav" class="left">
-    <?php if ($user['access_level_id'] == 3) { ?>
-      <a href="index.php?action=SysAd"><span class="left">&larr;Back to list</span></a>
-    <?php } else if ($user['access_level_id'] == 2) { ?>
-      <a href="index.php?action=Faculty"><span class="left">&larr;Back to list</span></a>
-    <?php } else if ($user['access_level_id'] == 4) { ?>
-      <a href="index.php?action=Acctg"><span class="left">&larr;Back to list</span></a>
-    <?php } else if ($user['access_level_id'] == 5) { ?>
-      <a href="index.php?action=Lib"><span class="left">&larr;Back to list</span></a>
-    <?php } else if ($user['access_level_id'] == 6) { ?>
-      <a href="index.php?action=Cashier"><span class="left">&larr;Back to list</span></a>
-    <?php } else if ($user['access_level_id'] == 7) { ?>
-      <a href="index.php?action=Cso"><span class="left">&larr;Back to list</span></a>
-    <?php } else if ($user['access_level_id'] == 8) { ?>
-      <a href="index.php?action=Osa"><span class="left">&larr;Back to list</span></a>
-    <?php } else if ($user['access_level_id'] == 9) { ?>
-      <a href="index.php?action=Clerk"><span class="left">&larr;Back to list</span></a>
+    <?php if ($_SESSION['access_level_id'] == 3) { ?>
+      <div id="admin_nav" class="left">
+        <?php if ($user['access_level_id'] == 3) { ?>
+          <a href="index.php?action=SysAd"><span class="left">&larr;Back to list</span></a>
+        <?php } else if ($user['access_level_id'] == 2) { ?>
+          <a href="index.php?action=Faculty"><span class="left">&larr;Back to list</span></a>
+        <?php } else if ($user['access_level_id'] == 4) { ?>
+          <a href="index.php?action=Acctg"><span class="left">&larr;Back to list</span></a>
+        <?php } else if ($user['access_level_id'] == 5) { ?>
+          <a href="index.php?action=Lib"><span class="left">&larr;Back to list</span></a>
+        <?php } else if ($user['access_level_id'] == 6) { ?>
+          <a href="index.php?action=Cashier"><span class="left">&larr;Back to list</span></a>
+        <?php } else if ($user['access_level_id'] == 7) { ?>
+          <a href="index.php?action=Cso"><span class="left">&larr;Back to list</span></a>
+        <?php } else if ($user['access_level_id'] == 8) { ?>
+          <a href="index.php?action=Osa"><span class="left">&larr;Back to list</span></a>
+        <?php } else if ($user['access_level_id'] == 9) { ?>
+          <a href="index.php?action=Clerk"><span class="left">&larr;Back to list</span></a>
+        <?php } ?>
+      </div>
+    <?php } else { ?>
+      <div id="admin_nav" class="left">
+        <a href="javascript:history.back(-1);">&larr;Back</a>
+      </div>
     <?php } ?>
-    </div>
   </div>
 
   <div id="fill_up">

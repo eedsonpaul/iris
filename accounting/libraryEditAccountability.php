@@ -58,13 +58,13 @@
 		<td>
 		<select name="year_incurred">
 		<?php
-		if($year_incurred==2009){
-			echo "<option value=\"2009\">2009-2010</option>";
+		if($year_incurred==2010){
 			echo "<option value=\"2010\">2010-2011</option>";
+			echo "<option value=\"2011\">2011-2012</option>";
 		}
-		else if($year_incurred == 2010){
+		else if($year_incurred == 2011){
+			echo "<option value=\"2011\">2011-2012</option>";
 			echo "<option value=\"2010\">2010-2011</option>";
-			echo "<option value=\"2009\">2009-2010</option>";
 		}
 		?>
 		</select>

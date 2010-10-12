@@ -29,7 +29,7 @@
 		</table>
 		<table width="62">
 		  <tr>
-		    <td width="54"><input type="submit" value="Clear" /></td>
+		    <td width="54"><input type="submit" value="Submit" /></td>
 	      </tr>
 		  </table>
 		<table width="59">

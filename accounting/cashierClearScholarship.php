@@ -11,7 +11,7 @@
 <html>
 <center>
 	<body>
-		<form action="clearScholarship.php" method="post">
+		<form action="clearScholarship.php" method="post" name="cashierform">
 		<input type="hidden" name="student_number" value="<?php echo $student_number;?>"/>
 		<input type="hidden" name="id" value="<?php echo $id;?>"/>
 		<table>
@@ -29,7 +29,7 @@
 		</table>
 		<table width="62">
 		  <tr>
-		    <td width="54"><input type="submit" value="Clear" /></td>
+		    <td width="54"><input type="submit" value="Submit" /></td>
 	      </tr>
 		  </table>
 		<table width="59">
@@ -47,6 +47,17 @@
 		<p>&nbsp;</p>
         </form>
 		
+<script language="JavaScript" type="text/javascript">
+
+    var frmvalidator  = new Validator("cashierform");
+    
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("or_number","req","Please enter OR Number.");
+    frmvalidator.addValidation("amount_paid","req","Amount Paid required.");
+    
+  </script>
+
 	</body>
 	</center>
 </html>

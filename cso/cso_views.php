@@ -105,7 +105,7 @@
 					if ($action=="Cancel Enrollment" || $action=="Cancel Assessment" || $action=="Cancel Payment" || $action=="Unconfirm") {
         				echo "<td><div align='center' class='headfont'><b><a href='cso_confirm_subject.php?id=$subj_id&lab=$sect_lab&act=$action'>".$action."</a></b></div></td>";
 					} else {
-						echo "<td><div align='center' class='headfont'><b><a href='cso_confirm_subject.php?id=$subj_id&lab=$sect_lab&act=$action'>".$action."</a> |  <a href='cso_confirm_subject.php?id=$subj_id&lab=$sect_lab&act=Remove' target='_self' onclick='return getconfirm('Are you sure you want to remove this subject?')'; title='Remove'>  Remove </b></div></td>";
+						echo "<td><div align='center' class='headfont'><b><a href='cso_confirm_subject.php?id=$subj_id&lab=$sect_lab&act=CHANGE'><input type='submit' name='add_student_subject' id='add_student_subject' value='CHANGE' onclick='addSubject();' class=myButton></a> <a href='cso_confirm_subject.php?id=$subj_id&lab=$sect_lab&act=$action'>".$action."</a> |  <a href='cso_confirm_subject.php?id=$subj_id&lab=$sect_lab&act=Remove' target='_self' onclick='return getconfirm('Are you sure you want to remove this subject?')'; title='Remove'>  Remove </b></div></td>";
 					}
       				echo "</tr>";
 					
@@ -158,3 +158,9 @@
 	}
 
 ?>
+<script type="text/javascript">
+	function addSubject(){
+		window.open("student_search_subject.php", "info", "width=600,scrollbars=0,resizable=0");
+	}
+		
+</script>

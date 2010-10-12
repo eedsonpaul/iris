@@ -95,5 +95,16 @@
 				header ("Location: cso_enroll_student.php?id=$stud_num");
 				//echo "<script> alert('Subject successfully removed.'); window.location.href = 'cso_enroll_student.php?id=$stud_num';</script>";
                 
+			} else if ($action=="CHANGE") {
+
+				$sql = "DELETE FROM student_status WHERE student_number = '$stud_num' && section_label = '$sec_id' && course_code = '$sub_id'";
+				mysql_query($sql);
+				
+				$sql2 = "UPDATE section SET
+						available_slots = available_slots+1
+						WHERE section_label = '$sec_id' && course_code = '$sub_id'";
+				mysql_query($sql2);
+				header ("Location: cso_enroll_student.php?id=$stud_num");
 			}
+			
 ?>

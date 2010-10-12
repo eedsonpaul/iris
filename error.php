@@ -1,8 +1,4 @@
-<html>
-<head>
-  <title> Error! | UP Cebu IRIS</title>
-</head>
-</html>
+<title> Error! | UP Cebu IRIS</title>
 
 <?php
 require_once 'admin_db_connect.php';

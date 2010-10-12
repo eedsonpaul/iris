@@ -1,5 +1,6 @@
 <?php
 //CSO Form5 Class
+//Version 3: Revision Date
 //Version 2: Revision Date: September 23, 2010
 //Version 1: Date: September 13, 2010
 //By: Mae Ann A. Amarado
@@ -24,15 +25,20 @@ include("sql_queries.php");
           				<td width='88' class='style3'><div align='center' class='style9'>LAB FEE</div></td>
        			 	</tr>";
 					
-			$student_number = $stud_num;
+			$student_number = $_SESSION['student_number'];
 			$unit = 0;
 			$count = 0;
-			$semester = $_SESSION['semester'];
-			$academic_year = $_SESSION['academic_year']+1;
+			//$semester = $_SESSION['semester'];
+			//$academic_year = $_SESSION['ay'];
+			/*&& semester = '$semester' && academic_year = '$academic_year'*/
+			$sql1 = "select * from student_status where student_number = $stud_num && status = 'paid'";
+			$res = mysql_query($sql1);
+			$count = 0;
+			/*while($row = mysql_fetch_array($res)){
+				$count++;
+				}
+				echo "<script> alert('$count'); </script>";*/
 			
-			$sql = "select * from student_status where student_number = '$stud_num' && status = 'enrolled' && semester = '$semester' && academic_year = '$academic_year'";
-			$res = mysql_query($sql);
-				
 			while($row = mysql_fetch_array($res)){
 				$subj_id = $row['course_code'];
 				$sect_lab = $row['section_label'];
@@ -98,7 +104,7 @@ include("sql_queries.php");
 		require_once 'connect_to_database.php';
 		require_once 'faculty_functions.php';
 		require_once 'tuition_compute.php';
-	
+		//echo "<script> alert('$stud_num'); </script>";
 		$student_number = $stud_num;
 		//$unit = $_POST['unitcount'];
 		//STFAP and Scholarship and student name

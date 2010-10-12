@@ -86,12 +86,12 @@
 
 		function getClassStanding($student_number,$academic_year,$semester){
 
-      $units_earned = 0;
-      $units_taken = 0;
-      $grade = 0;
-      $percentage = 0;
-      $standing = '';
-      $index = 0;
+		$units_earned = 0;
+		$units_taken = 0;
+		$grade = 0;
+		$percentage = 0;
+		$standing = '';
+		$index = 0;
     	$query = "SELECT initial_grade,completion_grade,course_code FROM grade WHERE student_number = '$student_number' AND academic_year=$academic_year AND semester=$semester";
 			$result = mysql_query($query);
 			while($row = mysql_fetch_array($result)) {

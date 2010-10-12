@@ -1,7 +1,7 @@
 <?php
 require_once 'admin_http.php';
 require_once 'admin_db_connect.php';
-require_once 'admin_echolist.php';
+require_once 'admin_functions.php';
 
   if (isset($_GET['admindelete'])) {
     $sql = "DELETE FROM employee WHERE employee_id='" . $_GET['admindelete'] . "' LIMIT 1";
@@ -202,6 +202,15 @@ if (isset($_REQUEST['action'])) {
                '" . $_POST['gender'] . "','" . $_POST['last_updated_by'] . "',
                '" . $_POST['unit_id'] . "','" . $_POST['designation_id'] . "')";
 
+        //insert tracking function here
+        session_start();
+        $action_flag = 1;
+        $target_type = 1;
+        $employee_id = $_SESSION['username'];
+        $id = $_POST['employee_id'];
+        $section_label = NULL;
+        tracker($employee_id, $action_flag, $target_type, $id, $section_label);
+
         //or die('Could not create user account; ' . mysql_error());
 
         if (mysql_query($sql, $conn)) {
@@ -288,6 +297,9 @@ if (isset($_REQUEST['action'])) {
       if (isset($_POST['employee_id'])
           and isset($_POST['access_level'])
           and isset($_POST['username'])
+          and isset($_POST['first_name'])
+          and isset($_POST['middle_name'])
+          and isset($_POST['last_name'])
           and isset($_POST['gender'])          
           and isset($_POST['unit_id'])
           and isset($_POST['designation_id'])
@@ -311,6 +323,10 @@ if (isset($_REQUEST['action'])) {
 
         $sql = "UPDATE employee " .
                "SET employee_id='" . $_POST['employee_id'] .
+               "', username='" . $_POST['username'] .
+               "', first_name='" . $_POST['first_name'] .
+               "', middle_name='" . $_POST['middle_name'] .
+               "', last_name='" . $_POST['last_name'] .
                "', access_level_id='" . $_POST['access_level'] .
                "', gender='" . $_POST['gender'] .
                "', last_updated_by='" . $_POST['last_updated_by'] .
@@ -327,10 +343,21 @@ if (isset($_REQUEST['action'])) {
                "', father_name='" . $_POST['father_name'] .
                "', mother_name='" . $_POST['mother_name'] .
                "', housing_type='" . $_POST['housing_type'] .
-               "', citizenship='" . $_POST['citizenship'] .
+               "', citizenship='" . $_POST['citizenship'] . "' " .
+               /*
                "', security_question='" . $_POST['sec_quest'] .
                "', security_answer='" . $_POST['sec_ans'] . "' " .
+               */
                "WHERE employee_id=" . $_POST['employee_id'];
+
+        //insert tracking function here
+        session_start();
+        $action_flag = 2;
+        $target_type = 1;
+        $employee_id = $_SESSION['username'];
+        $id = $_POST['employee_id'];
+        $section_label = NULL;
+        tracker($employee_id, $action_flag, $target_type, $id, $section_label);
 
         mysql_query($sql, $conn)
           or die('Could not create user account; ' . mysql_error());

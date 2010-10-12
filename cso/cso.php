@@ -45,8 +45,10 @@
 		$cur_sem = $row['semester_type'];
 	}
 	$end_ay = $cur_ay_id + 1;
+	$_SESSION['sem'] = $cur_sem;
 	$_SESSION['semester'] = $cur_sem;
 	$_SESSION['academic_year'] = $cur_ay_id.' - '.$end_ay;
+	$_SESSION['ay'] = $cur_ay_id;
   ?>
 <div id="right_side">
 	<p>

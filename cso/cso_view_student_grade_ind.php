@@ -45,6 +45,7 @@
 </p>
 <?php
 	include("connect_to_database.php");
+	session_start();
 	$stud_num = $_GET['id'];
 	$semp = $_GET['sem'];
 	$ayp = $_GET['ay'];
@@ -124,8 +125,8 @@
     <td><span class="style4">Student Number</span></td>
     <td class="style4"><div align="center" class="style10">:</div></td>
     <td colspan="2" class="style4"><?php echo $stud_num?></td>
-    <td colspan="3"><div align="right"><span class="style4">Degree Program &nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong class="style4">&nbsp;&nbsp;:</strong></div></td>
-    <td colspan="2" class="style4"><?php echo $degree;?></td>
+    <td colspan="3"><div align="right"><span class="style4">Degree Program &nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong class="style4">:</strong></div></td>
+    <td colspan="2" class="style4">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $degree;?></td>
   </tr>
   <tr>
     <td><span class="style4">Name</span></td>
@@ -147,10 +148,12 @@
   </tr>
 <?php
 
-			$count = 1;
+			$count = 0;
 			$units = 0;
-			//$semester = $_SESSION['current_semester'];
-			//$academic_year = $_SESSION['current_year'];
+			$semester = $_SESSION['semester'];
+			$academic_year = $_SESSION['academic_year'];
+			$academicyear =  $_SESSION['ay'];
+			$semss = $_SESSION['sem'];
 			$ay = "";
 			$sem = "";
 			$standing = "";
@@ -159,58 +162,59 @@
 			$gwa = 0;
 			$grades = 0;
 			$grade = 0;
-			$com_grade = 0;	
-			$query = "SELECT * FROM grade WHERE student_number = '$stud_num' order by academic_year";
+			
+			$query = "SELECT * FROM grade WHERE student_number = '$stud_num' && semester = '$semp' && academic_year = '$ayp'";
 			$result = mysql_query($query);
-			while($grade = mysql_fetch_array($result)) {
-				$ay = $grade['academic_year'];
-				$sem = $grade['semester'];
-				$standing = $grade['remarks'];
-				$igrade = $grade['initial_grade'];
-				$com_grade = $grade['completion_grade'];
-				$remarks = $grade['remarks'];
-				$subject = $grade['course_code'];
-				
-				$query = "SELECT * FROM semester WHERE semester_id = '$sem'";
-				$result = mysql_query($query);
-				while($sems = mysql_fetch_array($result)) {
-					$semname = $sems['semester_type'];
-				}
-				
-				$query = "SELECT * FROM subject WHERE course_code= '$subject'";
-				$result = mysql_query($query);
-				while($sub = mysql_fetch_array($result)) {
-					$subtitle = $sub['subject_title'];
-					$unit = $sub['units'];
-				}
-				if ($com_grade==0) {
-					$grade = $igrade * $unit;
-				} else if($igrade==4){
-					$grade = ($com_grade*$unit) + ($igrade*$unit);
+			
+			while($row = mysql_fetch_array($result)) {
+				$ay = $row['academic_year'];
+				$sem = $row['semester'];
+				$igrade[$count] = $row['initial_grade'];
+				$com_grade[$count] = $row['completion_grade'];
+				$remarks[$count] = $row['grade_status'];
+				$subject[$count] = $row['course_code'];
+					
+
+				if($igrade[$count]==5 || $com_grade[$count]==5) {
+					$unit[$count] = 0;
+					$query1 = "SELECT * FROM subject WHERE course_code= '$subject[$count]'";
+					$result1 = mysql_query($query1);
+					while($sub = mysql_fetch_array($result1)) {
+						$subtitle[$count] = $sub['subject_title'];
+					}
 				} else {
-					$grade = $com_grade*$unit;
+					$query2 = "SELECT * FROM subject WHERE course_code= '$subject[$count]'";
+					$result2 = mysql_query($query2);
+					while($sub = mysql_fetch_array($result2)) {
+						$subtitle[$count] = $sub['subject_title'];
+						$unit[$count] = $sub['units'];
+					}
 				}
-		?>
-  <tr>
-    <td><div align="left" class="style15"><?php echo $subject;?></div>
-    <div align="center"></div></td>
-    <td><div align="center" class="style15"><?php echo $subtitle;?></div></td>
-    <td><div align="center" class="style15"><?php echo number_format($igrade, 2, '.', '');?></div></td>
-    <td><div align="center" class="style15"><?php echo $remarks;?></div></td>
-    <td><div align="center" class="style15"><?php echo number_format($com_grade, 2, '.', '');?></div></td>
-    <td><div align="center"><span class="style15"></span></div></td>
-    <td><div align="center" class="style15"><?php echo number_format($unit, 1, '.', '');?></div></td>
-  </tr>
- <?php $units = $units + $unit;
- 		$gwa  = (($gwa+$grade)/$units);
-		$count++;}
+				
+				$units = $units + $unit[$count];
+				$count++;
+			}
+			
+			$i = 0;
+			while($i<$count) {
+			  echo "<tr>
+				<td><div align=center class=style15>".strtoupper($subject[$i])."</div>
+				<div align=center></div></td>
+				<td><div align=center class=style15>".$subtitle[$i]."</div></td>
+				<td><div align=center class=style15>".number_format($igrade[$i], 2, '.', '')."</div></td>
+				<td><div align=center class=style15>".strtoupper($remarks[$i])."</div></td>
+				<td><div align=center class=style15>".number_format($com_grade[$i], 2, '.', '')."</div></td>
+				<td><div align=center><span class=style15></span></div></td>
+				<td><div align=center class=style15>".number_format($unit[$i], 2, '.', '')."</div></td>
+				</tr>";
+				
+				$i++;
+			}
+			
 		include("cso_functions.php");
-		session_start();
-		if ($gwa<=3) {
-			$standing = "Good Standing";
-		} else if ($gwa>3 && $gwa<=5) {
-			$standing = academicStanding($stud_num, $sem, $ay, $units, $_SESSION['access_level_id']);
-		}
+		//session_start();
+ 		$gwa  = getGWA($stud_num,$ayp, $semp);
+		$standing = getClassStanding($stud_num,$ayp, $semp);
  ?>
    <tr>
     <td><div align="left"><span class="style15"></span></div></td>
@@ -242,7 +246,7 @@
 </table>
 <table width="950" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td colspan="2" class="style15">Total Number of Units: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo number_format($units, 1, '.', '');?></td>
+    <td colspan="2" class="style15">Total Number of Units: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b><?php echo number_format($units, 1, '.', '');?></b></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
@@ -250,7 +254,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td class="style15">Class Standing: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $standing;?></td>
+    <td class="style15">Class Standing: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b><?php echo $standing;?></b></td>
     <td class="style15">&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
@@ -259,7 +263,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td class="style15">General Weighted Average: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo number_format($gwa, 2, '.', '');?></td>
+    <td class="style15">General Weighted Average: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b><?php echo number_format($gwa, 2, '.', '');?></b></td>
     <td class="style15">&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>

@@ -2,7 +2,7 @@
 require_once 'admin_db_connect.php';
 require_once 'admin_header.php';
 require_once 'admin_http.php';
-require_once 'admin_echolist.php';
+require_once 'admin_functions.php';
 require_once 'admin_sql_query.php';
 
 //require_once 'admin_search.php';
@@ -346,7 +346,7 @@ require_once 'admin_sql_query.php';
             </center>
           <?php } ?>
           
-          <form method="post" action="index.php?action=">
+          <form method="post" action="index.php?action=SearchAcct">
           <table width="60%" align="left" style="font-size: 12px;">          
             <tr>
               <td>Enter Username / Name / ID</td>
@@ -385,9 +385,35 @@ require_once 'admin_sql_query.php';
           </table>
           </form>
         </div>
+
     <?php
     
-        //search(isset($_GET['keywords']));
+        if (isset($_POST['keywords']) or isset($_POST['filter'])) {
+          echo "<h2>Search Results</h2>\n";
+
+          $search = searchAccount($_POST['keywords'], $_POST['filter']);
+
+          if ($search and !mysql_num_rows($search)) {
+            echo "<p>No user found that match the search terms.</p>\n";
+          } else {
+            while ($row = mysql_fetch_array($search)) {
+              echo '<li>';
+              echo '<a href="admin_useraccount.php?editlogin=' . $row['employee_id'] .'">';
+              echo $row['first_name'];
+              echo '&nbsp;';
+              echo $row['last_name'];
+              echo '</a>';             
+          ?>
+              <input type="button" onclick="confirmation(<?php echo $row['employee_id'] ?>,<?php echo $row['access_level_id'] ?>)" value="Delete">
+          <?php
+              echo '<a href="admin_useraccount.php?userid=' . $row['employee_id'] .'">';
+              echo '<input type="button" value="Modify">';
+              echo '</a>';
+              echo '</li>';
+              
+            }
+          }
+        }
           break;
 
           default:
