@@ -54,6 +54,7 @@ body{
   padding-right: 0px;
   margin-top: -10px;
   padding-bottom: 10px;
+  font-weight: bold;
 }
 
 #admin_nav.right {
@@ -64,7 +65,7 @@ body{
   float: left;
 }
 
-#admin_nav a:link {text-decoration:none; color: #880606;}
+#admin_nav a:link {text-decoration:none; color: #880606; }
 #admin_nav a:visited {text-decoration:none; color: #880606;}
 #admin_nav a:hover {text-decoration: underline; color: #880606;}
 
@@ -530,11 +531,17 @@ span.ast {
 
 span.white {
   color: white;
+  font-size: 12px;
 }
 
 span.white:a {
   color: white;
   text-align: center;
+}
+
+span.footer_allrights {
+  font-size: 14px;
+  font-weight: bold;
 }
 
 td.left {
